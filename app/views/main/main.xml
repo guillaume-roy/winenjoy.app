@@ -1,0 +1,8 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatedTo="navigatedTo">
+  <StackLayout>
+    <Label text="{{ clickMeLabel }}" />
+    <Button text="Click" tap="onClick" col="1" />
+    <Label text="{{ clickedLabel }}" row="1" colspan="2" />
+  </StackLayout>
+</Page>
+

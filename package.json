@@ -1,0 +1,17 @@
+{
+  "nativescript": {
+    "id": "com.winenjoy.app",
+    "tns-android": {
+      "version": "1.6.1"
+    }
+  },
+  "dependencies": {
+    "tns-core-modules": "^1.6.0"
+  },
+  "devDependencies": {
+    "nativescript-dev-typescript": "^0.3.0",
+    "typescript": "^1.7.5",
+    "gulp": "*",
+    "gulp-sass": "*"
+  }
+}

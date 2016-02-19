@@ -1,0 +1,6 @@
+lib/
+node_modules/
+platforms/
+tmp/
+app/**/*.js
+app/**/*.css
