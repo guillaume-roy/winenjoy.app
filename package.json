@@ -6,6 +6,7 @@
     }
   },
   "dependencies": {
+    "nativescript-floatingactionbutton": "^0.2.3",
     "tns-core-modules": "^1.6.0"
   },
   "devDependencies": {
