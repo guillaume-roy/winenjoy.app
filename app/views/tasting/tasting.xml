@@ -1,5 +1,10 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatedTo="navigatedTo">
-  <TabView>
+  <Page.actionBar>
+    <ActionBar title="Nouvelle dégustation">
+      <NavigationButton android.systemIcon="ic_menu_back"/>
+    </ActionBar>
+  </Page.actionBar>
+  <TabView selectedColor="#FFFFFF">
    <TabView.items>
      <TabViewItem title="Vin">
        <TabViewItem.view>
