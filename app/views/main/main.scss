@@ -1,0 +1,10 @@
+@import "../../styles/_material-theme";
+
+.fab-button {
+    height: 70;
+    margin: 15;
+    background-color: $accent-color; 
+    horizontal-align: right; /* Android Only */
+    vertical-align: bottom; /* Android Only */
+    color: #fff;  /* iOS Only */
+}

@@ -1,8 +1,11 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatedTo="navigatedTo">
-  <StackLayout>
-    <Label text="{{ clickMeLabel }}" />
-    <Button text="Click" tap="onClick" col="1" />
-    <Label text="{{ clickedLabel }}" row="1" colspan="2" />
-  </StackLayout>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatedTo="navigatedTo"
+      xmlns:FAB="nativescript-floatingactionbutton">
+  <Grid-Layout rows="auto, *">
+    <FAB:fab tap="fabTap"
+                     row="1"
+                     icon="res://ic_add_white_24dp"
+                     rippleColor="#f1f1f1"
+                     class="fab-button" />
+  </Grid-Layout>
 </Page>
 
