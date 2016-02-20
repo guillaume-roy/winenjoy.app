@@ -1,7 +1,7 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatedTo="navigatedTo">
   <Page.actionBar>
     <ActionBar title="Nouvelle dégustation">
-      <NavigationButton android.systemIcon="ic_menu_back"/>
+      <NavigationButton icon="res://ic_cancel_white_24dp" tap="cancel"/>
     </ActionBar>
   </Page.actionBar>
   <TabView selectedColor="#FFFFFF">
