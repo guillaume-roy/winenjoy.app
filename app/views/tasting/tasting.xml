@@ -1,5 +1,31 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatedTo="navigatedTo">
-  <StackLayout>
-    <Label text="tasting" />
-  </StackLayout>
+  <TabView>
+   <TabView.items>
+     <TabViewItem title="Vin">
+       <TabViewItem.view>
+          <Label text="Vin" />
+       </TabViewItem.view>
+     </TabViewItem>
+     <TabViewItem title="Aspect">
+       <TabViewItem.view>
+          <Label text="Aspect" />
+       </TabViewItem.view>
+     </TabViewItem>
+     <TabViewItem title="Arômes">
+       <TabViewItem.view>
+          <Label text="Arômes" />
+       </TabViewItem.view>
+     </TabViewItem>
+     <TabViewItem title="Saveurs">
+       <TabViewItem.view>
+          <Label text="Saveurs" />
+       </TabViewItem.view>
+     </TabViewItem>
+     <TabViewItem title="Synthèse">
+       <TabViewItem.view>
+          <Label text="Synthèse" />
+       </TabViewItem.view>
+     </TabViewItem>
+   </TabView.items>
+ </TabView>
 </Page>
