@@ -8,7 +8,39 @@
    <TabView.items>
      <TabViewItem title="Vin">
        <TabViewItem.view>
-          <Label text="Vin" />
+        <ScrollView>
+          <StackLayout class="tab-view-content">
+            <TextField hint="Nom du vin" />
+            <TextField hint="Domaine" />
+            <TextField hint="Cuvée" />
+            <TextField hint="Pays" />
+            <TextField hint="Région" />
+            <StackLayout orientation="horizontal">
+                <Label text="Année" />
+                <ListPicker />
+                <Label text="Couleur" />
+                <ListPicker />
+            </StackLayout>
+            <StackLayout orientation="horizontal">
+                <Label text="% Alcool" />
+                <Label text="14.3" />
+                <Slider minValue="0" maxValue="100" value="14.3" width="100%" />
+            </StackLayout>
+            <StackLayout orientation="horizontal">
+                <Label text="Biologique" />
+                <Switch />
+            </StackLayout>
+            <StackLayout orientation="horizontal">
+                <Label text="Biodynamique" />
+                <Switch />
+            </StackLayout>
+            <StackLayout orientation="horizontal">
+                <Label text="Cépages" />
+                <TextField hint="Ajouter un cépage" />
+            </StackLayout>
+            <TextView hint="Notes" />
+           </StackLayout>
+          </ScrollView>
        </TabViewItem.view>
      </TabViewItem>
      <TabViewItem title="Aspect">
