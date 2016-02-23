@@ -18,6 +18,5 @@ export function onClick(args: GestureEventData) {
 }
 
 export function fabTap(args) {
-    let topmost = frameModule.topmost();
-    topmost.navigate(Views.tasting);
+    frameModule.topmost().navigate(Views.tasting);
 }

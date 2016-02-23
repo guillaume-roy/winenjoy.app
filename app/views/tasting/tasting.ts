@@ -1,11 +1,16 @@
 import {EventData} from "data/observable";
 import {Page} from "ui/page";
-import {GestureEventData} from "ui/gestures";
 import {TastingViewModel} from "../../view-models/tasting-view-model";
 import frameModule = require("ui/frame");
 import dialogs = require("ui/dialogs");
+import {Slider} from "ui/slider";
 
 let viewModel: TastingViewModel;
+
+export function loaded(args: EventData) {
+    let page = <Page>args.object;
+    let alcoholSlider = <Slider>page.getViewById("alcohol-slider");
+}
 
 export function navigatedTo(args: EventData) {
     let page = <Page>args.object;
@@ -15,12 +20,13 @@ export function navigatedTo(args: EventData) {
 
 export function cancel() {
     dialogs.confirm({
-        title: "Annuler",
+        cancelButtonText: "Non",
         message: "Etes-vous sûr de vouloir annuler cette dégustation ?",
         okButtonText: "Oui",
-        cancelButtonText: "Non"
+        title: "Annuler"
     }).then(result => {
-        if(result)
+        if (result) {
             frameModule.topmost().goBack();
+        }
     });
 }

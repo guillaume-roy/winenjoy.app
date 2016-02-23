@@ -1,4 +1,4 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatedTo="navigatedTo">
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:dd="nativescript-drop-down" navigatedTo="navigatedTo" loaded="loaded">
   <Page.actionBar>
     <ActionBar title="Nouvelle dégustation">
       <NavigationButton icon="res://ic_close_white_24dp" tap="cancel"/>
@@ -10,34 +10,36 @@
        <TabViewItem.view>
         <ScrollView>
           <StackLayout class="tab-view-content">
-            <TextField hint="Nom du vin" />
-            <TextField hint="Domaine" />
-            <TextField hint="Cuvée" />
-            <TextField hint="Pays" />
-            <TextField hint="Région" />
-            <StackLayout orientation="horizontal">
+            <TextField text="{{ wineTasting.name }}" hint="Nom du vin" class="form-item" style="font-size: 13;" />
+            <TextField text="{{ wineTasting.estate }}" hint="Domaine" class="form-item" style="font-size: 13" />
+            <TextField text="{{ wineTasting.cuvee }}" hint="Cuvée" class="form-item" style="font-size: 13" />
+            <TextField text="{{ wineTasting.country }}" hint="Pays" class="form-item" style="font-size: 13" />
+            <TextField text="{{ wineTasting.region }}" hint="Région" class="form-item" style="font-size: 13" />
+            <GridLayout columns="*,*,*,*" class="form-item" style="padding-left: 6">
                 <Label text="Année" />
-                <ListPicker />
-                <Label text="Couleur" />
-                <ListPicker />
-            </StackLayout>
-            <StackLayout orientation="horizontal">
-                <Label text="% Alcool" />
-                <Label text="14.3" />
-                <Slider minValue="0" maxValue="100" value="14.3" width="100%" />
-            </StackLayout>
-            <StackLayout orientation="horizontal">
-                <Label text="Biologique" />
-                <Switch />
-            </StackLayout>
-            <StackLayout orientation="horizontal">
-                <Label text="Biodynamique" />
-                <Switch />
-            </StackLayout>
-            <StackLayout orientation="horizontal">
-                <Label text="Cépages" />
-                <TextField hint="Ajouter un cépage" />
-            </StackLayout>
+                <dd:DropDown col="1" items="{{ yearsSelection }}" selectedIndex="{{ yearSelectedIndex }}" />
+                <Label text="Couleur" col="2" style="padding-left: 6" />
+                <dd:DropDown col="3" items="{{ wineTypesSelection }}" selectedIndex="{{ wineTypeSelectedIndex }}" />
+            </GridLayout>
+            <GridLayout columns="100, *" style="padding-left: 6">
+                <StackLayout orientation="horizontal" style="vertical-align: center;">
+                    <Label text="{{ alcoholValue }}" />
+                    <Label text="% Alcool" />
+                </StackLayout>
+                <Slider id="alcohol-slider" value="{{ alcoholValue }}" minValue="0" maxValue="100" col="1" />
+            </GridLayout>
+            <GridLayout class="form-item" style="padding-left: 6">
+                <Label text="Biologique" style="vertical-align: center;horizontal-align: left" width="100" />
+                <Switch checked="{{ wineTasting.isBiologic }}" style="horizontal-align: right;" />
+            </GridLayout>
+            <GridLayout class="form-item" style="padding-left: 6">
+                <Label text="Biodynamique" style="vertical-align: center;horizontal-align: left" width="100" />
+                <Switch checked="{{ wineTasting.isBiodynamic }}" style="horizontal-align: right;" />
+            </GridLayout>
+            <GridLayout class="form-item" columns="auto, *" style="padding-left: 6">
+                <Label text="Cépages" style="vertical-align: center;horizontal-align: left" width="100" />
+                <TextField hint="Ajouter un cépage" col="1" />
+            </GridLayout>
             <TextView hint="Notes" />
            </StackLayout>
           </ScrollView>

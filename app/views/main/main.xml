@@ -2,10 +2,9 @@
       xmlns:FAB="nativescript-floatingactionbutton">
   <Grid-Layout rows="auto, *">
     <FAB:fab tap="fabTap"
-                     row="1"
-                     icon="res://ic_add_white_24dp"
-                     rippleColor="#f1f1f1"
-                     class="fab-button" />
+        row="1"
+        icon="res://ic_add_white_24dp"
+        rippleColor="#f1f1f1"
+        class="fab-button" />
   </Grid-Layout>
 </Page>
-
