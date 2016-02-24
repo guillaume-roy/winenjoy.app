@@ -24,6 +24,13 @@
                 <Label text="Couleur" col="2" style="padding-left: 6" />
                 <dd:DropDown col="3" items="{{ wineTypesSelection }}" selectedIndex="{{ wineTypeSelectedIndex }}" />
             </GridLayout>
+            <GridLayout columns="100, *" style="padding-left: 6">
+                <StackLayout orientation="horizontal" style="vertical-align: center;">
+                    <Label text="{{ alcoholFromattedValue }}" />
+                    <Label text="% Alcool" />
+                </StackLayout>
+                <Slider id="alcohol-slider" value="{{ alcoholValue }}" minValue="30" maxValue="180" col="1" />
+            </GridLayout>
             <GridLayout class="form-item" style="padding-left: 6">
                 <Label text="Biologique" style="vertical-align: center;horizontal-align: left" width="100" />
                 <Switch checked="{{ wineTasting.isBiologic }}" style="horizontal-align: right;" />

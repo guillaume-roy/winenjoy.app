@@ -8,6 +8,7 @@ export class TastingViewModel extends Observable {
     private _wineTypesSelection: string[];
     private _wineTypeSelectedIndex: number;
     private _alcoholValue: number;
+    private _alcoholFromattedValue: number;
 
     public get wineTasting() {
         return this._wineTasting;
@@ -47,6 +48,16 @@ export class TastingViewModel extends Observable {
     public set alcoholValue(value: number) {
         this._alcoholValue = value;
         this.notifyPropertyChange("alcoholValue", value);
+
+        this.alcoholFromattedValue = value / 10;
+    }
+
+    public get alcoholFromattedValue() {
+        return this._alcoholFromattedValue;
+    }
+    public set alcoholFromattedValue(value: number) {
+        this._alcoholFromattedValue = value;
+        this.notifyPropertyChange("alcoholFromattedValue", value);
     }
 
     constructor() {
@@ -61,6 +72,6 @@ export class TastingViewModel extends Observable {
         this._wineTypesSelection = [ "Blanc", "Rosé", "Rouge" ];
         this._wineTypeSelectedIndex = 2;
 
-        this._alcoholValue = 14.4;
+        this.alcoholValue = 130;
     }
 }
