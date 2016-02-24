@@ -1,7 +1,10 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:dd="nativescript-drop-down" navigatedTo="navigatedTo" loaded="loaded">
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:dd="nativescript-drop-down" navigatedTo="navigatedTo">
   <Page.actionBar>
     <ActionBar title="Nouvelle dégustation">
       <NavigationButton icon="res://ic_close_white_24dp" tap="cancel"/>
+      <ActionBar.actionItems>
+        <ActionItem icon="res://ic_check_white_24dp" ios.position="right" android.position="actionBar" tap="onSaveTasting"/>
+      </ActionBar.actionItems>
     </ActionBar>
   </Page.actionBar>
   <TabView selectedColor="#FFFFFF">
@@ -10,23 +13,16 @@
        <TabViewItem.view>
         <ScrollView>
           <StackLayout class="tab-view-content">
-            <TextField text="{{ wineTasting.name }}" hint="Nom du vin" class="form-item" style="font-size: 13;" />
-            <TextField text="{{ wineTasting.estate }}" hint="Domaine" class="form-item" style="font-size: 13" />
-            <TextField text="{{ wineTasting.cuvee }}" hint="Cuvée" class="form-item" style="font-size: 13" />
-            <TextField text="{{ wineTasting.country }}" hint="Pays" class="form-item" style="font-size: 13" />
-            <TextField text="{{ wineTasting.region }}" hint="Région" class="form-item" style="font-size: 13" />
+            <TextField text="{{ wineTasting.estate }}" hint="Domaine" class="form-item" />
+            <TextField text="{{ wineTasting.cuvee }}" hint="Cuvée" class="form-item" />
+            <TextField text="{{ wineTasting.country }}" hint="Pays" class="form-item" />
+            <TextField text="{{ wineTasting.region }}" hint="Région" class="form-item" />
+            <TextField text="{{ wineTasting.aoc }}" hint="AOC" class="form-item" />
             <GridLayout columns="*,*,*,*" class="form-item" style="padding-left: 6">
                 <Label text="Année" />
                 <dd:DropDown col="1" items="{{ yearsSelection }}" selectedIndex="{{ yearSelectedIndex }}" />
                 <Label text="Couleur" col="2" style="padding-left: 6" />
                 <dd:DropDown col="3" items="{{ wineTypesSelection }}" selectedIndex="{{ wineTypeSelectedIndex }}" />
-            </GridLayout>
-            <GridLayout columns="100, *" style="padding-left: 6">
-                <StackLayout orientation="horizontal" style="vertical-align: center;">
-                    <Label text="{{ alcoholValue }}" />
-                    <Label text="% Alcool" />
-                </StackLayout>
-                <Slider id="alcohol-slider" value="{{ alcoholValue }}" minValue="0" maxValue="100" col="1" />
             </GridLayout>
             <GridLayout class="form-item" style="padding-left: 6">
                 <Label text="Biologique" style="vertical-align: center;horizontal-align: left" width="100" />
@@ -40,14 +36,64 @@
                 <Label text="Cépages" style="vertical-align: center;horizontal-align: left" width="100" />
                 <TextField hint="Ajouter un cépage" col="1" />
             </GridLayout>
-            <TextView hint="Notes" />
+            <TextView text="{{ wineTasting.wineTabNotes }}" hint="Notes" />
            </StackLayout>
           </ScrollView>
        </TabViewItem.view>
      </TabViewItem>
      <TabViewItem title="Aspect">
        <TabViewItem.view>
-          <Label text="Aspect" />
+          <ScrollView>
+            <StackLayout class="tab-view-content">
+                <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6; padding-top: 8">
+                    <Label text="Limpidité" />
+                    <WrapLayout orientation="horizontal" col="1">
+                        <Button text="Net" width="110" style="background-color: #FFC107; color: white" />
+                        <Button text="Trouble" width="110" />
+                        <Button text="Flou" width="110" />
+                        <Button text="Limpide" width="110" />
+                        <Button text="Cristallin" width="110" />
+                        <Button text="Voilé" width="110" />
+                    </WrapLayout>
+                    <TextField hint="Autres" col="1" row="1" />
+                </GridLayout>
+                <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6">
+                    <Label text="Intensité" />
+                    <WrapLayout orientation="horizontal" col="1">
+                        <Button text="Pâle" width="100" />
+                        <Button text="Moyenne" width="100" style="background-color: #FFC107; color: white" />
+                        <Button text="Intense" width="100" />
+                    </WrapLayout>
+                    <TextField hint="Autres" col="1" row="1" />
+                </GridLayout>
+                <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6">
+                    <Label text="Nuance" />
+                    <WrapLayout orientation="horizontal" col="1">
+                    </WrapLayout>
+                </GridLayout>
+                <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6">
+                    <Label text="Larmes" />
+                    <WrapLayout orientation="horizontal" col="1">
+                        <Button text="Aucun" width="120" />
+                        <Button text="Courtes" width="120" style="background-color: #FFC107; color: white" />
+                        <Button text="Longues" width="120" />
+                        <Button text="Grasses" width="120" style="background-color: #FFC107; color: white" />
+                        <Button text="Fluides" width="120" />
+                        <Button text="Abondantes" width="120" />
+                    </WrapLayout>
+                    <TextField hint="Autres" col="1" row="1" />
+                </GridLayout>
+                <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6">
+                    <Label text="Bulles" />
+                    <WrapLayout orientation="horizontal" col="1">
+                        <Button text="Aucun" width="120" style="background-color: #FFC107; color: white" />
+                        <Button text="Peu" width="120" />
+                        <Button text="Abondantes" width="120" />
+                    </WrapLayout>
+                    <TextField hint="Autres" col="1" row="1" />
+                </GridLayout>
+            </StackLayout>
+          </ScrollView>
        </TabViewItem.view>
      </TabViewItem>
      <TabViewItem title="Arômes">

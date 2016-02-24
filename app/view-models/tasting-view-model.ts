@@ -27,6 +27,8 @@ export class TastingViewModel extends Observable {
     public set yearSelectedIndex(value: number) {
         this._yearSelectedIndex = value;
         this.notifyPropertyChange("yearSelectedIndex", value);
+
+        this.wineTasting.year = this.yearsSelection[value];
     }
 
     public get wineTypeSelectedIndex() {
@@ -35,6 +37,8 @@ export class TastingViewModel extends Observable {
     public set wineTypeSelectedIndex(value: number) {
         this._wineTypeSelectedIndex = value;
         this.notifyPropertyChange("wineTypeSelectedIndex", value);
+
+        this.wineTasting.wineType = value;
     }
 
     public get alcoholValue() {
@@ -49,7 +53,7 @@ export class TastingViewModel extends Observable {
         super();
 
         this._yearsSelection = [];
-        for (let i = 1880; i <= 2016; i++) {
+        for (let i = 1900; i <= 2016; i++) {
             this._yearsSelection.push(i);
         }
         this._yearSelectedIndex = this._yearsSelection.length - 3;
