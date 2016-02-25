@@ -3,6 +3,7 @@ import {Page} from "ui/page";
 import {TastingViewModel} from "../../view-models/tasting-view-model";
 import frameModule = require("ui/frame");
 import dialogs = require("ui/dialogs");
+import appModule = require("application");
 
 let viewModel: TastingViewModel;
 
@@ -13,7 +14,7 @@ export function navigatedTo(args: EventData) {
 }
 
 export function onSaveTasting() {
-    console.log("onSave");
+    viewModel.finishTasting();
 }
 
 export function cancel() {
@@ -28,3 +29,13 @@ export function cancel() {
         }
     });
 }
+
+appModule.resources["dateConverter"] = function(value) {
+    let date = new Date(value);
+    let day = date.getDate();
+    let month = date.getMonth();
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    return (day < 10 ? "0" + day : day) + "/" + (month < 10 ? "0" + month : month) + "/" + date.getFullYear() +
+        " " + (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes);
+};

@@ -58,10 +58,16 @@ export class TastingViewModel extends Observable {
     public set alcoholFromattedValue(value: number) {
         this._alcoholFromattedValue = value;
         this.notifyPropertyChange("alcoholFromattedValue", value);
+
+        this.wineTasting.alcohol = value;
     }
 
     constructor() {
         super();
+
+        this._wineTasting = {
+            startDate: Date.now()
+        };
 
         this._yearsSelection = [];
         for (let i = 1900; i <= 2016; i++) {
@@ -73,5 +79,10 @@ export class TastingViewModel extends Observable {
         this._wineTypeSelectedIndex = 2;
 
         this.alcoholValue = 130;
+    }
+
+    public finishTasting() {
+        this.wineTasting.endDate = Date.now();
+        console.dump(this.wineTasting);
     }
 }

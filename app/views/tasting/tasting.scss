@@ -1,0 +1,17 @@
+@import "../../styles/_material-theme";
+
+.selected-critera {
+    background-color: $accent-color;
+    color: $primary-color-text;
+}
+
+.rating-item {
+    opacity: 0.2;
+}
+
+.selected-rating-item {
+    // border-width: 1;
+    // border-color: $secondary-text-color;
+    // border-radius: 5
+    opacity: 1;
+}

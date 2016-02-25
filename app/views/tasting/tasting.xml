@@ -39,11 +39,11 @@
                 <Label text="Biodynamique" style="vertical-align: center;horizontal-align: left" width="100" />
                 <Switch checked="{{ wineTasting.isBiodynamic }}" style="horizontal-align: right;" />
             </GridLayout>
-            <GridLayout class="form-item" columns="auto, *" style="padding-left: 6">
+            <GridLayout columns="auto, *" style="padding-left: 6; padding-bottom: 8; min-height: 48">
                 <Label text="Cépages" style="vertical-align: center;horizontal-align: left" width="100" />
-                <TextField hint="Ajouter un cépage" col="1" />
+                <TextView hint="Ajouter un cépage" col="1" />
             </GridLayout>
-            <TextView text="{{ wineTasting.wineTabNotes }}" hint="Notes" />
+            <TextView text="{{ wineTasting.wineTabNotes }}" hint="Commentaires" />
            </StackLayout>
           </ScrollView>
        </TabViewItem.view>
@@ -115,7 +115,25 @@
      </TabViewItem>
      <TabViewItem title="Synthèse">
        <TabViewItem.view>
-          <Label text="Synthèse" />
+           <ScrollView>
+            <StackLayout class="tab-view-content">
+                <GridLayout class="form-item" style="padding-left: 6" columns="100, *">
+                    <Label text="Note globale" style="vertical-align: center;horizontal-align: left" />
+                    <StackLayout orientation="horizontal" col="1" style="horizontal-align: center">
+                        <Image src="res://ic_very_happy" height="48" width="48" class="rating-item" />
+                        <Image src="res://ic_happy" height="48" width="48" class="rating-item selected-rating-item" />
+                        <Image src="res://ic_neutral" height="48" width="48" class="rating-item"/>
+                        <Image src="res://ic_sad" height="48" width="48" class="rating-item" />
+                        <Image src="res://ic_very_sad" height="48" width="48" class="rating-item" />
+                    </StackLayout>
+                </GridLayout>
+                <GridLayout class="form-item" style="padding-left: 6; padding-right: 6">
+                    <Label text="Date" style="vertical-align: center;horizontal-align: left" width="100" />
+                    <Label text="{{ wineTasting.startDate | dateConverter}}" style="vertical-align: center;horizontal-align: right" />
+                </GridLayout>
+                <TextView text="{{ wineTasting.synthesisTabNotes }}" hint="Commentaires" />
+            </StackLayout>
+           </ScrollView>
        </TabViewItem.view>
      </TabViewItem>
    </TabView.items>
