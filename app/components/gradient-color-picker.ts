@@ -1,33 +1,45 @@
 import {WrapLayout} from "ui/layouts/wrap-layout";
 import {Button} from "ui/button";
 import {Color} from "color";
+import dependencyObservableModule = require("ui/core/dependency-observable");
 
 // https://github.com/NativeScript/NativeScript/issues/1252
 
 export class GradientColorPicker extends WrapLayout {
-    private _startingColor: string;
-    private _endingColor: string;
-    private _colorCount: number;
+    public static startingColorProperty = new dependencyObservableModule.Property(
+        "startingColor",
+        "GradientColorPicker",
+        new dependencyObservableModule.PropertyMetadata(null, dependencyObservableModule.PropertyMetadataSettings.None));
+
+    public static endingColorProperty = new dependencyObservableModule.Property(
+        "endingColor",
+        "GradientColorPicker",
+        new dependencyObservableModule.PropertyMetadata(null, dependencyObservableModule.PropertyMetadataSettings.None));
+
+    public static colorCountProperty = new dependencyObservableModule.Property(
+        "colorCount",
+        "GradientColorPicker",
+        new dependencyObservableModule.PropertyMetadata(null, dependencyObservableModule.PropertyMetadataSettings.None));
 
     public get startingColor() {
-        return this._startingColor;
+        return this._getValue(GradientColorPicker.startingColorProperty);
     }
     public set startingColor(value: string) {
-        this._startingColor = value;
+        this._setValue(GradientColorPicker.startingColorProperty, value);
     }
 
     public get endingColor() {
-        return this._endingColor;
+        return this._getValue(GradientColorPicker.endingColorProperty);
     }
     public set endingColor(value: string) {
-        this._endingColor = value;
+        this._setValue(GradientColorPicker.endingColorProperty, value);
     }
 
     public get colorCount() {
-        return this._colorCount;
+        return this._getValue(GradientColorPicker.colorCountProperty);
     }
     public set colorCount(value: number) {
-        this._colorCount = value;
+        this._setValue(GradientColorPicker.colorCountProperty, value);
     }
 
     constructor() {
