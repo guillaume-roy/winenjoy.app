@@ -4,6 +4,7 @@ import {TastingViewModel} from "../../view-models/tasting-view-model";
 import frameModule = require("ui/frame");
 import dialogs = require("ui/dialogs");
 import appModule = require("application");
+import {GradientColorPicker} from "../../components/gradient-color-picker";
 
 let viewModel: TastingViewModel;
 
@@ -11,6 +12,10 @@ export function navigatedTo(args: EventData) {
     let page = <Page>args.object;
     viewModel = new TastingViewModel();
     page.bindingContext = viewModel;
+
+    let gradientColorPicker = <GradientColorPicker>page.getViewById("gradientColorPicker");
+    gradientColorPicker.generateGradient();
+    // let lol = new GradientColorPicker("#3B022D", "#C23311", 20);
 }
 
 export function onSaveTasting() {

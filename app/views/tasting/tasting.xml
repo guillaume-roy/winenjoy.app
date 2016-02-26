@@ -1,4 +1,7 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:dd="nativescript-drop-down" navigatedTo="navigatedTo">
+<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+        xmlns:dd="nativescript-drop-down"
+        xmlns:gcp="components/gradient-color-picker"
+        navigatedTo="navigatedTo">
   <Page.actionBar>
     <ActionBar title="Nouvelle dégustation">
       <NavigationButton icon="res://ic_close_white_24dp" tap="cancel"/>
@@ -75,8 +78,7 @@
                 </GridLayout>
                 <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6">
                     <Label text="Nuance" />
-                    <WrapLayout orientation="horizontal" col="1">
-                    </WrapLayout>
+                    <gcp:GradientColorPicker id="gradientColorPicker" startingColor="#3B022D" endingColor="#C23311" colorCount="20" col="1" />
                 </GridLayout>
                 <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6">
                     <Label text="Larmes" />
