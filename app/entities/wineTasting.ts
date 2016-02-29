@@ -15,4 +15,5 @@ export interface WineTasting {
     startDate?: number;
     endDate?: number;
     synthesisTabNotes?: string;
+    color?: string;
 }

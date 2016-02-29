@@ -78,7 +78,8 @@
                 </GridLayout>
                 <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6">
                     <Label text="Nuance" />
-                    <gcp:GradientColorPicker id="gradientColorPicker" startingColor="#3B022D" endingColor="#C23311" colorCount="20" col="1" />
+                    <Button text="Définir" tap="onSelectColor" col="1" visibility="{{ wineTasting.color ? 'collapsed' : 'visible' }}" />
+                    <Button tap="onSelectColor" col="1" backgroundColor="{{wineTasting.color}}" visibility="{{ wineTasting.color ? 'visible' : 'collapsed' }}" />
                 </GridLayout>
                 <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6">
                     <Label text="Larmes" />

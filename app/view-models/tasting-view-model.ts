@@ -66,7 +66,9 @@ export class TastingViewModel extends Observable {
         super();
 
         this._wineTasting = {
-            startDate: Date.now()
+            alcohol: 13,
+            startDate: Date.now(),
+            wineType: 2
         };
 
         this._yearsSelection = [];

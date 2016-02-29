@@ -1,31 +1,36 @@
 import {WrapLayout} from "ui/layouts/wrap-layout";
+import {EventData} from "data/observable";
 import {Button} from "ui/button";
 import {Color} from "color";
 import dependencyObservableModule = require("ui/core/dependency-observable");
-
-// https://github.com/NativeScript/NativeScript/issues/1252
 
 export class GradientColorPicker extends WrapLayout {
     public static startingColorProperty = new dependencyObservableModule.Property(
         "startingColor",
         "GradientColorPicker",
-        new dependencyObservableModule.PropertyMetadata(null, dependencyObservableModule.PropertyMetadataSettings.None));
+        new dependencyObservableModule.PropertyMetadata(undefined, dependencyObservableModule.PropertyMetadataSettings.None));
 
     public static endingColorProperty = new dependencyObservableModule.Property(
         "endingColor",
         "GradientColorPicker",
-        new dependencyObservableModule.PropertyMetadata(null, dependencyObservableModule.PropertyMetadataSettings.None));
+        new dependencyObservableModule.PropertyMetadata(undefined, dependencyObservableModule.PropertyMetadataSettings.None));
 
-    public static colorCountProperty = new dependencyObservableModule.Property(
-        "colorCount",
+    public static colorsCountProperty = new dependencyObservableModule.Property(
+        "colorsCount",
         "GradientColorPicker",
-        new dependencyObservableModule.PropertyMetadata(null, dependencyObservableModule.PropertyMetadataSettings.None));
+        new dependencyObservableModule.PropertyMetadata(undefined, dependencyObservableModule.PropertyMetadataSettings.None));
+
+    public static selectedColorProperty = new dependencyObservableModule.Property(
+        "selectedColor",
+        "GradientColorPicker",
+        new dependencyObservableModule.PropertyMetadata(undefined, dependencyObservableModule.PropertyMetadataSettings.None));
 
     public get startingColor() {
         return this._getValue(GradientColorPicker.startingColorProperty);
     }
     public set startingColor(value: string) {
         this._setValue(GradientColorPicker.startingColorProperty, value);
+        this.generateGradient();
     }
 
     public get endingColor() {
@@ -33,38 +38,54 @@ export class GradientColorPicker extends WrapLayout {
     }
     public set endingColor(value: string) {
         this._setValue(GradientColorPicker.endingColorProperty, value);
+        this.generateGradient();
     }
 
-    public get colorCount() {
-        return this._getValue(GradientColorPicker.colorCountProperty);
+    public get colorsCount() {
+        return this._getValue(GradientColorPicker.colorsCountProperty);
     }
-    public set colorCount(value: number) {
-        this._setValue(GradientColorPicker.colorCountProperty, value);
+    public set colorsCount(value: number) {
+        this._setValue(GradientColorPicker.colorsCountProperty, value);
+        this.generateGradient();
     }
+
+    public get selectedColor() {
+        return this._getValue(GradientColorPicker.selectedColorProperty);
+    }
+    public set selectedColor(value: string) {
+        this._setValue(GradientColorPicker.selectedColorProperty, value);
+    }
+
+    private _gradientButtons: Button[];
 
     constructor() {
         super();
+
+        this._gradientButtons = [];
     }
 
-    public generateGradient() {
-        let startingColorRgb = this.convertToRGB(this.startingColor);
-        let endingColorRgb = this.convertToRGB(this.endingColor);
-        let alpha = 0.0;
+    private generateGradient() {
+        if (this.startingColor && this.endingColor && this.colorsCount > 0) {
+            let startingColorRgb = this.convertToRGB(this.startingColor);
+            let endingColorRgb = this.convertToRGB(this.endingColor);
 
-        let result = [];
+            let alpha = 0.0;
 
-        for (let i = 0; i < this.colorCount; i++) {
-            let gradientColor = [];
-            alpha += (1.0 / this.colorCount);
+            let result = [];
 
-            gradientColor[0] = startingColorRgb[0] * alpha + (1 - alpha) * endingColorRgb[0];
-            gradientColor[1] = startingColorRgb[1] * alpha + (1 - alpha) * endingColorRgb[1];
-            gradientColor[2] = startingColorRgb[2] * alpha + (1 - alpha) * endingColorRgb[2];
+            for (let i = 0; i < this.colorsCount; i++) {
+                let gradientColor = [];
+                alpha += (1.0 / this.colorsCount);
 
-            result.push(this.rgbToHex(gradientColor));
+                gradientColor[0] = startingColorRgb[0] * alpha + (1 - alpha) * endingColorRgb[0];
+                gradientColor[1] = startingColorRgb[1] * alpha + (1 - alpha) * endingColorRgb[1];
+                gradientColor[2] = startingColorRgb[2] * alpha + (1 - alpha) * endingColorRgb[2];
+
+                result.push(this.rgbToHex(gradientColor));
+            }
+
+            this.displayGradient(result.reverse());
         }
-
-        this.displayGradient(result.reverse());
     }
 
     private displayGradient(gradient: any[]) {
@@ -73,9 +94,22 @@ export class GradientColorPicker extends WrapLayout {
         for (let i = 0; i < resultLength; i++) {
             let gradientButton = new Button();
             gradientButton.backgroundColor = new Color("#" + gradient[i]);
+            gradientButton.color = new Color("white");
             gradientButton.height = 72;
             gradientButton.width = 72;
 
+            gradientButton.on(Button.tapEvent, function(args: EventData) {
+                let clickedButton = <Button>args.object;
+
+                for (let i = 0; i < this._gradientButtons.length; i++) {
+                    this._gradientButtons[i].text = "";
+                }
+
+                clickedButton.text = "✓";
+                this.selectedColor = clickedButton.style.backgroundColor.hex;
+            }, this);
+
+            this._gradientButtons.push(gradientButton);
             this.addChild(gradientButton);
         }
     }
