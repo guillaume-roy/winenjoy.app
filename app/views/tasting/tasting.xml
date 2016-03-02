@@ -1,6 +1,7 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd"
         xmlns:dd="nativescript-drop-down"
         xmlns:gcp="components/gradient-color-picker"
+        xmlns:fr="components/final-rating"
         navigatedTo="navigatedTo">
   <Page.actionBar>
     <ActionBar title="Nouvelle dégustation">
@@ -122,13 +123,7 @@
             <StackLayout class="tab-view-content">
                 <GridLayout class="form-item" style="padding-left: 6" columns="100, *">
                     <Label text="Note globale" style="vertical-align: center;horizontal-align: left" />
-                    <StackLayout orientation="horizontal" col="1" style="horizontal-align: center">
-                        <Image src="res://ic_very_happy" height="48" width="48" class="rating-item" />
-                        <Image src="res://ic_happy" height="48" width="48" class="rating-item selected-rating-item" />
-                        <Image src="res://ic_neutral" height="48" width="48" class="rating-item"/>
-                        <Image src="res://ic_sad" height="48" width="48" class="rating-item" />
-                        <Image src="res://ic_very_sad" height="48" width="48" class="rating-item" />
-                    </StackLayout>
+                    <fr:FinalRating col="1" style="horizontal-align: center" selectedValue="{{ wineTasting.finalRating }}" />
                 </GridLayout>
                 <GridLayout class="form-item" style="padding-left: 6; padding-right: 6">
                     <Label text="Date" style="vertical-align: center;horizontal-align: left" width="100" />

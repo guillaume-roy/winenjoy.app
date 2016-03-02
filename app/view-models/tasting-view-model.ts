@@ -40,6 +40,7 @@ export class TastingViewModel extends Observable {
         this.notifyPropertyChange("wineTypeSelectedIndex", value);
 
         this.wineTasting.wineType = value;
+        this.wineTasting.color = null;
     }
 
     public get alcoholValue() {
