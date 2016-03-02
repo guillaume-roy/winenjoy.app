@@ -2,6 +2,7 @@
         xmlns:dd="nativescript-drop-down"
         xmlns:gcp="components/gradient-color-picker"
         xmlns:fr="components/final-rating"
+        xmlns:vs="components/values-selector"
         navigatedTo="navigatedTo">
   <Page.actionBar>
     <ActionBar title="Nouvelle dégustation">
@@ -58,14 +59,7 @@
             <StackLayout class="tab-view-content">
                 <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6; padding-top: 8">
                     <Label text="Limpidité" />
-                    <WrapLayout orientation="horizontal" col="1">
-                        <Button text="Net" width="110" style="background-color: #FFC107; color: white" />
-                        <Button text="Trouble" width="110" />
-                        <Button text="Flou" width="110" />
-                        <Button text="Limpide" width="110" />
-                        <Button text="Cristallin" width="110" />
-                        <Button text="Voilé" width="110" />
-                    </WrapLayout>
+                    <vs:ValuesSelector items="{{ limpidityValues }}" col="1" />
                     <TextField hint="Autres" col="1" row="1" />
                 </GridLayout>
                 <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6">
@@ -103,13 +97,66 @@
                     </WrapLayout>
                     <TextField hint="Autres" col="1" row="1" />
                 </GridLayout>
+                <TextView text="{{ wineTasting.sightTabNotes }}" hint="Commentaires" />
             </StackLayout>
           </ScrollView>
        </TabViewItem.view>
      </TabViewItem>
      <TabViewItem title="Arômes">
        <TabViewItem.view>
-          <Label text="Arômes" />
+        <ScrollView>
+            <StackLayout class="tab-view-content">
+                <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6; padding-top: 8">
+                   <Label text="1° Nez" />
+                   <WrapLayout orientation="horizontal" col="1">
+                        <Button text="Fruité" width="90" />
+                        <Button text="Floral" width="90" style="background-color: #FFC107; color: white" />
+                        <Button text="Végétal" width="90" />
+                        <Button text="Epicé" width="90" style="background-color: #FFC107; color: white" />
+                        <Button text="Boisé" width="90" />
+                        <Button text="Minéral" width="90" />
+                        <Button text="Animal" width="90" />
+                        <Button text="Empyreumatique" width="150" />
+                    </WrapLayout>
+                    <TextField hint="Autres" col="1" row="1" />
+                </GridLayout>
+                <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6;">
+                   <Label text="2° Nez" />
+                   <WrapLayout orientation="horizontal" col="1">
+                    </WrapLayout>
+                    <TextField hint="Autres" col="1" row="1" />
+                </GridLayout>
+                <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6;">
+                   <Label text="Intensité" />
+                   <WrapLayout orientation="horizontal" col="1">
+                        <Button text="Faible" width="100" />
+                        <Button text="Moyenne" width="100" style="background-color: #FFC107; color: white" />
+                        <Button text="Puissante" width="100" />
+                    </WrapLayout>
+                    <TextField hint="Autres" col="1" row="1" />
+                </GridLayout>
+                <GridLayout columns="100, *" style="padding-left: 6;">
+                   <Label text="Type" />
+                   <WrapLayout orientation="horizontal" col="1">
+                        <Button text="Ouvert" width="100" />
+                        <Button text="Fermé" width="100" style="background-color: #FFC107; color: white" />
+                    </WrapLayout>
+                </GridLayout>
+                <GridLayout class="form-item" style="padding-left: 6">
+                    <Label text="Bouchon" style="vertical-align: center;horizontal-align: left" width="100" />
+                    <Switch style="horizontal-align: right;" />
+                </GridLayout>
+                <GridLayout class="form-item" style="padding-left: 6">
+                    <Label text="A carafer" style="vertical-align: center;horizontal-align: left" width="100" />
+                    <Switch style="horizontal-align: right;" />
+                </GridLayout>
+                <GridLayout class="form-item" style="padding-left: 6">
+                    <Label text="A aéré" style="vertical-align: center;horizontal-align: left" width="100" />
+                    <Switch style="horizontal-align: right;" />
+                </GridLayout>
+                <TextView text="{{ wineTasting.smellTabNotes }}" hint="Commentaires" />
+            </StackLayout>
+          </ScrollView>
        </TabViewItem.view>
      </TabViewItem>
      <TabViewItem title="Saveurs">

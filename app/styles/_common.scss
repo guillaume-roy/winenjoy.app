@@ -16,3 +16,16 @@ TabView {
     height: 48;
     margin-bottom: 8;
 }
+
+.values-selector-selected-item {
+    background-color: $accent-color;
+    color: $primary-color-text;
+}
+
+.rating-item {
+    opacity: 0.2;
+}
+
+.selected-rating-item {
+    opacity: 1;
+}

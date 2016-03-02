@@ -9,9 +9,14 @@ export class TastingViewModel extends Observable {
     private _wineTypeSelectedIndex: number;
     private _alcoholValue: number;
     private _alcoholFromattedValue: number;
+    private _limpidityValues: any;
 
     public get wineTasting() {
         return this._wineTasting;
+    }
+
+    public get limpidityValues() {
+        return this._limpidityValues;
     }
 
     public get yearsSelection() {
@@ -82,6 +87,39 @@ export class TastingViewModel extends Observable {
         this._wineTypeSelectedIndex = 2;
 
         this.alcoholValue = 130;
+
+        this._limpidityValues = [
+            {
+                id: 0,
+                order: 0,
+                text: "Net"
+            },
+            {
+                id: 1,
+                order: 1,
+                text: "Trouble"
+            },
+            {
+                id: 1,
+                order: 1,
+                text: "Flou"
+            },
+            {
+                id: 1,
+                order: 1,
+                text: "Limpide"
+            },
+            {
+                id: 1,
+                order: 1,
+                text: "Cristallin"
+            },
+            {
+                id: 1,
+                order: 1,
+                text: "Voilé"
+            }
+        ];
     }
 
     public finishTasting() {

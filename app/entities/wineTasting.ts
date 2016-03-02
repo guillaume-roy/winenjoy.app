@@ -17,4 +17,6 @@ export interface WineTasting {
     synthesisTabNotes?: string;
     color?: string;
     finalRating?: string;
+    sightTabNotes?: string;
+    smellTabNotes?: string;
 }
