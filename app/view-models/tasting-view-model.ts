@@ -1,30 +1,53 @@
 import {Observable} from "data/observable";
 import {WineTasting} from "../entities/wineTasting";
+import {CriteriaItem} from "../entities/criteriaItem";
+import {Services} from "../utils/services";
+import {IAppService} from "../services/IAppService";
 
 export class TastingViewModel extends Observable {
-    private _wineTasting: WineTasting;
-    private _yearsSelection: number[];
-    private _yearSelectedIndex: number;
-    private _wineTypesSelection: string[];
-    private _wineTypeSelectedIndex: number;
+    private _service: IAppService;
+    private _limpidityCriterias: CriteriaItem[];
+    private _intensityCriterias: CriteriaItem[];
+    private _tearCriterias: CriteriaItem[];
+    private _bubbleCriterias: CriteriaItem[];
+    private _wineTypes: CriteriaItem[];
+    private _years: number[];
     private _alcoholValue: number;
     private _alcoholFromattedValue: number;
-    private _limpidityValues: any;
+
+    private _wineTasting: WineTasting;
+
+    private _yearSelectedIndex: number;
+    private _wineTypeSelectedIndex: number;
 
     public get wineTasting() {
         return this._wineTasting;
     }
 
-    public get limpidityValues() {
-        return this._limpidityValues;
+    public get limpidityCriterias() {
+        return this._limpidityCriterias;
     }
 
-    public get yearsSelection() {
-        return this._yearsSelection;
+    public get tearCriterias() {
+        return this._tearCriterias;
     }
 
-    public get wineTypesSelection() {
-        return this._wineTypesSelection;
+    public get bubbleCriterias() {
+        return this._bubbleCriterias;
+    }
+
+    public get intensityCriterias() {
+        return this._intensityCriterias;
+    }
+
+    public get wineTypes() {
+        return this._wineTypes.map((value: CriteriaItem) => {
+           return value.name;
+        });
+    }
+
+    public get years() {
+        return this._years;
     }
 
     public get yearSelectedIndex() {
@@ -34,7 +57,7 @@ export class TastingViewModel extends Observable {
         this._yearSelectedIndex = value;
         this.notifyPropertyChange("yearSelectedIndex", value);
 
-        this.wineTasting.year = this.yearsSelection[value];
+        this.wineTasting.year = this._years[value];
     }
 
     public get wineTypeSelectedIndex() {
@@ -44,7 +67,7 @@ export class TastingViewModel extends Observable {
         this._wineTypeSelectedIndex = value;
         this.notifyPropertyChange("wineTypeSelectedIndex", value);
 
-        this.wineTasting.wineType = value;
+        this.wineTasting.wineType = this._wineTypes[value];
         this.wineTasting.color = null;
     }
 
@@ -71,55 +94,20 @@ export class TastingViewModel extends Observable {
     constructor() {
         super();
 
+        this._service = Services.current;
+        this._limpidityCriterias = this._service.getLimpidityCriterias();
+        this._intensityCriterias = this._service.getIntensityCriterias();
+        this._tearCriterias = this._service.getTearCriterias();
+        this._bubbleCriterias = this._service.getBubbleCriterias();
+        this._wineTypes = this._service.getWineTypes();
+        this._years = this._service.getYears();
+
+        this._yearSelectedIndex = this._years.length - 3;
         this._wineTasting = {
-            alcohol: 13,
             startDate: Date.now(),
-            wineType: 2
+            wineType: 2,
+            year: this._years[this._yearSelectedIndex]
         };
-
-        this._yearsSelection = [];
-        for (let i = 1900; i <= 2016; i++) {
-            this._yearsSelection.push(i);
-        }
-        this._yearSelectedIndex = this._yearsSelection.length - 3;
-
-        this._wineTypesSelection = [ "Blanc", "Rosé", "Rouge" ];
-        this._wineTypeSelectedIndex = 2;
-
-        this.alcoholValue = 130;
-
-        this._limpidityValues = [
-            {
-                id: 0,
-                order: 0,
-                text: "Net"
-            },
-            {
-                id: 1,
-                order: 1,
-                text: "Trouble"
-            },
-            {
-                id: 1,
-                order: 1,
-                text: "Flou"
-            },
-            {
-                id: 1,
-                order: 1,
-                text: "Limpide"
-            },
-            {
-                id: 1,
-                order: 1,
-                text: "Cristallin"
-            },
-            {
-                id: 1,
-                order: 1,
-                text: "Voilé"
-            }
-        ];
     }
 
     public finishTasting() {

@@ -25,9 +25,9 @@
             <TextField text="{{ wineTasting.aoc }}" hint="AOC" class="form-item" />
             <GridLayout columns="*,*,*,*" class="form-item" style="padding-left: 6">
                 <Label text="Année" />
-                <dd:DropDown col="1" items="{{ yearsSelection }}" selectedIndex="{{ yearSelectedIndex }}" />
+                <dd:DropDown col="1" items="{{ years }}" selectedIndex="{{ yearSelectedIndex }}" />
                 <Label text="Couleur" col="2" style="padding-left: 6" />
-                <dd:DropDown col="3" items="{{ wineTypesSelection }}" selectedIndex="{{ wineTypeSelectedIndex }}" />
+                <dd:DropDown col="3" items="{{ wineTypes }}" selectedIndex="{{ wineTypeSelectedIndex }}" />
             </GridLayout>
             <GridLayout columns="100, *" style="padding-left: 6">
                 <StackLayout orientation="horizontal" style="vertical-align: center;">
@@ -59,16 +59,12 @@
             <StackLayout class="tab-view-content">
                 <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6; padding-top: 8">
                     <Label text="Limpidité" />
-                    <vs:ValuesSelector items="{{ limpidityValues }}" col="1" />
+                    <vs:ValuesSelector items="{{ limpidityCriterias }}" singleSelection="true" col="1" />
                     <TextField hint="Autres" col="1" row="1" />
                 </GridLayout>
                 <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6">
                     <Label text="Intensité" />
-                    <WrapLayout orientation="horizontal" col="1">
-                        <Button text="Pâle" width="100" />
-                        <Button text="Moyenne" width="100" style="background-color: #FFC107; color: white" />
-                        <Button text="Intense" width="100" />
-                    </WrapLayout>
+                    <vs:ValuesSelector items="{{ intensityCriterias }}" singleSelection="true" col="1" />
                     <TextField hint="Autres" col="1" row="1" />
                 </GridLayout>
                 <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6">
@@ -78,23 +74,12 @@
                 </GridLayout>
                 <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6">
                     <Label text="Larmes" />
-                    <WrapLayout orientation="horizontal" col="1">
-                        <Button text="Aucun" width="120" />
-                        <Button text="Courtes" width="120" style="background-color: #FFC107; color: white" />
-                        <Button text="Longues" width="120" />
-                        <Button text="Grasses" width="120" style="background-color: #FFC107; color: white" />
-                        <Button text="Fluides" width="120" />
-                        <Button text="Abondantes" width="120" />
-                    </WrapLayout>
+                    <vs:ValuesSelector items="{{ tearCriterias }}" col="1" />
                     <TextField hint="Autres" col="1" row="1" />
                 </GridLayout>
                 <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6">
                     <Label text="Bulles" />
-                    <WrapLayout orientation="horizontal" col="1">
-                        <Button text="Aucun" width="120" style="background-color: #FFC107; color: white" />
-                        <Button text="Peu" width="120" />
-                        <Button text="Abondantes" width="120" />
-                    </WrapLayout>
+                    <vs:ValuesSelector items="{{ bubbleCriterias }}" singleSelection="true" col="1" />
                     <TextField hint="Autres" col="1" row="1" />
                 </GridLayout>
                 <TextView text="{{ wineTasting.sightTabNotes }}" hint="Commentaires" />

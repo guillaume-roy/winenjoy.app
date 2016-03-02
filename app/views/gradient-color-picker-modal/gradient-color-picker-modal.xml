@@ -8,21 +8,21 @@
             endingColor="#F0C636"
             colorsCount="20"
             selectedColor="{{selectedColor}}"
-            visibility="{{ wineTasting.wineType === 0 ? 'visible' : 'collapsed' }}"
+            visibility="{{ wineTasting.wineType.id === 0 ? 'visible' : 'collapsed' }}"
             style="horizontal-alignment: center; vertical-alignment: center" />
         <gcp:GradientColorPicker
             startingColor="#F7C7B1"
             endingColor="#BF3E2B"
             colorsCount="20"
             selectedColor="{{selectedColor}}"
-            visibility="{{ wineTasting.wineType === 1 ? 'visible' : 'collapsed' }}"
+            visibility="{{ wineTasting.wineType.id === 1 ? 'visible' : 'collapsed' }}"
             style="horizontal-alignment: center; vertical-alignment: center" />
         <gcp:GradientColorPicker
             startingColor="#3B022D"
             endingColor="#C23311"
             colorsCount="20"
             selectedColor="{{selectedColor}}"
-            visibility="{{ wineTasting.wineType === 2 ? 'visible' : 'collapsed' }}"
+            visibility="{{ wineTasting.wineType.id === 2 ? 'visible' : 'collapsed' }}"
             style="horizontal-alignment: center; vertical-alignment: center" />
     </StackLayout>
 </Page>

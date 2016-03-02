@@ -8,7 +8,7 @@ export class ValuesSelector extends WrapLayout {
         "items",
         "ValuesSelector",
         new dependencyObservableModule.PropertyMetadata(
-            undefined,
+            [],
             dependencyObservableModule.PropertyMetadataSettings.None,
             function(data: dependencyObservableModule.PropertyChangeData) {
                 if (data.newValue) {
@@ -16,6 +16,34 @@ export class ValuesSelector extends WrapLayout {
                     instance.items = data.newValue;
                 }
             }));
+
+    public static selectedItemsProperty = new dependencyObservableModule.Property(
+        "selectedItems",
+        "ValuesSelector",
+        new dependencyObservableModule.PropertyMetadata(
+            [],
+            dependencyObservableModule.PropertyMetadataSettings.None));
+
+    public static singleSelectionProperty = new dependencyObservableModule.Property(
+        "singleSelection",
+        "ValuesSelector",
+        new dependencyObservableModule.PropertyMetadata(
+            false,
+            dependencyObservableModule.PropertyMetadataSettings.None));
+
+    public get selectedItems() {
+        return this._getValue(ValuesSelector.selectedItemsProperty);
+    }
+    public set selectedItems(value: any[]) {
+        this._setValue(ValuesSelector.selectedItemsProperty, value);
+    }
+
+    public get singleSelection() {
+        return this._getValue(ValuesSelector.singleSelectionProperty);
+    }
+    public set singleSelection(value: boolean) {
+        this._setValue(ValuesSelector.singleSelectionProperty, value);
+    }
 
     public get items() {
         return this._getValue(ValuesSelector.itemsProperty);
@@ -25,11 +53,12 @@ export class ValuesSelector extends WrapLayout {
         this.createUI();
     }
 
-    // TODO : Create selectedItems property
+    private _buttons: ValueButton[];
 
     constructor() {
         super();
         this.orientation = "horizontal";
+        this._buttons = [];
     }
 
     private createUI() {
@@ -37,19 +66,36 @@ export class ValuesSelector extends WrapLayout {
 
         for (let i = 0; i < itemsLength; i++) {
             let itemButton = new ValueButton();
-            itemButton.text = this.items[i].text;
+            itemButton.text = this.items[i].name;
             itemButton.value = this.items[i];
 
             itemButton.on(ValueButton.tapEvent, (data: EventData) => {
                 let clickedButton = <ValueButton>data.object;
 
                 if (!clickedButton.className || clickedButton.className.trim().length === 0) {
+                    if (this.singleSelection && this.selectedItems.length > 0) {
+                        this.selectedItems = [];
+
+                        for (let i = 0; i < this._buttons.length; i++) {
+                            this._buttons[i].className = "";
+                        }
+                    }
+
                     clickedButton.className = "values-selector-selected-item";
+                    this.selectedItems.push(clickedButton.value);
                 } else {
                     clickedButton.className = "";
+
+                    let itemIndex = this.selectedItems.indexOf(clickedButton.value);
+                    if (itemIndex > -1) {
+                        let newSelectedItems = this.selectedItems;
+                        newSelectedItems.splice(itemIndex, 1);
+                        this.selectedItems = newSelectedItems;
+                    }
                 }
             }, this);
 
+            this._buttons.push(itemButton);
             this.addChild(itemButton);
         }
     }

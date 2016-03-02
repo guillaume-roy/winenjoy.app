@@ -1,12 +1,14 @@
+import {CriteriaItem} from "./criteriaItem";
+
 export interface WineTasting {
-    id?: string;
+    id?: number;
     estate?: string;
     region?: string;
     aoc?: string;
     cuvee?: string;
     country?: string;
     year?: number;
-    wineType?: number;
+    wineType?: CriteriaItem;
     alcohol?: number;
     isBiologic?: boolean;
     isBiodynamic?: boolean;
