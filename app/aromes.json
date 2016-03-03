@@ -1,0 +1,534 @@
+[
+	{
+		"language": "fr",
+		"region": "FR",
+		"data": [
+			{
+				"id": "",
+				"label": "Boisé",
+				"values": [
+					{
+						"id": "",
+						"label": "Résine"
+					},
+					{
+						"id": "",
+						"label": "Chêne"
+					},
+					{
+						"id": "",
+						"label": "Châtaigne"
+					},
+					{
+						"id": "",
+						"label": "Écorce"
+					},
+					{
+						"id": "",
+						"label": "Sapin"
+					},
+					{
+						"id": "",
+						"label": "Pin"
+					},
+					{
+						"id": "",
+						"label": "Cèdre"
+					}
+				]
+			},
+			{
+				"id": "1",
+				"label": "Épicé",
+				"values": [
+					{
+						"id": "",
+						"label": "Poivre"
+					},
+					{
+						"id": "",
+						"label": "Noix de muscade"
+					},
+					{
+						"id": "",
+						"label": "Anis"
+					},
+					{
+						"id": "",
+						"label": "Coriandre"
+					},
+					{
+						"id": "",
+						"label": "Gingembre"
+					},
+					{
+						"id": "",
+						"label": "Vanille"
+					},
+					{
+						"id": "",
+						"label": "Réglisse"
+					},
+					{
+						"id": "",
+						"label": "Cannelle"
+					},
+					{
+						"id": "",
+						"label": "Laurier"
+					},
+					{
+						"id": "",
+						"label": "Safran"
+					},
+					{
+						"id": "",
+						"label": "Clou de girofle"
+					}
+				]
+			},
+			{
+				"id": "",
+				"label": "Végétal",
+				"values": [
+					{
+						"id": "",
+						"label": "Foins"
+					},
+					{
+						"id": "",
+						"label": "Herbe"
+					},
+					{
+						"id": "",
+						"label": "Sous-bois"
+					},
+					{
+						"id": "",
+						"label": "Champignons"
+					},
+					{
+						"id": "",
+						"label": "Fougère"
+					},
+					{
+						"id": "",
+						"label": "Paille"
+					},
+					{
+						"id": "",
+						"label": "Humus"
+					},
+					{
+						"id": "",
+						"label": "Menthe"
+					},
+					{
+						"id": "",
+						"label": "Poivron vert"
+					},
+					{
+						"id": "",
+						"label": "Olive verte"
+					},
+					{
+						"id": "",
+						"label": "Truffe"
+					},
+					{
+						"id": "",
+						"label": "Thym"
+					},
+					{
+						"id": "",
+						"label": "Tabac"
+					},
+					{
+						"id": "",
+						"label": "Herbe coupée"
+					}
+				]
+			},
+			{
+				"id": "",
+				"label" : "Fruits secs",
+				"values": [
+					{
+						"id": "",
+						"label": "Amande"
+					},
+					{
+						"id": "",
+						"label": "Noisette"
+					},
+					{
+						"id": "",
+						"label": "Noix"
+					}
+				]
+			},
+			{
+				"id": "",
+				"label" : "Empyreumatiques",
+				"values": [
+					{
+						"id": "",
+						"label": "Café"
+					},
+					{
+						"id": "",
+						"label": "Fumé"
+					},
+					{
+						"id": "",
+						"label": "Brûlé"
+					},
+					{
+						"id": "",
+						"label": "Pain grillé"
+					},
+					{
+						"id": "",
+						"label": "Moka"
+					},
+					{
+						"id": "",
+						"label": "Tabac"
+					},
+					{
+						"id": "",
+						"label": "Encens"
+					},
+					{
+						"id": "",
+						"label": "Cigare"
+					},
+					{
+						"id": "",
+						"label": "Feu de bois"
+					}
+				]
+			},
+			{
+				"id": "",
+				"label" : "Alimentaire",
+				"values": [
+					{
+						"id": "",
+						"label": "Chocolat au lait"
+					},
+					{
+						"id": "",
+						"label": "Chocolat noir"
+					},
+					{
+						"id": "",
+						"label": "Miel"
+					},
+					{
+						"id": "",
+						"label": "Caramel"
+					},
+					{
+						"id": "",
+						"label": "Caramel au beurre salé"
+					},
+					{
+						"id": "",
+						"label": "Bonbon"
+					},
+					{
+						"id": "",
+						"label": "Bare à papa"
+					},
+					{
+						"id": "",
+						"label": "Beurre"
+					},
+					{
+						"id": "",
+						"label": "Laitage"
+					}
+				]
+			},
+			{
+				"id": "",
+				"label" : "Défauts",
+				"values": [
+					{
+						"id": "",
+						"label": "Maïs"
+					},
+					{
+						"id": "",
+						"label": "Oignon"
+					},
+					{
+						"id": "",
+						"label": "Oeuf pourri"
+					},
+					{
+						"id": "",
+						"label": "Caoutchouc"
+					},
+					{
+						"id": "",
+						"label": "Dissolvant"
+					},
+					{
+						"id": "",
+						"label": "Vinaigre"
+					},
+					{
+						"id": "",
+						"label": "Madère"
+					},
+					{
+						"id": "",
+						"label": "Sherry/Xérès"
+					},
+					{
+						"id": "",
+						"label": "Bouchonné"
+					},
+					{
+						"id": "",
+						"label": "Savon"
+					},
+					{
+						"id": "",
+						"label": "Souffre"
+					}
+				]
+			},
+			{
+				"id": "",
+				"label" : "Floral",
+				"values": [
+					{
+						"id": "",
+						"label": "Lavande"
+					},
+					{
+						"id": "",
+						"label": "Oeillets"
+					},
+					{
+						"id": "",
+						"label": "Chevrefeuille"
+					},
+					{
+						"id": "",
+						"label": "Aubépine"
+					},
+					{
+						"id": "",
+						"label": "Fleur d'oranger"
+					},
+					{
+						"id": "",
+						"label": "Tilleul"
+					},
+					{
+						"id": "",
+						"label": "Jasmin"
+					},
+					{
+						"id": "",
+						"label": "Acacia"
+					},
+					{
+						"id": "",
+						"label": "Violette"
+					},
+					{
+						"id": "",
+						"label": "Rose"
+					},
+					{
+						"id": "",
+						"label": "Camomille"
+					}
+				]
+			},
+			{
+				"id": "",
+				"label" : "Fruité",
+				"values": [
+					{
+						"id": "",
+						"label": "Abricot"
+					},
+					{
+						"id": "",
+						"label": "Prune"
+					},
+					{
+						"id": "",
+						"label": "Pêche"
+					},
+					{
+						"id": "",
+						"label": "Poire"
+					},
+					{
+						"id": "",
+						"label": "Pomme"
+					},
+					{
+						"id": "",
+						"label": "Coing"
+					},
+					{
+						"id": "",
+						"label": "Citron"
+					},
+					{
+						"id": "",
+						"label": "Citron vert"
+					},
+					{
+						"id": "",
+						"label": "Pomme verte"
+					},
+					{
+						"id": "",
+						"label": "Melon"
+					},
+					{
+						"id": "",
+						"label": "Goyave"
+					},
+					{
+						"id": "",
+						"label": "Fruit de la passion"
+					},
+					{
+						"id": "",
+						"label": "Orange"
+					},
+					{
+						"id": "",
+						"label": "Pamplemousse"
+					},
+					{
+						"id": "",
+						"label": "Banane"
+					},
+					{
+						"id": "",
+						"label": "Kiwi"
+					},
+					{
+						"id": "",
+						"label": "Houblon"
+					},
+					{
+						"id": "",
+						"label": "Raisin sec"
+					},
+					{
+						"id": "",
+						"label": "Figue"
+					},
+					{
+						"id": "",
+						"label": "Framboise"
+					},
+					{
+						"id": "",
+						"label": "Cerise"
+					},
+					{
+						"id": "",
+						"label": "Mûre"
+					},
+					{
+						"id": "",
+						"label": "Mandarine"
+					},
+					{
+						"id": "",
+						"label": "Mangue"
+					},
+					{
+						"id": "",
+						"label": "Ananas"
+					},
+					{
+						"id": "",
+						"label": "Litchi"
+					},
+					{
+						"id": "",
+						"label": "Groseille"
+					},
+					{
+						"id": "",
+						"label": "Casis"
+					},
+					{
+						"id": "",
+						"label": "Fraise"
+					},
+					{
+						"id": "",
+						"label": "Pruneau"
+					}
+				]
+			},
+			{
+				"id": "",
+				"label" : "Minéral",
+				"values": [
+					{
+						"id": "",
+						"label": "Silex"
+					},
+					{
+						"id": "",
+						"label": "Pierre à fusil"
+					},
+					{
+						"id": "",
+						"label": "Craie"
+					},
+					{
+						"id": "",
+						"label": "Iode"
+					},
+					{
+						"id": "",
+						"label": "Calcaire"
+					},
+					{
+						"id": "",
+						"label": "Galet mouillé"
+					}
+				]
+			},
+			{
+				"id": "",
+				"label" : "Animal",
+				"values": [
+					{
+						"id": "",
+						"label": "Cuir"
+					},
+					{
+						"id": "",
+						"label": "Jus de viande"
+					},
+					{
+						"id": "",
+						"label": "Musc"
+					},
+					{
+						"id": "",
+						"label": "Gibier"
+					}
+				]
+			}
+		]
+	}
+]
