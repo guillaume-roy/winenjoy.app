@@ -1,0 +1,37 @@
+[
+	{
+		"language": "fr",
+		"data": [
+            {
+				"id": "",
+				"label": "Net",
+                "order": 0
+			},
+            {
+				"id": "",
+				"label": "Trouble",
+                "order": 1
+			},
+            {
+				"id": "",
+				"label": "Flou",
+                "order": 2
+			},
+            {
+				"id": "",
+				"label": "Limpide",
+                "order": 3
+			},
+            {
+				"id": "",
+				"label": "Cristallin",
+                "order": 4
+			},
+            {
+				"id": "",
+				"label": "Voilé",
+                "order": 5
+			}
+        ]
+    }
+]

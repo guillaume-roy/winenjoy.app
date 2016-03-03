@@ -1,0 +1,37 @@
+[
+	{
+		"language": "fr",
+		"data": [
+            {
+				"id": "",
+				"label": "Aucun",
+                "order": 0
+			},
+            {
+				"id": "",
+				"label": "Courtes",
+                "order": 1
+			},
+            {
+				"id": "",
+				"label": "Longues",
+                "order": 2
+			},
+            {
+				"id": "",
+				"label": "Grasses",
+                "order": 3
+			},
+            {
+				"id": "",
+				"label": "Fluides",
+                "order": 4
+			},
+            {
+				"id": "",
+				"label": "Abondantes",
+                "order": 5
+			}
+        ]
+    }
+]

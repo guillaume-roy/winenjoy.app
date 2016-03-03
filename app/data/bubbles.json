@@ -1,0 +1,22 @@
+[
+	{
+		"language": "fr",
+		"data": [
+            {
+				"id": "",
+				"label": "Aucun",
+                "order": 0
+			},
+            {
+				"id": "",
+				"label": "Peu",
+                "order": 1
+			},
+            {
+				"id": "",
+				"label": "Abondantes",
+                "order": 2
+			}
+        ]
+    }
+]

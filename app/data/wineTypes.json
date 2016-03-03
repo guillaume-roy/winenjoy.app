@@ -1,0 +1,25 @@
+[
+	{
+		"language": "fr",
+		"data": [
+            {
+				"id": "",
+				"label": "Blanc",
+                "code": "WHITE",
+                "order": 0
+			},
+            {
+				"id": "",
+				"label": "Rosé",
+                "code": "ROSE",
+                "order": 1
+			},
+            {
+				"id": "",
+				"label": "Rouge",
+                "code": "RED",
+                "order": 2
+			}
+        ]
+    }
+]

@@ -6,6 +6,9 @@ import {CriteriaItem} from "../entities/criteriaItem";
 export class LocalJsonAppService implements IAppService {
     private _wineTastingsCollectionName = "wineTastings";
 
+    // TODO : Load data from JSON
+    // fs.path.join(fs.knownFolders.currentApp().path, "data", "aromas.json");
+
     public getWineTastings(): WineTasting[] {
         return [];
         // return this.deserialize<WineTasting>(this._wineTastingsCollectionName);
