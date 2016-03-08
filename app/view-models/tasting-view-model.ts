@@ -7,7 +7,8 @@ import {IAppService} from "../services/IAppService";
 export class TastingViewModel extends Observable {
     private _service: IAppService;
     private _limpidityCriterias: CriteriaItem[];
-    private _intensityCriterias: CriteriaItem[];
+    private _sightIntensityCriterias: CriteriaItem[];
+    private _smellIntensityCriterias: CriteriaItem[];
     private _tearCriterias: CriteriaItem[];
     private _bubbleCriterias: CriteriaItem[];
     private _wineTypes: CriteriaItem[];
@@ -28,6 +29,10 @@ export class TastingViewModel extends Observable {
         return this._limpidityCriterias;
     }
 
+    public get smellIntensityCriterias() {
+        return this._smellIntensityCriterias;
+    }
+
     public get tearCriterias() {
         return this._tearCriterias;
     }
@@ -36,13 +41,13 @@ export class TastingViewModel extends Observable {
         return this._bubbleCriterias;
     }
 
-    public get intensityCriterias() {
-        return this._intensityCriterias;
+    public get sightIntensityCriterias() {
+        return this._sightIntensityCriterias;
     }
 
     public get wineTypes() {
         return this._wineTypes.map((value: CriteriaItem) => {
-           return value.name;
+           return value.label;
         });
     }
 
@@ -96,7 +101,8 @@ export class TastingViewModel extends Observable {
 
         this._service = Services.current;
         this._limpidityCriterias = this._service.getLimpidityCriterias();
-        this._intensityCriterias = this._service.getIntensityCriterias();
+        this._sightIntensityCriterias = this._service.getSightIntensityCriterias();
+        this._smellIntensityCriterias = this._service.getSmellIntensityCriterias();
         this._tearCriterias = this._service.getTearCriterias();
         this._bubbleCriterias = this._service.getBubbleCriterias();
         this._wineTypes = this._service.getWineTypes();

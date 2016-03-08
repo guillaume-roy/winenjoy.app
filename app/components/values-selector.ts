@@ -66,7 +66,7 @@ export class ValuesSelector extends WrapLayout {
 
         for (let i = 0; i < itemsLength; i++) {
             let itemButton = new ValueButton();
-            itemButton.text = this.items[i].name;
+            itemButton.text = this.items[i].label;
             itemButton.value = this.items[i];
 
             itemButton.on(ValueButton.tapEvent, (data: EventData) => {

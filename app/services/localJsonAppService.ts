@@ -1,14 +1,10 @@
 import fs = require("file-system");
+import platformModule = require("platform");
 import {IAppService} from "./iAppService";
 import {WineTasting} from "../entities/wineTasting";
 import {CriteriaItem} from "../entities/criteriaItem";
 
 export class LocalJsonAppService implements IAppService {
-    private _wineTastingsCollectionName = "wineTastings";
-
-    // TODO : Load data from JSON
-    // fs.path.join(fs.knownFolders.currentApp().path, "data", "aromas.json");
-
     public getWineTastings(): WineTasting[] {
         return [];
         // return this.deserialize<WineTasting>(this._wineTastingsCollectionName);
@@ -23,161 +19,57 @@ export class LocalJsonAppService implements IAppService {
         return result;
     }
 
-    public getWineTypes(): CriteriaItem[] {
-        return [
-          {
-              id: 0,
-              name: "Blanc",
-              order: 0
-          },
-          {
-              id: 1,
-              name: "Rosé",
-              order: 1
-          },
-          {
-              id: 2,
-              name: "Rouge",
-              order: 2
-          }
-        ];
+    public getSmellIntensityCriterias(): CriteriaItem[] {
+        return this.loadJSON("smell-intensities");
     }
 
-    public getIntensityCriterias(): CriteriaItem[] {
-        return [
-            {
-                id: 0,
-                name: "Pâle",
-                order: 0
-            },
-            {
-                id: 1,
-                name: "Moyenne",
-                order: 1
-            },
-            {
-                id: 2,
-                name: "Intense",
-                order: 2
-            }
-        ];
+    public getAromaCriterias(): CriteriaItem[] {
+        return this.loadJSON("aromas");
+    }
+
+    public getWineTypes(): CriteriaItem[] {
+        return this.loadJSON("wineTypes");
+    }
+
+    public getSightIntensityCriterias(): CriteriaItem[] {
+        return this.loadJSON("sight-intensities");
     }
 
     public getBubbleCriterias(): CriteriaItem[] {
-        return [
-            {
-                id: 0,
-                name: "Aucun",
-                order: 0
-            },
-            {
-                id: 1,
-                name: "Peu",
-                order: 1
-            },
-            {
-                id: 2,
-                name: "Abondantes",
-                order: 2
-            }
-        ];
+        return this.loadJSON("bubbles");
     }
 
     public getTearCriterias(): CriteriaItem[] {
-        return [
-            {
-                id: 0,
-                name: "Aucun",
-                order: 0
-            },
-            {
-                id: 1,
-                name: "Courtes",
-                order: 1
-            },
-            {
-                id: 2,
-                name: "Longues",
-                order: 2
-            },
-            {
-                id: 3,
-                name: "Grasses",
-                order: 3
-            },
-            {
-                id: 4,
-                name: "Fluides",
-                order: 4
-            },
-            {
-                id: 5,
-                name: "Abondantes",
-                order: 5
-            }
-        ];
+        return this.loadJSON("tears");
     }
 
     public getLimpidityCriterias(): CriteriaItem[] {
-        return [
-            {
-                id: 0,
-                name: "Net",
-                order: 0
-            },
-            {
-                id: 1,
-                name: "Trouble",
-                order: 1
-            },
-            {
-                id: 2,
-                name: "Flou",
-                order: 2
-            },
-            {
-                id: 3,
-                name: "Limpide",
-                order: 3
-            },
-            {
-                id: 4,
-                name: "Cristallin",
-                order: 4
-            },
-            {
-                id: 5,
-                name: "Voilé",
-                order: 5
-            }
-        ];
+        return this.loadJSON("limpidities");
     }
 
-    /*
-     * Utils
-     * //TODO : Externalize in utils
-     */
+    private loadJSON(filename: string): CriteriaItem[] {
+        let filePath = fs.path.join(fs.knownFolders.currentApp().path, "data", filename + ".json");
 
-    // Use ApplicationSettings instead
+        if (!fs.File.exists(filePath)) {
+            return;
+        }
 
-//     private deserialize<T>(collectionName: string): T[] {
-//         let filePath = fs.path.join(fs.knownFolders.documents().path, collectionName + ".json");
-//
-//         let file = fs.File.fromPath(filePath);
-//         if (!file) {
-//             return null;
-//         }
-//
-//         let fileContent = file.readTextSync();
-//         if (!fileContent) {
-//             return null;
-//         }
-//
-//         return <T[]>JSON.parse(fileContent);
-//     }
-//
-//     private serialize(collectionName: string, collection: any[]) {
-//         let filePath = fs.path.join(fs.knownFolders.documents().path, collectionName + ".json");
-//         fs.File.fromPath(filePath).writeText(JSON.stringify(collection));
-//     }
+        let file = fs.File.fromPath(filePath);
+        if (!file) {
+            return null;
+        }
+
+        let fileContent = file.readTextSync();
+        if (!fileContent) {
+            return null;
+        }
+
+        let jsonFile = <[]>JSON.parse(fileContent);
+
+        let platformLanguage = platformModule.device.language;
+
+        return <CriteriaItem[]>(<any>jsonFile.filter((value: any) => {
+           return value.language ===  platformLanguage;
+        })[0]).data;
+    }
 }

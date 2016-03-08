@@ -1,0 +1,22 @@
+[
+	{
+		"language": "fr",
+		"data": [
+            {
+				"id": "",
+				"label": "Faible",
+                "order": 0
+			},
+            {
+				"id": "",
+				"label": "Moyenne",
+                "order": 1
+			},
+            {
+				"id": "",
+				"label": "Intense",
+                "order": 2
+			}
+        ]
+    }
+]

@@ -64,7 +64,7 @@
                 </GridLayout>
                 <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6">
                     <Label text="Intensité" />
-                    <vs:ValuesSelector items="{{ intensityCriterias }}" singleSelection="true" col="1" />
+                    <vs:ValuesSelector items="{{ sightIntensityCriterias }}" singleSelection="true" col="1" />
                     <TextField hint="Autres" col="1" row="1" />
                 </GridLayout>
                 <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6">
@@ -91,53 +91,22 @@
        <TabViewItem.view>
         <ScrollView>
             <StackLayout class="tab-view-content">
-                <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6; padding-top: 8">
-                   <Label text="1° Nez" />
-                   <WrapLayout orientation="horizontal" col="1">
-                        <Button text="Fruité" width="90" />
-                        <Button text="Floral" width="90" style="background-color: #FFC107; color: white" />
-                        <Button text="Végétal" width="90" />
-                        <Button text="Epicé" width="90" style="background-color: #FFC107; color: white" />
-                        <Button text="Boisé" width="90" />
-                        <Button text="Minéral" width="90" />
-                        <Button text="Animal" width="90" />
-                        <Button text="Empyreumatique" width="150" />
+                <StackLayout orientation="vertical" style="padding-left: 6; padding-top: 8">
+                    <Button text="Ajouter" tap="onAddAromas" />
+                    <WrapLayout orientation="horizontal">
+                        <Button text="Cerise" class="values-selector-selected-item" />
+                        <Button text="Mûre" class="values-selector-selected-item" />
+                        <Button text="Cuir" class="values-selector-selected-item" />
+                        <Button text="Café" class="values-selector-selected-item" />
+                        <Button text="Framboise" class="values-selector-selected-item" />
+                        <Button text="Cassis" class="values-selector-selected-item" />
                     </WrapLayout>
                     <TextField hint="Autres" col="1" row="1" />
-                </GridLayout>
-                <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6;">
-                   <Label text="2° Nez" />
-                   <WrapLayout orientation="horizontal" col="1">
-                    </WrapLayout>
+                </StackLayout>
+                <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6">
+                    <Label text="Intensité" />
+                    <vs:ValuesSelector items="{{ smellIntensityCriterias }}" singleSelection="true" col="1" />
                     <TextField hint="Autres" col="1" row="1" />
-                </GridLayout>
-                <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6;">
-                   <Label text="Intensité" />
-                   <WrapLayout orientation="horizontal" col="1">
-                        <Button text="Faible" width="100" />
-                        <Button text="Moyenne" width="100" style="background-color: #FFC107; color: white" />
-                        <Button text="Puissante" width="100" />
-                    </WrapLayout>
-                    <TextField hint="Autres" col="1" row="1" />
-                </GridLayout>
-                <GridLayout columns="100, *" style="padding-left: 6;">
-                   <Label text="Type" />
-                   <WrapLayout orientation="horizontal" col="1">
-                        <Button text="Ouvert" width="100" />
-                        <Button text="Fermé" width="100" style="background-color: #FFC107; color: white" />
-                    </WrapLayout>
-                </GridLayout>
-                <GridLayout class="form-item" style="padding-left: 6">
-                    <Label text="Bouchon" style="vertical-align: center;horizontal-align: left" width="100" />
-                    <Switch style="horizontal-align: right;" />
-                </GridLayout>
-                <GridLayout class="form-item" style="padding-left: 6">
-                    <Label text="A carafer" style="vertical-align: center;horizontal-align: left" width="100" />
-                    <Switch style="horizontal-align: right;" />
-                </GridLayout>
-                <GridLayout class="form-item" style="padding-left: 6">
-                    <Label text="A aéré" style="vertical-align: center;horizontal-align: left" width="100" />
-                    <Switch style="horizontal-align: right;" />
                 </GridLayout>
                 <TextView text="{{ wineTasting.smellTabNotes }}" hint="Commentaires" />
             </StackLayout>

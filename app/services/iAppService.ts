@@ -6,7 +6,9 @@ export interface IAppService {
     getWineTypes(): CriteriaItem[];
     getYears(): number[];
     getLimpidityCriterias(): CriteriaItem[];
-    getIntensityCriterias(): CriteriaItem[];
+    getSightIntensityCriterias(): CriteriaItem[];
     getTearCriterias(): CriteriaItem[];
+    getAromaCriterias(): CriteriaItem[];
     getBubbleCriterias(): CriteriaItem[];
+    getSmellIntensityCriterias(): CriteriaItem[];
 }

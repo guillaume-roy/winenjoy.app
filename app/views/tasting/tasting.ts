@@ -30,6 +30,10 @@ export function onSelectColor() {
         true);
 }
 
+export function onAddAromas() {
+    console.log("clicked");
+}
+
 export function cancel() {
     dialogs.confirm({
         cancelButtonText: "Non",
