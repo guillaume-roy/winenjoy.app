@@ -93,14 +93,7 @@
             <StackLayout class="tab-view-content">
                 <StackLayout orientation="vertical" style="padding-left: 6; padding-top: 8">
                     <Button text="Ajouter" tap="onAddAromas" />
-                    <WrapLayout orientation="horizontal">
-                        <Button text="Cerise" class="values-selector-selected-item" />
-                        <Button text="Mûre" class="values-selector-selected-item" />
-                        <Button text="Cuir" class="values-selector-selected-item" />
-                        <Button text="Café" class="values-selector-selected-item" />
-                        <Button text="Framboise" class="values-selector-selected-item" />
-                        <Button text="Cassis" class="values-selector-selected-item" />
-                    </WrapLayout>
+                    <vs:ValuesSelector items="{{ wineTasting.aromas }}" deleteOnClick="true" />
                     <TextField hint="Autres" col="1" row="1" />
                 </StackLayout>
                 <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6">

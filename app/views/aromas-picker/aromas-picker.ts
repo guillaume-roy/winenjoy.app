@@ -1,19 +1,29 @@
 import pages = require("ui/page");
-import observable = require("data/observable");
 import {Page} from "ui/page";
-import {GradientColorPickerModalViewModel} from "../../view-models/gradient-color-picker-modal-view-model";
+import {AromasPickerViewModel} from "../../view-models/aromas-picker-view-model";
+import {SearchBar} from "ui/search-bar";
+import listViewModule = require("ui/list-view");
 
 let closeCallback: Function;
-let viewModel: GradientColorPickerModalViewModel;
+let viewModel: AromasPickerViewModel;
 
 export function onShownModally(args: pages.ShownModallyData) {
     closeCallback = args.closeCallback;
 
-    viewModel = new GradientColorPickerModalViewModel(args.context);
-    (<Page>args.object).bindingContext = viewModel;
+    viewModel = new AromasPickerViewModel(args.context);
+    let page = <Page>args.object;
+    page.bindingContext = viewModel;
 
-    viewModel.addEventListener(observable.Observable.propertyChangeEvent,
-    data => {
-        closeCallback(viewModel.selectedColor);
+    let searchBar = <SearchBar>page.getViewById("searchBar");
+    searchBar.on(SearchBar.propertyChangeEvent, searchBarArgs => {
+       viewModel.searchingText = searchBar.text;
     });
+}
+
+export function onSelectAroma(args: listViewModule.ItemEventData) {
+    viewModel.toggleItem(args.index);
+}
+
+export function onValidate() {
+    closeCallback(viewModel.selectedItems);
 }

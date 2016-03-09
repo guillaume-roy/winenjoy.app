@@ -1,5 +1,6 @@
 {
 	"name": "winenjoy",
+	"version": "1.0.0",
 	"nativescript": {
 		"id": "com.winenjoy.app",
 		"tns-android": {
@@ -9,7 +10,8 @@
 	"dependencies": {
 		"nativescript-drop-down": "^1.2.1",
 		"nativescript-floatingactionbutton": "^0.2.3",
-		"tns-core-modules": "^1.6.0"
+		"tns-core-modules": "^1.6.0",
+		"lodash": "*"
 	},
 	"devDependencies": {
 		"gulp": "*",

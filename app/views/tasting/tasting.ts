@@ -31,7 +31,13 @@ export function onSelectColor() {
 }
 
 export function onAddAromas() {
-    console.log("clicked");
+    page.showModal(
+        Views.aromasPicker,
+        viewModel.wineTasting.aromas,
+        function(data) {
+            viewModel.setAromas(data);
+        },
+        true);
 }
 
 export function cancel() {

@@ -17,6 +17,13 @@ export class ValuesSelector extends WrapLayout {
                 }
             }));
 
+    public static deleteOnClickProperty = new dependencyObservableModule.Property(
+        "deleteOnClick",
+        "ValuesSelector",
+        new dependencyObservableModule.PropertyMetadata(
+            false,
+            dependencyObservableModule.PropertyMetadataSettings.None));
+
     public static selectedItemsProperty = new dependencyObservableModule.Property(
         "selectedItems",
         "ValuesSelector",
@@ -36,6 +43,13 @@ export class ValuesSelector extends WrapLayout {
     }
     public set selectedItems(value: any[]) {
         this._setValue(ValuesSelector.selectedItemsProperty, value);
+    }
+
+    public get deleteOnClick() {
+        return this._getValue(ValuesSelector.deleteOnClickProperty);
+    }
+    public set deleteOnClick(value: boolean) {
+        this._setValue(ValuesSelector.deleteOnClickProperty, value);
     }
 
     public get singleSelection() {
@@ -62,6 +76,7 @@ export class ValuesSelector extends WrapLayout {
     }
 
     private createUI() {
+        this.removeChildren();
         let itemsLength = this.items.length;
 
         for (let i = 0; i < itemsLength; i++) {
@@ -69,8 +84,22 @@ export class ValuesSelector extends WrapLayout {
             itemButton.text = this.items[i].label;
             itemButton.value = this.items[i];
 
+            if (this.deleteOnClick) {
+                itemButton.className = "values-selector-selected-item";
+            }
+
             itemButton.on(ValueButton.tapEvent, (data: EventData) => {
                 let clickedButton = <ValueButton>data.object;
+
+                if (this.deleteOnClick) {
+                    let itemIndex = this.items.indexOf(clickedButton.value);
+                    if (itemIndex > -1) {
+                        let newSelectedItems = this.items;
+                        newSelectedItems.splice(itemIndex, 1);
+                        this.items = newSelectedItems;
+                    }
+                    return;
+                }
 
                 if (!clickedButton.className || clickedButton.className.trim().length === 0) {
                     if (this.singleSelection && this.selectedItems.length > 0) {
@@ -80,18 +109,18 @@ export class ValuesSelector extends WrapLayout {
                             this._buttons[i].className = "";
                         }
                     }
+                    this.selectedItems.push(clickedButton.value);
 
                     clickedButton.className = "values-selector-selected-item";
-                    this.selectedItems.push(clickedButton.value);
                 } else {
-                    clickedButton.className = "";
-
                     let itemIndex = this.selectedItems.indexOf(clickedButton.value);
                     if (itemIndex > -1) {
                         let newSelectedItems = this.selectedItems;
                         newSelectedItems.splice(itemIndex, 1);
                         this.selectedItems = newSelectedItems;
                     }
+
+                    clickedButton.className = "";
                 }
             }, this);
 

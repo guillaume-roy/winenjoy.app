@@ -120,4 +120,11 @@ export class TastingViewModel extends Observable {
         this.wineTasting.endDate = Date.now();
         console.dump(this.wineTasting);
     }
+
+    public setAromas(aromas: CriteriaItem[]) {
+        this.wineTasting.aromas = null;
+        this.notifyPropertyChange("wineTasting", this.wineTasting);
+        this.wineTasting.aromas = aromas;
+        this.notifyPropertyChange("wineTasting", this.wineTasting);
+    }
 }

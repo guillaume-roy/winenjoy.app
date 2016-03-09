@@ -21,4 +21,5 @@ export interface WineTasting {
     finalRating?: string;
     sightTabNotes?: string;
     smellTabNotes?: string;
+    aromas?: CriteriaItem[];
 }

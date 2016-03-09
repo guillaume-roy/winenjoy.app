@@ -1,25 +1,79 @@
+import _ = require("lodash");
 import {Observable} from "data/observable";
-import {WineTasting} from "../entities/wineTasting";
+import {Services} from "../utils/services";
+import {IAppService} from "../services/IAppService";
+import {CriteriaItem} from "../entities/criteriaItem";
 
-export class GradientColorPickerModalViewModel extends Observable {
-    private _selectedColor: string;
-    private _wineTasting: WineTasting;
+export class AromasPickerViewModel extends Observable {
+    private _aromaCriterias: any[];
+    private _aromaCriteriasSource: any[];
+    private _service: IAppService;
+    private _searchingText: string;
+    private _selectedItems: CriteriaItem[];
 
-    public get selectedColor() {
-        return this._selectedColor;
+    public get aromaCriterias() {
+        return this._aromaCriterias;
     }
-    public set selectedColor(value: string) {
-        this._selectedColor = value;
-        this.notifyPropertyChange("selectedColor", value);
+    public set aromaCriterias(value) {
+        this._aromaCriterias = value;
+        this.notifyPropertyChange("aromaCriterias", value);
     }
 
-    public get wineTasting() {
-        return this._wineTasting;
+    public get searchingText() {
+        return this._searchingText;
+    }
+    public set searchingText(value: string) {
+        this._searchingText = value;
+        this.notifyPropertyChange("searchingText", value);
+
+        if (value.length === 0) {
+            this.aromaCriterias = this._aromaCriteriasSource;
+        } else if (value.length > 1) {
+            this.aromaCriterias = this._aromaCriteriasSource.filter(v => {
+                return v.aroma.label.toLowerCase().startsWith(value.trim().toLowerCase());
+            });
+        }
     }
 
-    constructor(wineTasting: WineTasting) {
+    public get selectedItems() {
+        return this._selectedItems;
+    }
+
+    constructor(selectedAromas: CriteriaItem[]) {
         super();
 
-        this._wineTasting = wineTasting;
+        if (_.isArray(selectedAromas)) {
+            this._selectedItems = selectedAromas;
+        } else {
+            this._selectedItems = [];
+        }
+
+        this._service = Services.current;
+
+        this._aromaCriteriasSource = _.orderBy(_.flattenDeep(
+            this._service.getAromaCriterias().map(a => {
+                return a.values.map(i => {
+                    return new Observable({
+                        aroma: i,
+                        isSelected: _.some(this._selectedItems, i)
+                    });
+                });
+        })), ["aroma.label"]);
+        this._aromaCriterias = this._aromaCriteriasSource;
+    }
+
+    public toggleItem(index: number) {
+        let selectedItem = this.aromaCriterias[index];
+
+        if (selectedItem.isSelected) {
+            let item = _.find(this._selectedItems, selectedItem.aroma);
+            if (item) {
+                _.remove(this._selectedItems, item);
+            }
+        } else {
+            this._selectedItems.push(selectedItem.aroma);
+        }
+
+        selectedItem.isSelected = !selectedItem.isSelected;
     }
 }
