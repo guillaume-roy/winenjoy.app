@@ -10,14 +10,16 @@ let viewModel: AromasPickerViewModel;
 export function onShownModally(args: pages.ShownModallyData) {
     closeCallback = args.closeCallback;
 
-    viewModel = new AromasPickerViewModel(args.context);
-    let page = <Page>args.object;
-    page.bindingContext = viewModel;
+    setTimeout(function() {
+        viewModel = new AromasPickerViewModel(args.context);
+        let page = <Page>args.object;
+        page.bindingContext = viewModel;
 
-    let searchBar = <SearchBar>page.getViewById("searchBar");
-    searchBar.on(SearchBar.propertyChangeEvent, searchBarArgs => {
-       viewModel.searchingText = searchBar.text;
-    });
+        let searchBar = <SearchBar>page.getViewById("searchBar");
+        searchBar.on(SearchBar.propertyChangeEvent, searchBarArgs => {
+            viewModel.searchingText = searchBar.text;
+        });
+    }, 0);
 }
 
 export function onSelectAroma(args: listViewModule.ItemEventData) {

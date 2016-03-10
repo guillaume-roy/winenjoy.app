@@ -24,35 +24,65 @@ export class TastingViewModel extends Observable {
     public get wineTasting() {
         return this._wineTasting;
     }
+    public set wineTasting(value) {
+        this._wineTasting = value;
+        this.notifyPropertyChange("wineTasting", value);
+    }
 
     public get limpidityCriterias() {
         return this._limpidityCriterias;
+    }
+    public set limpidityCriterias(value) {
+        this._limpidityCriterias = value;
+        this.notifyPropertyChange("limpidityCriterias", value);
     }
 
     public get smellIntensityCriterias() {
         return this._smellIntensityCriterias;
     }
+    public set smellIntensityCriterias(value) {
+        this._smellIntensityCriterias = value;
+        this.notifyPropertyChange("smellIntensityCriterias", value);
+    }
 
     public get tearCriterias() {
         return this._tearCriterias;
+    }
+    public set tearCriterias(value) {
+        this._tearCriterias = value;
+        this.notifyPropertyChange("tearCriterias", value);
     }
 
     public get bubbleCriterias() {
         return this._bubbleCriterias;
     }
+    public set bubbleCriterias(value) {
+        this._bubbleCriterias = value;
+        this.notifyPropertyChange("bubbleCriterias", value);
+    }
 
     public get sightIntensityCriterias() {
         return this._sightIntensityCriterias;
     }
+    public set sightIntensityCriterias(value) {
+        this._sightIntensityCriterias = value;
+        this.notifyPropertyChange("sightIntensityCriterias", value);
+    }
 
     public get wineTypes() {
-        return this._wineTypes.map((value: CriteriaItem) => {
-           return value.label;
-        });
+        return this._wineTypes;
+    }
+    public set wineTypes(value) {
+        this._wineTypes = value;
+        this.notifyPropertyChange("wineTypes", value);
     }
 
     public get years() {
         return this._years;
+    }
+    public set years(value) {
+        this._years = value;
+        this.notifyPropertyChange("years", value);
     }
 
     public get yearSelectedIndex() {
@@ -60,9 +90,8 @@ export class TastingViewModel extends Observable {
     }
     public set yearSelectedIndex(value: number) {
         this._yearSelectedIndex = value;
+        this.wineTasting.year = this.years[value];
         this.notifyPropertyChange("yearSelectedIndex", value);
-
-        this.wineTasting.year = this._years[value];
     }
 
     public get wineTypeSelectedIndex() {
@@ -100,20 +129,32 @@ export class TastingViewModel extends Observable {
         super();
 
         this._service = Services.current;
-        this._limpidityCriterias = this._service.getLimpidityCriterias();
-        this._sightIntensityCriterias = this._service.getSightIntensityCriterias();
-        this._smellIntensityCriterias = this._service.getSmellIntensityCriterias();
-        this._tearCriterias = this._service.getTearCriterias();
-        this._bubbleCriterias = this._service.getBubbleCriterias();
-        this._wineTypes = this._service.getWineTypes();
-        this._years = this._service.getYears();
 
-        this._yearSelectedIndex = this._years.length - 3;
-        this._wineTasting = {
-            startDate: Date.now(),
-            wineType: 2,
-            year: this._years[this._yearSelectedIndex]
+        this._service.getLimpidityCriteriasAsync()
+            .then(data => this.limpidityCriterias = data);
+        this._service.getSightIntensityCriteriasAsync()
+            .then(data => this.sightIntensityCriterias = data);
+        this._service.getSmellIntensityCriteriasAsync()
+            .then(data => this.smellIntensityCriterias = data);
+        this._service.getTearCriteriasAsync()
+            .then(data => this.tearCriterias = data);
+        this._service.getBubbleCriteriasAsync()
+            .then(data => this.bubbleCriterias = data);
+        this._service.getWineTypesAsync()
+            .then(data => {
+                this.wineTypes = data;
+                this.wineTypeSelectedIndex = 2;
+            });
+        this._service.getYearsAsync()
+            .then(data => {
+                this.years = data;
+                this.yearSelectedIndex = data.length - 3;
+            });
+
+        this.wineTasting = {
+            startDate: Date.now()
         };
+        this.alcoholValue = 0;
     }
 
     public finishTasting() {

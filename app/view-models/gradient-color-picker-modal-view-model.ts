@@ -16,10 +16,15 @@ export class GradientColorPickerModalViewModel extends Observable {
     public get wineTasting() {
         return this._wineTasting;
     }
+    public set wineTasting(value) {
+        this._wineTasting = value;
+        this.notifyPropertyChange("wineTasting", value);
+        console.dump(value);
+    }
 
     constructor(wineTasting: WineTasting) {
         super();
 
-        this._wineTasting = wineTasting;
+        this.wineTasting = wineTasting;
     }
 }

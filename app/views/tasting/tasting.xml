@@ -1,133 +1,102 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd"
-        xmlns:dd="nativescript-drop-down"
+		xmlns:dd="nativescript-drop-down"
         xmlns:gcp="components/gradient-color-picker"
         xmlns:fr="components/final-rating"
         xmlns:vs="components/values-selector"
-        navigatedTo="navigatedTo">
+		loaded="loaded">
   <Page.actionBar>
-    <ActionBar title="Nouvelle dégustation">
-      <NavigationButton icon="res://ic_close_white_24dp" tap="cancel"/>
-      <ActionBar.actionItems>
-        <ActionItem icon="res://ic_check_white_24dp" ios.position="right" android.position="actionBar" tap="onSaveTasting"/>
-      </ActionBar.actionItems>
-    </ActionBar>
+	<ActionBar title="Nouvelle dégustation">
+	  <NavigationButton icon="res://ic_close_white_24dp" tap="cancel"/>
+	  <ActionBar.actionItems>
+		<ActionItem icon="res://ic_check_white_24dp" ios.position="right" android.position="actionBar" tap="onSaveTasting"/>
+	  </ActionBar.actionItems>
+	</ActionBar>
   </Page.actionBar>
   <TabView selectedColor="#FFFFFF">
    <TabView.items>
-     <TabViewItem title="Vin">
-       <TabViewItem.view>
-        <ScrollView>
-          <StackLayout class="tab-view-content">
-            <TextField text="{{ wineTasting.estate }}" hint="Domaine" class="form-item" />
-            <TextField text="{{ wineTasting.cuvee }}" hint="Cuvée" class="form-item" />
-            <TextField text="{{ wineTasting.country }}" hint="Pays" class="form-item" />
-            <TextField text="{{ wineTasting.region }}" hint="Région" class="form-item" />
-            <TextField text="{{ wineTasting.aoc }}" hint="AOC" class="form-item" />
-            <GridLayout columns="*,*,*,*" class="form-item" style="padding-left: 6">
-                <Label text="Année" />
-                <dd:DropDown col="1" items="{{ years }}" selectedIndex="{{ yearSelectedIndex }}" />
-                <Label text="Couleur" col="2" style="padding-left: 6" />
-                <dd:DropDown col="3" items="{{ wineTypes }}" selectedIndex="{{ wineTypeSelectedIndex }}" />
-            </GridLayout>
-            <GridLayout columns="100, *" style="padding-left: 6">
-                <StackLayout orientation="horizontal" style="vertical-align: center;">
-                    <Label text="{{ alcoholFromattedValue }}" />
-                    <Label text="% Alcool" />
-                </StackLayout>
-                <Slider id="alcohol-slider" value="{{ alcoholValue }}" minValue="30" maxValue="180" col="1" />
-            </GridLayout>
-            <GridLayout class="form-item" style="padding-left: 6">
-                <Label text="Biologique" style="vertical-align: center;horizontal-align: left" width="100" />
-                <Switch checked="{{ wineTasting.isBiologic }}" style="horizontal-align: right;" />
-            </GridLayout>
-            <GridLayout class="form-item" style="padding-left: 6">
-                <Label text="Biodynamique" style="vertical-align: center;horizontal-align: left" width="100" />
-                <Switch checked="{{ wineTasting.isBiodynamic }}" style="horizontal-align: right;" />
-            </GridLayout>
-            <GridLayout columns="auto, *" style="padding-left: 6; padding-bottom: 8; min-height: 48">
-                <Label text="Cépages" style="vertical-align: center;horizontal-align: left" width="100" />
-                <TextView hint="Ajouter un cépage" col="1" />
-            </GridLayout>
-            <TextView text="{{ wineTasting.wineTabNotes }}" hint="Commentaires" />
-           </StackLayout>
-          </ScrollView>
-       </TabViewItem.view>
-     </TabViewItem>
-     <TabViewItem title="Aspect">
-       <TabViewItem.view>
-          <ScrollView>
-            <StackLayout class="tab-view-content">
-                <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6; padding-top: 8">
-                    <Label text="Limpidité" />
-                    <vs:ValuesSelector items="{{ limpidityCriterias }}" singleSelection="true" col="1" />
-                    <TextField hint="Autres" col="1" row="1" />
-                </GridLayout>
-                <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6">
-                    <Label text="Intensité" />
-                    <vs:ValuesSelector items="{{ sightIntensityCriterias }}" singleSelection="true" col="1" />
-                    <TextField hint="Autres" col="1" row="1" />
-                </GridLayout>
-                <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6">
-                    <Label text="Nuance" />
-                    <Button text="Définir" tap="onSelectColor" col="1" visibility="{{ wineTasting.color ? 'collapsed' : 'visible' }}" />
-                    <Button tap="onSelectColor" col="1" backgroundColor="{{wineTasting.color}}" visibility="{{ wineTasting.color ? 'visible' : 'collapsed' }}" />
-                </GridLayout>
-                <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6">
-                    <Label text="Larmes" />
-                    <vs:ValuesSelector items="{{ tearCriterias }}" col="1" />
-                    <TextField hint="Autres" col="1" row="1" />
-                </GridLayout>
-                <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6">
-                    <Label text="Bulles" />
-                    <vs:ValuesSelector items="{{ bubbleCriterias }}" singleSelection="true" col="1" />
-                    <TextField hint="Autres" col="1" row="1" />
-                </GridLayout>
-                <TextView text="{{ wineTasting.sightTabNotes }}" hint="Commentaires" />
-            </StackLayout>
-          </ScrollView>
-       </TabViewItem.view>
-     </TabViewItem>
-     <TabViewItem title="Arômes">
-       <TabViewItem.view>
-        <ScrollView>
-            <StackLayout class="tab-view-content">
-                <StackLayout orientation="vertical" style="padding-left: 6; padding-top: 8">
-                    <Button text="Ajouter" tap="onAddAromas" />
-                    <vs:ValuesSelector items="{{ wineTasting.aromas }}" deleteOnClick="true" />
-                    <TextField hint="Autres" col="1" row="1" />
-                </StackLayout>
-                <GridLayout columns="100, *" rows="*, auto" style="padding-left: 6">
-                    <Label text="Intensité" />
-                    <vs:ValuesSelector items="{{ smellIntensityCriterias }}" singleSelection="true" col="1" />
-                    <TextField hint="Autres" col="1" row="1" />
-                </GridLayout>
-                <TextView text="{{ wineTasting.smellTabNotes }}" hint="Commentaires" />
-            </StackLayout>
-          </ScrollView>
-       </TabViewItem.view>
-     </TabViewItem>
-     <TabViewItem title="Saveurs">
-       <TabViewItem.view>
-          <Label text="Saveurs" />
-       </TabViewItem.view>
-     </TabViewItem>
-     <TabViewItem title="Synthèse">
-       <TabViewItem.view>
-           <ScrollView>
-            <StackLayout class="tab-view-content">
-                <GridLayout class="form-item" style="padding-left: 6" columns="100, *">
-                    <Label text="Note globale" style="vertical-align: center;horizontal-align: left" />
-                    <fr:FinalRating col="1" style="horizontal-align: center" selectedValue="{{ wineTasting.finalRating }}" />
-                </GridLayout>
-                <GridLayout class="form-item" style="padding-left: 6; padding-right: 6">
-                    <Label text="Date" style="vertical-align: center;horizontal-align: left" width="100" />
-                    <Label text="{{ wineTasting.startDate | dateConverter}}" style="vertical-align: center;horizontal-align: right" />
-                </GridLayout>
-                <TextView text="{{ wineTasting.synthesisTabNotes }}" hint="Commentaires" />
-            </StackLayout>
-           </ScrollView>
-       </TabViewItem.view>
-     </TabViewItem>
+	 <TabViewItem title="Vin">
+	   <TabViewItem.view>
+		<ScrollView>
+			<GridLayout columns="100,*,100,*" rows="*,*,*,*,*,*,*,*,*,*,*" class="tab-view-content">
+				<TextField text="{{ wineTasting.estate }}" hint="Domaine" colspan="4" />
+				<TextField text="{{ wineTasting.cuvee }}" hint="Cuvée" row="1" colspan="4" />
+				<TextField text="{{ wineTasting.country }}" hint="Pays" row="2" colspan="4"/>
+				<TextField text="{{ wineTasting.region }}" hint="Région" row="3" colspan="4" />
+				<TextField text="{{ wineTasting.aoc }}" hint="AOC" row="4" colspan="4" />
+				<Label text="Année" row="5" />
+				<dd:DropDown items="{{ years }}" selectedIndex="{{ yearSelectedIndex }}" row="5" col="1" />
+				<Label text="Couleur" row="5" col="2" />
+				<dd:DropDown items="{{ wineTypes | labelConverter }}" selectedIndex="{{ wineTypeSelectedIndex }}" row="5" col="3" />
+				<Label text="{{ alcoholFromattedValue + ' % Alcool' }}" row="6" />
+				<Slider id="alcohol-slider" value="{{ alcoholValue }}" minValue="30" maxValue="180" row="6" col="1" colspan="3" />
+				<Label text="Biologique" row="7"/>
+				<Switch checked="{{ wineTasting.isBiologic }}" row="7" col="3" />
+				<Label text="Biodynamique" row="8" />
+				<Switch checked="{{ wineTasting.isBiodynamic }}" row="8" col="3" />
+				<Label text="Cépages" row="9" />
+				<TextView hint="Ajouter un cépage" row="9" col="1" colspan="3" />
+				<TextView text="{{ wineTasting.wineTabNotes }}" hint="Commentaires" row="10" colspan="4" />
+			</GridLayout>
+		  </ScrollView>
+	   </TabViewItem.view>
+	 </TabViewItem>
+	 <TabViewItem title="Aspect">
+	   <TabViewItem.view>
+		  <ScrollView>
+			<GridLayout class="tab-view-content" rows="*,*,*,*,*,*,*,*,*,*" columns="100,*">
+				<Label text="Limpidité" />
+				<vs:ValuesSelector items="{{ limpidityCriterias }}" singleSelection="true" col="1" />
+				<TextField hint="Autres" col="1" row="1" />
+				<Label text="Intensité" row="2" />
+				<vs:ValuesSelector items="{{ sightIntensityCriterias }}" singleSelection="true" col="1" row="2" />
+				<TextField hint="Autres" col="1" row="3" />
+				<Label text="Nuance" row="4" />
+				<Button text="Définir" tap="onSelectColor" visibility="{{ wineTasting.color ? 'collapsed' : 'visible' }}" col="1" row="4"/>
+				<Button tap="onSelectColor" backgroundColor="{{wineTasting.color}}" visibility="{{ wineTasting.color ? 'visible' : 'collapsed' }}" col="1" row="4" />
+				<Label text="Larmes" row="5" />
+				<vs:ValuesSelector items="{{ tearCriterias }}" col="1" row="5" />
+				<TextField hint="Autres" col="1" row="6" />
+				<Label text="Bulles" row="7" />
+				<vs:ValuesSelector items="{{ bubbleCriterias }}" singleSelection="true" col="1" row="7" />
+				<TextField hint="Autres" col="1" row="8" />
+				<TextView text="{{ wineTasting.sightTabNotes }}" hint="Commentaires" row="9" colspan="2" />
+			</GridLayout>
+		  </ScrollView>
+	   </TabViewItem.view>
+	 </TabViewItem>
+	 <TabViewItem title="Arômes">
+	   <TabViewItem.view>
+		<ScrollView>
+			<GridLayout class="tab-view-content" columns="100,*" rows="*,*,*,*,*,*,*">
+				<Button text="Ajouter" tap="onAddAromas" colspan="2" />
+				<vs:ValuesSelector items="{{ wineTasting.aromas }}" deleteOnClick="true" row="2" colspan="2" />
+				<TextField hint="Autres" col="1" row="3" />
+				<Label text="Intensité" row="4" />
+				<vs:ValuesSelector items="{{ smellIntensityCriterias }}" singleSelection="true" col="1" row="4" />
+				<TextField hint="Autres" col="1" row="5" />
+				<TextView text="{{ wineTasting.smellTabNotes }}" hint="Commentaires" row="6" colspan="2" />
+			</GridLayout>
+		  </ScrollView>
+	   </TabViewItem.view>
+	 </TabViewItem>
+	 <TabViewItem title="Saveurs">
+	   <TabViewItem.view>
+		  <Label text="Saveurs" />
+	   </TabViewItem.view>
+	 </TabViewItem>
+	 <TabViewItem title="Synthèse">
+	   <TabViewItem.view>
+		   <ScrollView>
+			<GridLayout class="tab-view-content" columns="100,*" rows="*,*,*">
+				<Label text="Note globale" />
+				<fr:FinalRating selectedValue="{{ wineTasting.finalRating }}" col="1" />
+				<Label text="Date" row="2" />
+				<Label text="{{ wineTasting.startDate | dateConverter}}" row="2" col="1" />
+				<TextView text="{{ wineTasting.synthesisTabNotes }}" hint="Commentaires" row="3" colspan="2" />
+			</GridLayout>
+		   </ScrollView>
+	   </TabViewItem.view>
+	 </TabViewItem>
    </TabView.items>
  </TabView>
 </Page>

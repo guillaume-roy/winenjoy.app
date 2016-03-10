@@ -9,10 +9,13 @@ import {Views} from "../../utils/views";
 let viewModel: TastingViewModel;
 let page: Page;
 
-export function navigatedTo(args: EventData) {
+export function loaded(args: EventData) {
     page = <Page>args.object;
-    viewModel = new TastingViewModel();
-    page.bindingContext = viewModel;
+
+    setTimeout(function() {
+        viewModel = new TastingViewModel();
+        page.bindingContext = viewModel;
+    }, 0);
 }
 
 export function onSaveTasting() {
@@ -53,7 +56,8 @@ export function cancel() {
     });
 }
 
-appModule.resources["dateConverter"] = function(value) {
+let dateConverterKey = "dateConverter";
+appModule.resources[dateConverterKey] = function(value) {
     let date = new Date(value);
     let day = date.getDate();
     let month = date.getMonth();
@@ -61,4 +65,15 @@ appModule.resources["dateConverter"] = function(value) {
     let minutes = date.getMinutes();
     return (day < 10 ? "0" + day : day) + "/" + (month < 10 ? "0" + month : month) + "/" + date.getFullYear() +
         " " + (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes);
+};
+
+let labelConverterKey = "labelConverter";
+appModule.resources[labelConverterKey] = function(value) {
+    if (value && value.length > 0) {
+        return value.map(v => {
+            return v.label;
+        });
+    } else {
+        return [];
+    }
 };

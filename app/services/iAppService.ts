@@ -11,4 +11,13 @@ export interface IAppService {
     getAromaCriterias(): CriteriaItem[];
     getBubbleCriterias(): CriteriaItem[];
     getSmellIntensityCriterias(): CriteriaItem[];
+
+    getWineTypesAsync(): Promise<CriteriaItem[]>;
+    getYearsAsync(): Promise<number[]>;
+    getLimpidityCriteriasAsync(): Promise<CriteriaItem[]>;
+    getSightIntensityCriteriasAsync(): Promise<CriteriaItem[]>;
+    getTearCriteriasAsync(): Promise<CriteriaItem[]>;
+    getAromaCriteriasAsync(): Promise<CriteriaItem[]>;
+    getBubbleCriteriasAsync(): Promise<CriteriaItem[]>;
+    getSmellIntensityCriteriasAsync(): Promise<CriteriaItem[]>;
 }

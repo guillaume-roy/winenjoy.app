@@ -50,16 +50,20 @@ export class AromasPickerViewModel extends Observable {
 
         this._service = Services.current;
 
-        this._aromaCriteriasSource = _.orderBy(_.flattenDeep(
-            this._service.getAromaCriterias().map(a => {
-                return a.values.map(i => {
-                    return new Observable({
-                        aroma: i,
-                        isSelected: _.some(this._selectedItems, i)
-                    });
-                });
-        })), ["aroma.label"]);
-        this._aromaCriterias = this._aromaCriteriasSource;
+        this._service.getAromaCriteriasAsync()
+            .then(data => {
+                this._aromaCriteriasSource = _.orderBy(_.flattenDeep(
+                    data.map(a => {
+                        return a.values.map(i => {
+                            return new Observable({
+                                aroma: i,
+                                isSelected: _.some(this._selectedItems, i)
+                            });
+                        });
+                    })
+                ), ["aroma.label"]);
+                this.aromaCriterias = this._aromaCriteriasSource;
+            });
     }
 
     public toggleItem(index: number) {

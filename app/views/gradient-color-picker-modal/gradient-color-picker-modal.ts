@@ -8,12 +8,14 @@ let viewModel: GradientColorPickerModalViewModel;
 
 export function onShownModally(args: pages.ShownModallyData) {
     closeCallback = args.closeCallback;
+    setTimeout(function() {
+        viewModel = new GradientColorPickerModalViewModel(args.context);
+        (<Page>args.object).bindingContext = viewModel;
 
-    viewModel = new GradientColorPickerModalViewModel(args.context);
-    (<Page>args.object).bindingContext = viewModel;
-
-    viewModel.addEventListener(observable.Observable.propertyChangeEvent,
-    data => {
-        closeCallback(viewModel.selectedColor);
-    });
+        viewModel.addEventListener(
+            observable.Observable.propertyChangeEvent,
+            data => {
+                closeCallback(viewModel.selectedColor);
+            });
+    }, 0);
 }

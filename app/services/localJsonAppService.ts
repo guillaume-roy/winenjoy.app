@@ -5,9 +5,10 @@ import {WineTasting} from "../entities/wineTasting";
 import {CriteriaItem} from "../entities/criteriaItem";
 
 export class LocalJsonAppService implements IAppService {
+    private _defaultLanguage = "fr";
+
     public getWineTastings(): WineTasting[] {
         return [];
-        // return this.deserialize<WineTasting>(this._wineTastingsCollectionName);
     }
 
     public getYears(): number[] {
@@ -19,32 +20,94 @@ export class LocalJsonAppService implements IAppService {
         return result;
     }
 
+    public getYearsAsync(): Promise<number[]> {
+        return new Promise<number[]>((resolve, reject) => {
+            let result = [];
+            let currentYear = new Date().getFullYear();
+            for (let i = 1900; i <= currentYear; i++) {
+                result.push(i);
+            }
+            resolve(result);
+        });
+    }
+
     public getSmellIntensityCriterias(): CriteriaItem[] {
         return this.loadJSON("smell-intensities");
+    }
+
+    public getSmellIntensityCriteriasAsync(): Promise<CriteriaItem[]> {
+        return this.loadJsonAsync("smell-intensities");
     }
 
     public getAromaCriterias(): CriteriaItem[] {
         return this.loadJSON("aromas");
     }
 
+    public getAromaCriteriasAsync(): Promise<CriteriaItem[]> {
+        return this.loadJsonAsync("aromas");
+    }
+
     public getWineTypes(): CriteriaItem[] {
         return this.loadJSON("wineTypes");
+    }
+
+    public getWineTypesAsync(): Promise<CriteriaItem[]> {
+        return this.loadJsonAsync("wineTypes");
     }
 
     public getSightIntensityCriterias(): CriteriaItem[] {
         return this.loadJSON("sight-intensities");
     }
 
+    public getSightIntensityCriteriasAsync(): Promise<CriteriaItem[]> {
+        return this.loadJsonAsync("sight-intensities");
+    }
+
     public getBubbleCriterias(): CriteriaItem[] {
         return this.loadJSON("bubbles");
+    }
+
+    public getBubbleCriteriasAsync(): Promise<CriteriaItem[]> {
+        return this.loadJsonAsync("bubbles");
     }
 
     public getTearCriterias(): CriteriaItem[] {
         return this.loadJSON("tears");
     }
 
+    public getTearCriteriasAsync(): Promise<CriteriaItem[]> {
+        return this.loadJsonAsync("tears");
+    }
+
     public getLimpidityCriterias(): CriteriaItem[] {
         return this.loadJSON("limpidities");
+    }
+
+    public getLimpidityCriteriasAsync(): Promise<CriteriaItem[]> {
+        return this.loadJsonAsync("limpidities");
+    }
+
+    private loadJsonAsync(filename: string): Promise<CriteriaItem[]> {
+        return new Promise<CriteriaItem[]>((resolve, reject) => {
+            let filePath = fs.path.join(fs.knownFolders.currentApp().path, "data", filename + ".json");
+            let file = fs.File.fromPath(filePath);
+            file.readText()
+            .then(fileContent => {
+                let jsonFile = <[]>JSON.parse(fileContent);
+
+                let platformData = <any>jsonFile.filter((value: any) => {
+                    return value.language ===  platformModule.device.language;
+                });
+
+                if (platformData && platformData.length > 0) {
+                    resolve(<CriteriaItem[]>platformData[0].data);
+                } else {
+                    resolve(<CriteriaItem[]>(<any>jsonFile.filter((value: any) => {
+                        return value.language === this._defaultLanguage;
+                    })[0]).data);
+                }
+            }).catch(error => reject(error));
+        });
     }
 
     private loadJSON(filename: string): CriteriaItem[] {
@@ -68,8 +131,16 @@ export class LocalJsonAppService implements IAppService {
 
         let platformLanguage = platformModule.device.language;
 
-        return <CriteriaItem[]>(<any>jsonFile.filter((value: any) => {
+        let platformData = <any>jsonFile.filter((value: any) => {
            return value.language ===  platformLanguage;
-        })[0]).data;
+        });
+
+        if (platformData && platformData.length > 0) {
+            return platformData[0].data;
+        } else {
+            return (<any>jsonFile.filter((value: any) => {
+                return value.language === this._defaultLanguage;
+            })[0]).data;
+        }
     }
 }
