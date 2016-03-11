@@ -7,7 +7,7 @@ import {IAppService} from "../services/IAppService";
 export class TastingViewModel extends Observable {
     private _service: IAppService;
     private _limpidityCriterias: CriteriaItem[];
-    private _sightIntensityCriterias: CriteriaItem[];
+    private _shineCriterias: CriteriaItem[];
     private _smellIntensityCriterias: CriteriaItem[];
     private _tearCriterias: CriteriaItem[];
     private _bubbleCriterias: CriteriaItem[];
@@ -79,12 +79,12 @@ export class TastingViewModel extends Observable {
         this.notifyPropertyChange("bubbleCriterias", value);
     }
 
-    public get sightIntensityCriterias() {
-        return this._sightIntensityCriterias;
+    public get shineCriterias() {
+        return this._shineCriterias;
     }
-    public set sightIntensityCriterias(value) {
-        this._sightIntensityCriterias = value;
-        this.notifyPropertyChange("sightIntensityCriterias", value);
+    public set shineCriterias(value) {
+        this._shineCriterias = value;
+        this.notifyPropertyChange("shineCriterias", value);
     }
 
     public get wineTypes() {
@@ -150,8 +150,8 @@ export class TastingViewModel extends Observable {
 
         this._service.getLimpidityCriteriasAsync()
             .then(data => this.limpidityCriterias = data);
-        this._service.getSightIntensityCriteriasAsync()
-            .then(data => this.sightIntensityCriterias = data);
+        this._service.getShineCriteriasAsync()
+            .then(data => this.shineCriterias = data);
         this._service.getSmellIntensityCriteriasAsync()
             .then(data => this.smellIntensityCriterias = data);
         this._service.getTearCriteriasAsync()

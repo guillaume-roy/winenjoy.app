@@ -6,7 +6,7 @@ export interface IAppService {
     getWineTypes(): CriteriaItem[];
     getYears(): number[];
     getLimpidityCriterias(): CriteriaItem[];
-    getSightIntensityCriterias(): CriteriaItem[];
+    getShineCriterias(): CriteriaItem[];
     getTearCriterias(): CriteriaItem[];
     getAromaCriterias(): CriteriaItem[];
     getBubbleCriterias(): CriteriaItem[];
@@ -15,7 +15,7 @@ export interface IAppService {
     getWineTypesAsync(): Promise<CriteriaItem[]>;
     getYearsAsync(): Promise<number[]>;
     getLimpidityCriteriasAsync(): Promise<CriteriaItem[]>;
-    getSightIntensityCriteriasAsync(): Promise<CriteriaItem[]>;
+    getShineCriteriasAsync(): Promise<CriteriaItem[]>;
     getTearCriteriasAsync(): Promise<CriteriaItem[]>;
     getAromaCriteriasAsync(): Promise<CriteriaItem[]>;
     getBubbleCriteriasAsync(): Promise<CriteriaItem[]>;

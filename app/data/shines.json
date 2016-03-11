@@ -1,0 +1,37 @@
+[
+	{
+		"language": "fr",
+		"data": [
+            {
+				"id": "c630468c-578e-46ec-ab7c-1616eca88053",
+				"label": "Cristallin",
+                "order": 0
+			},
+            {
+				"id": "93b6bea8-7e49-44f1-9643-3e7fb348d394",
+				"label": "Brillant",
+                "order": 1
+			},
+            {
+				"id": "41a81ce7-b229-414c-8d29-b1cc7144193d",
+				"label": "Eclatant",
+                "order": 2
+			},
+            {
+				"id": "90a54555-8ee8-4974-8e36-d0ce75f94db0",
+				"label": "Mat",
+                "order": 3
+			},
+            {
+				"id": "0d53ba38-8685-46fc-b3e9-6eaca7adf8bf",
+				"label": "Terne",
+                "order": 4
+			},
+            {
+				"id": "c719c063-f622-437a-a630-872047779712",
+				"label": "Eteint",
+                "order": 5
+			}
+        ]
+    }
+]

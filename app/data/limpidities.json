@@ -3,34 +3,39 @@
 		"language": "fr",
 		"data": [
             {
-				"id": "",
-				"label": "Net",
+				"id": "5fc69c88-cb99-4279-b6f3-b08eccd7932d",
+				"label": "Clair",
                 "order": 0
 			},
             {
-				"id": "",
-				"label": "Trouble",
+				"id": "ee40ba15-0bf5-4bed-92e6-6490c05fbc81",
+				"label": "Limpide",
                 "order": 1
 			},
             {
-				"id": "",
-				"label": "Flou",
+				"id": "aeb5d557-8cd1-4126-9b2a-ee17ad2bd437",
+				"label": "Mat",
                 "order": 2
 			},
             {
-				"id": "",
-				"label": "Limpide",
+				"id": "8c8d2d35-c2c9-4556-87c7-de0f9b71171c",
+				"label": "Terne",
                 "order": 3
 			},
             {
-				"id": "",
-				"label": "Cristallin",
+				"id": "66fb365f-b60f-4918-b815-4746a730a763",
+				"label": "Trouble",
                 "order": 4
 			},
             {
-				"id": "",
-				"label": "Voilé",
+				"id": "d82f9bf2-22f9-4015-8521-b7f9c99e9a03",
+				"label": "Flou",
                 "order": 5
+			},
+            {
+				"id": "7b43a18b-7d53-44d9-b03b-e8d3919b8917",
+				"label": "Voilé",
+                "order": 6
 			}
         ]
     }

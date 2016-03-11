@@ -55,12 +55,12 @@ export class LocalJsonAppService implements IAppService {
         return this.loadJsonAsync("wineTypes");
     }
 
-    public getSightIntensityCriterias(): CriteriaItem[] {
-        return this.loadJSON("sight-intensities");
+    public getShineCriterias(): CriteriaItem[] {
+        return this.loadJSON("shines");
     }
 
-    public getSightIntensityCriteriasAsync(): Promise<CriteriaItem[]> {
-        return this.loadJsonAsync("sight-intensities");
+    public getShineCriteriasAsync(): Promise<CriteriaItem[]> {
+        return this.loadJsonAsync("shines");
     }
 
     public getBubbleCriterias(): CriteriaItem[] {

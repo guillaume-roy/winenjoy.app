@@ -43,26 +43,22 @@
 	 <TabViewItem title="Aspect">
 	   <TabViewItem.view>
 		  <ScrollView>
-            <StackLayout class="tab-view-content">
-				<Label text="Limpidité" style="font-size: 16;padding-top: 8;padding-bottom:8;color:#727272;padding-left: 8" />
-				<vs:ValuesSelector items="{{ limpidityCriterias }}" singleSelection="true" style="padding-bottom:8" />
-				<Label text="Intensité" style="font-size: 16;padding-top: 8;padding-bottom:8;color:#727272;padding-left: 8" />
-				<vs:ValuesSelector items="{{ sightIntensityCriterias }}" singleSelection="true"/>
-				<Label text="Robe"  style="font-size: 16;padding-top: 8;padding-bottom:8;color:#727272;padding-left: 8" />
-				<Button text="Définir" tap="onSelectColor" visibility="{{ wineTasting.color ? 'collapsed' : 'visible' }}" />
-				<Button tap="onSelectColor" backgroundColor="{{wineTasting.color}}" visibility="{{ wineTasting.color ? 'visible' : 'collapsed' }}" />
-                <GridLayout style="padding-top: 8;padding-bottom:8;padding-left: 8">
-				    <Label text="Larmes" style="font-size: 16;color:#727272" />
-                    <Switch style="horizontal-align: right" checked="{{ hasTears }}" />
-                </GridLayout>
-				<vs:ValuesSelector items="{{ tearCriterias }}" visibility="{{ hasTears ? 'visible' : 'collapsed' }}" />
-                <GridLayout style="padding-top: 8;padding-bottom:8;padding-left: 8">
-				    <Label text="Bulles" style="font-size: 16;color:#727272" />
-                    <Switch style="horizontal-align: right" checked="{{ hasBubbles }}" />
-                </GridLayout>
-				<vs:ValuesSelector items="{{ bubbleCriterias }}" singleSelection="true" visibility="{{ hasBubbles ? 'visible' : 'collapsed' }}" />
-				<TextView text="{{ wineTasting.sightTabNotes }}" hint="Commentaires" />
-			</StackLayout>
+            <GridLayout class="tab-view-content" rows="*,*,*,*,*,*,*,auto,*,auto,auto" columns="*, auto">
+				<Label text="Limpidité" style="font-size: 16;padding-top: 8;padding-bottom:8;color:#727272;padding-left: 8" colspan="2" />
+				<vs:ValuesSelector items="{{ limpidityCriterias }}" style="padding-bottom:8" row="1" colspan="2" />
+				<Label text="Brillance" style="font-size: 16;padding-top: 8;padding-bottom:8;color:#727272;padding-left: 8" row="2" colspan="2" />
+				<vs:ValuesSelector items="{{ shineCriterias }}" row="3" colspan="2" />
+				<!--<Label text="Robe"  style="font-size: 16;padding-top: 8;padding-bottom:8;color:#727272;padding-left: 8" row="4" colspan="2" />-->
+				<Button text="Définir la robe" tap="onSelectColor" visibility="{{ wineTasting.color ? 'collapsed' : 'visible' }}" row="5" colspan="2" />
+				<Button tap="onSelectColor" backgroundColor="{{wineTasting.color}}" visibility="{{ wineTasting.color ? 'visible' : 'collapsed' }}" row="5" colspan="2" />
+                <Label text="Larmes" style="padding-top: 8;padding-bottom:8;padding-left: 8;font-size: 16;color:#727272" row="6" />
+                <Switch style="horizontal-align: right" checked="{{ hasTears }}" row="6" col="1" />
+				<vs:ValuesSelector items="{{ tearCriterias }}" visibility="{{ hasTears ? 'visible' : 'collapsed' }}" row="7" colspan="2" />
+                <Label text="Bulles" style="padding-top: 8;padding-bottom:8;padding-left: 8;font-size: 16;color:#727272" row="8" />
+                <Switch style="horizontal-align: right" checked="{{ hasBubbles }}" row="8" col="1" />
+				<vs:ValuesSelector items="{{ bubbleCriterias }}" visibility="{{ hasBubbles ? 'visible' : 'collapsed' }}" row="9" colspan="2" />
+				<TextView text="{{ wineTasting.sightTabNotes }}" hint="Commentaires" row="10" colspan="2" />
+			</GridLayout>
 		  </ScrollView>
 	   </TabViewItem.view>
 	 </TabViewItem>
