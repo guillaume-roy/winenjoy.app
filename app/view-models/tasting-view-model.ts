@@ -15,11 +15,29 @@ export class TastingViewModel extends Observable {
     private _years: number[];
     private _alcoholValue: number;
     private _alcoholFromattedValue: number;
+    private _hasTears: boolean;
+    private _hasBubbles: boolean;
 
     private _wineTasting: WineTasting;
 
     private _yearSelectedIndex: number;
     private _wineTypeSelectedIndex: number;
+
+    public get hasBubbles() {
+        return this._hasBubbles;
+    }
+    public set hasBubbles(value) {
+        this._hasBubbles = value;
+        this.notifyPropertyChange("hasBubbles", value);
+    }
+
+    public get hasTears() {
+        return this._hasTears;
+    }
+    public set hasTears(value) {
+        this._hasTears = value;
+        this.notifyPropertyChange("hasTears", value);
+    }
 
     public get wineTasting() {
         return this._wineTasting;
