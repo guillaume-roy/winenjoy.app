@@ -17,9 +17,16 @@ TabView {
     margin-bottom: 8;
 }
 
+.values-selector-item {
+    background-color: white;
+    color: #727272;
+    font-size: 12;
+}
+
 .values-selector-selected-item {
     background-color: $accent-color;
     color: $primary-color-text;
+    font-size: 12;
 }
 
 .rating-item {

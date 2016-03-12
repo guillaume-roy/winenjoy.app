@@ -28,7 +28,7 @@ export class AromasPickerViewModel extends Observable {
 
         if (value.length === 0) {
             this.aromaCriterias = this._aromaCriteriasSource;
-        } else if (value.length > 1) {
+        } else {
             this.aromaCriterias = this._aromaCriteriasSource.filter(v => {
                 return v.aroma.label.toLowerCase().startsWith(value.trim().toLowerCase());
             });

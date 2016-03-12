@@ -31,12 +31,12 @@ export class LocalJsonAppService implements IAppService {
         });
     }
 
-    public getSmellIntensityCriterias(): CriteriaItem[] {
-        return this.loadJSON("smell-intensities");
+    public getIntensityCriterias(): CriteriaItem[] {
+        return this.loadJSON("intensities");
     }
 
-    public getSmellIntensityCriteriasAsync(): Promise<CriteriaItem[]> {
-        return this.loadJsonAsync("smell-intensities");
+    public getIntensityCriteriasAsync(): Promise<CriteriaItem[]> {
+        return this.loadJsonAsync("intensities");
     }
 
     public getAromaCriterias(): CriteriaItem[] {

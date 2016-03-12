@@ -4,7 +4,6 @@ export interface WineTasting {
     id?: number;
     estate?: string;
     region?: string;
-    aoc?: string;
     cuvee?: string;
     country?: string;
     year?: number;

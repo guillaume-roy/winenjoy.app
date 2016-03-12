@@ -8,20 +8,28 @@ export class TastingViewModel extends Observable {
     private _service: IAppService;
     private _limpidityCriterias: CriteriaItem[];
     private _shineCriterias: CriteriaItem[];
-    private _smellIntensityCriterias: CriteriaItem[];
+    private _intensityCriterias: CriteriaItem[];
     private _tearCriterias: CriteriaItem[];
     private _bubbleCriterias: CriteriaItem[];
     private _wineTypes: CriteriaItem[];
     private _years: number[];
     private _alcoholValue: number;
     private _alcoholFromattedValue: number;
-    private _hasTears: boolean;
     private _hasBubbles: boolean;
+    private _wineYear: number;
 
     private _wineTasting: WineTasting;
 
-    private _yearSelectedIndex: number;
     private _wineTypeSelectedIndex: number;
+
+    public get wineYear() {
+        return this._wineYear;
+    }
+    public set wineYear(value) {
+        this._wineYear = value;
+        this.notifyPropertyChange("wineYear", value);
+        this.wineTasting.year = value;
+    }
 
     public get hasBubbles() {
         return this._hasBubbles;
@@ -29,14 +37,6 @@ export class TastingViewModel extends Observable {
     public set hasBubbles(value) {
         this._hasBubbles = value;
         this.notifyPropertyChange("hasBubbles", value);
-    }
-
-    public get hasTears() {
-        return this._hasTears;
-    }
-    public set hasTears(value) {
-        this._hasTears = value;
-        this.notifyPropertyChange("hasTears", value);
     }
 
     public get wineTasting() {
@@ -55,12 +55,12 @@ export class TastingViewModel extends Observable {
         this.notifyPropertyChange("limpidityCriterias", value);
     }
 
-    public get smellIntensityCriterias() {
-        return this._smellIntensityCriterias;
+    public get intensityCriterias() {
+        return this._intensityCriterias;
     }
-    public set smellIntensityCriterias(value) {
-        this._smellIntensityCriterias = value;
-        this.notifyPropertyChange("smellIntensityCriterias", value);
+    public set intensityCriterias(value) {
+        this._intensityCriterias = value;
+        this.notifyPropertyChange("intensityCriterias", value);
     }
 
     public get tearCriterias() {
@@ -103,15 +103,6 @@ export class TastingViewModel extends Observable {
         this.notifyPropertyChange("years", value);
     }
 
-    public get yearSelectedIndex() {
-        return this._yearSelectedIndex;
-    }
-    public set yearSelectedIndex(value: number) {
-        this._yearSelectedIndex = value;
-        this.wineTasting.year = this.years[value];
-        this.notifyPropertyChange("yearSelectedIndex", value);
-    }
-
     public get wineTypeSelectedIndex() {
         return this._wineTypeSelectedIndex;
     }
@@ -152,8 +143,8 @@ export class TastingViewModel extends Observable {
             .then(data => this.limpidityCriterias = data);
         this._service.getShineCriteriasAsync()
             .then(data => this.shineCriterias = data);
-        this._service.getSmellIntensityCriteriasAsync()
-            .then(data => this.smellIntensityCriterias = data);
+        this._service.getIntensityCriteriasAsync()
+            .then(data => this.intensityCriterias = data);
         this._service.getTearCriteriasAsync()
             .then(data => this.tearCriterias = data);
         this._service.getBubbleCriteriasAsync()
@@ -166,7 +157,7 @@ export class TastingViewModel extends Observable {
         this._service.getYearsAsync()
             .then(data => {
                 this.years = data;
-                this.yearSelectedIndex = data.length - 3;
+                this.wineYear = data[data.length - 3];
             });
 
         this.wineTasting = {

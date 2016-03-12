@@ -2,6 +2,7 @@ import {WrapLayout} from "ui/layouts/wrap-layout";
 import {EventData} from "data/observable";
 import {ValueButton} from "./value-button";
 import dependencyObservableModule = require("ui/core/dependency-observable");
+import colorModule = require("color");
 
 export class ValuesSelector extends WrapLayout {
     public static itemsProperty = new dependencyObservableModule.Property(
@@ -83,6 +84,7 @@ export class ValuesSelector extends WrapLayout {
             let itemButton = new ValueButton();
             itemButton.text = this.items[i].label;
             itemButton.value = this.items[i];
+            itemButton.className = "values-selector-item";
 
             if (this.deleteOnClick) {
                 itemButton.className = "values-selector-selected-item";
@@ -101,12 +103,12 @@ export class ValuesSelector extends WrapLayout {
                     return;
                 }
 
-                if (!clickedButton.className || clickedButton.className.trim().length === 0) {
+                if (clickedButton.className === "values-selector-item") {
                     if (this.singleSelection && this.selectedItems.length > 0) {
                         this.selectedItems = [];
 
                         for (let i = 0; i < this._buttons.length; i++) {
-                            this._buttons[i].className = "";
+                            this._buttons[i].className = "values-selector-item";
                         }
                     }
                     this.selectedItems.push(clickedButton.value);
@@ -120,7 +122,7 @@ export class ValuesSelector extends WrapLayout {
                         this.selectedItems = newSelectedItems;
                     }
 
-                    clickedButton.className = "";
+                    clickedButton.className = "values-selector-item";
                 }
             }, this);
 
