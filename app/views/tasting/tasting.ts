@@ -36,9 +36,25 @@ export function onSelectColor() {
 export function onAddAromas() {
     page.showModal(
         Views.aromasPicker,
-        viewModel.wineTasting.aromas,
+        {
+            isDefects: false,
+            values: viewModel.wineTasting.aromas
+        },
         function(data) {
             viewModel.setAromas(data);
+        },
+        true);
+}
+
+export function onAddDefects() {
+    page.showModal(
+        Views.aromasPicker,
+        {
+            isDefects: true,
+            values: viewModel.wineTasting.defects
+        },
+        function(data) {
+            viewModel.setDefects(data);
         },
         true);
 }

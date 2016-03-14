@@ -95,6 +95,18 @@ export class LocalJsonAppService implements IAppService {
         return this.loadJsonAsync("length");
     }
 
+    public getAttackCriterias(wineCode: string): CriteriaItem[] {
+        return this.loadJSON("attacks").filter(a => a.code === wineCode)[0].values;
+    }
+
+    public getAttackCriteriasAsync(wineCode: string): Promise<CriteriaItem[]> {
+        return new Promise<CriteriaItem[]>((resolve, reject) => {
+            this.loadJsonAsync("attacks")
+            .then(data => resolve(data.filter(a => a.code === wineCode)[0].values))
+            .catch(e => reject(e));
+        });
+    }
+
     private loadJsonAsync(filename: string): Promise<CriteriaItem[]> {
         return new Promise<CriteriaItem[]>((resolve, reject) => {
             let filePath = fs.path.join(fs.knownFolders.currentApp().path, "data", filename + ".json");

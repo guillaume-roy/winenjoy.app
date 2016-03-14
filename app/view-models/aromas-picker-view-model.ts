@@ -10,6 +10,15 @@ export class AromasPickerViewModel extends Observable {
     private _service: IAppService;
     private _searchingText: string;
     private _selectedItems: CriteriaItem[];
+    private _isDefects: boolean;
+
+    public get isDefects() {
+        return this._isDefects;
+    }
+    public set isDefects(value) {
+        this._isDefects = value;
+        this.notifyPropertyChange("isDefects", value);
+    }
 
     public get aromaCriterias() {
         return this._aromaCriterias;
@@ -39,11 +48,13 @@ export class AromasPickerViewModel extends Observable {
         return this._selectedItems;
     }
 
-    constructor(selectedAromas: CriteriaItem[]) {
+    constructor(args: any) {
         super();
 
-        if (_.isArray(selectedAromas)) {
-            this._selectedItems = selectedAromas;
+        this.isDefects = args.isDefects;
+
+        if (_.isArray(args.values)) {
+            this._selectedItems = args.values;
         } else {
             this._selectedItems = [];
         }
@@ -52,8 +63,13 @@ export class AromasPickerViewModel extends Observable {
 
         this._service.getAromaCriteriasAsync()
             .then(data => {
+                console.log(this.isDefects);
+                let filterFunction = this.isDefects
+                    ? (d) => d.code === "DEFECTS"
+                    : (d) => d.code !== "DEFECTS";
+
                 this._aromaCriteriasSource = _.orderBy(_.flattenDeep(
-                    data.map(a => {
+                    data.filter(filterFunction).map(a => {
                         return a.values.map(i => {
                             return new Observable({
                                 aroma: i,

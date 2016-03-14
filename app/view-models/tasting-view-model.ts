@@ -13,6 +13,7 @@ export class TastingViewModel extends Observable {
     private _bubbleCriterias: CriteriaItem[];
     private _wineTypes: CriteriaItem[];
     private _lengthCriterias: CriteriaItem[];
+    private _attackCriterias: CriteriaItem[];
     private _years: number[];
     private _alcoholValue: number;
     private _alcoholFromattedValue: number;
@@ -46,6 +47,14 @@ export class TastingViewModel extends Observable {
     public set wineTasting(value) {
         this._wineTasting = value;
         this.notifyPropertyChange("wineTasting", value);
+    }
+
+    public get attackCriterias() {
+        return this._attackCriterias;
+    }
+    public set attackCriterias(value) {
+        this._attackCriterias = value;
+        this.notifyPropertyChange("attackCriterias", value);
     }
 
     public get limpidityCriterias() {
@@ -121,6 +130,12 @@ export class TastingViewModel extends Observable {
 
         this.wineTasting.wineType = this._wineTypes[value];
         this.wineTasting.color = null;
+
+        this._service.getAttackCriteriasAsync(this.wineTasting.wineType.code)
+            .then(data => {
+                this.wineTasting.attacks = null;
+                this.attackCriterias = data;
+            });
     }
 
     public get alcoholValue() {
@@ -146,6 +161,10 @@ export class TastingViewModel extends Observable {
     constructor() {
         super();
 
+        this.wineTasting = {
+            startDate: Date.now()
+        };
+
         this._service = Services.current;
 
         this._service.getLimpidityCriteriasAsync()
@@ -163,7 +182,7 @@ export class TastingViewModel extends Observable {
         this._service.getWineTypesAsync()
             .then(data => {
                 this.wineTypes = data;
-                this.wineTypeSelectedIndex = 2;
+                this.wineTypeSelectedIndex = 0;
             });
         this._service.getYearsAsync()
             .then(data => {
@@ -171,9 +190,6 @@ export class TastingViewModel extends Observable {
                 this.wineYear = data[data.length - 3];
             });
 
-        this.wineTasting = {
-            startDate: Date.now()
-        };
         this.alcoholValue = 0;
     }
 
@@ -186,6 +202,13 @@ export class TastingViewModel extends Observable {
         this.wineTasting.aromas = null;
         this.notifyPropertyChange("wineTasting", this.wineTasting);
         this.wineTasting.aromas = aromas;
+        this.notifyPropertyChange("wineTasting", this.wineTasting);
+    }
+
+    public setDefects(defects: CriteriaItem[]) {
+        this.wineTasting.defects = null;
+        this.notifyPropertyChange("wineTasting", this.wineTasting);
+        this.wineTasting.defects = defects;
         this.notifyPropertyChange("wineTasting", this.wineTasting);
     }
 }

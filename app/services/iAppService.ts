@@ -12,6 +12,7 @@ export interface IAppService {
     getBubbleCriterias(): CriteriaItem[];
     getIntensityCriterias(): CriteriaItem[];
     getLengthCriterias(): CriteriaItem[];
+    getAttackCriterias(wineCode: string): CriteriaItem[];
 
     getWineTypesAsync(): Promise<CriteriaItem[]>;
     getYearsAsync(): Promise<number[]>;
@@ -22,4 +23,5 @@ export interface IAppService {
     getBubbleCriteriasAsync(): Promise<CriteriaItem[]>;
     getIntensityCriteriasAsync(): Promise<CriteriaItem[]>;
     getLengthCriteriasAsync(): Promise<CriteriaItem[]>;
+    getAttackCriteriasAsync(wineCode: string): Promise<CriteriaItem[]>;
 }

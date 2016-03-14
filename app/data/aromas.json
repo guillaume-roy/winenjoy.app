@@ -253,6 +253,7 @@
 			{
 				"id": "98f9a5b6-a5f2-4f31-ab74-923335d2d9fc",
 				"label" : "Défauts",
+                "code": "DEFECTS",
 				"values": [
 					{
 						"id": "b7cb7dbf-9776-41f0-a05e-5e9790ff8489",
