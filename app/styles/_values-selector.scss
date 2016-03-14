@@ -1,0 +1,13 @@
+@import "_material-theme";
+
+.values-selector-item {
+    background-color: $primary-color-text;
+    color: $secondary-text-color;
+    font-size: 12;
+}
+
+.values-selector-selected-item {
+    background-color: $accent-color;
+    color: $primary-color-text;
+    font-size: 12;
+}

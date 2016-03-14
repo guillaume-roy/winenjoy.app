@@ -3,36 +3,3 @@
 ActionBar {
     color: $primary-color-text;
 }
-
-TabView {
-    color: $primary-color-text;
-}
-
-.tab-view-content {
-    color: $primary-text-color;
-}
-
-.form-item {
-    height: 48;
-    margin-bottom: 8;
-}
-
-.values-selector-item {
-    background-color: white;
-    color: #727272;
-    font-size: 12;
-}
-
-.values-selector-selected-item {
-    background-color: $accent-color;
-    color: $primary-color-text;
-    font-size: 12;
-}
-
-.rating-item {
-    opacity: 0.2;
-}
-
-.selected-rating-item {
-    opacity: 1;
-}

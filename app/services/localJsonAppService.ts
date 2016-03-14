@@ -87,6 +87,14 @@ export class LocalJsonAppService implements IAppService {
         return this.loadJsonAsync("limpidities");
     }
 
+    public getLengthCriterias(): CriteriaItem[] {
+        return this.loadJSON("length");
+    }
+
+    public getLengthCriteriasAsync(): Promise<CriteriaItem[]> {
+        return this.loadJsonAsync("length");
+    }
+
     private loadJsonAsync(filename: string): Promise<CriteriaItem[]> {
         return new Promise<CriteriaItem[]>((resolve, reject) => {
             let filePath = fs.path.join(fs.knownFolders.currentApp().path, "data", filename + ".json");

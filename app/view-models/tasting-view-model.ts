@@ -12,6 +12,7 @@ export class TastingViewModel extends Observable {
     private _tearCriterias: CriteriaItem[];
     private _bubbleCriterias: CriteriaItem[];
     private _wineTypes: CriteriaItem[];
+    private _lengthCriterias: CriteriaItem[];
     private _years: number[];
     private _alcoholValue: number;
     private _alcoholFromattedValue: number;
@@ -53,6 +54,14 @@ export class TastingViewModel extends Observable {
     public set limpidityCriterias(value) {
         this._limpidityCriterias = value;
         this.notifyPropertyChange("limpidityCriterias", value);
+    }
+
+    public get lengthCriterias() {
+        return this._lengthCriterias;
+    }
+    public set lengthCriterias(value) {
+        this._lengthCriterias = value;
+        this.notifyPropertyChange("lengthCriterias", value);
     }
 
     public get intensityCriterias() {
@@ -149,6 +158,8 @@ export class TastingViewModel extends Observable {
             .then(data => this.tearCriterias = data);
         this._service.getBubbleCriteriasAsync()
             .then(data => this.bubbleCriterias = data);
+        this._service.getLengthCriteriasAsync()
+            .then(data => this.lengthCriterias = data);
         this._service.getWineTypesAsync()
             .then(data => {
                 this.wineTypes = data;

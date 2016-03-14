@@ -39,8 +39,8 @@ export class FinalRating extends StackLayout {
         for (let i = 0; i < imageSourcesLength; i++) {
             let ratingImage = new Image();
             ratingImage.src = this._imageSources[i];
-            ratingImage.height = 48;
-            ratingImage.width = 48;
+            ratingImage.height = 64;
+            ratingImage.width = 64;
             ratingImage.className = "rating-item";
 
             ratingImage.on("tap", (data: EventData) => {

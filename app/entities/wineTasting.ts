@@ -1,7 +1,7 @@
 import {CriteriaItem} from "./criteriaItem";
 
 export interface WineTasting {
-    id?: number;
+    id?: string;
     estate?: string;
     region?: string;
     cuvee?: string;
