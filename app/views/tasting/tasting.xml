@@ -2,7 +2,7 @@
         xmlns:gcp="components/gradient-color-picker"
         xmlns:fr="components/final-rating"
         xmlns:vs="components/values-selector"
-		loaded="loaded">
+		navigatedTo="navigatedTo">
   <Page.actionBar>
 	<ActionBar title="Nouvelle dégustation">
 	  <NavigationButton icon="res://ic_close_white_24dp" tap="cancel"/>

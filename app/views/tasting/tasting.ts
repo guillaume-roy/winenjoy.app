@@ -9,7 +9,7 @@ import {Views} from "../../utils/views";
 let viewModel: TastingViewModel;
 let page: Page;
 
-export function loaded(args: EventData) {
+export function navigatedTo(args: EventData) {
     page = <Page>args.object;
 
     setTimeout(function() {
