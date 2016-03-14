@@ -1,6 +1,10 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatedTo="navigatedTo"
       xmlns:FAB="nativescript-floatingactionbutton">
   <GridLayout rows="*, auto">
-    <Button text="New" tap="fabTap" row="1" />
+    <FAB:fab row="1"
+        tap="onCreateNewTasting"
+        icon="res://ic_add_white_24dp"
+        rippleColor="#f1f1f1"
+        class="fab-button" />
   </GridLayout>
 </Page>
