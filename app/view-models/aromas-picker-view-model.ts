@@ -63,7 +63,6 @@ export class AromasPickerViewModel extends Observable {
 
         this._service.getAromaCriteriasAsync()
             .then(data => {
-                console.log(this.isDefects);
                 let filterFunction = this.isDefects
                     ? (d) => d.code === "DEFECTS"
                     : (d) => d.code !== "DEFECTS";

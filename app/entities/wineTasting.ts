@@ -20,7 +20,19 @@ export interface WineTasting {
     finalRating?: string;
     sightTabNotes?: string;
     smellTabNotes?: string;
+    tasteTabNotes?: string;
     aromas?: CriteriaItem[];
     defects?: CriteriaItem[];
     attacks?: CriteriaItem[];
+    limpidities?: CriteriaItem[];
+    shines?: CriteriaItem[];
+    tears?: CriteriaItem[];
+    bubbles?: CriteriaItem[];
+    intensities?: CriteriaItem[];
+    balances?: CriteriaItem[];
+    length?: CriteriaItem[];
+    meatsNotes?: string;
+    longitude?: string;
+    latitude?: string;
+    altitude?: string;
 }

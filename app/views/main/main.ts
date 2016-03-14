@@ -4,6 +4,7 @@ import {MainViewModel} from "../../view-models/main-view-model";
 import frameModule = require("ui/frame");
 import {View} from "ui/core/view";
 import {Views} from "../../utils/views";
+import geolocation = require("nativescript-geolocation");
 
 let viewModel: MainViewModel;
 
@@ -11,6 +12,10 @@ export function navigatedTo(args: EventData) {
     let page = <Page>args.object;
     viewModel = new MainViewModel();
     page.bindingContext = viewModel;
+
+    if (!geolocation.isEnabled()) {
+        geolocation.enableLocationRequest();
+    }
 }
 
 export function onCreateNewTasting(args: EventData) {

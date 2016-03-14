@@ -78,6 +78,42 @@
                         "order": 6
 					}
 				]
+			},
+            {
+				"id": "28a16544-91b3-4987-8176-31e171b0d1d4",
+				"code": "ROSE",
+				"values": [
+					{
+						"id": "72436f4e-dd89-454e-a43a-8e25d3aa0902",
+						"label": "Fuyante",
+                        "order": 0
+					},
+					{
+						"id": "8ad0519e-6e32-49ad-a435-a81f6d7a39b1",
+						"label": "Franche",
+                        "order": 1
+					},
+					{
+						"id": "0efad1c3-82bf-4573-8ec0-0efac88a19d7",
+						"label": "Nette",
+                        "order": 2
+					},
+					{
+						"id": "2634a545-9c3f-4a9f-928f-1b48e8b9c39d",
+						"label": "Ample",
+                        "order": 3
+					},
+					{
+						"id": "ee396bcf-aeb7-4634-b24e-b26ffbc70cb8",
+						"label": "Aromatique",
+                        "order": 4
+					},
+					{
+						"id": "2db9ca74-29e1-4ca9-b604-df3818239f43",
+						"label": "Intense",
+                        "order": 5
+					}
+				]
 			}
         ]
     }

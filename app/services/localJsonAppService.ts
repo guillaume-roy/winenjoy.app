@@ -95,6 +95,22 @@ export class LocalJsonAppService implements IAppService {
         return this.loadJsonAsync("length");
     }
 
+    public getTannicCriterias(): CriteriaItem[] {
+        return this.loadJSON("red-tannics");
+    }
+
+    public getTannicCriteriasAsync(): Promise<CriteriaItem[]> {
+        return this.loadJsonAsync("red-tannics");
+    }
+
+    public getWhiteAcidityCriterias(): CriteriaItem[] {
+        return this.loadJSON("white-acidities");
+    }
+
+    public getWhiteAcidityCriteriasAsync(): Promise<CriteriaItem[]> {
+        return this.loadJsonAsync("white-acidities");
+    }
+
     public getAttackCriterias(wineCode: string): CriteriaItem[] {
         return this.loadJSON("attacks").filter(a => a.code === wineCode)[0].values;
     }

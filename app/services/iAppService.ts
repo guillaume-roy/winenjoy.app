@@ -13,6 +13,8 @@ export interface IAppService {
     getIntensityCriterias(): CriteriaItem[];
     getLengthCriterias(): CriteriaItem[];
     getAttackCriterias(wineCode: string): CriteriaItem[];
+    getTannicCriterias(): CriteriaItem[];
+    getWhiteAcidityCriterias(): CriteriaItem[];
 
     getWineTypesAsync(): Promise<CriteriaItem[]>;
     getYearsAsync(): Promise<number[]>;
@@ -24,4 +26,6 @@ export interface IAppService {
     getIntensityCriteriasAsync(): Promise<CriteriaItem[]>;
     getLengthCriteriasAsync(): Promise<CriteriaItem[]>;
     getAttackCriteriasAsync(wineCode: string): Promise<CriteriaItem[]>;
+    getTannicCriteriasAsync(): Promise<CriteriaItem[]>;
+    getWhiteAcidityCriteriasAsync(): Promise<CriteriaItem[]>;
 }

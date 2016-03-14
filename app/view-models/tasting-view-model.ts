@@ -3,6 +3,7 @@ import {WineTasting} from "../entities/wineTasting";
 import {CriteriaItem} from "../entities/criteriaItem";
 import {Services} from "../utils/services";
 import {IAppService} from "../services/IAppService";
+import geolocation = require("nativescript-geolocation");
 
 export class TastingViewModel extends Observable {
     private _service: IAppService;
@@ -14,6 +15,8 @@ export class TastingViewModel extends Observable {
     private _wineTypes: CriteriaItem[];
     private _lengthCriterias: CriteriaItem[];
     private _attackCriterias: CriteriaItem[];
+    private _tannicCriterias: CriteriaItem[];
+    private _acidityCriterias: CriteriaItem[];
     private _years: number[];
     private _alcoholValue: number;
     private _alcoholFromattedValue: number;
@@ -47,6 +50,22 @@ export class TastingViewModel extends Observable {
     public set wineTasting(value) {
         this._wineTasting = value;
         this.notifyPropertyChange("wineTasting", value);
+    }
+
+    public get tannicCriterias() {
+        return this._tannicCriterias;
+    }
+    public set tannicCriterias(value) {
+        this._tannicCriterias = value;
+        this.notifyPropertyChange("tannicCriterias", value);
+    }
+
+    public get acidityCriterias() {
+        return this._acidityCriterias;
+    }
+    public set acidityCriterias(value) {
+        this._acidityCriterias = value;
+        this.notifyPropertyChange("acidityCriterias", value);
     }
 
     public get attackCriterias() {
@@ -179,18 +198,29 @@ export class TastingViewModel extends Observable {
             .then(data => this.bubbleCriterias = data);
         this._service.getLengthCriteriasAsync()
             .then(data => this.lengthCriterias = data);
+        this._service.getTannicCriteriasAsync()
+            .then(data => this.tannicCriterias = data);
+        this._service.getWhiteAcidityCriteriasAsync()
+            .then(data => this.acidityCriterias = data);
         this._service.getWineTypesAsync()
             .then(data => {
                 this.wineTypes = data;
                 this.wineTypeSelectedIndex = 0;
             });
-        this._service.getYearsAsync()
-            .then(data => {
-                this.years = data;
-                this.wineYear = data[data.length - 3];
-            });
 
         this.alcoholValue = 0;
+        this.wineYear = new Date().getFullYear() - 3;
+
+        if (geolocation.isEnabled()) {
+            geolocation.getCurrentLocation({timeout: 5000}).
+            then(function(loc) {
+                if (loc) {
+                    this.wineTasting.latitude = loc.latitude;
+                    this.wineTasting.longitude = loc.longitude;
+                    this.wineTasting.altitude = loc.altitude;
+                }
+            });
+        }
     }
 
     public finishTasting() {
