@@ -1,14 +1,15 @@
-import fs = require("file-system");
-import platformModule = require("platform");
 import {IAppService} from "./iAppService";
 import {WineTasting} from "../entities/wineTasting";
 import {CriteriaItem} from "../entities/criteriaItem";
+import {LocalStorage} from "../utils/local-storage";
+import appSettings = require("application-settings");
+import {UUID} from "../utils/uuid";
 
 export class LocalJsonAppService implements IAppService {
-    private _defaultLanguage = "fr";
+    private _localStorage: LocalStorage;
 
-    public getWineTastings(): WineTasting[] {
-        return [];
+    constructor() {
+        this._localStorage = new LocalStorage();
     }
 
     public getYears(): number[] {
@@ -32,155 +33,105 @@ export class LocalJsonAppService implements IAppService {
     }
 
     public getIntensityCriterias(): CriteriaItem[] {
-        return this.loadJSON("intensities");
+        return this._localStorage.loadCriterias("intensities");
     }
 
     public getIntensityCriteriasAsync(): Promise<CriteriaItem[]> {
-        return this.loadJsonAsync("intensities");
+        return this._localStorage.loadCriteriasAsync("intensities");
     }
 
     public getAromaCriterias(): CriteriaItem[] {
-        return this.loadJSON("aromas");
+        return this._localStorage.loadCriterias("aromas");
     }
 
     public getAromaCriteriasAsync(): Promise<CriteriaItem[]> {
-        return this.loadJsonAsync("aromas");
+        return this._localStorage.loadCriteriasAsync("aromas");
     }
 
     public getWineTypes(): CriteriaItem[] {
-        return this.loadJSON("wineTypes");
+        return this._localStorage.loadCriterias("wineTypes");
     }
 
     public getWineTypesAsync(): Promise<CriteriaItem[]> {
-        return this.loadJsonAsync("wineTypes");
+        return this._localStorage.loadCriteriasAsync("wineTypes");
     }
 
     public getShineCriterias(): CriteriaItem[] {
-        return this.loadJSON("shines");
+        return this._localStorage.loadCriterias("shines");
     }
 
     public getShineCriteriasAsync(): Promise<CriteriaItem[]> {
-        return this.loadJsonAsync("shines");
+        return this._localStorage.loadCriteriasAsync("shines");
     }
 
     public getBubbleCriterias(): CriteriaItem[] {
-        return this.loadJSON("bubbles");
+        return this._localStorage.loadCriterias("bubbles");
     }
 
     public getBubbleCriteriasAsync(): Promise<CriteriaItem[]> {
-        return this.loadJsonAsync("bubbles");
+        return this._localStorage.loadCriteriasAsync("bubbles");
     }
 
     public getTearCriterias(): CriteriaItem[] {
-        return this.loadJSON("tears");
+        return this._localStorage.loadCriterias("tears");
     }
 
     public getTearCriteriasAsync(): Promise<CriteriaItem[]> {
-        return this.loadJsonAsync("tears");
+        return this._localStorage.loadCriteriasAsync("tears");
     }
 
     public getLimpidityCriterias(): CriteriaItem[] {
-        return this.loadJSON("limpidities");
+        return this._localStorage.loadCriterias("limpidities");
     }
 
     public getLimpidityCriteriasAsync(): Promise<CriteriaItem[]> {
-        return this.loadJsonAsync("limpidities");
+        return this._localStorage.loadCriteriasAsync("limpidities");
     }
 
     public getLengthCriterias(): CriteriaItem[] {
-        return this.loadJSON("length");
+        return this._localStorage.loadCriterias("length");
     }
 
     public getLengthCriteriasAsync(): Promise<CriteriaItem[]> {
-        return this.loadJsonAsync("length");
+        return this._localStorage.loadCriteriasAsync("length");
     }
 
     public getTannicCriterias(): CriteriaItem[] {
-        return this.loadJSON("red-tannics");
+        return this._localStorage.loadCriterias("red-tannics");
     }
 
     public getTannicCriteriasAsync(): Promise<CriteriaItem[]> {
-        return this.loadJsonAsync("red-tannics");
+        return this._localStorage.loadCriteriasAsync("red-tannics");
     }
 
     public getWhiteAcidityCriterias(): CriteriaItem[] {
-        return this.loadJSON("white-acidities");
+        return this._localStorage.loadCriterias("white-acidities");
     }
 
     public getWhiteAcidityCriteriasAsync(): Promise<CriteriaItem[]> {
-        return this.loadJsonAsync("white-acidities");
+        return this._localStorage.loadCriteriasAsync("white-acidities");
     }
 
     public getAttackCriterias(wineCode: string): CriteriaItem[] {
-        return this.loadJSON("attacks").filter(a => a.code === wineCode)[0].values;
+        return this._localStorage.loadCriterias("attacks").filter(a => a.code === wineCode)[0].values;
     }
 
     public getAttackCriteriasAsync(wineCode: string): Promise<CriteriaItem[]> {
         return new Promise<CriteriaItem[]>((resolve, reject) => {
-            this.loadJsonAsync("attacks")
+            this._localStorage.loadCriteriasAsync("attacks")
             .then(data => resolve(data.filter(a => a.code === wineCode)[0].values))
             .catch(e => reject(e));
         });
     }
 
+    public getWineTastings(): WineTasting[] {
+        return <WineTasting[]>JSON.parse(appSettings.getString("wineTastings", "[]"));
+    }
+
     public saveWineTasting(wineTasting: WineTasting) {
-
-    }
-
-    private loadJsonAsync(filename: string): Promise<CriteriaItem[]> {
-        return new Promise<CriteriaItem[]>((resolve, reject) => {
-            let filePath = fs.path.join(fs.knownFolders.currentApp().path, "data", filename + ".json");
-            let file = fs.File.fromPath(filePath);
-            file.readText()
-            .then(fileContent => {
-                let jsonFile = <[]>JSON.parse(fileContent);
-
-                let platformData = <any>jsonFile.filter((value: any) => {
-                    return value.language ===  platformModule.device.language;
-                });
-
-                if (platformData && platformData.length > 0) {
-                    resolve(<CriteriaItem[]>platformData[0].data);
-                } else {
-                    resolve(<CriteriaItem[]>(<any>jsonFile.filter((value: any) => {
-                        return value.language === this._defaultLanguage;
-                    })[0]).data);
-                }
-            }).catch(error => reject(error));
-        });
-    }
-
-    private loadJSON(filename: string): CriteriaItem[] {
-        let filePath = fs.path.join(fs.knownFolders.currentApp().path, "data", filename + ".json");
-
-        if (!fs.File.exists(filePath)) {
-            return;
-        }
-
-        let file = fs.File.fromPath(filePath);
-        if (!file) {
-            return null;
-        }
-
-        let fileContent = file.readTextSync();
-        if (!fileContent) {
-            return null;
-        }
-
-        let jsonFile = <[]>JSON.parse(fileContent);
-
-        let platformLanguage = platformModule.device.language;
-
-        let platformData = <any>jsonFile.filter((value: any) => {
-           return value.language ===  platformLanguage;
-        });
-
-        if (platformData && platformData.length > 0) {
-            return platformData[0].data;
-        } else {
-            return (<any>jsonFile.filter((value: any) => {
-                return value.language === this._defaultLanguage;
-            })[0]).data;
-        }
+        let wineTastings = this.getWineTastings();
+        wineTasting.id = UUID.generate();
+        wineTastings.push(wineTasting);
+        appSettings.setString("wineTastings", JSON.stringify(wineTastings));
     }
 }

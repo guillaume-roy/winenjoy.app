@@ -5,6 +5,7 @@ import frameModule = require("ui/frame");
 import {View} from "ui/core/view";
 import {Views} from "../../utils/views";
 import geolocation = require("nativescript-geolocation");
+import fs = require("file-system");
 
 let viewModel: MainViewModel;
 

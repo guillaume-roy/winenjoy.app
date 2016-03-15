@@ -2,11 +2,16 @@
       xmlns:FAB="nativescript-floatingactionbutton"
       navigatedTo="navigatedTo">
   <GridLayout rows="*, auto">
-    <GridLayout visibility="{{ (tastings.length > 0) ? 'collapsed' : 'visible' }}">
+    <!--<GridLayout visibility="{{ tastings.length < 1 ? 'visible' : 'collapse' }}">
         <Label text="Aucune dégustation ... pour l'instant"
             style="font-size: 16;color: #727272;horizontal-align:center;vertical-align:center;" />
-    </GridLayout>
-    <ListView visibility="{{ (tastings.length <= 0) ? 'collapsed' : 'visible' }}">
+    </GridLayout>-->
+    <ListView items="{{ tastings }}">
+        <ListView.itemTemplate>
+            <StackLayout style="height: 48;font-size: 16;color: black;padding-top: 16;padding-bottom: 16;padding-left: 16;padding-right: 16;">
+                <Label text="{{ cuvee }}" />
+            </StackLayout>
+        </ListView.itemTemplate>
     </ListView>
     <FAB:fab row="1"
         tap="onCreateNewTasting"
