@@ -2,7 +2,6 @@ import {WrapLayout} from "ui/layouts/wrap-layout";
 import {EventData} from "data/observable";
 import {ValueButton} from "./value-button";
 import dependencyObservableModule = require("ui/core/dependency-observable");
-import colorModule = require("color");
 
 export class ValuesSelector extends WrapLayout {
     public static itemsProperty = new dependencyObservableModule.Property(

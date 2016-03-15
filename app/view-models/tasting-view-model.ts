@@ -148,10 +148,11 @@ export class TastingViewModel extends Observable {
 
         this.wineTasting.wineType = this._wineTypes[value];
         this.wineTasting.color = null;
+        this.wineTasting.balances = [];
 
         this._service.getAttackCriteriasAsync(this.wineTasting.wineType.code)
             .then(data => {
-                this.wineTasting.attacks = null;
+                this.wineTasting.attacks = [];
                 this.attackCriterias = data;
             });
     }
@@ -180,7 +181,15 @@ export class TastingViewModel extends Observable {
         super();
 
         this.wineTasting = {
-            startDate: Date.now()
+            attacks: [],
+            balances: [],
+            bubbles: [],
+            intensities: [],
+            length: [],
+            limpidities: [],
+            shines: [],
+            startDate: Date.now(),
+            tears: []
         };
 
         this.wineYear = new Date().getFullYear() - 3;
