@@ -6,11 +6,15 @@
         <Label text="Aucune dégustation ... pour l'instant"
             style="font-size: 16;color: #727272;horizontal-align:center;vertical-align:center;" />
     </GridLayout>-->
-    <ListView items="{{ tastings }}">
+    <ListView items="{{ tastings }}" itemTap="onViewTasting">
         <ListView.itemTemplate>
-            <StackLayout style="height: 48;font-size: 16;color: black;padding-top: 16;padding-bottom: 16;padding-left: 16;padding-right: 16;">
-                <Label text="{{ cuvee }}" />
-            </StackLayout>
+            <GridLayout class="list-item" rows="*,*,*" columns="56, *, auto">
+                <StackLayout backgroundColor="{{ color }}" class="list-item-icon" rowSpan="3" />
+                <Label text="{{ cuvee }}" class="list-item-title" col="1" />
+                <Label text="{{ year + ' - ' + estate }}" class="list-item-secondary" row="1" col="1" />
+                <Label text="{{ region + ' - ' + country }}" class="list-item-secondary" row="2" col="1" />
+                <Image src="{{ finalRating | finalRatingToImageConverter }}" col="2" rowspan="3" height="16" width="16" />
+            </GridLayout>
         </ListView.itemTemplate>
     </ListView>
     <FAB:fab row="1"

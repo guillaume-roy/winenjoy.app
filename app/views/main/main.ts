@@ -5,7 +5,7 @@ import frameModule = require("ui/frame");
 import {View} from "ui/core/view";
 import {Views} from "../../utils/views";
 import geolocation = require("nativescript-geolocation");
-import fs = require("file-system");
+import appModule = require("application");
 
 let viewModel: MainViewModel;
 
@@ -51,3 +51,16 @@ export function onCreateNewTasting(args: EventData) {
         });
     });
 }
+
+export function onViewTasting() {
+    console.log('taped');
+}
+
+let finalRatingToImageConverterKey = "finalRatingToImageConverter";
+appModule.resources[finalRatingToImageConverterKey] = function(value: string) {
+    if (!value) {
+        return null;
+    }
+
+    return "res://ic_" + value.toLowerCase();
+};
