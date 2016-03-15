@@ -7,7 +7,10 @@
 	<ActionBar title="Nouvelle dégustation">
 	  <NavigationButton icon="res://ic_close_white_24dp" tap="cancel"/>
 	  <ActionBar.actionItems>
-		<ActionItem icon="res://ic_check_white_24dp" ios.position="right" android.position="actionBar" tap="onSaveTasting"/>
+		<ActionItem icon="res://ic_check_white_24dp"
+                    ios.position="right"
+                    android.position="actionBar"
+                    tap="onSaveTasting"/>
 	  </ActionBar.actionItems>
 	</ActionBar>
   </Page.actionBar>
@@ -42,7 +45,7 @@
 		  </ScrollView>
 	   </TabViewItem.view>
 	 </TabViewItem>
-	 <!--<TabViewItem title="Aspect">
+	 <TabViewItem title="Aspect">
 	   <TabViewItem.view>
 		  <ScrollView>
             <GridLayout class="tab-view-content" rows="*,*,*,*,*,*,*,auto,*,auto,auto" columns="*, auto">
@@ -106,12 +109,6 @@
 		   </ScrollView>
 	   </TabViewItem.view>
 	 </TabViewItem>
-     <TabViewItem title="Test">
-        <TabViewItem.view>
-            <LayoutBase id="tab-5">
-            </LayoutBase>
-	   </TabViewItem.view>
-	 </TabViewItem>-->
    </TabView.items>
  </TabView>
 </Page>
