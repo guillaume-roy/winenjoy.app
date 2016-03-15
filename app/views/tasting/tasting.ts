@@ -5,9 +5,14 @@ import frameModule = require("ui/frame");
 import dialogs = require("ui/dialogs");
 import appModule = require("application");
 import {Views} from "../../utils/views";
+import geolocation = require("nativescript-geolocation");
+import {parse} from "ui/builder";
+import fs = require("file-system");
+import uilayoutslayout_base = require("ui/layouts/layout-base");
 
 let viewModel: TastingViewModel;
 let page: Page;
+let lastTabContainer: uilayoutslayout_base.LayoutBase;
 
 export function navigatedTo(args: EventData) {
     page = <Page>args.object;
@@ -15,8 +20,41 @@ export function navigatedTo(args: EventData) {
     setTimeout(function() {
         viewModel = new TastingViewModel();
         page.bindingContext = viewModel;
+
+        if (geolocation.isEnabled()) {
+            geolocation.getCurrentLocation({timeout: 5000}).
+            then(function(loc) {
+                viewModel.wineTasting.latitude = loc.latitude;
+                viewModel.wineTasting.longitude = loc.longitude;
+                viewModel.wineTasting.altitude = loc.altitude;
+            });
+        }
+
+        // lastTabContainer = <uilayoutslayout_base.LayoutBase>page.getViewById("tab-5");
+        // let xml = getViewContent("tasting-tab5.xml");
+        // let view = parse(xml);
+        // lastTabContainer.addChild(view);
+        // console.log('ok');
     }, 0);
 }
+
+function getViewContent(templateUrl: string) {
+        templateUrl = templateUrl.replace("~/", "");
+
+        let fullFilePath = fs.path.join(fs.knownFolders.currentApp().path, "views/tasting", templateUrl);
+        let fileContent;
+
+        if (fs.File.exists(fullFilePath)) {
+            let file = fs.File.fromPath(fullFilePath);
+            let onError = function (error) {
+                console.error("Error loading file " + fullFilePath + " :" + error.message);
+                throw new Error("Error loading file " + fullFilePath + " :" + error.message);
+            };
+            fileContent = file.readTextSync(onError);
+        }
+
+        return fileContent;
+    }
 
 export function onSaveTasting() {
     viewModel.finishTasting();

@@ -1,9 +1,10 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatedTo="navigatedTo"
       xmlns:FAB="nativescript-floatingactionbutton">
   <GridLayout rows="*, auto">
-    <StackLayout style="vertical-align: center; horizontal-align: center" visibility="{{ tastings.length > 0 ? 'collapsed' : 'visible' }}">
-        <Label text="Aucune dégustation ... pour l'instant." style="font-size: 20;color: #727272" />
-    </StackLayout>
+    <GridLayout visibility="{{ (tastings.length > 0) ? 'collapsed' : 'visible' }}">
+        <Label text="Aucune dégustation ... pour l'instant"
+            style="font-size: 16;color: #727272;horizontal-align:center;vertical-align:center;" />
+    </GridLayout>
     <FAB:fab row="1"
         tap="onCreateNewTasting"
         icon="res://ic_add_white_24dp"

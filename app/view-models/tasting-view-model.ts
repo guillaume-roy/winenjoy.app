@@ -3,7 +3,6 @@ import {WineTasting} from "../entities/wineTasting";
 import {CriteriaItem} from "../entities/criteriaItem";
 import {Services} from "../utils/services";
 import {IAppService} from "../services/IAppService";
-import geolocation = require("nativescript-geolocation");
 
 export class TastingViewModel extends Observable {
     private _service: IAppService;
@@ -184,6 +183,9 @@ export class TastingViewModel extends Observable {
             startDate: Date.now()
         };
 
+        this.wineYear = new Date().getFullYear() - 3;
+        this.alcoholValue = 0;
+
         this._service = Services.current;
 
         this._service.getLimpidityCriteriasAsync()
@@ -207,20 +209,6 @@ export class TastingViewModel extends Observable {
                 this.wineTypes = data;
                 this.wineTypeSelectedIndex = 0;
             });
-
-        this.alcoholValue = 0;
-        this.wineYear = new Date().getFullYear() - 3;
-
-        if (geolocation.isEnabled()) {
-            geolocation.getCurrentLocation({timeout: 5000}).
-            then(function(loc) {
-                if (loc) {
-                    this.wineTasting.latitude = loc.latitude;
-                    this.wineTasting.longitude = loc.longitude;
-                    this.wineTasting.altitude = loc.altitude;
-                }
-            });
-        }
     }
 
     public finishTasting() {

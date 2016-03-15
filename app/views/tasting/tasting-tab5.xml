@@ -1,0 +1,12 @@
+<ScrollView>
+    <GridLayout class="tab-view-content" columns="auto,*" rows="*,*,*,*">
+        <Label text="Longitude" row="0" class="criterias-title" />
+        <Label text="{{ wineTasting.longitude}}" class="criterias-label" row="0" col="1" />
+        <Label text="Latitude" row="1" class="criterias-title" />
+        <Label text="{{ wineTasting.latitude}}" class="criterias-label" row="1" col="1" />
+        <Label text="Altitude" row="2" class="criterias-title" />
+        <Label text="{{ wineTasting.altitude}}" class="criterias-label" row="2" col="1" />
+        <Label text="Biologique" row="3" class="criterias-title" />
+        <Switch checked="{{ wineTasting.isBiologic }}" row="3" col="1" />
+    </GridLayout>
+</ScrollView>

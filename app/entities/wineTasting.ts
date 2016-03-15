@@ -32,7 +32,7 @@ export interface WineTasting {
     balances?: CriteriaItem[];
     length?: CriteriaItem[];
     meatsNotes?: string;
-    longitude?: string;
-    latitude?: string;
-    altitude?: string;
+    longitude?: number;
+    latitude?: number;
+    altitude?: number;
 }

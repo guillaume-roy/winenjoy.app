@@ -22,15 +22,16 @@ export function onCreateNewTasting(args: EventData) {
     let button = <View>args.object;
     button.icon = "res://blank";
     button.animate({
-       duration: 300,
-       scale: {
-           x: 20,
-           y: 20
-       },
-       translate: {
-           x: -200,
-           y: -200
-       }
+        curve: "easeOut",
+        duration: 250,
+        scale: {
+            x: 20,
+            y: 20
+        },
+        translate: {
+            x: -200,
+            y: -200
+        }
     }).then(v => {
         frameModule.topmost().navigate({
             animated: false,
@@ -39,7 +40,8 @@ export function onCreateNewTasting(args: EventData) {
         });
 
         button.animate({ // reset to original state
-            delay: 300,
+            curve: "easeIn",
+            delay: 250,
             duration: 0,
             scale: { x: 1, y: 1 },
             translate: { x: 0, y: 0 },

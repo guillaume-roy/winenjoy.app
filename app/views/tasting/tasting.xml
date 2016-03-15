@@ -42,7 +42,7 @@
 		  </ScrollView>
 	   </TabViewItem.view>
 	 </TabViewItem>
-	 <TabViewItem title="Aspect">
+	 <!--<TabViewItem title="Aspect">
 	   <TabViewItem.view>
 		  <ScrollView>
             <GridLayout class="tab-view-content" rows="*,*,*,*,*,*,*,auto,*,auto,auto" columns="*, auto">
@@ -106,6 +106,12 @@
 		   </ScrollView>
 	   </TabViewItem.view>
 	 </TabViewItem>
+     <TabViewItem title="Test">
+        <TabViewItem.view>
+            <LayoutBase id="tab-5">
+            </LayoutBase>
+	   </TabViewItem.view>
+	 </TabViewItem>-->
    </TabView.items>
  </TabView>
 </Page>
