@@ -123,6 +123,10 @@ export class LocalJsonAppService implements IAppService {
         });
     }
 
+    public saveWineTasting(wineTasting: WineTasting) {
+
+    }
+
     private loadJsonAsync(filename: string): Promise<CriteriaItem[]> {
         return new Promise<CriteriaItem[]>((resolve, reject) => {
             let filePath = fs.path.join(fs.knownFolders.currentApp().path, "data", filename + ".json");

@@ -6,6 +6,7 @@ import dialogs = require("ui/dialogs");
 import appModule = require("application");
 import {Views} from "../../utils/views";
 import geolocation = require("nativescript-geolocation");
+import socialShare = require("nativescript-social-share");
 
 let viewModel: TastingViewModel;
 let page: Page;
@@ -30,6 +31,17 @@ export function navigatedTo(args: EventData) {
 
 export function onSaveTasting() {
     viewModel.finishTasting();
+
+    if (viewModel.shareWineTasting) {
+        let shareMessage = viewModel.getShareMessage();
+        socialShare.shareText(shareMessage);
+    }
+
+    frameModule.topmost().navigate({
+       animated: false,
+       backstackVisible: false,
+       moduleName: Views.main
+    });
 }
 
 export function onSelectColor() {

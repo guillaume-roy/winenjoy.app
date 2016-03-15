@@ -16,6 +16,8 @@ export interface IAppService {
     getTannicCriterias(): CriteriaItem[];
     getWhiteAcidityCriterias(): CriteriaItem[];
 
+    saveWineTasting(wineTasting: WineTasting);
+
     getWineTypesAsync(): Promise<CriteriaItem[]>;
     getYearsAsync(): Promise<number[]>;
     getLimpidityCriteriasAsync(): Promise<CriteriaItem[]>;

@@ -21,6 +21,7 @@ export class TastingViewModel extends Observable {
     private _alcoholFromattedValue: number;
     private _hasBubbles: boolean;
     private _wineYear: number;
+    private _shareWineTasting: boolean;
 
     private _wineTasting: WineTasting;
 
@@ -33,6 +34,14 @@ export class TastingViewModel extends Observable {
         this._wineYear = value;
         this.notifyPropertyChange("wineYear", value);
         this.wineTasting.year = value;
+    }
+
+    public get shareWineTasting() {
+        return this._shareWineTasting;
+    }
+    public set shareWineTasting(value) {
+        this._shareWineTasting = value;
+        this.notifyPropertyChange("shareWineTasting", value);
     }
 
     public get hasBubbles() {
@@ -218,11 +227,13 @@ export class TastingViewModel extends Observable {
                 this.wineTypes = data;
                 this.wineTypeSelectedIndex = 0;
             });
+
+        this.shareWineTasting = true;
     }
 
     public finishTasting() {
         this.wineTasting.endDate = Date.now();
-        console.dump(this.wineTasting);
+        this._service.saveWineTasting(this.wineTasting);
     }
 
     public setAromas(aromas: CriteriaItem[]) {
@@ -237,5 +248,31 @@ export class TastingViewModel extends Observable {
         this.notifyPropertyChange("wineTasting", this.wineTasting);
         this.wineTasting.defects = defects;
         this.notifyPropertyChange("wineTasting", this.wineTasting);
+    }
+
+    public getShareMessage() {
+        let wineColor = this.wineTasting.wineType.label;
+        let year = this.wineTasting.year;
+
+        let cuvee = this.wineTasting.cuvee;
+        let estate = this.wineTasting.estate;
+
+        let result = "#Dégustation d'un #vin #" + wineColor;
+
+        if (cuvee) {
+            result = result + " " + cuvee;
+        }
+
+        if (estate) {
+            result = result + " " + estate;
+        }
+
+        if (year) {
+            result = result + " #" + year;
+        }
+
+        result = result + " via @WinenjoyApp";
+
+        return result;
     }
 }

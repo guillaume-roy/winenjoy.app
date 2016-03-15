@@ -1,10 +1,13 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatedTo="navigatedTo"
-      xmlns:FAB="nativescript-floatingactionbutton">
+<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:FAB="nativescript-floatingactionbutton"
+      navigatedTo="navigatedTo">
   <GridLayout rows="*, auto">
     <GridLayout visibility="{{ (tastings.length > 0) ? 'collapsed' : 'visible' }}">
         <Label text="Aucune dégustation ... pour l'instant"
             style="font-size: 16;color: #727272;horizontal-align:center;vertical-align:center;" />
     </GridLayout>
+    <ListView visibility="{{ (tastings.length <= 0) ? 'collapsed' : 'visible' }}">
+    </ListView>
     <FAB:fab row="1"
         tap="onCreateNewTasting"
         icon="res://ic_add_white_24dp"
