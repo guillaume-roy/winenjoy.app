@@ -12,6 +12,8 @@ let viewModel: TastingViewModel;
 let page: Page;
 
 export function loaded(args: EventData) {
+    page = <Page>args.object;
+    viewModel = new TastingViewModel(page.navigationContext);
     page.bindingContext = viewModel;
     if (geolocation.isEnabled() && !viewModel.isEditMode) {
         geolocation.getCurrentLocation({timeout: 5000}).
@@ -24,10 +26,8 @@ export function loaded(args: EventData) {
 }
 
 export function navigatingTo(args: EventData) {
-    page = <Page>args.object;
-    setTimeout(() => {
-        viewModel = new TastingViewModel(page.navigationContext);
-    }, 0);
+    // page = <Page>args.object;
+    // viewModel = new TastingViewModel(page.navigationContext);
 }
 
 export function onDeleteTasting() {
@@ -100,7 +100,7 @@ export function onAddDefects() {
         true);
 }
 
-export function cancel() {
+export function cancel(args: any) {
     if (viewModel.isEditMode) {
         frameModule.topmost().navigate({
             animated: false,
@@ -114,6 +114,7 @@ export function cancel() {
             okButtonText: "Oui",
             title: "Annuler"
         }).then(result => {
+            args.cancel = !result;
             if (result) {
                 frameModule.topmost().navigate({
                     animated: false,
@@ -123,6 +124,10 @@ export function cancel() {
             }
         });
     }
+}
+
+export function backEvent(args: any) {
+    cancel(args);
 }
 
 let dateConverterKey = "dateConverter";

@@ -4,7 +4,7 @@
   "nativescript": {
     "id": "com.winenjoy.app",
     "tns-android": {
-      "version": "1.6.3"
+      "version": "1.7.0"
     }
   },
   "dependencies": {
@@ -12,7 +12,7 @@
     "nativescript-floatingactionbutton": "^0.2.3",
     "nativescript-geolocation": "0.0.8",
     "nativescript-social-share": "^1.1.2",
-    "tns-core-modules": "^1.6.0"
+    "tns-core-modules": "^1.7.0"
   },
   "devDependencies": {
     "gulp": "*",

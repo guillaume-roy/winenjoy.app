@@ -50,6 +50,10 @@ export class TastingViewModel extends Observable {
     public set hasBubbles(value) {
         this._hasBubbles = value;
         this.notifyPropertyChange("hasBubbles", value);
+
+        if (!value) {
+            this.wineTasting.bubbles = [];
+        }
     }
 
     public get wineTasting() {
