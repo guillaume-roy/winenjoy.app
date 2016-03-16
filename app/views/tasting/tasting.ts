@@ -11,23 +11,21 @@ import socialShare = require("nativescript-social-share");
 let viewModel: TastingViewModel;
 let page: Page;
 
-export function loaded(args: EventData) {
+export function navigatedTo(args: EventData) {
     page = <Page>args.object;
-    viewModel = new TastingViewModel(page.navigationContext);
-    page.bindingContext = viewModel;
-    if (geolocation.isEnabled() && !viewModel.isEditMode) {
-        geolocation.getCurrentLocation({timeout: 5000}).
-        then(function(loc) {
-            viewModel.wineTasting.latitude = loc.latitude;
-            viewModel.wineTasting.longitude = loc.longitude;
-            viewModel.wineTasting.altitude = loc.altitude;
-        });
-    }
-}
 
-export function navigatingTo(args: EventData) {
-    // page = <Page>args.object;
-    // viewModel = new TastingViewModel(page.navigationContext);
+    setTimeout(() => {
+       viewModel = new TastingViewModel(page.navigationContext);
+        page.bindingContext = viewModel;
+        if (geolocation.isEnabled() && !viewModel.isEditMode) {
+            geolocation.getCurrentLocation({timeout: 5000}).
+            then(function(loc) {
+                viewModel.wineTasting.latitude = loc.latitude;
+                viewModel.wineTasting.longitude = loc.longitude;
+                viewModel.wineTasting.altitude = loc.altitude;
+            });
+        }
+    });
 }
 
 export function onDeleteTasting() {
@@ -35,7 +33,7 @@ export function onDeleteTasting() {
         cancelButtonText: "Non",
         message: "Etes-vous sûr de vouloir supprimer cette dégustation ?",
         okButtonText: "Oui",
-        title: "Annuler"
+        title: "Supprimer"
     }).then(result => {
         if (result) {
             viewModel.deleteTasting();
@@ -49,18 +47,71 @@ export function onDeleteTasting() {
 }
 
 export function onSaveTasting() {
-    viewModel.finishTasting();
+    viewModel.validateForm();
 
-    frameModule.topmost().navigate({
-       animated: false,
-       backstackVisible: false,
-       moduleName: Views.main
-    });
+    if (viewModel.formIsValid) {
+        viewModel.finishTasting();
+
+        frameModule.topmost().navigate({
+        animated: false,
+        backstackVisible: false,
+        moduleName: Views.main
+        });
+    } else {
+        viewModel.tabSelectedIndex = 0;
+        setTimeout(() => {
+            let field = page.getViewById("cuvee-field");
+            field.animate({
+                curve: "spring",
+                duration: 100,
+                translate: {
+                    x: -50,
+                    y: 0
+                }
+            }).then(() => {
+                field.animate({
+                    curve: "spring",
+                    duration: 100,
+                    translate: {
+                        x: 50,
+                        y: 0
+                    }
+                }).then(() => {
+                    field.animate({
+                        curve: "spring",
+                        duration: 100,
+                        translate: {
+                            x: -40,
+                            y: 0
+                        }
+                    }).then(() => {
+                        field.animate({
+                            curve: "spring",
+                            duration: 100,
+                            translate: {
+                                x: 20,
+                                y: 0
+                            }
+                        }).then(() => {
+                            field.animate({
+                                curve: "spring",
+                                duration: 100,
+                                translate: {
+                                    x: 0,
+                                    y: 0
+                                }
+                            });
+                        });
+                    });
+                });
+            });
+        }, 10);
+    }
 }
 
 export function onShareTasting() {
     let shareMessage = viewModel.getShareMessage();
-    socialShare.shareText(shareMessage);
+    socialShare.shareText(shareMessage, "Partager ma dégustation");
 }
 
 export function onSelectColor() {
@@ -124,10 +175,6 @@ export function cancel(args: any) {
             }
         });
     }
-}
-
-export function backEvent(args: any) {
-    cancel(args);
 }
 
 let dateConverterKey = "dateConverter";

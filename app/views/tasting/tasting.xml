@@ -2,8 +2,7 @@
         xmlns:gcp="components/gradient-color-picker"
         xmlns:fr="components/final-rating"
         xmlns:vs="components/values-selector"
-		navigatedTo="navigatedTo"
-        loaded="loaded">
+		navigatedTo="navigatedTo">
   <Page.actionBar>
 	<ActionBar title="{{ isEditMode ? 'Dégustation' : 'Nouvelle dégustation' }}">
 	  <NavigationButton icon="{{ isEditMode ? 'res://ic_arrow_back_white_24dp' : 'res://ic_close_white_24dp' }}" tap="cancel"/>
@@ -26,7 +25,7 @@
 	  </ActionBar.actionItems>
 	</ActionBar>
   </Page.actionBar>
-  <TabView selectedColor="#FFFFFF">
+  <TabView selectedColor="#FFFFFF" selectedIndex="{{ tabSelectedIndex }}">
    <TabView.items>
 	 <TabViewItem title="Vin">
 	   <TabViewItem.view>
@@ -39,7 +38,7 @@
                         <SegmentedBarItem title="Rouge" />
                     </SegmentedBar.items>
                 </SegmentedBar>
-				<TextField text="{{ wineTasting.cuvee }}" hint="Cuvée" row="1" colspan="2" />
+				<TextField text="{{ wineTasting.cuvee }}" hint="Cuvée" row="1" colspan="2" id="cuvee-field" class="{{ formIsValid ? '' : 'invalid-field' }}" />
                 <TextField text="{{ wineTasting.estate }}" hint="Domaine" row="2" colspan="2" />
                 <TextField text="{{ wineTasting.region }}" hint="Région" row="3" colspan="2" />
 				<TextField text="{{ wineTasting.country }}" hint="Pays" row="4" colspan="2"/>

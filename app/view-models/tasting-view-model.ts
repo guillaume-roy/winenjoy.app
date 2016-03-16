@@ -22,10 +22,20 @@ export class TastingViewModel extends Observable {
     private _hasBubbles: boolean;
     private _wineYear: number;
     private _isEditMode: boolean;
+    private _formIsValid: boolean;
+    private _tabSelectedIndex: number;
 
     private _wineTasting: WineTasting;
 
     private _wineTypeSelectedIndex: number;
+
+    public get tabSelectedIndex() {
+        return this._tabSelectedIndex;
+    }
+    public set tabSelectedIndex(value) {
+        this._tabSelectedIndex = value;
+        this.notifyPropertyChange("tabSelectedIndex", value);
+    }
 
     public get wineYear() {
         return this._wineYear;
@@ -34,6 +44,14 @@ export class TastingViewModel extends Observable {
         this._wineYear = value;
         this.notifyPropertyChange("wineYear", value);
         this.wineTasting.year = value;
+    }
+
+    public get formIsValid() {
+        return this._formIsValid;
+    }
+    public set formIsValid(value) {
+        this._formIsValid = value;
+        this.notifyPropertyChange("formIsValid", value);
     }
 
     public get isEditMode() {
@@ -50,10 +68,6 @@ export class TastingViewModel extends Observable {
     public set hasBubbles(value) {
         this._hasBubbles = value;
         this.notifyPropertyChange("hasBubbles", value);
-
-        if (!value) {
-            this.wineTasting.bubbles = [];
-        }
     }
 
     public get wineTasting() {
@@ -207,6 +221,8 @@ export class TastingViewModel extends Observable {
             this.alcoholValue = 0;
         }
 
+        this.formIsValid = true;
+
         this._service = Services.current;
 
         this._service.getLimpidityCriteriasAsync()
@@ -238,6 +254,9 @@ export class TastingViewModel extends Observable {
     }
 
     public finishTasting() {
+        if (!this.hasBubbles) {
+            this.wineTasting.bubbles = [];
+        }
         this.wineTasting.endDate = Date.now();
         this._service.saveWineTasting(this.wineTasting);
     }
@@ -284,5 +303,9 @@ export class TastingViewModel extends Observable {
 
     public deleteTasting() {
         this._service.deleteWineTasting(this.wineTasting);
+    }
+
+    public validateForm() {
+        this.formIsValid = !_.isEmpty(this.wineTasting.cuvee);
     }
 }
