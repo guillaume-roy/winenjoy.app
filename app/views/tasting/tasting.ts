@@ -11,21 +11,22 @@ import socialShare = require("nativescript-social-share");
 let viewModel: TastingViewModel;
 let page: Page;
 
-export function navigatedTo(args: EventData) {
+export function loaded(args: EventData) {
+    page.bindingContext = viewModel;
+    if (geolocation.isEnabled() && !viewModel.isEditMode) {
+        geolocation.getCurrentLocation({timeout: 5000}).
+        then(function(loc) {
+            viewModel.wineTasting.latitude = loc.latitude;
+            viewModel.wineTasting.longitude = loc.longitude;
+            viewModel.wineTasting.altitude = loc.altitude;
+        });
+    }
+}
+
+export function navigatingTo(args: EventData) {
     page = <Page>args.object;
-
-    setTimeout(function() {
+    setTimeout(() => {
         viewModel = new TastingViewModel(page.navigationContext);
-        page.bindingContext = viewModel;
-
-        if (geolocation.isEnabled()) {
-            geolocation.getCurrentLocation({timeout: 5000}).
-            then(function(loc) {
-                viewModel.wineTasting.latitude = loc.latitude;
-                viewModel.wineTasting.longitude = loc.longitude;
-                viewModel.wineTasting.altitude = loc.altitude;
-            });
-        }
     }, 0);
 }
 
@@ -101,7 +102,11 @@ export function onAddDefects() {
 
 export function cancel() {
     if (viewModel.isEditMode) {
-        frameModule.topmost().goBack();
+        frameModule.topmost().navigate({
+            animated: false,
+            backstackVisible: false,
+            moduleName: Views.main
+        });
     } else {
         dialogs.confirm({
             cancelButtonText: "Non",
@@ -110,7 +115,11 @@ export function cancel() {
             title: "Annuler"
         }).then(result => {
             if (result) {
-                frameModule.topmost().goBack();
+                frameModule.topmost().navigate({
+                    animated: false,
+                    backstackVisible: false,
+                    moduleName: Views.main
+                });
             }
         });
     }

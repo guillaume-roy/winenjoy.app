@@ -2,7 +2,8 @@
         xmlns:gcp="components/gradient-color-picker"
         xmlns:fr="components/final-rating"
         xmlns:vs="components/values-selector"
-		navigatedTo="navigatedTo">
+		navigatedTo="navigatedTo"
+        loaded="loaded">
   <Page.actionBar>
 	<ActionBar title="{{ isEditMode ? 'Dégustation' : 'Nouvelle dégustation' }}">
 	  <NavigationButton icon="{{ isEditMode ? 'res://ic_arrow_back_white_24dp' : 'res://ic_close_white_24dp' }}" tap="cancel"/>

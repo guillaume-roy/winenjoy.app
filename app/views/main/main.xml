@@ -12,7 +12,7 @@
                 <StackLayout backgroundColor="{{ color }}" class="list-item-icon" rowSpan="3" id="toto" />
                 <Label text="{{ cuvee }}" class="list-item-title" col="1" />
                 <Label text="{{ estate }}" class="list-item-secondary" row="1" col="1" />
-                <Label text="{{ region + ' - ' + country }}" class="list-item-secondary" row="2" col="1" />
+                <Label text="{{ $value | wineLocationConverter }}" class="list-item-secondary" row="2" col="1" />
                 <Label text="{{ year }}" class="list-item-secondary" col="2" />
                 <Image src="{{ finalRating | finalRatingToImageConverter }}" col="2" row="1" rowspan="2" height="24" width="24" />
             </GridLayout>

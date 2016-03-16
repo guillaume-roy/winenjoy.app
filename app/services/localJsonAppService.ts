@@ -7,6 +7,7 @@ import {UUID} from "../utils/uuid";
 
 export class LocalJsonAppService implements IAppService {
     private _localStorage: LocalStorage;
+    private _wineTastingsCollectionName = "wineTastings";
 
     constructor() {
         this._localStorage = new LocalStorage();
@@ -125,19 +126,23 @@ export class LocalJsonAppService implements IAppService {
     }
 
     public getWineTastings(): WineTasting[] {
-        return <WineTasting[]>JSON.parse(appSettings.getString("wineTastings", "[]"));
+        return <WineTasting[]>JSON.parse(appSettings.getString(this._wineTastingsCollectionName, "[]"));
     }
 
     public saveWineTasting(wineTasting: WineTasting) {
         let wineTastings = this.getWineTastings();
         wineTasting.id = UUID.generate();
         wineTastings.push(wineTasting);
-        appSettings.setString("wineTastings", JSON.stringify(wineTastings));
+        appSettings.setString(this._wineTastingsCollectionName, JSON.stringify(wineTastings));
     }
 
     public deleteWineTasting(wineTasting: WineTasting) {
         let wineTastings = this.getWineTastings();
-        _.remove(wineTastings, w => w.id === wineTasting.id);
-        appSettings.setString("wineTastings", JSON.stringify(wineTastings));
+        let savedTasting = wineTastings.filter(w => w.id === wineTasting.id);
+        if (savedTasting && savedTasting.length > 0) {
+            let wineTastingIndex = wineTastings.indexOf(savedTasting[0]);
+            wineTastings.splice(wineTastingIndex, 1);
+            appSettings.setString(this._wineTastingsCollectionName, JSON.stringify(wineTastings));
+        }
     }
 }
