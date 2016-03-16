@@ -6,6 +6,7 @@ import {View} from "ui/core/view";
 import {Views} from "../../utils/views";
 import geolocation = require("nativescript-geolocation");
 import appModule = require("application");
+import listViewModule = require("ui/list-view");
 
 let viewModel: MainViewModel;
 
@@ -52,8 +53,14 @@ export function onCreateNewTasting(args: EventData) {
     });
 }
 
-export function onViewTasting() {
-    console.log('taped');
+export function onViewTasting(args: listViewModule.ItemEventData) {
+    let wineTasting = viewModel.tastings[args.index];
+    frameModule.topmost().navigate({
+        animated: false,
+        context: wineTasting,
+        moduleName: Views.tasting,
+        transition: null
+    });
 }
 
 let finalRatingToImageConverterKey = "finalRatingToImageConverter";

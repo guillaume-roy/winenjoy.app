@@ -15,7 +15,7 @@ export function navigatedTo(args: EventData) {
     page = <Page>args.object;
 
     setTimeout(function() {
-        viewModel = new TastingViewModel();
+        viewModel = new TastingViewModel(page.navigationContext);
         page.bindingContext = viewModel;
 
         if (geolocation.isEnabled()) {
@@ -29,19 +29,37 @@ export function navigatedTo(args: EventData) {
     }, 0);
 }
 
+export function onDeleteTasting() {
+    dialogs.confirm({
+        cancelButtonText: "Non",
+        message: "Etes-vous sûr de vouloir supprimer cette dégustation ?",
+        okButtonText: "Oui",
+        title: "Annuler"
+    }).then(result => {
+        if (result) {
+            viewModel.deleteTasting();
+            frameModule.topmost().navigate({
+                animated: false,
+                backstackVisible: false,
+                moduleName: Views.main
+            });
+        }
+    });
+}
+
 export function onSaveTasting() {
     viewModel.finishTasting();
-
-    if (viewModel.shareWineTasting) {
-        let shareMessage = viewModel.getShareMessage();
-        socialShare.shareText(shareMessage);
-    }
 
     frameModule.topmost().navigate({
        animated: false,
        backstackVisible: false,
        moduleName: Views.main
     });
+}
+
+export function onShareTasting() {
+    let shareMessage = viewModel.getShareMessage();
+    socialShare.shareText(shareMessage);
 }
 
 export function onSelectColor() {
@@ -82,16 +100,20 @@ export function onAddDefects() {
 }
 
 export function cancel() {
-    dialogs.confirm({
-        cancelButtonText: "Non",
-        message: "Etes-vous sûr de vouloir annuler cette dégustation ?",
-        okButtonText: "Oui",
-        title: "Annuler"
-    }).then(result => {
-        if (result) {
-            frameModule.topmost().goBack();
-        }
-    });
+    if (viewModel.isEditMode) {
+        frameModule.topmost().goBack();
+    } else {
+        dialogs.confirm({
+            cancelButtonText: "Non",
+            message: "Etes-vous sûr de vouloir annuler cette dégustation ?",
+            okButtonText: "Oui",
+            title: "Annuler"
+        }).then(result => {
+            if (result) {
+                frameModule.topmost().goBack();
+            }
+        });
+    }
 }
 
 let dateConverterKey = "dateConverter";

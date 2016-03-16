@@ -134,4 +134,10 @@ export class LocalJsonAppService implements IAppService {
         wineTastings.push(wineTasting);
         appSettings.setString("wineTastings", JSON.stringify(wineTastings));
     }
+
+    public deleteWineTasting(wineTasting: WineTasting) {
+        let wineTastings = this.getWineTastings();
+        _.remove(wineTastings, w => w.id === wineTasting.id);
+        appSettings.setString("wineTastings", JSON.stringify(wineTastings));
+    }
 }

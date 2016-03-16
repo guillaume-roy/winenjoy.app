@@ -9,11 +9,12 @@
     <ListView items="{{ tastings }}" itemTap="onViewTasting">
         <ListView.itemTemplate>
             <GridLayout class="list-item" rows="*,*,*" columns="56, *, auto">
-                <StackLayout backgroundColor="{{ color }}" class="list-item-icon" rowSpan="3" />
+                <StackLayout backgroundColor="{{ color }}" class="list-item-icon" rowSpan="3" id="toto" />
                 <Label text="{{ cuvee }}" class="list-item-title" col="1" />
-                <Label text="{{ year + ' - ' + estate }}" class="list-item-secondary" row="1" col="1" />
+                <Label text="{{ estate }}" class="list-item-secondary" row="1" col="1" />
                 <Label text="{{ region + ' - ' + country }}" class="list-item-secondary" row="2" col="1" />
-                <Image src="{{ finalRating | finalRatingToImageConverter }}" col="2" rowspan="3" height="16" width="16" />
+                <Label text="{{ year }}" class="list-item-secondary" col="2" />
+                <Image src="{{ finalRating | finalRatingToImageConverter }}" col="2" row="1" rowspan="2" height="24" width="24" />
             </GridLayout>
         </ListView.itemTemplate>
     </ListView>

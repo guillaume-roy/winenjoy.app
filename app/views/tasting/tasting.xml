@@ -4,13 +4,24 @@
         xmlns:vs="components/values-selector"
 		navigatedTo="navigatedTo">
   <Page.actionBar>
-	<ActionBar title="Nouvelle dégustation">
-	  <NavigationButton icon="res://ic_close_white_24dp" tap="cancel"/>
+	<ActionBar title="{{ isEditMode ? 'Dégustation' : 'Nouvelle dégustation' }}">
+	  <NavigationButton icon="{{ isEditMode ? 'res://ic_arrow_back_white_24dp' : 'res://ic_close_white_24dp' }}" tap="cancel"/>
 	  <ActionBar.actionItems>
 		<ActionItem icon="res://ic_check_white_24dp"
                     ios.position="right"
                     android.position="actionBar"
-                    tap="onSaveTasting"/>
+                    tap="onSaveTasting"
+                    visibility="{{ isEditMode ? 'collapse' : 'visible' }}" />
+        <ActionItem icon="res://ic_share_white_24dp"
+                    ios.position="right"
+                    android.position="actionBar"
+                    tap="onShareTasting"
+                    visibility="{{ isEditMode ? 'visible' : 'collapse' }}" />
+        <ActionItem icon="res://ic_delete_white_24dp"
+                    ios.position="right"
+                    android.position="actionBar"
+                    tap="onDeleteTasting"
+                    visibility="{{ isEditMode ? 'visible' : 'collapse' }}" />
 	  </ActionBar.actionItems>
 	</ActionBar>
   </Page.actionBar>
@@ -99,14 +110,12 @@
 	 <TabViewItem title="Synthèse">
 	   <TabViewItem.view>
 		   <ScrollView>
-			<GridLayout class="tab-view-content" columns="auto,*" rows="*,*,*,*,*">
+			<GridLayout class="tab-view-content" columns="auto,*" rows="*,*,*,*">
 				<fr:FinalRating selectedValue="{{ wineTasting.finalRating }}" style="margin-top: 8;horizontal-align: center;" colspan="2" />
-                <Label text="Partager ma dégustation" row="1" class="criterias-title" />
-				<Switch checked="{{ shareWineTasting }}" row="1" col="1" />
-                <Label text="Date" row="2" class="criterias-title" />
-				<Label text="{{ wineTasting.startDate | dateConverter}}" class="criterias-label" row="2" col="1" />
-                <TextView text="{{ wineTasting.meatsNotes }}" hint="Accord mets & vin" row="3" colspan="2" />
-				<TextView text="{{ wineTasting.synthesisTabNotes }}" hint="Commentaires" row="4" colspan="2" />
+                <Label text="Date" row="1" class="criterias-title" />
+				<Label text="{{ wineTasting.startDate | dateConverter}}" class="criterias-label" row="1" col="1" />
+                <TextView text="{{ wineTasting.meatsNotes }}" hint="Accord mets & vin" row="2" colspan="2" />
+				<TextView text="{{ wineTasting.synthesisTabNotes }}" hint="Commentaires" row="3" colspan="2" />
 			</GridLayout>
 		   </ScrollView>
 	   </TabViewItem.view>
