@@ -5,7 +5,7 @@ import {Services} from "../utils/services";
 import {IAppService} from "../services/IAppService";
 import _ = require("lodash");
 
-export class TastingViewModel extends Observable {
+export class EditTastingViewModel extends Observable {
     private _service: IAppService;
     private _limpidityCriterias: CriteriaItem[];
     private _shineCriterias: CriteriaItem[];
@@ -21,7 +21,6 @@ export class TastingViewModel extends Observable {
     private _alcoholFromattedValue: number;
     private _hasBubbles: boolean;
     private _wineYear: number;
-    private _isEditMode: boolean;
     private _formIsValid: boolean;
     private _tabSelectedIndex: number;
 
@@ -52,14 +51,6 @@ export class TastingViewModel extends Observable {
     public set formIsValid(value) {
         this._formIsValid = value;
         this.notifyPropertyChange("formIsValid", value);
-    }
-
-    public get isEditMode() {
-        return this._isEditMode;
-    }
-    public set isEditMode(value) {
-        this._isEditMode = value;
-        this.notifyPropertyChange("isEditMode", value);
     }
 
     public get hasBubbles() {
@@ -196,30 +187,24 @@ export class TastingViewModel extends Observable {
         this.wineTasting.alcohol = value;
     }
 
-    constructor(wineTasting: WineTasting) {
+    constructor() {
         super();
 
-        if (wineTasting) {
-            this.isEditMode = true;
-            this.wineTasting = wineTasting;
-            this.wineYear = this.wineTasting.year;
-            this.alcoholValue = this.wineTasting.alcohol;
-        } else {
-            this.wineTasting = {
-                attacks: [],
-                balances: [],
-                bubbles: [],
-                intensities: [],
-                length: [],
-                limpidities: [],
-                shines: [],
-                startDate: Date.now(),
-                tears: []
-            };
+        this.wineTasting = {
+            attacks: [],
+            balances: [],
+            bubbles: [],
+            finalRating: "NEUTRAL",
+            intensities: [],
+            length: [],
+            limpidities: [],
+            shines: [],
+            startDate: Date.now(),
+            tears: []
+        };
 
-            this.wineYear = new Date().getFullYear() - 3;
-            this.alcoholValue = 0;
-        }
+        this.wineYear = new Date().getFullYear() - 3;
+        this.alcoholValue = 0;
 
         this.formIsValid = true;
 
@@ -244,12 +229,7 @@ export class TastingViewModel extends Observable {
         this._service.getWineTypesAsync()
             .then(data => {
                 this.wineTypes = data;
-
-                if (!wineTasting) {
-                    this.wineTypeSelectedIndex = 0;
-                } else {
-                    this.wineTypeSelectedIndex = _.indexOf(data, _.find(data, this.wineTasting.wineType));
-                }
+                this.wineTypeSelectedIndex = 0;
             });
     }
 
@@ -273,36 +253,6 @@ export class TastingViewModel extends Observable {
         this.notifyPropertyChange("wineTasting", this.wineTasting);
         this.wineTasting.defects = defects;
         this.notifyPropertyChange("wineTasting", this.wineTasting);
-    }
-
-    public getShareMessage() {
-        let wineColor = this.wineTasting.wineType.label;
-        let year = this.wineTasting.year;
-
-        let cuvee = this.wineTasting.cuvee;
-        let estate = this.wineTasting.estate;
-
-        let result = "#Dégustation d'un #vin #" + wineColor;
-
-        if (cuvee) {
-            result = result + " " + cuvee;
-        }
-
-        if (estate) {
-            result = result + " " + estate;
-        }
-
-        if (year) {
-            result = result + " #" + year;
-        }
-
-        result = result + " via @WinenjoyApp";
-
-        return result;
-    }
-
-    public deleteTasting() {
-        this._service.deleteWineTasting(this.wineTasting);
     }
 
     public validateForm() {

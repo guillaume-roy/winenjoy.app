@@ -1,46 +1,27 @@
 import {EventData} from "data/observable";
 import {Page} from "ui/page";
-import {TastingViewModel} from "../../view-models/tasting-view-model";
+import {EditTastingViewModel} from "../../view-models/edit-tasting-view-model";
 import frameModule = require("ui/frame");
 import dialogs = require("ui/dialogs");
 import appModule = require("application");
 import {Views} from "../../utils/views";
 import geolocation = require("nativescript-geolocation");
-import socialShare = require("nativescript-social-share");
 
-let viewModel: TastingViewModel;
+let viewModel: EditTastingViewModel;
 let page: Page;
 
 export function navigatedTo(args: EventData) {
     page = <Page>args.object;
 
     setTimeout(() => {
-       viewModel = new TastingViewModel(page.navigationContext);
+       viewModel = new EditTastingViewModel();
         page.bindingContext = viewModel;
-        if (geolocation.isEnabled() && !viewModel.isEditMode) {
+        if (geolocation.isEnabled()) {
             geolocation.getCurrentLocation({timeout: 5000}).
             then(function(loc) {
                 viewModel.wineTasting.latitude = loc.latitude;
                 viewModel.wineTasting.longitude = loc.longitude;
                 viewModel.wineTasting.altitude = loc.altitude;
-            });
-        }
-    });
-}
-
-export function onDeleteTasting() {
-    dialogs.confirm({
-        cancelButtonText: "Non",
-        message: "Etes-vous sûr de vouloir supprimer cette dégustation ?",
-        okButtonText: "Oui",
-        title: "Supprimer"
-    }).then(result => {
-        if (result) {
-            viewModel.deleteTasting();
-            frameModule.topmost().navigate({
-                animated: false,
-                backstackVisible: false,
-                moduleName: Views.main
             });
         }
     });
@@ -109,11 +90,6 @@ export function onSaveTasting() {
     }
 }
 
-export function onShareTasting() {
-    let shareMessage = viewModel.getShareMessage();
-    socialShare.shareText(shareMessage, "Partager ma dégustation");
-}
-
 export function onSelectColor() {
     page.showModal(
         Views.gradientColorPickerModal,
@@ -151,30 +127,21 @@ export function onAddDefects() {
         true);
 }
 
-export function cancel(args: any) {
-    if (viewModel.isEditMode) {
-        frameModule.topmost().navigate({
-            animated: false,
-            backstackVisible: false,
-            moduleName: Views.main
-        });
-    } else {
-        dialogs.confirm({
-            cancelButtonText: "Non",
-            message: "Etes-vous sûr de vouloir annuler cette dégustation ?",
-            okButtonText: "Oui",
-            title: "Annuler"
-        }).then(result => {
-            args.cancel = !result;
-            if (result) {
-                frameModule.topmost().navigate({
-                    animated: false,
-                    backstackVisible: false,
-                    moduleName: Views.main
-                });
-            }
-        });
-    }
+export function cancel() {
+    dialogs.confirm({
+        cancelButtonText: "Non",
+        message: "Etes-vous sûr de vouloir annuler cette dégustation ?",
+        okButtonText: "Oui",
+        title: "Annuler"
+    }).then(result => {
+        if (result) {
+            frameModule.topmost().navigate({
+                animated: false,
+                backstackVisible: false,
+                moduleName: Views.main
+            });
+        }
+    });
 }
 
 let dateConverterKey = "dateConverter";

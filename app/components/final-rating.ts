@@ -7,13 +7,33 @@ export class FinalRating extends StackLayout {
     public static selectedValueProperty = new dependencyObservableModule.Property(
         "selectedValue",
         "FinalRating",
-        new dependencyObservableModule.PropertyMetadata(undefined, dependencyObservableModule.PropertyMetadataSettings.None));
+        new dependencyObservableModule.PropertyMetadata(undefined, dependencyObservableModule.PropertyMetadataSettings.None,
+        function(data: dependencyObservableModule.PropertyChangeData) {
+            if (data.newValue) {
+                let instance = <FinalRating>data.object;
+                instance.setSelectedValue(data.newValue);
+            }
+        }));
+
+    public static isEnabledProperty = new dependencyObservableModule.Property(
+        "isEnabled",
+        "FinalRating",
+        new dependencyObservableModule.PropertyMetadata(
+            true,
+            dependencyObservableModule.PropertyMetadataSettings.None));
 
     public get selectedValue() {
         return this._getValue(FinalRating.selectedValueProperty);
     }
     public set selectedValue(value: string) {
         this._setValue(FinalRating.selectedValueProperty, value);
+    }
+
+    public get isEnabled() {
+        return this._getValue(FinalRating.isEnabledProperty);
+    }
+    public set isEnabled(value: boolean) {
+        this._setValue(FinalRating.isEnabledProperty, value);
     }
 
     private _imageSources: string[];
@@ -33,6 +53,16 @@ export class FinalRating extends StackLayout {
         this.createUI();
     }
 
+    public setSelectedValue(value: string) {
+        for (let i = 0; i < this._images.length; i++) {
+            let currentImage = this._images[i];
+            if (value === currentImage.src.replace("res://ic_", "").toUpperCase()
+                && currentImage.className === "rating-item") {
+                currentImage.className = "selected-rating-item";
+            }
+        }
+    }
+
     private createUI() {
         let imageSourcesLength = this._imageSources.length;
 
@@ -44,13 +74,17 @@ export class FinalRating extends StackLayout {
             ratingImage.className = "rating-item";
 
             ratingImage.on("tap", (data: EventData) => {
+                if (!this.isEnabled) {
+                    return;
+                }
+
                 let imagesLength = this._images.length;
                 for (let i = 0; i < imagesLength; i++) {
                     this._images[i].className = "rating-item";
                 }
 
                 let tapedImage = <Image>data.object;
-                tapedImage.className = "rating-item selected-rating-item";
+                tapedImage.className = "selected-rating-item";
 
                 let imgSrc = <string>tapedImage.src;
                 this.selectedValue = imgSrc.replace("res://ic_", "").toUpperCase();

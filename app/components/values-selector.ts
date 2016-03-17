@@ -38,6 +38,13 @@ export class ValuesSelector extends WrapLayout {
             false,
             dependencyObservableModule.PropertyMetadataSettings.None));
 
+    public static isEnabledProperty = new dependencyObservableModule.Property(
+        "isEnabled",
+        "ValuesSelector",
+        new dependencyObservableModule.PropertyMetadata(
+            true,
+            dependencyObservableModule.PropertyMetadataSettings.None));
+
     public get selectedItems() {
         return this._getValue(ValuesSelector.selectedItemsProperty);
     }
@@ -57,6 +64,13 @@ export class ValuesSelector extends WrapLayout {
     }
     public set singleSelection(value: boolean) {
         this._setValue(ValuesSelector.singleSelectionProperty, value);
+    }
+
+    public get isEnabled() {
+        return this._getValue(ValuesSelector.isEnabledProperty);
+    }
+    public set isEnabled(value: boolean) {
+        this._setValue(ValuesSelector.isEnabledProperty, value);
     }
 
     public get items() {
@@ -90,6 +104,10 @@ export class ValuesSelector extends WrapLayout {
             }
 
             itemButton.on(ValueButton.tapEvent, (data: EventData) => {
+                if (!this.isEnabled) {
+                    return;
+                }
+
                 let clickedButton = <ValueButton>data.object;
 
                 if (this.deleteOnClick) {
