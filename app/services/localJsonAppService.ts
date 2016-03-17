@@ -4,6 +4,7 @@ import {CriteriaItem} from "../entities/criteriaItem";
 import {LocalStorage} from "../utils/local-storage";
 import appSettings = require("application-settings");
 import {UUID} from "../utils/uuid";
+import {UserInformations} from "../entities/userInformations";
 
 export class LocalJsonAppService implements IAppService {
     private _localStorage: LocalStorage;
@@ -144,5 +145,13 @@ export class LocalJsonAppService implements IAppService {
             wineTastings.splice(wineTastingIndex, 1);
             appSettings.setString(this._wineTastingsCollectionName, JSON.stringify(wineTastings));
         }
+    }
+
+    public getUserInformations(): UserInformations {
+        return <UserInformations>JSON.parse(appSettings.getString("userInformations"));
+    }
+
+    public setUserInformations(value: UserInformations) {
+        appSettings.setString("userInformations", JSON.stringify(value));
     }
 }

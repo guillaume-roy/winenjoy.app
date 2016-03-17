@@ -1,5 +1,6 @@
 import {WineTasting} from "../entities/wineTasting";
 import {CriteriaItem} from "../entities/criteriaItem";
+import {UserInformations} from "../entities/userInformations";
 
 export interface IAppService {
     getWineTastings(): WineTasting[];
@@ -31,4 +32,7 @@ export interface IAppService {
     getAttackCriteriasAsync(wineCode: string): Promise<CriteriaItem[]>;
     getTannicCriteriasAsync(): Promise<CriteriaItem[]>;
     getWhiteAcidityCriteriasAsync(): Promise<CriteriaItem[]>;
+
+    getUserInformations(): UserInformations;
+    setUserInformations(value: UserInformations);
 }

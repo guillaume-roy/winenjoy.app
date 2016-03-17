@@ -1,9 +1,10 @@
 import application = require("application");
 import {Views} from "./utils/views";
 import frame = require("ui/frame");
+import appSettings = require("application-settings");
 
 application.start({
-    moduleName: Views.main
+    moduleName: appSettings.hasKey("userInformations") ? Views.main : Views.login
 });
 
 if (application.android) {
