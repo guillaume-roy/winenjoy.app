@@ -1,23 +1,23 @@
 {
-  "name": "winenjoy",
-  "version": "1.0.0",
-  "nativescript": {
-    "id": "com.winenjoy.app",
-    "tns-android": {
-      "version": "1.7.0"
-    }
-  },
-  "dependencies": {
-    "lodash": "*",
-    "nativescript-floatingactionbutton": "^0.2.3",
-    "nativescript-geolocation": "0.0.8",
-    "nativescript-social-share": "^1.1.2",
-    "tns-core-modules": "^1.7.0"
-  },
-  "devDependencies": {
-    "gulp": "*",
-    "gulp-sass": "*",
-    "nativescript-dev-typescript": "^0.3.0",
-    "typescript": "^1.7.5"
-  }
+	"name": "winenjoy",
+	"version": "1.0.0",
+	"nativescript": {
+		"id": "com.winenjoy.app",
+		"tns-android": {
+			"version": "1.7.0"
+		}
+	},
+	"dependencies": {
+		"lodash": "*",
+		"nativescript-floatingactionbutton": "^0.2.3",
+		"nativescript-geolocation": "0.0.8",
+		"nativescript-social-share": "^1.1.2",
+		"tns-core-modules": "^1.7.0"
+	},
+	"devDependencies": {
+		"gulp": "*",
+		"gulp-sass": "*",
+		"nativescript-dev-typescript": "^0.3.0",
+		"typescript": "^1.7.5"
+	}
 }
