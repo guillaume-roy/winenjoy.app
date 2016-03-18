@@ -5,7 +5,7 @@
         <ActionBar title="Winenjoy - v0.1 beta" />
     </Page.actionBar>
   <GridLayout>
-    <ListView items="{{ tastings }}" itemTap="onViewTasting">
+    <ListView items="{{ tastings }}" visibility="{{ tastings && tastings.length !== 0 && !betaIsClosed ? 'visible' : 'collapse' }}" itemTap="onViewTasting">
         <ListView.itemTemplate>
             <GridLayout class="list-item" rows="*,*,*" columns="56, *, auto">
                 <StackLayout backgroundColor="{{ color }}" class="list-item-icon" rowSpan="3" id="toto" />
@@ -17,10 +17,12 @@
             </GridLayout>
         </ListView.itemTemplate>
     </ListView>
-    <FAB:fab visibility="{{ tastings.length < 7 ? 'visible' : 'collapse' }}"
+    <FAB:fab visibility="{{ tastings.length !== 10 || !betaIsClosed ? 'visible' : 'collapse' }}"
         tap="onCreateNewTasting"
         icon="res://ic_add_white_24dp"
         rippleColor="#f1f1f1"
         class="fab-button" />
+    <Label text="Aucune dégustation ... pour l'instant." style="vertical-align: center;horizontal-align:center" visibility="{{ !tastings || tastings.length === 0  ? 'visible' : 'collapse'}}"/>
+    <Label text="Cette version beta est terminée. Merci." style="vertical-align: center;horizontal-align:center" visibility="{{ betaIsClosed ? 'visible' : 'collapse' }}"/>
   </GridLayout>
 </Page>

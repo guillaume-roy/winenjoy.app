@@ -11,6 +11,7 @@
 		"lodash": "*",
 		"nativescript-floatingactionbutton": "^0.2.3",
 		"nativescript-geolocation": "0.0.8",
+		"nativescript-plugin-firebase": "^2.1.1",
 		"nativescript-social-share": "^1.1.2",
 		"tns-core-modules": "^1.7.0"
 	},
