@@ -24,7 +24,7 @@
     "ionic-gulp-webpack-build": "^1.0.0",
     "strip-sourcemap-loader": "0.0.1"
   },
-  "name": "winenjoy.app",
+  "name": "winenjoy",
   "description": "Winenjoy - Wine tasting connected book.",
   "cordovaPlugins": [
     "cordova-plugin-device",
@@ -34,7 +34,5 @@
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard"
   ],
-  "cordovaPlatforms": [
-    "android"
-  ]
+  "cordovaPlatforms": []
 }
