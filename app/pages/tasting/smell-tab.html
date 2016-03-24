@@ -10,8 +10,10 @@
 <ion-content>
     <form #smellForm="ngForm" novalidate padding>
         <button light block (click)="selectAromas()">Sélectionner les arômes</button>
+        <button class="text-light" round small *ngFor="#i of tasting.smell.aromas" (click)="deleteCriteria(i, 'aromas')">{{ i.label }}</button>
         <button light block style="margin-top: 16px" (click)="selectDefects()">Sélectionner les défauts</button>
-        <ion-label class="label">Intensité</ion-label>
+        <button class="text-light" round small *ngFor="#i of tasting.smell.defects" (click)="deleteCriteria(i, 'defects')">{{ i.label }}</button>
+        <ion-label class="label" style="margin-top: 16px">Intensité</ion-label>
         <button [class.button-outline]="!i.isSelected" [class.text-light]="i.isSelected" round small *ngFor="#i of intensities" (click)="selectCriteria(i, 'intensities')">{{ i.label }}</button>
         <ion-label class="label">Commentaires</ion-label>
         <ion-textarea [(ngModel)]="tasting.smell.notes" #sightNotes="ngForm"></ion-textarea>

@@ -12,7 +12,7 @@
     <ion-list radio-group>
         <ion-item *ngFor="#value of values">
             <ion-label>{{ value.value.label }}</ion-label>
-            <ion-checkbox checked="{{ value.isSelected }}"></ion-checkbox>
+            <ion-checkbox checked="{{ value.isSelected }}" (click)="selectValue(value)"></ion-checkbox>
         </ion-item>
     </ion-list>
 </ion-content>

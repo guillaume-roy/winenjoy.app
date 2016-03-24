@@ -23,7 +23,10 @@ export class AromasModal {
         this.initialValues = [];
         this.values = [];
         this.wineData.loadAromas(this.isDefects).then(data => {
-           this.initialValues = data.map(v => { return { value: v, isSelected: false }});
+           this.initialValues = data.map(v => {
+               var isSelected = _.some(this.selectedValues, v);
+               return { value: v, isSelected: isSelected }
+            });
            this.values = this.initialValues;
         });
     }
@@ -40,16 +43,10 @@ export class AromasModal {
     }
 
     validate() {
-        console.log(this.values.filter(v => v.isSelected));
+        this.viewController.dismiss(this.initialValues.filter(v => v.isSelected).map(v => v.value));
     }
 
-    // selectValue(selectedValue) {
-    //     if(selectedValue.isSelected) {
-    //         delete selectedValue.isSelected;
-    //         _.remove(this.selectedValues, selectedValue);
-    //     } else {
-    //         this.selectedValues.push(_.clone(selectedValue));
-    //         selectedValue.isSelected = true;
-    //     }
-    // }
+    selectValue(selectedValue) {
+        selectedValue.isSelected = !selectedValue.isSelected;
+    }
 }

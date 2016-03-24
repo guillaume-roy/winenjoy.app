@@ -22,6 +22,38 @@ export class WineData {
     });
   }
 
+  getRatings() {
+      return new Promise(resolve => {
+         resolve([
+             'VERY_SAD',
+             'SAD',
+             'NEUTRAL',
+             'HAPPY',
+             'VERY_HAPPY'
+         ])
+      });
+  }
+
+  loadAttacks(wineType) {
+      return new Promise(resolve => {
+         this.load('attacks').then(data => {
+            resolve(_.find(data, v => v.code === wineType).values);
+         });
+      });
+  }
+
+  loadBalances(wineType) {
+      return new Promise(resolve => {
+          var filename = wineType === 'WHITE'
+            ? 'white-acidities'
+            : 'red-tannics';
+
+          this.load(filename).then(data => {
+             resolve(data);
+          });
+      });
+  }
+
   loadAromas(isDefects) {
       return new Promise(resolve => {
         this.load('aromas').then(data => {

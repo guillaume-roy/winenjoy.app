@@ -51,4 +51,8 @@ export class SmellTab {
         });
         this.nav.present(aromasModal);
     }
+
+    deleteCriteria(criteria, property) {
+        _.remove(this.tasting.smell[property], criteria);
+    }
 }

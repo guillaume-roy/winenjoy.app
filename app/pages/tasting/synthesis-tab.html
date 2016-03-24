@@ -1,0 +1,16 @@
+<ion-navbar *navbar secondary>
+  <ion-title>Nouvelle dégustation</ion-title>
+  <ion-buttons end>
+    <button (click)="saveTasting()">
+      <ion-icon name="checkmark"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-navbar>
+
+<ion-content>
+    <form #synthesisForm="ngForm" novalidate padding>
+
+        <ion-label class="label">Commentaires</ion-label>
+        <ion-textarea [(ngModel)]="tasting.synthesis.notes" #synthesisNotes="ngForm"></ion-textarea>
+    </form>
+</ion-content>
