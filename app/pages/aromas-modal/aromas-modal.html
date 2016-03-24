@@ -1,0 +1,22 @@
+<ion-toolbar position="top">
+    <ion-title>Sélection des {{ isDefects ? 'défauts' : 'arômes' }}</ion-title>
+</ion-toolbar>
+<ion-toolbar position="top">
+    <ion-searchbar placeholder="Rechercher"
+        [(ngModel)]="valuesQuery"
+        (input)="searchValues()">
+    </ion-searchbar>
+</ion-toolbar>
+
+<ion-content>
+    <ion-list radio-group>
+        <ion-item *ngFor="#value of values">
+            <ion-label>{{ value.value.label }}</ion-label>
+            <ion-checkbox checked="{{ value.isSelected }}"></ion-checkbox>
+        </ion-item>
+    </ion-list>
+</ion-content>
+
+<ion-toolbar position="bottom" primary>
+    <button clear full light (click)="validate()">Valider</button>
+</ion-toolbar>

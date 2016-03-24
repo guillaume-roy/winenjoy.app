@@ -1,24 +1,40 @@
 import {App, Platform} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
-import {TabsPage} from './pages/tabs/tabs';
-
+import {LoginPage} from './pages/login/login';
+import {TastingsPage} from './pages/tastings/tastings';
+import {UserData} from './providers/user-data';
+import {TastingsData} from './providers/tastings-data';
+import {WineData} from './providers/wine-data';
 
 @App({
   template: '<ion-nav [root]="rootPage"></ion-nav>',
-  config: {} // http://ionicframework.com/docs/v2/api/config/Config/
+  providers: [UserData, TastingsData, WineData],
+  config: {
+    platforms: {
+      android: {
+        tabbarLayout: 'icon-hide'
+      }
+    }
+  }
 })
-export class MyApp {
+export class WinenjoyApp {
   static get parameters() {
-    return [[Platform]];
+    return [[Platform], [UserData]];
   }
 
-  constructor(platform) {
-    this.rootPage = TabsPage;
-
+  constructor(platform, userData) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      StatusBar.styleDefault();
+      StatusBar.styleLightContent();
+    });
+
+    userData.isLogged().then(isLogged => {
+        if (isLogged) {
+            this.rootPage = TastingsPage;
+        } else {
+            this.rootPage = LoginPage;
+        }
     });
   }
 }

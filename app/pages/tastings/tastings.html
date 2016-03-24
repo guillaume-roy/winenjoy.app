@@ -1,0 +1,18 @@
+<ion-navbar *navbar secondary>
+  <ion-title>Winenjoy</ion-title>
+</ion-navbar>
+
+<ion-content>
+    <ion-list>
+        <button ion-item *ngFor="#tasting of tastings" (click)="viewTasting(tasting)">
+            <ion-avatar item-left [style.backgroundColor]="tasting.color"></ion-avatar>
+            <h2>{{ tasting.cuvee }}</h2>
+            <h6>{{ tasting.estate }}</h6>
+            <p>{{ tasting.region + ' - ' + tasting.country }}</p>
+            <p item-right>{{ tasting.year }}</p>
+        </button>
+    </ion-list>
+    <button fab fab-bottom fab-right (click)="createTasting()">
+        <ion-icon light name="wine"></ion-icon>
+    </button>
+</ion-content>

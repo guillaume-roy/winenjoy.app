@@ -1,0 +1,58 @@
+<ion-navbar *navbar secondary>
+  <ion-title>Nouvelle dégustation</ion-title>
+  <ion-buttons end>
+    <button (click)="saveTasting()">
+      <ion-icon name="checkmark"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-navbar>
+
+<ion-content>
+    <form #tastingForm="ngForm" novalidate>
+        <ion-segment [(ngModel)]="tasting.informations.wineType" padding>
+            <ion-segment-button value="WHITE">
+                Blanc
+            </ion-segment-button>
+            <ion-segment-button value="ROSE">
+                Rosé
+            </ion-segment-button>
+            <ion-segment-button value="RED">
+                Rouge
+            </ion-segment-button>
+        </ion-segment>
+        <ion-list>
+            <ion-item>
+                <ion-label floating>Cuvée</ion-label>
+                <ion-input [(ngModel)]="tasting.informations.cuvee" ngControl="cuvee" type="text" #cuvee="ngForm" required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Domaine</ion-label>
+                <ion-input [(ngModel)]="tasting.informations.estate" type="text" #estate="ngForm"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Région</ion-label>
+                <ion-input [(ngModel)]="tasting.informations.region" type="text" #region="ngForm"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Pays</ion-label>
+                <ion-input [(ngModel)]="tasting.informations.country" type="text" #country="ngForm"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Cépages</ion-label>
+                <ion-input [(ngModel)]="tasting.informations.grapes" type="text" #grapes="ngForm"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>Biologique</ion-label>
+                <ion-toggle [(ngModel)]="tasting.informations.isBiologic" type="text" #isBiologic="ngForm"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label  class="lol">Biodynamique</ion-label>
+                <ion-toggle [(ngModel)]="tasting.informations.isBiodynamic" type="text" #isBiodynamic ="ngForm"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Commentaires</ion-label>
+                <ion-textarea [(ngModel)]="tasting.informations.notes" #informationsNotes="ngForm"></ion-textarea>
+            </ion-item>
+        </ion-list>
+    </form>
+</ion-content>

@@ -1,0 +1,29 @@
+<ion-navbar *navbar secondary>
+  <ion-title>Nouvelle dégustation</ion-title>
+  <ion-buttons end>
+    <button (click)="saveTasting()">
+      <ion-icon name="checkmark"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-navbar>
+
+<ion-content>
+    <form #sightForm="ngForm" novalidate padding>
+        <button light block (click)="selectColor()" *ngIf="!tasting.sight.color">Sélectionner la robe</button>
+        <button block (click)="selectColor()" [style.backgroundColor]="tasting.sight.color" *ngIf="tasting.sight.color"></button>
+        <ion-label class="label">Limpidité</ion-label>
+        <button [class.button-outline]="!i.isSelected" [class.text-light]="i.isSelected" round small *ngFor="#i of limpidities" (click)="selectCriteria(i, 'limpidities')">{{ i.label }}</button>
+        <ion-item></ion-item>
+        <ion-label class="label">Brillance</ion-label>
+        <button [class.button-outline]="!i.isSelected" [class.text-light]="i.isSelected" round small *ngFor="#i of shines" (click)="selectCriteria(i, 'shines')">{{ i.label }}</button>
+        <ion-item></ion-item>
+        <ion-label class="label">Larmes</ion-label>
+        <button [class.button-outline]="!i.isSelected" [class.text-light]="i.isSelected" round small *ngFor="#i of tears" (click)="selectCriteria(i, 'tears')">{{ i.label }}</button>
+        <ion-item></ion-item>
+        <ion-label class="label">Bulles</ion-label>
+        <button [class.button-outline]="!i.isSelected" [class.text-light]="i.isSelected" round small *ngFor="#i of bubbles" (click)="selectCriteria(i, 'bubbles')">{{ i.label }}</button>
+        <ion-item></ion-item>
+        <ion-label class="label">Commentaires</ion-label>
+        <ion-textarea [(ngModel)]="tasting.sight.notes" #sightNotes="ngForm"></ion-textarea>
+    </form>
+</ion-content>

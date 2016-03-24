@@ -16,7 +16,7 @@ log.txt
 coverage/
 dist/
 node_modules/
-platform/
+platforms/
 tmp/
 temp/
 www/build/

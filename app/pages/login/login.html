@@ -1,0 +1,46 @@
+<ion-navbar *navbar secondary>
+  <ion-title>Winenjoy</ion-title>
+</ion-navbar>
+
+<ion-content>
+
+  <ion-list>
+    <div text-center>
+        <h4>
+            Bienvenue dans l'application Winenjoy !
+        </h4>
+        <p>
+            Nous sommes en phase de beta-test.
+        </p>
+        <h6>
+            Votre avis nous intéresse !
+        </h6>
+        <p>
+            Si vous rencontrez des difficultés au cours de l'utilisation de l'application ou si vous avez des idées, des remarques, des critiques, n'hésitez pas à nous envoyer un mail.
+        </p>
+        <p>
+            Afin d'obtenir votre accès, merci d'indiquer votre email ci-dessous.
+        </p>
+    </div>
+
+    <form #loginForm="ngForm" novalidate>
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input [(ngModel)]="login.email" ngControl="email" type="email" #email="ngForm" required>
+        </ion-input>
+      </ion-item>
+      <p [hidden]="email.valid || submitted == false" danger padding-left>
+        L'email est requis.
+      </p>
+
+      <ion-row responsive-sm>
+        <ion-col>
+          <button (click)="onLogin(loginForm)" type="submit" primary block>
+              <span light text-uppercase>Connexion</span>
+            </button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-list>
+
+</ion-content>
