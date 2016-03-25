@@ -1,5 +1,10 @@
 <ion-navbar *navbar secondary>
-  <ion-title>Nouvelle dégustation</ion-title>
+  <ion-buttons start>
+    <button (click)="cancelTasting()">
+      <ion-icon name="close"></ion-icon>
+    </button>
+  </ion-buttons>
+  <ion-title>Dégustation</ion-title>
   <ion-buttons end>
     <button (click)="saveTasting()">
       <ion-icon name="checkmark"></ion-icon>

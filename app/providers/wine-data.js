@@ -25,11 +25,11 @@ export class WineData {
   getRatings() {
       return new Promise(resolve => {
          resolve([
-             'VERY_SAD',
-             'SAD',
-             'NEUTRAL',
+             'VERY_HAPPY',
              'HAPPY',
-             'VERY_HAPPY'
+             'NEUTRAL',
+             'SAD',
+             'VERY_SAD'
          ])
       });
   }

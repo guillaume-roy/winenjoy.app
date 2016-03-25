@@ -1,5 +1,10 @@
 <ion-navbar *navbar secondary>
-  <ion-title>Nouvelle dégustation</ion-title>
+  <ion-buttons start>
+    <button (click)="cancelTasting()">
+      <ion-icon name="close"></ion-icon>
+    </button>
+  </ion-buttons>
+  <ion-title>Dégustation</ion-title>
   <ion-buttons end>
     <button (click)="saveTasting()">
       <ion-icon name="checkmark"></ion-icon>
@@ -9,7 +14,7 @@
 
 <ion-content>
     <form #tastingForm="ngForm" novalidate>
-        <ion-segment [(ngModel)]="tasting.informations.wineType" padding>
+        <ion-segment [(ngModel)]="wineType" (change)="selectWineType()" padding>
             <ion-segment-button value="WHITE">
                 Blanc
             </ion-segment-button>
@@ -41,12 +46,12 @@
                 <ion-label floating>Cépages</ion-label>
                 <ion-input [(ngModel)]="tasting.informations.grapes" type="text" #grapes="ngForm"></ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item style="height: 68px">
                 <ion-label>Biologique</ion-label>
                 <ion-toggle [(ngModel)]="tasting.informations.isBiologic" type="text" #isBiologic="ngForm"></ion-toggle>
             </ion-item>
-            <ion-item>
-                <ion-label  class="lol">Biodynamique</ion-label>
+            <ion-item style="height: 68px">
+                <ion-label>Biodynamique</ion-label>
                 <ion-toggle [(ngModel)]="tasting.informations.isBiodynamic" type="text" #isBiodynamic ="ngForm"></ion-toggle>
             </ion-item>
             <ion-item>

@@ -10,18 +10,18 @@ export class UserData {
   constructor(events) {
     this.storage = new Storage(LocalStorage);
     this.events = events;
-    this.USER_INFORMATIONS = 'USER_INFORMATIONS';
+    this.USER_INFORMATIONS_KEY = 'USER_INFORMATIONS';
   }
 
 
   login(loginData) {
-    this.storage.set(this.USER_INFORMATIONS, loginData);
+    this.storage.set(this.USER_INFORMATIONS_KEY, loginData);
     this.events.publish('user:login');
   }
 
   // return a promise
   isLogged() {
-    return this.storage.get(this.USER_INFORMATIONS).then((value) => {
+    return this.storage.get(this.USER_INFORMATIONS_KEY).then((value) => {
       return value;
     });
   }

@@ -1,5 +1,10 @@
 <ion-navbar *navbar secondary>
-  <ion-title>Nouvelle dégustation</ion-title>
+  <ion-buttons start>
+    <button (click)="cancelTasting()">
+      <ion-icon name="close"></ion-icon>
+    </button>
+  </ion-buttons>
+  <ion-title>Dégustation</ion-title>
   <ion-buttons end>
     <button (click)="saveTasting()">
       <ion-icon name="checkmark"></ion-icon>
@@ -11,10 +16,13 @@
     <form #tasteForm="ngForm" novalidate padding>
         <ion-label class="label">Attaque</ion-label>
         <button [class.button-outline]="!i.isSelected" [class.text-light]="i.isSelected" round small *ngFor="#i of attacks" (click)="selectCriteria(i, 'attacks')">{{ i.label }}</button>
+        <ion-item></ion-item>
         <ion-label class="label">Equilibre</ion-label>
         <button [class.button-outline]="!i.isSelected" [class.text-light]="i.isSelected" round small *ngFor="#i of balances" (click)="selectCriteria(i, 'balances')">{{ i.label }}</button>
+        <ion-item></ion-item>
         <ion-label class="label">Finale</ion-label>
         <button [class.button-outline]="!i.isSelected" [class.text-light]="i.isSelected" round small *ngFor="#i of length" (click)="selectCriteria(i, 'length')">{{ i.label }}</button>
+        <ion-item></ion-item>
         <ion-label class="label">Commentaires</ion-label>
         <ion-textarea [(ngModel)]="tasting.taste.notes" #tasteNotes="ngForm"></ion-textarea>
     </form>

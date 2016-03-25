@@ -1,4 +1,4 @@
-import {Page, NavParams, Modal, NavController} from 'ionic-angular';
+import {Page, NavParams, Modal, NavController, Events} from 'ionic-angular';
 import {WineData} from '../../providers/wine-data';
 import * as _ from 'lodash';
 import {ColorsModal} from '../colors-modal/colors-modal';
@@ -8,16 +8,16 @@ import {ColorsModal} from '../colors-modal/colors-modal';
 })
 export class SightTab {
     static get parameters() {
-        return [[WineData], [NavParams], [NavController]];
+        return [[WineData], [NavParams], [NavController], [Events]];
     }
 
-    constructor(wineData, navParams, nav) {
+    constructor(wineData, navParams, nav, events) {
         this.nav = nav;
         this.wineData = wineData;
         this.navParams = navParams;
+        this.events = events;
 
         this.tasting = this.navParams.get('tasting');
-        this.saveTasting = this.navParams.get('onSave');
 
         this.limpidities = [];
         this.shines = [];
@@ -54,5 +54,13 @@ export class SightTab {
             this.tasting.sight.color = data;
         });
         this.nav.present(colorsModal);
+    }
+
+    saveTasting() {
+        this.events.publish('tasting:save');
+    }
+
+    cancelTasting() {
+        this.events.publish('tasting:cancel');
     }
 }

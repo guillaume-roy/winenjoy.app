@@ -1,5 +1,10 @@
 <ion-navbar *navbar secondary>
-  <ion-title>Nouvelle dégustation</ion-title>
+  <ion-buttons start>
+    <button (click)="cancelTasting()">
+      <ion-icon name="close"></ion-icon>
+    </button>
+  </ion-buttons>
+  <ion-title>Dégustation</ion-title>
   <ion-buttons end>
     <button (click)="saveTasting()">
       <ion-icon name="checkmark"></ion-icon>
@@ -9,7 +14,10 @@
 
 <ion-content>
     <form #synthesisForm="ngForm" novalidate padding>
-
+        <div text-center>
+            <button [class.button-light]="tasting.synthesis.rating === i" [class.button-clear]="tasting.synthesis.rating !== i" class="final-rating-button" *ngFor="#i of ratings" (click)="selectRating(i)"><img src="img/{{i}}.svg" /></button>
+        </div>
+        <ion-item></ion-item>
         <ion-label class="label">Commentaires</ion-label>
         <ion-textarea [(ngModel)]="tasting.synthesis.notes" #synthesisNotes="ngForm"></ion-textarea>
     </form>

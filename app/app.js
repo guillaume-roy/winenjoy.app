@@ -8,14 +8,7 @@ import {WineData} from './providers/wine-data';
 
 @App({
   template: '<ion-nav [root]="rootPage"></ion-nav>',
-  providers: [UserData, TastingsData, WineData],
-  config: {
-    platforms: {
-      android: {
-        tabbarLayout: 'icon-hide'
-      }
-    }
-  }
+  providers: [UserData, TastingsData, WineData]
 })
 export class WinenjoyApp {
   static get parameters() {

@@ -5,14 +5,21 @@
 <ion-content>
     <ion-list>
         <button ion-item *ngFor="#tasting of tastings" (click)="viewTasting(tasting)">
-            <ion-avatar item-left [style.backgroundColor]="tasting.color"></ion-avatar>
-            <h2>{{ tasting.cuvee }}</h2>
-            <h6>{{ tasting.estate }}</h6>
-            <p>{{ tasting.region + ' - ' + tasting.country }}</p>
-            <p item-right>{{ tasting.year }}</p>
+            <ion-avatar item-left [style.backgroundColor]="tasting.sight.color"></ion-avatar>
+            <h2 *ngIf="tasting.informations.cuvee">{{ tasting.informations.cuvee }}</h2>
+            <h6 *ngIf="tasting.informations.estate">{{ tasting.informations.estate }}</h6>
+            <p *ngIf="tasting.informations.region || tasting.informations.country">
+                <span *ngIf="tasting.informations.region && !tasting.informations.country">{{ tasting.informations.region }}</span>
+                <span *ngIf="tasting.informations.region && tasting.informations.country">{{ tasting.informations.region + ' - ' + tasting.informations.country }}</span>
+                <span *ngIf="!tasting.informations.region && tasting.informations.country">{{ tasting.informations.regcountryion }}</span>
+            </p>
+            <div item-right text-center>
+                <p *ngIf="tasting.informations.year"><small>{{ tasting.informations.year }}</small></p>
+                <img *ngIf="tasting.synthesis.rating" src="img/{{ tasting.synthesis.rating }}.svg" class="rating-img" />
+            </div>
         </button>
     </ion-list>
     <button fab fab-bottom fab-right (click)="createTasting()">
-        <ion-icon light name="wine"></ion-icon>
+        <ion-icon light name="ios-wine"></ion-icon>
     </button>
 </ion-content>

@@ -1,4 +1,4 @@
-import {Page, NavParams} from 'ionic-angular';
+import {Page, NavParams, NavController, Events} from 'ionic-angular';
 import {WineData} from '../../providers/wine-data';
 
 @Page({
@@ -6,28 +6,38 @@ import {WineData} from '../../providers/wine-data';
 })
 export class TasteTab {
     static get parameters() {
-        return [[NavParams], [WineData]];
+        return [[NavParams], [WineData], [NavController], [Events]];
     }
 
-    constructor(navParams, wineData) {
+    constructor(navParams, wineData, nav, events) {
         this.navParams = navParams;
         this.wineData = wineData;
+        this.nav = nav;
+        this.events = events;
 
         this.tasting = this.navParams.get('tasting');
-        this.saveTasting = this.navParams.get('onSave');
 
         this.attacks = [];
         this.balances = [];
         this.length = [];
 
-        this.wineData.loadAttacks(this.tasting.informations.wineType).then(data => {
+        this.loadCriterias();
+
+        this.wineData.load('length').then(data => {
+           this.length = data;
+        });
+
+        this.events.subscribe('tasting:wineType', () => {
+            this.loadCriterias();
+        });
+    }
+
+    loadCriterias() {
+       this.wineData.loadAttacks(this.tasting.informations.wineType).then(data => {
            this.attacks = data;
         });
         this.wineData.loadBalances(this.tasting.informations.wineType).then(data => {
            this.balances = data;
-        });
-        this.wineData.load('length').then(data => {
-           this.length = data;
         });
     }
 
@@ -39,5 +49,13 @@ export class TasteTab {
             this.tasting.taste[property].push(_.clone(criteria));
             criteria.isSelected = true;
         }
+    }
+
+    saveTasting() {
+        this.events.publish('tasting:save');
+    }
+
+    cancelTasting() {
+        this.events.publish('tasting:cancel');
     }
 }
