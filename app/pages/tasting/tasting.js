@@ -104,7 +104,7 @@ export class TastingPage {
                 {
                     text: 'Oui',
                     handler: () => {
-                        this.nav.pop();
+                        setTimeout(() => this.nav.pop(), 500);
                     }
                 }
             ]
