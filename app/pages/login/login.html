@@ -24,7 +24,7 @@
         </p>
     </div>
 
-    <form #loginForm="ngForm" novalidate>
+    <form #loginForm="ngForm" novalidate (ngSubmit)="onLogin(loginForm)">
       <ion-item>
         <ion-label floating>Email</ion-label>
         <ion-input [(ngModel)]="login.email" ngControl="email" type="email" #email="ngForm" required>
@@ -34,9 +34,13 @@
         L'email est requis.
       </p>
 
+      <p *ngIf="errorMessage.length > 0" danger text-center>
+          {{ errorMessage }}
+      </p>
+
       <ion-row responsive-sm>
         <ion-col>
-          <button (click)="onLogin(loginForm)" type="submit" primary block>
+          <button type="submit" primary block [disabled]="!loginForm.form.valid">
               <span light text-uppercase>Connexion</span>
             </button>
         </ion-col>

@@ -9,14 +9,31 @@ export class UserData {
 
   constructor(events) {
     this.storage = new Storage(LocalStorage);
-    this.events = events;
     this.USER_INFORMATIONS_KEY = 'USER_INFORMATIONS';
   }
 
-
   login(loginData) {
-    this.storage.set(this.USER_INFORMATIONS_KEY, loginData);
-    this.events.publish('user:login');
+    return new Promise((resolve, reject) => {
+        var myFirebaseRef = new Firebase("https://winenjoy.firebaseio.com/beta-testers");
+        myFirebaseRef.orderByChild("email").equalTo(loginData.email.toLowerCase().trim()).limitToFirst(1).once("value", data => {
+            if(!data) {
+                reject("Connexion impossible.");
+                return;
+            }
+
+            var result = data.val();
+
+            if (!result || result.length === 0) {
+                reject("Connexion impossible.");
+                return;
+            }
+
+            this.storage.set(this.USER_INFORMATIONS_KEY, { email: loginData.email.toLowerCase().trim()});
+            resolve(true);
+        }, error => {
+            reject("Connexion impossible.");
+        }, this);
+    });
   }
 
   // return a promise

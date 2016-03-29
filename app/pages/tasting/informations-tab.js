@@ -18,6 +18,12 @@ export class InformationsTab {
         this.tasting = this.navParams.get('tasting');
 
         this.wineType = this.tasting.informations.wineType;
+
+        var currentYear = new Date().getFullYear();
+        this.years = [];
+        for(var i = currentYear; i >= 1900; i--) {
+            this.years.push(i);
+        }
     }
 
     selectWineType() {

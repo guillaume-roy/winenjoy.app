@@ -47,6 +47,12 @@
                 <ion-input [(ngModel)]="tasting.informations.grapes" type="text" #grapes="ngForm"></ion-input>
             </ion-item>
             <ion-item style="height: 68px">
+                <ion-label>Millésime</ion-label>
+                <ion-select [(ngModel)]="tasting.informations.year" #year="ngForm">
+                    <ion-option *ngFor="#y of years" value="{{ y }}">{{ y }}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item style="height: 68px">
                 <ion-label>Biologique</ion-label>
                 <ion-toggle [(ngModel)]="tasting.informations.isBiologic" type="text" #isBiologic="ngForm"></ion-toggle>
             </ion-item>

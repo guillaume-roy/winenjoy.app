@@ -30,10 +30,10 @@ export class TastingsPage {
     }
 
     viewTasting(tasting) {
-        this.nav.push(TastingPage, { tasting: tasting });
+        this.nav.push(TastingPage, { tasting: tasting, isEdit: true });
     }
 
     createTasting() {
-        this.nav.push(TastingPage);
+        this.nav.push(TastingPage, { tasting: null, isEdit: false });
     }
 }

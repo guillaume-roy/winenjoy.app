@@ -16,14 +16,20 @@ export class LoginPage {
 
         this.login = {};
         this.submitted = false;
+        this.errorMessage = "";
     }
 
     onLogin(form) {
         this.submitted = true;
+        this.errorMessage = "";
 
         if (form.valid) {
-            this.userData.login(form.value);
-            this.nav.setRoot(TastingsPage);
+            this.userData.login(form.value).then(result => {
+                this.nav.setRoot(TastingsPage);
+            }, error => {
+                this.errorMessage = error;
+                this.submitted = false;
+            });
         }
     }
 }

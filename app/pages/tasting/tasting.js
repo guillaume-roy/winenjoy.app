@@ -9,11 +9,11 @@ import {SynthesisTab} from './synthesis-tab';
 @Page({
   template: `
     <ion-tabs [selectedIndex]="selectedTab">
-      <ion-tab tabTitle="Vin" [root]="informationsTab" [rootParams]="{ tasting: tasting, onSave: saveTasting, onCancel: cancelTasting }"></ion-tab>
-      <ion-tab tabTitle="Aspect" [root]="sightTab" [rootParams]="{ tasting: tasting, onSave: saveTasting, onCancel: cancelTasting }"></ion-tab>
-      <ion-tab tabTitle="Arômes" [root]="smellTab" [rootParams]="{ tasting: tasting, onSave: saveTasting, onCancel: cancelTasting }"></ion-tab>
-      <ion-tab tabTitle="Saveurs" [root]="tasteTab" [rootParams]="{ tasting: tasting, onSave: saveTasting, onCancel: cancelTasting }"></ion-tab>
-      <ion-tab tabTitle="Synthèse" [root]="synthesisTab" [rootParams]="{ tasting: tasting, onSave: saveTasting, onCancel: cancelTasting }"></ion-tab>
+      <ion-tab tabTitle="Vin" [root]="informationsTab" [rootParams]="{ tasting: tasting }"></ion-tab>
+      <ion-tab tabTitle="Aspect" [root]="sightTab" [rootParams]="{ tasting: tasting }"></ion-tab>
+      <ion-tab tabTitle="Arômes" [root]="smellTab" [rootParams]="{ tasting: tasting }"></ion-tab>
+      <ion-tab tabTitle="Saveurs" [root]="tasteTab" [rootParams]="{ tasting: tasting }"></ion-tab>
+      <ion-tab tabTitle="Synthèse" [root]="synthesisTab" [rootParams]="{ tasting: tasting }"></ion-tab>
     </ion-tabs>`
 })
 export class TastingPage {
@@ -63,6 +63,8 @@ export class TastingPage {
             }
         };
 
+        this.isEdit = this.navParams.get('isEdit');
+
         this.events.subscribe('tasting:save', () => {
             this.saveTasting();
         });
@@ -83,7 +85,10 @@ export class TastingPage {
             return;
         }
 
-        this.tasting.endDate = Date.now();
+        if(!this.isEdit) {
+            this.tasting.endDate = Date.now();
+        }
+
         this.tastingsData.saveTasting(this.tasting).then(result => {
             if(result) {
                 this.events.publish('tasting:saved');

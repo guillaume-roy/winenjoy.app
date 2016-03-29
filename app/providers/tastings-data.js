@@ -25,12 +25,21 @@ export class TastingsData {
 
   saveTasting(tasting) {
       return new Promise((resolve, reject) => {
-          tasting.id = this.generateUUID();
-          this.getTastings().then(tastings => {
-              tastings.push(tasting);
-              this.storage.set(this.TASTINGS_KEY, JSON.stringify(tastings));
-              resolve(true);
-          });
+          if(tasting.id) {
+              this.getTastings().then(tastings => {
+                _.remove(tastings, t => t.id === tasting.id);
+                tastings.push(tasting);
+                this.storage.set(this.TASTINGS_KEY, JSON.stringify(tastings));
+                resolve(true);
+            });
+          } else {
+            tasting.id = this.generateUUID();
+            this.getTastings().then(tastings => {
+                tastings.push(tasting);
+                this.storage.set(this.TASTINGS_KEY, JSON.stringify(tastings));
+                resolve(true);
+            });
+          }
       });
   }
 
