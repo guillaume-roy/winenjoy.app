@@ -34,25 +34,32 @@ export class LoginViewModel extends Observable {
 
             firebase.init({
                 url: new Config().FirebaseUrl
-            }).then(result => {
-                firebase.query(value => {
+            }).then(() => {
+                firebase.query(result => {
                     this.isBusy = false;
 
-                    if (value.value && value.value.length > 0) {
-                        Services.current.setUserInformations({
-                           email: this.email
-                        });
-                        resolve(true);
-                    } else {
+                    if (!result) {
                         resolve(false);
+                        return;
                     }
+
+                    if (!result.value) {
+                        resolve(false);
+                        return;
+                    }
+
+                    if (result.value.length === 0) {
+                        resolve(false);
+                        return;
+                    }
+
+                    Services.current.setUserInformations({
+                        email: this.email
+                    });
+                    resolve(true);
                 },
                 "beta-testers",
                 {
-                    limit: {
-                        type: firebase.QueryLimitType.FIRST,
-                        value: 1
-                    },
                     orderBy: {
                         type: firebase.QueryOrderByType.CHILD,
                         value: "email"
@@ -63,8 +70,8 @@ export class LoginViewModel extends Observable {
                     },
                     singleEvent: true
                 }).catch(e => {
-                    reject(e);
                     this.isBusy = false;
+                    reject(e);
                 });
             }, error => {
                 this.isBusy = false;
