@@ -3,7 +3,14 @@
 </ion-navbar>
 
 <ion-content>
-    <ion-list>
+    <div class="empty-message" padding text-center *ngIf="tastings.length === 0">
+        <img src="img/grapes.svg"/>
+        <h5>Aucune dégustation</h5>
+        <button full secondary (click)="createTasting()">
+            Créer ma première dégustation
+        </button>
+    </div>
+    <ion-list *ngIf="tastings.length > 0">
         <button ion-item *ngFor="#tasting of tastings" (click)="viewTasting(tasting)">
             <ion-avatar item-left [style.backgroundColor]="tasting.sight.color"></ion-avatar>
             <h2 *ngIf="tasting.informations.cuvee">{{ tasting.informations.cuvee }}</h2>
@@ -21,6 +28,6 @@
     </ion-list>
 </ion-content>
 
-<button fab fab-bottom fab-right (click)="createTasting()" style="z-index: 99">
+<button fab fab-bottom fab-right (click)="createTasting()" style="z-index: 99" *ngIf="tastings.length > 0">
     <ion-icon light name="ios-wine"></ion-icon>
 </button>

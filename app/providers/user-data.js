@@ -1,5 +1,5 @@
 import {Injectable} from 'angular2/core';
-import {Storage, LocalStorage, Events} from 'ionic-angular';
+import {Storage, SqlStorage, Events} from 'ionic-angular';
 
 @Injectable()
 export class UserData {
@@ -8,8 +8,8 @@ export class UserData {
   }
 
   constructor(events) {
-    this.storage = new Storage(LocalStorage);
-    this.USER_INFORMATIONS_KEY = 'USER_INFORMATIONS';
+    this.storage = new Storage(SqlStorage, { name: "winenjoy" });
+    this.USER_KEY = 'USER';
   }
 
   login(loginData) {
@@ -28,7 +28,7 @@ export class UserData {
                 return;
             }
 
-            this.storage.set(this.USER_INFORMATIONS_KEY, { email: loginData.email.toLowerCase().trim()});
+            this.storage.set(this.USER_KEY, JSON.stringify({ email: loginData.email.toLowerCase().trim()}));
             resolve(true);
         }, error => {
             reject("Connexion impossible.");
@@ -38,8 +38,8 @@ export class UserData {
 
   // return a promise
   isLogged() {
-    return this.storage.get(this.USER_INFORMATIONS_KEY).then((value) => {
-      return value;
+    return this.storage.get(this.USER_KEY).then((value) => {
+        return value;
     });
   }
 }
