@@ -34,6 +34,11 @@ export class TastingsPage {
     }
 
     createTasting() {
+        // Beta Time !
+        if(this.tastings.lenght === 10) {
+            return;
+        }
+
         this.nav.push(TastingPage, { tasting: null, isEdit: false });
     }
 }
