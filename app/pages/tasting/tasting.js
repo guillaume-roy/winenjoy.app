@@ -59,7 +59,7 @@ export class TastingPage {
                 length: []
             },
             synthesis: {
-                rating: 'NEUTRAL'
+                rating: 'neutral'
             }
         };
 
