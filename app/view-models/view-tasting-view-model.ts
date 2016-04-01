@@ -4,6 +4,8 @@ import {Services} from "../utils/services";
 
 export class ViewTastingViewModel extends Observable {
     private _wineTasting: WineTasting;
+    private _alcoholValue: number;
+    private _alcoholFromattedValue: number;
 
     public get wineTasting() {
         return this._wineTasting;
@@ -13,9 +15,18 @@ export class ViewTastingViewModel extends Observable {
         this.notifyPropertyChange("wineTasting", value);
     }
 
+    public get alcoholValue() {
+        return this._alcoholValue;
+    }
+    public set alcoholValue(value: number) {
+        this._alcoholValue = value;
+        this.notifyPropertyChange("alcoholValue", value);
+    }
+
     constructor(wineTasting: WineTasting) {
         super();
         this.wineTasting = wineTasting;
+        this.alcoholValue = this.wineTasting.alcohol * 10;
     }
 
     public getShareMessage() {
