@@ -97,7 +97,7 @@ export function onSelectColor() {
             viewModel.wineTasting.color = selectedColor;
             viewModel.notifyPropertyChange("wineTasting", viewModel.wineTasting);
         },
-        true);
+        false);
 }
 
 export function onAddAromas() {
