@@ -38,54 +38,13 @@ export function onSaveTasting() {
             moduleName: Views.main
         });
     } else {
-        viewModel.tabSelectedIndex = 0;
-        setTimeout(() => {
-            let field = page.getViewById("cuvee-field");
-            field.animate({
-                curve: "spring",
-                duration: 100,
-                translate: {
-                    x: -50,
-                    y: 0
-                }
-            }).then(() => {
-                field.animate({
-                    curve: "spring",
-                    duration: 100,
-                    translate: {
-                        x: 50,
-                        y: 0
-                    }
-                }).then(() => {
-                    field.animate({
-                        curve: "spring",
-                        duration: 100,
-                        translate: {
-                            x: -40,
-                            y: 0
-                        }
-                    }).then(() => {
-                        field.animate({
-                            curve: "spring",
-                            duration: 100,
-                            translate: {
-                                x: 20,
-                                y: 0
-                            }
-                        }).then(() => {
-                            field.animate({
-                                curve: "spring",
-                                duration: 100,
-                                translate: {
-                                    x: 0,
-                                    y: 0
-                                }
-                            });
-                        });
-                    });
-                });
-            });
-        }, 10);
+        dialogs.alert({
+            message: "Vous devez indiquer au moins : un nom de cuvée, un domaine, une région ou un pays.",
+            okButtonText: "OK",
+            title: "Erreur"
+        }).then(function() {
+            viewModel.tabSelectedIndex = 0;
+        });
     }
 }
 

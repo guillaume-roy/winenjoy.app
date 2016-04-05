@@ -27,7 +27,7 @@
                         <SegmentedBarItem title="Rouge" />
                     </SegmentedBar.items>
                 </SegmentedBar>
-				<TextField text="{{ wineTasting.cuvee }}" hint="Cuvée" row="1" colspan="2" id="cuvee-field" class="{{ formIsValid ? '' : 'invalid-field' }}" />
+				<TextField text="{{ wineTasting.cuvee }}" hint="Cuvée" row="1" colspan="2" id="cuvee-field" />
                 <TextField text="{{ wineTasting.estate }}" hint="Domaine" row="2" colspan="2" />
                 <TextField text="{{ wineTasting.region }}" hint="Région" row="3" colspan="2" />
 				<TextField text="{{ wineTasting.country }}" hint="Pays" row="4" colspan="2"/>
