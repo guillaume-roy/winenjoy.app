@@ -1,32 +1,59 @@
+import _ = require("lodash");
 import {Observable} from "data/observable";
 import {WineTasting} from "../entities/wineTasting";
 import {CriteriaItem} from "../entities/criteriaItem";
-import {Services} from "../utils/services";
-import {IAppService} from "../services/IAppService";
-import _ = require("lodash");
+import {WineDataService} from "../services/wineDataService";
+import {TastingsService} from "../services/tastingsService";
 
 export class EditTastingViewModel extends Observable {
-    private _service: IAppService;
+    private _wineDataService: WineDataService;
+    private _tabSelectedIndex: number;
+    private _formIsValid: boolean;
+    private _hasBubbles: boolean;
+    private _wineTasting: WineTasting;
+    private _wineTypeSelectedIndex: number;
+    private _alcoholValue: number;
+    private _alcoholFromattedValue: number;
     private _limpidityCriterias: CriteriaItem[];
     private _shineCriterias: CriteriaItem[];
     private _intensityCriterias: CriteriaItem[];
     private _tearCriterias: CriteriaItem[];
     private _bubbleCriterias: CriteriaItem[];
-    private _wineTypes: CriteriaItem[];
     private _lengthCriterias: CriteriaItem[];
-    private _attackCriterias: CriteriaItem[];
     private _tannicCriterias: CriteriaItem[];
     private _acidityCriterias: CriteriaItem[];
-    private _alcoholValue: number;
-    private _alcoholFromattedValue: number;
-    private _hasBubbles: boolean;
+    private _wineTypes: CriteriaItem[];
+    private _attackCriterias: CriteriaItem[];
     private _wineYear: number;
-    private _formIsValid: boolean;
-    private _tabSelectedIndex: number;
 
-    private _wineTasting: WineTasting;
+    public get wineYear() {
+        return this._wineYear;
+    }
 
-    private _wineTypeSelectedIndex: number;
+    public set wineYear(value) {
+        this._wineYear = value;
+        this.notifyPropertyChange("wineYear", value);
+
+        this.wineTasting.year = value;
+    }
+
+    public get attackCriterias() {
+        return this._attackCriterias;
+    }
+
+    public set attackCriterias(value) {
+        this._attackCriterias = value;
+        this.notifyPropertyChange("attackCriterias", value);
+    }
+
+    public get limpidityCriterias() {
+        return this._limpidityCriterias;
+    }
+
+    public set limpidityCriterias(value) {
+        this._limpidityCriterias = value;
+        this.notifyPropertyChange("limpidityCriterias", value);
+    }
 
     public get tabSelectedIndex() {
         return this._tabSelectedIndex;
@@ -34,15 +61,6 @@ export class EditTastingViewModel extends Observable {
     public set tabSelectedIndex(value) {
         this._tabSelectedIndex = value;
         this.notifyPropertyChange("tabSelectedIndex", value);
-    }
-
-    public get wineYear() {
-        return this._wineYear;
-    }
-    public set wineYear(value) {
-        this._wineYear = value;
-        this.notifyPropertyChange("wineYear", value);
-        this.wineTasting.year = value;
     }
 
     public get formIsValid() {
@@ -69,49 +87,69 @@ export class EditTastingViewModel extends Observable {
         this.notifyPropertyChange("wineTasting", value);
     }
 
-    public get tannicCriterias() {
-        return this._tannicCriterias;
+    public get wineTypeSelectedIndex() {
+        return this._wineTypeSelectedIndex;
     }
-    public set tannicCriterias(value) {
-        this._tannicCriterias = value;
-        this.notifyPropertyChange("tannicCriterias", value);
+    public set wineTypeSelectedIndex(value: number) {
+        this._wineTypeSelectedIndex = value;
+        this.notifyPropertyChange("wineTypeSelectedIndex", value);
+
+        this.wineTasting.wineType = this.wineTypes[value];
+        this.wineTasting.color = null;
+        this.wineTasting.balances = [];
+        this.wineTasting.attacks = [];
+
+        let criteriasName = "";
+        switch (this.wineTasting.wineType.code) {
+            case "WHITE":
+                criteriasName = "whiteAttacks";
+            break;
+            case "ROSE":
+                criteriasName = "roseAttacks";
+            break;
+            case "RED":
+                criteriasName = "redAttacks";
+            break;
+        }
+
+        this._wineDataService.getCriterias(criteriasName).then(data => {
+            this.attackCriterias = data;
+        });
     }
 
-    public get acidityCriterias() {
-        return this._acidityCriterias;
-    }
-    public set acidityCriterias(value) {
-        this._acidityCriterias = value;
-        this.notifyPropertyChange("acidityCriterias", value);
+    public get alcoholValue() {
+        return this._alcoholValue;
     }
 
-    public get attackCriterias() {
-        return this._attackCriterias;
-    }
-    public set attackCriterias(value) {
-        this._attackCriterias = value;
-        this.notifyPropertyChange("attackCriterias", value);
+    public set alcoholValue(value: number) {
+        this._alcoholValue = value;
+        this.notifyPropertyChange("alcoholValue", value);
+        this.alcoholFromattedValue = value / 10;
     }
 
-    public get limpidityCriterias() {
-        return this._limpidityCriterias;
-    }
-    public set limpidityCriterias(value) {
-        this._limpidityCriterias = value;
-        this.notifyPropertyChange("limpidityCriterias", value);
+    public get alcoholFromattedValue() {
+        return this._alcoholFromattedValue;
     }
 
-    public get lengthCriterias() {
-        return this._lengthCriterias;
+    public set alcoholFromattedValue(value: number) {
+        this._alcoholFromattedValue = value;
+        this.notifyPropertyChange("alcoholFromattedValue", value);
+        this.wineTasting.alcohol = value;
     }
-    public set lengthCriterias(value) {
-        this._lengthCriterias = value;
-        this.notifyPropertyChange("lengthCriterias", value);
+
+    public get shineCriterias() {
+        return this._shineCriterias;
+    }
+
+    public set shineCriterias(value) {
+        this._shineCriterias = value;
+        this.notifyPropertyChange("shineCriterias", value);
     }
 
     public get intensityCriterias() {
         return this._intensityCriterias;
     }
+
     public set intensityCriterias(value) {
         this._intensityCriterias = value;
         this.notifyPropertyChange("intensityCriterias", value);
@@ -120,6 +158,7 @@ export class EditTastingViewModel extends Observable {
     public get tearCriterias() {
         return this._tearCriterias;
     }
+
     public set tearCriterias(value) {
         this._tearCriterias = value;
         this.notifyPropertyChange("tearCriterias", value);
@@ -128,63 +167,46 @@ export class EditTastingViewModel extends Observable {
     public get bubbleCriterias() {
         return this._bubbleCriterias;
     }
+
     public set bubbleCriterias(value) {
         this._bubbleCriterias = value;
         this.notifyPropertyChange("bubbleCriterias", value);
     }
 
-    public get shineCriterias() {
-        return this._shineCriterias;
+    public get lengthCriterias() {
+        return this._lengthCriterias;
     }
-    public set shineCriterias(value) {
-        this._shineCriterias = value;
-        this.notifyPropertyChange("shineCriterias", value);
+
+    public set lengthCriterias(value) {
+        this._lengthCriterias = value;
+        this.notifyPropertyChange("lengthCriterias", value);
+    }
+
+    public get tannicCriterias() {
+        return this._tannicCriterias;
+    }
+
+    public set tannicCriterias(value) {
+        this._tannicCriterias = value;
+        this.notifyPropertyChange("tannicCriterias", value);
+    }
+
+    public get acidityCriterias() {
+        return this._acidityCriterias;
+    }
+
+    public set acidityCriterias(value) {
+        this._acidityCriterias = value;
+        this.notifyPropertyChange("acidityCriterias", value);
     }
 
     public get wineTypes() {
         return this._wineTypes;
     }
+
     public set wineTypes(value) {
         this._wineTypes = value;
         this.notifyPropertyChange("wineTypes", value);
-    }
-
-    public get wineTypeSelectedIndex() {
-        return this._wineTypeSelectedIndex;
-    }
-    public set wineTypeSelectedIndex(value: number) {
-        this._wineTypeSelectedIndex = value;
-        this.notifyPropertyChange("wineTypeSelectedIndex", value);
-
-        this.wineTasting.wineType = this._wineTypes[value];
-        this.wineTasting.color = null;
-        this.wineTasting.balances = [];
-
-        this._service.getAttackCriteriasAsync(this.wineTasting.wineType.code)
-            .then(data => {
-                this.wineTasting.attacks = [];
-                this.attackCriterias = data;
-            });
-    }
-
-    public get alcoholValue() {
-        return this._alcoholValue;
-    }
-    public set alcoholValue(value: number) {
-        this._alcoholValue = value;
-        this.notifyPropertyChange("alcoholValue", value);
-
-        this.alcoholFromattedValue = value / 10;
-    }
-
-    public get alcoholFromattedValue() {
-        return this._alcoholFromattedValue;
-    }
-    public set alcoholFromattedValue(value: number) {
-        this._alcoholFromattedValue = value;
-        this.notifyPropertyChange("alcoholFromattedValue", value);
-
-        this.wineTasting.alcohol = value;
     }
 
     constructor() {
@@ -203,30 +225,39 @@ export class EditTastingViewModel extends Observable {
             tears: []
         };
 
-        this.wineYear = new Date().getFullYear() - 3;
         this.alcoholValue = 0;
 
         this.formIsValid = true;
 
-        this._service = Services.current;
+        this.limpidityCriterias = [];
+        this.shineCriterias = [];
+        this.intensityCriterias = [];
+        this.tearCriterias = [];
+        this.bubbleCriterias = [];
+        this.lengthCriterias = [];
+        this.tannicCriterias = [];
+        this.acidityCriterias = [];
+        this.wineTypes = [];
+        this.attackCriterias = [];
 
-        this._service.getLimpidityCriteriasAsync()
+        this._wineDataService = new WineDataService();
+        this._wineDataService.getCriterias("limpidities")
             .then(data => this.limpidityCriterias = data);
-        this._service.getShineCriteriasAsync()
+        this._wineDataService.getCriterias("shines")
             .then(data => this.shineCriterias = data);
-        this._service.getIntensityCriteriasAsync()
+        this._wineDataService.getCriterias("intensities")
             .then(data => this.intensityCriterias = data);
-        this._service.getTearCriteriasAsync()
+        this._wineDataService.getCriterias("tears")
             .then(data => this.tearCriterias = data);
-        this._service.getBubbleCriteriasAsync()
+        this._wineDataService.getCriterias("bubbles")
             .then(data => this.bubbleCriterias = data);
-        this._service.getLengthCriteriasAsync()
+        this._wineDataService.getCriterias("length")
             .then(data => this.lengthCriterias = data);
-        this._service.getTannicCriteriasAsync()
+        this._wineDataService.getCriterias("redTannics")
             .then(data => this.tannicCriterias = data);
-        this._service.getWhiteAcidityCriteriasAsync()
+        this._wineDataService.getCriterias("whiteAcidities")
             .then(data => this.acidityCriterias = data);
-        this._service.getWineTypesAsync()
+        this._wineDataService.getCriterias("wineTypes")
             .then(data => {
                 this.wineTypes = data;
                 this.wineTypeSelectedIndex = 0;
@@ -238,7 +269,7 @@ export class EditTastingViewModel extends Observable {
             this.wineTasting.bubbles = [];
         }
         this.wineTasting.endDate = Date.now();
-        this._service.saveWineTasting(this.wineTasting);
+        new TastingsService().saveTasting(this.wineTasting);
     }
 
     public setAromas(aromas: CriteriaItem[]) {
@@ -256,6 +287,9 @@ export class EditTastingViewModel extends Observable {
     }
 
     public validateForm() {
-        this.formIsValid = !_.isEmpty(this.wineTasting.cuvee);
+        this.formIsValid = !_.isEmpty(this.wineTasting.cuvee)
+            || !_.isEmpty(this.wineTasting.estate)
+            || !_.isEmpty(this.wineTasting.region)
+            || !_.isEmpty(this.wineTasting.country);
     }
 }

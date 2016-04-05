@@ -1,0 +1,37 @@
+[
+	{
+		"language": "fr",
+		"data": [
+            {
+                "id": "f3713a11-eb18-401d-be25-e4d8855f2368",
+                "label": "Fuyante",
+                "order": 0
+            },
+            {
+                "id": "5f377831-a1a6-45b6-b046-b79fed34628f",
+                "label": "Franche",
+                "order": 1
+            },
+            {
+                "id": "9406aa3c-b3bb-47a8-9e2a-6cc3eb5e2c1a",
+                "label": "Nette",
+                "order": 2
+            },
+            {
+                "id": "41a6e639-0389-4187-95c9-6e689e15ed7d",
+                "label": "Ample",
+                "order": 3
+            },
+            {
+                "id": "8781145d-2f93-4b51-9be8-38523d6d4c27",
+                "label": "Aromatique",
+                "order": 4
+            },
+            {
+                "id": "4c886e23-e599-46f5-b6d0-159eef0f1eca",
+                "label": "Intense",
+                "order": 5
+            }
+        ]
+    }
+]

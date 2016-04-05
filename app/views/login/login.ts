@@ -1,7 +1,6 @@
 import {LoginViewModel} from "../../view-models/login-view-model";
 import {EventData} from "data/observable";
 import {Page} from "ui/page";
-import editableTextBaseModule = require("ui/editable-text-base");
 import dialogs = require("ui/dialogs");
 import frameModule = require("ui/frame");
 import {Views} from "../../utils/views";
@@ -10,7 +9,6 @@ let viewModel: LoginViewModel;
 
 export function navigatedTo(args: EventData) {
     let page = <Page>args.object;
-    (<editableTextBaseModule.EditableTextBase>page.getViewById("login-field")).dismissSoftInput();
     viewModel = new LoginViewModel();
     page.bindingContext = viewModel;
 }

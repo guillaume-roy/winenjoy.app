@@ -5,7 +5,6 @@ import frameModule = require("ui/frame");
 import {View} from "ui/core/view";
 import {Views} from "../../utils/views";
 import geolocation = require("nativescript-geolocation");
-import appModule = require("application");
 import listViewModule = require("ui/list-view");
 
 let viewModel: MainViewModel;
@@ -53,6 +52,14 @@ export function onCreateNewTasting(args: EventData) {
     });
 }
 
+export function onCreateFirstTasting() {
+    frameModule.topmost().navigate({
+        animated: false,
+        moduleName: Views.editTasting,
+        transition: null
+    });
+}
+
 export function onViewTasting(args: listViewModule.ItemEventData) {
     let wineTasting = viewModel.tastings[args.index];
     frameModule.topmost().navigate({
@@ -62,37 +69,3 @@ export function onViewTasting(args: listViewModule.ItemEventData) {
         transition: null
     });
 }
-
-let finalRatingToImageConverterKey = "finalRatingToImageConverter";
-appModule.resources[finalRatingToImageConverterKey] = function(value: string) {
-    if (!value) {
-        return null;
-    }
-
-    return "res://ic_" + value.toLowerCase();
-};
-
-let wineLocationConverterKey = "wineLocationConverter";
-appModule.resources[wineLocationConverterKey] = function(value: any) {
-    if (!value) {
-        return null;
-    }
-
-    let result = "";
-
-    if (value.region || value.country) {
-        if (value.region) {
-            result = value.region;
-        }
-
-        if (value.country) {
-            if (result.length > 0) {
-              result = result + " - " + value.country;
-            } else {
-                result = value.country;
-            }
-        }
-    }
-
-    return result;
-};

@@ -1,10 +1,9 @@
 import {Observable} from "data/observable";
-import {Services} from "../utils/services";
-import {IAppService} from "../services/IAppService";
+import {TastingsService} from "../services/tastingsService";
+import {WineTasting} from "../entities/wineTasting";
 
 export class MainViewModel extends Observable {
-    private _service: IAppService;
-    private _tastings: any[];
+    private _tastings: WineTasting[];
     private _betaIsClosed: boolean;
 
     public get tastings() {
@@ -26,8 +25,11 @@ export class MainViewModel extends Observable {
     constructor() {
         super();
 
-        this._service = Services.current;
-        this.tastings = this._service.getWineTastings();
         this.betaIsClosed = new Date().getTime() > new Date(2016, 3, 17).getTime();
+
+        this.tastings = [];
+        new TastingsService().getTastings().then(data => {
+            this.tastings = data;
+        });
     }
 }

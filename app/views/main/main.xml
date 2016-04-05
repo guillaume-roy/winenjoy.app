@@ -17,12 +17,20 @@
             </GridLayout>
         </ListView.itemTemplate>
     </ListView>
-    <FAB:fab visibility="{{ tastings.length !== 10 || !betaIsClosed ? 'visible' : 'collapse' }}"
+    <FAB:fab visibility="{{ tastings && tastings.length !== 0 && !betaIsClosed ? 'visible' : 'collapse' }}"
         tap="onCreateNewTasting"
         icon="res://ic_add_white_24dp"
         rippleColor="#f1f1f1"
         class="fab-button" />
-    <Label text="Aucune dégustation ... pour l'instant." style="vertical-align: center;horizontal-align:center" visibility="{{ !tastings || tastings.length === 0  ? 'visible' : 'collapse'}}"/>
-    <Label text="Cette version beta est terminée. Merci." style="vertical-align: center;horizontal-align:center" visibility="{{ betaIsClosed ? 'visible' : 'collapse' }}"/>
+
+    <StackLayout visibility="{{ !tastings || tastings.length === 0  ? 'visible' : 'collapse'}}" class="empty-container">
+        <StackLayout class="empty-message">
+            <Label class="winenjoy-icon" text="&#xe900;" />
+            <Label text="Aucune dégustation" class="no-tasting-message" />
+        </StackLayout>
+        <Button text="Créer ma première dégustation" class="first-tasting-button" tap="onCreateFirstTasting" />
+    </StackLayout>
+
+    <Label text="Cette version beta est terminée. Merci." class="beta-message" visibility="{{ betaIsClosed ? 'visible' : 'collapse' }}"/>
   </GridLayout>
 </Page>

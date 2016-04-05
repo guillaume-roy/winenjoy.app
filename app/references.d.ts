@@ -1,6 +1,5 @@
 /// <reference path="../node_modules/tns-core-modules/tns-core-modules.d.ts" /> Enable smart suggestions and completions in Visual Studio Code JavaScript projects.
-/// <reference path="./definitions/lodash.d.ts" />
-/// <reference path="../app/definitions/lodash.d.ts" />
+/// <reference path="../typings/lodash.d.ts" />
 /// <reference path="../node_modules/nativescript-geolocation/nativescript-geolocation.d.ts" />
 /// <reference path="../node_modules/nativescript-geolocation/nativescript-geolocation.d.ts" />
 /// <reference path="../node_modules/nativescript-geolocation/index.d.ts" />

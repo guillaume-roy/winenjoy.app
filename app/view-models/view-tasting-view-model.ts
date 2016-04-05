@@ -1,11 +1,10 @@
 import {Observable} from "data/observable";
 import {WineTasting} from "../entities/wineTasting";
-import {Services} from "../utils/services";
+import {TastingsService} from "../services/tastingsService";
 
 export class ViewTastingViewModel extends Observable {
     private _wineTasting: WineTasting;
     private _alcoholValue: number;
-    private _alcoholFromattedValue: number;
 
     public get wineTasting() {
         return this._wineTasting;
@@ -56,6 +55,6 @@ export class ViewTastingViewModel extends Observable {
     }
 
     public deleteTasting() {
-        Services.current.deleteWineTasting(this.wineTasting);
+        new TastingsService().deleteTasting(this.wineTasting);
     }
 }

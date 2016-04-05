@@ -3,7 +3,6 @@ import {Page} from "ui/page";
 import {EditTastingViewModel} from "../../view-models/edit-tasting-view-model";
 import frameModule = require("ui/frame");
 import dialogs = require("ui/dialogs");
-import appModule = require("application");
 import {Views} from "../../utils/views";
 import geolocation = require("nativescript-geolocation");
 
@@ -34,9 +33,9 @@ export function onSaveTasting() {
         viewModel.finishTasting();
 
         frameModule.topmost().navigate({
-        animated: false,
-        backstackVisible: false,
-        moduleName: Views.main
+            animated: false,
+            backstackVisible: false,
+            moduleName: Views.main
         });
     } else {
         viewModel.tabSelectedIndex = 0;
@@ -143,25 +142,3 @@ export function cancel() {
         }
     });
 }
-
-let dateConverterKey = "dateConverter";
-appModule.resources[dateConverterKey] = function(value) {
-    let date = new Date(value);
-    let day = date.getDate();
-    let month = date.getMonth();
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    return (day < 10 ? "0" + day : day) + "/" + (month < 10 ? "0" + month : month) + "/" + date.getFullYear() +
-        " " + (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes);
-};
-
-let labelConverterKey = "labelConverter";
-appModule.resources[labelConverterKey] = function(value) {
-    if (value && value.length > 0) {
-        return value.map(v => {
-            return v.label;
-        });
-    } else {
-        return [];
-    }
-};

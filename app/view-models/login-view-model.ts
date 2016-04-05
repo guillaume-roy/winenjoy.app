@@ -1,14 +1,14 @@
 import {Observable} from "data/observable";
-import {Services} from "../utils/services";
 import firebase = require("nativescript-plugin-firebase");
 import {Config} from "../utils/config";
+import {UserService} from "../services/userService";
 
 export class LoginViewModel extends Observable {
     private _email: string;
     private _isBusy: boolean;
 
     public get email() {
-        return this._email;
+        return this.email;
     }
     public set email(value: string) {
         this._email = value;
@@ -53,8 +53,8 @@ export class LoginViewModel extends Observable {
                         return;
                     }
 
-                    Services.current.setUserInformations({
-                        email: this.email
+                    new UserService().setUser({
+                        email: this.email.toLowerCase().trim()
                     });
                     resolve(true);
                 },

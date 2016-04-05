@@ -1,5 +1,10 @@
 @import "_material-theme";
+@import "_fonts";
 
 ActionBar {
     color: $primary-color-text;
+}
+
+.icon-24 {
+    font-size: 24;
 }

@@ -1,13 +1,11 @@
 import _ = require("lodash");
 import {Observable} from "data/observable";
-import {Services} from "../utils/services";
-import {IAppService} from "../services/IAppService";
 import {CriteriaItem} from "../entities/criteriaItem";
+import {WineDataService} from "../services/wineDataService";
 
 export class AromasPickerViewModel extends Observable {
     private _aromaCriterias: any[];
     private _aromaCriteriasSource: any[];
-    private _service: IAppService;
     private _searchingText: string;
     private _selectedItems: CriteriaItem[];
     private _isDefects: boolean;
@@ -59,9 +57,7 @@ export class AromasPickerViewModel extends Observable {
             this._selectedItems = [];
         }
 
-        this._service = Services.current;
-
-        this._service.getAromaCriteriasAsync()
+        new WineDataService().getCriterias("aromas")
             .then(data => {
                 let filterFunction = this.isDefects
                     ? (d) => d.code === "DEFECTS"
