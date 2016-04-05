@@ -2,6 +2,7 @@ import {WrapLayout} from "ui/layouts/wrap-layout";
 import {EventData} from "data/observable";
 import {Button} from "ui/button";
 import {Color} from "color";
+import {ColorUtils} from "../utils/color";
 import dependencyObservableModule = require("ui/core/dependency-observable");
 
 export class GradientColorPicker extends WrapLayout {
@@ -66,8 +67,8 @@ export class GradientColorPicker extends WrapLayout {
 
     private generateGradient() {
         if (this.startingColor && this.endingColor && this.colorsCount > 0) {
-            let startingColorRgb = this.convertToRGB(this.startingColor);
-            let endingColorRgb = this.convertToRGB(this.endingColor);
+            let startingColorRgb = ColorUtils.convertToRGB(this.startingColor);
+            let endingColorRgb = ColorUtils.convertToRGB(this.endingColor);
 
             let alpha = 0.0;
 
@@ -81,7 +82,7 @@ export class GradientColorPicker extends WrapLayout {
                 gradientColor[1] = startingColorRgb[1] * alpha + (1 - alpha) * endingColorRgb[1];
                 gradientColor[2] = startingColorRgb[2] * alpha + (1 - alpha) * endingColorRgb[2];
 
-                result.push(this.rgbToHex(gradientColor));
+                result.push(ColorUtils.rgbToHex(gradientColor));
             }
 
             this.displayGradient(result.reverse());
@@ -112,33 +113,5 @@ export class GradientColorPicker extends WrapLayout {
             this._gradientButtons.push(gradientButton);
             this.addChild(gradientButton);
         }
-    }
-
-    private hex (c) {
-        let s = "0123456789abcdef";
-        let i = parseInt(c);
-        if (i === 0 || isNaN (c)) {
-            return "00";
-        }
-        i = Math.round (Math.min (Math.max (0, i), 255));
-        return s.charAt ((i - i % 16) / 16) + s.charAt (i % 16);
-    }
-
-    private rgbToHex(rgb) {
-        return this.hex(rgb[0]) + this.hex(rgb[1]) + this.hex(rgb[2]);
-    }
-
-    private trimHexValue(s) {
-        return (s.charAt(0) === "#")
-            ? s.substring(1, 7)
-            : s;
-    }
-
-    private convertToRGB(hex) {
-        let color = [];
-        color[0] = parseInt ((this.trimHexValue(hex)).substring (0, 2), 16);
-        color[1] = parseInt ((this.trimHexValue(hex)).substring (2, 4), 16);
-        color[2] = parseInt ((this.trimHexValue(hex)).substring (4, 6), 16);
-        return color;
     }
 }

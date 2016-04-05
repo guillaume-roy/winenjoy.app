@@ -50,7 +50,7 @@
 		  <ScrollView>
             <GridLayout class="tab-view-content" rows="*,*,*,*,*,*,*,auto,*,auto,auto" columns="*, auto">
                 <Button text="Sélectionner la robe" tap="onSelectColor" visibility="{{ wineTasting.color ? 'collpase' : 'visible' }}" colspan="2" class="modal-button" />
-                <Button tap="onSelectColor" backgroundColor="{{wineTasting.color}}" visibility="{{ wineTasting.color ? 'visible' : 'collapse' }}" colspan="2" />
+                <Button text="Modifier la robe" tap="onSelectColor" color="{{wineTasting.color | foregroundColorConverter}}" backgroundColor="{{wineTasting.color}}" visibility="{{ wineTasting.color ? 'visible' : 'collapse' }}" colspan="2" />
 				<Label text="Limpidité" class="criterias-title" row="1" colspan="2" />
 				<vs:ValuesSelector items="{{ limpidityCriterias }}" selectedItems="{{ wineTasting.limpidities }}" row="2" colspan="2" />
 				<Label text="Brillance" class="criterias-title" row="3" colspan="2" />

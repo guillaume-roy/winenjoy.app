@@ -1,6 +1,7 @@
 import application = require("application");
 import {Views} from "./utils/views";
 import {UserService} from "./services/userService";
+import {ColorUtils} from "./utils/color";
 
 // TODO : Use moment.js
 application.resources.dateConverter = function(value) {
@@ -53,6 +54,10 @@ application.resources.wineLocationConverter = function(value: any) {
     }
 
     return result;
+};
+
+application.resources.foregroundColorConverter = function(backgroundColor: string) {
+    return ColorUtils.getForegroundColor(backgroundColor);
 };
 
 new UserService().isLogged().then(isLogged => {
