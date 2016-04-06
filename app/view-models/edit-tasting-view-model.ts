@@ -299,6 +299,11 @@ export class EditTastingViewModel extends Observable {
         this.notifyPropertyChange("wineTasting", this.wineTasting);
     }
 
+    public setYear(year: number) {
+        this.wineTasting.year = year;
+        this.notifyPropertyChange("wineTasting", this.wineTasting);
+    }
+
     public validateForm() {
         this.formIsValid = !_.isEmpty(this.wineTasting.cuvee)
             || !_.isEmpty(this.wineTasting.estate)

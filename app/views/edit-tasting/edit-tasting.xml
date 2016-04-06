@@ -32,9 +32,10 @@
                 <TextField text="{{ wineTasting.region }}" hint="Région" row="3" colspan="2" />
                 <Label text="Pays" row="4" class="criterias-title" />
                 <Button text="Sélectionner" tap="onSelectCountry" row="4" col="1" class="white-button" visibility="{{ wineTasting.country ? 'collapse' : 'visible' }}" />
-                <Button text="{{ (wineTasting.country ||{}).label }}" tap="onDeleteCountry" row="4" col="1" class="white-button" style="horizontal-align: right;" visibility="{{ wineTasting.country ? 'visible' : 'collapse' }}" />
-                <Label text="{{ wineYear ? wineYear : 'Année' }}" row="5" class="criterias-title-no-margin" width="70" />
-				<Slider value="{{ wineYear }}" minValue="1950" maxValue="2016" row="5" col="1" class="criterias-margin" />
+                <Button text="{{ (wineTasting.country ||{}).label }}" tap="onDeleteCountry" row="4" col="1" class="white-button" visibility="{{ wineTasting.country ? 'visible' : 'collapse' }}" />
+                <Label text="Année" row="5" class="criterias-title" />
+                <Button text="Sélectionner" tap="onSelectYear" row="5" col="1" class="white-button" visibility="{{ wineTasting.year ? 'collapse' : 'visible' }}" />
+                <Button text="{{ wineTasting.year }}" tap="onDeleteYear" row="5" col="1" class="white-button" visibility="{{ wineTasting.year ? 'visible' : 'collapse' }}" />
 				<Label text="{{ alcoholFromattedValue ? alcoholFromattedValue + '%' : '% Alcool' }}" row="6" class="criterias-title-no-margin" width="70" />
 				<Slider id="alcohol-slider" value="{{ alcoholValue }}" minValue="30" maxValue="180" row="6" col="1" class="criterias-margin" />
 				<Label text="Biologique" row="7" colspan="2" class="criterias-title" />

@@ -1,0 +1,7 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+        shownModally="onShownModally">
+    <StackLayout style="margin: 20" width="250">
+        <ListPicker items="{{ years }}" selectedIndex="{{ selectedYearIndex }}" />
+        <Button text="Valider" tap="onValidate" class="validate-button" />
+    </StackLayout>
+</Page>

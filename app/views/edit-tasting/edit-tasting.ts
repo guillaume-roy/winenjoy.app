@@ -88,6 +88,20 @@ export function onDeleteCountry() {
     viewModel.setCountry(null);
 }
 
+export function onSelectYear() {
+    page.showModal(
+        Views.yearPicker,
+        viewModel.wineTasting.year,
+        function(data) {
+            viewModel.setYear(data);
+        },
+        false);
+}
+
+export function onDeleteYear() {
+    viewModel.setYear(null);
+}
+
 export function onAddAromas() {
     page.showModal(
         Views.aromasPicker,

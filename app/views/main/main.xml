@@ -28,7 +28,7 @@
             <Label class="winenjoy-icon" text="&#xe900;" />
             <Label text="Aucune dégustation" class="no-tasting-message" />
         </StackLayout>
-        <Button text="Créer ma première dégustation" class="first-tasting-button" tap="onCreateFirstTasting" />
+        <Button text="Créer une dégustation" class="first-tasting-button" tap="onCreateFirstTasting" />
     </StackLayout>
 
     <Label text="Cette version beta est terminée. Merci." class="beta-message" visibility="{{ betaIsClosed ? 'visible' : 'collapse' }}"/>
