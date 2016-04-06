@@ -46,9 +46,9 @@ application.resources.wineLocationConverter = function(value: any) {
 
         if (value.country) {
             if (result.length > 0) {
-              result = result + " - " + value.country;
+              result = result + " - " + value.country.label;
             } else {
-                result = value.country;
+                result = value.country.label;
             }
         }
     }

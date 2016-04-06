@@ -4,12 +4,12 @@
         <SearchBar hint="{{ isDefects ? 'Rechercher un défaut' : 'Rechercher un arôme'}}" id="searchBar" textFieldHintColor="#FFFFFF" />
         <ListView items="{{ aromaCriterias }}" itemTap="onSelectAroma" row="1">
             <ListView.itemTemplate>
-                <GridLayout style="height:48;font-size:16;color:#212121;padding:16">
+                <GridLayout class="list-item">
                     <Label text="{{ aroma.label }}" />
-                    <Label text="✓" visibility="{{ isSelected ? 'visible' : 'collapsed' }}" style="horizontal-align: right" />
+                    <Label text="✓" visibility="{{ isSelected ? 'visible' : 'collapsed' }}" class="check-icon" />
                 </GridLayout>
             </ListView.itemTemplate>
         </ListView>
-        <Button text="Valider" row="2" tap="onValidate" style="background-color: #FFC107;color:#FFFFFF;height:60;font-size:16" />
+        <Button text="Valider" row="2" tap="onValidate" class="validate-button" />
     </GridLayout>
 </Page>

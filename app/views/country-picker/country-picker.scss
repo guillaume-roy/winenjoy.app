@@ -11,15 +11,21 @@
     font-size: 16;
     color: $primary-text-color;
     padding: 16;
+
+    .winenjoy-icon {
+        margin-right: 32;
+    }
 }
 
-.validate-button {
-    background-color: $accent-color;
-    color: $primary-color-text;
-    height:60;
-    font-size:16;
+.expanded-item {
+    color: $primary-color;
 }
 
-.check-icon {
-    horizontal-align: right;
+.countries-list {
+    margin-left: 50;
+}
+
+.title {
+    font-size: 20;
+    margin:20;
 }

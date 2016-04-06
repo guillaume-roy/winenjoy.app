@@ -29,7 +29,7 @@
 				<TextField text="{{ wineTasting.cuvee }}" hint="Cuvée" colspan="2" isEnabled="false" />
                 <TextField text="{{ wineTasting.estate }}" hint="Domaine" row="1" colspan="2" isEnabled="false" />
                 <TextField text="{{ wineTasting.region }}" hint="Région" row="2" colspan="2" isEnabled="false" />
-				<TextField text="{{ wineTasting.country }}" hint="Pays" row="3" colspan="2" isEnabled="false"/>
+				<TextField text="{{ (wineTasting.country || {}).label }}" hint="Pays" row="3" colspan="2" isEnabled="false"/>
                 <TextView hint="Cépages" row="4" colspan="2" text="{{ wineTasting.grapes }}" isEnabled="false" />
                 <Label text="{{ wineTasting.year ? wineTasting.year : 'Année' }}" row="5" class="criterias-title-no-margin" width="70" />
 				<Slider value="{{ wineTasting.year }}" minValue="1950" maxValue="2016" row="5" col="1" class="criterias-margin" isEnabled="false" />

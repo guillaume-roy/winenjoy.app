@@ -50,13 +50,32 @@ export function onSaveTasting() {
 
 export function onSelectColor() {
     page.showModal(
-        Views.gradientColorPickerModal,
+        Views.gradientColorPicker,
         viewModel.wineTasting,
         function(selectedColor) {
             viewModel.wineTasting.color = selectedColor;
             viewModel.notifyPropertyChange("wineTasting", viewModel.wineTasting);
         },
         false);
+}
+
+export function onDeleteColor() {
+    viewModel.wineTasting.color = null;
+    viewModel.notifyPropertyChange("wineTasting", viewModel.wineTasting);
+}
+
+export function onSelectCountry() {
+    page.showModal(
+        Views.countryPicker,
+        viewModel.wineTasting.country,
+        function(data) {
+            viewModel.setCountry(data);
+        },
+        true);
+}
+
+export function onDeleteCountry() {
+    viewModel.setCountry(null);
 }
 
 export function onAddAromas() {

@@ -30,7 +30,9 @@
 				<TextField text="{{ wineTasting.cuvee }}" hint="Cuvée" row="1" colspan="2" id="cuvee-field" />
                 <TextField text="{{ wineTasting.estate }}" hint="Domaine" row="2" colspan="2" />
                 <TextField text="{{ wineTasting.region }}" hint="Région" row="3" colspan="2" />
-				<TextField text="{{ wineTasting.country }}" hint="Pays" row="4" colspan="2"/>
+                <Label text="Pays" row="4" class="criterias-title" />
+                <Button text="Sélectionner" tap="onSelectCountry" row="4" col="1" visibility="{{ wineTasting.country ? 'collapse' : 'visible' }}" />
+                <Button text="{{ (wineTasting.country ||{}).label }}" tap="onDeleteCountry" row="4" col="1" style="background-color: white" visibility="{{ wineTasting.country ? 'visible' : 'collapse' }}" />
                 <TextView hint="Cépages" row="5" colspan="2" text="{{ wineTasting.grapes }}" />
                 <Label text="{{ wineYear ? wineYear : 'Année' }}" row="6" class="criterias-title-no-margin" width="70" />
 				<Slider value="{{ wineYear }}" minValue="1950" maxValue="2016" row="6" col="1" class="criterias-margin" />
@@ -50,7 +52,7 @@
 		  <ScrollView>
             <GridLayout class="tab-view-content" rows="*,*,*,*,*,*,*,auto,*,auto,auto" columns="*, auto">
                 <Button text="Sélectionner la robe" tap="onSelectColor" visibility="{{ wineTasting.color ? 'collpase' : 'visible' }}" colspan="2" class="modal-button" />
-                <Button text="Modifier la robe" tap="onSelectColor" color="{{wineTasting.color | foregroundColorConverter}}" backgroundColor="{{wineTasting.color}}" visibility="{{ wineTasting.color ? 'visible' : 'collapse' }}" colspan="2" />
+                <Button text="Supprimer la robe" tap="onDeleteColor" color="{{wineTasting.color | foregroundColorConverter}}" backgroundColor="{{wineTasting.color}}" visibility="{{ wineTasting.color ? 'visible' : 'collapse' }}" colspan="2" />
 				<Label text="Limpidité" class="criterias-title" row="1" colspan="2" />
 				<vs:ValuesSelector items="{{ limpidityCriterias }}" selectedItems="{{ wineTasting.limpidities }}" row="2" colspan="2" />
 				<Label text="Brillance" class="criterias-title" row="3" colspan="2" />

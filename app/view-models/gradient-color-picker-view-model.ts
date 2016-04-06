@@ -1,7 +1,7 @@
 import {Observable} from "data/observable";
 import {WineTasting} from "../entities/wineTasting";
 
-export class GradientColorPickerModalViewModel extends Observable {
+export class GradientColorPickerViewModel extends Observable {
     private _selectedColor: string;
     private _wineTasting: WineTasting;
 

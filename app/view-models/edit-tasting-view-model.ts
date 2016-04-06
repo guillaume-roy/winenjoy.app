@@ -216,6 +216,7 @@ export class EditTastingViewModel extends Observable {
             attacks: [],
             balances: [],
             bubbles: [],
+            country: null,
             finalRating: "NEUTRAL",
             intensities: [],
             length: [],
@@ -283,6 +284,11 @@ export class EditTastingViewModel extends Observable {
         this.wineTasting.defects = null;
         this.notifyPropertyChange("wineTasting", this.wineTasting);
         this.wineTasting.defects = defects;
+        this.notifyPropertyChange("wineTasting", this.wineTasting);
+    }
+
+    public setCountry(country: CriteriaItem) {
+        this.wineTasting.country = country;
         this.notifyPropertyChange("wineTasting", this.wineTasting);
     }
 

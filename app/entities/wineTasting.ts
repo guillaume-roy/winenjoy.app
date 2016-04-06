@@ -5,7 +5,7 @@ export interface WineTasting {
     estate?: string;
     region?: string;
     cuvee?: string;
-    country?: string;
+    country?: CriteriaItem;
     year?: number;
     wineType?: CriteriaItem;
     alcohol?: number;

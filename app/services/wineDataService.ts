@@ -24,6 +24,26 @@ export class WineDataService {
         });
     }
 
+    public getGeoAreas(): Promise<CriteriaItem[]> {
+        return new Promise<CriteriaItem[]>((resolve, reject) => {
+            this.getCriterias("geo").then(geoData => {
+                resolve(geoData.map(g => <CriteriaItem>{
+                    code: g.code,
+                    id: g.id,
+                    label: g.label
+                }));
+            });
+        });
+    }
+
+    public getCountries(areaCode: string): Promise<CriteriaItem[]> {
+        return new Promise<CriteriaItem[]>((resolve, reject) => {
+            this.getCriterias("geo").then(geoData => {
+                resolve(_.find(geoData, { code: areaCode }).values);
+            });
+        });
+    }
+
     private internalLoadCriterias(fileContent: string) {
         let jsonFile = <[]>JSON.parse(fileContent);
         let platformData = _.find(jsonFile, (value: any) => {
