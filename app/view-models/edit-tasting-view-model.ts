@@ -287,6 +287,13 @@ export class EditTastingViewModel extends Observable {
         this.notifyPropertyChange("wineTasting", this.wineTasting);
     }
 
+    public setGrapes(grapes: CriteriaItem[]) {
+        this.wineTasting.grapes = null;
+        this.notifyPropertyChange("wineTasting", this.wineTasting);
+        this.wineTasting.grapes = grapes;
+        this.notifyPropertyChange("wineTasting", this.wineTasting);
+    }
+
     public setCountry(country: CriteriaItem) {
         this.wineTasting.country = country;
         this.notifyPropertyChange("wineTasting", this.wineTasting);

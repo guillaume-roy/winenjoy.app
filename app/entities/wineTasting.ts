@@ -11,7 +11,7 @@ export interface WineTasting {
     alcohol?: number;
     isBiologic?: boolean;
     isBiodynamic?: boolean;
-    grapes?: string[];
+    grapes?: CriteriaItem[];
     wineTabNotes?: string;
     startDate?: number;
     endDate?: number;

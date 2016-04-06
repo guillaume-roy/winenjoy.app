@@ -19,7 +19,7 @@
 	 <TabViewItem title="Vin">
 	   <TabViewItem.view>
 		<ScrollView>
-			<GridLayout columns="auto,*" rows="*,*,*,*,*,*,*,*,*,*,*" class="tab-view-content">
+			<GridLayout columns="auto,*" rows="*,*,*,*,*,*,*,*,*,*,auto,*" class="tab-view-content">
                 <SegmentedBar colspan="2" selectedIndex="{{ wineTypeSelectedIndex }}">
                     <SegmentedBar.items>
                         <SegmentedBarItem title="Blanc" />
@@ -31,18 +31,20 @@
                 <TextField text="{{ wineTasting.estate }}" hint="Domaine" row="2" colspan="2" />
                 <TextField text="{{ wineTasting.region }}" hint="Région" row="3" colspan="2" />
                 <Label text="Pays" row="4" class="criterias-title" />
-                <Button text="Sélectionner" tap="onSelectCountry" row="4" col="1" visibility="{{ wineTasting.country ? 'collapse' : 'visible' }}" />
-                <Button text="{{ (wineTasting.country ||{}).label }}" tap="onDeleteCountry" row="4" col="1" style="background-color: white" visibility="{{ wineTasting.country ? 'visible' : 'collapse' }}" />
-                <TextView hint="Cépages" row="5" colspan="2" text="{{ wineTasting.grapes }}" />
-                <Label text="{{ wineYear ? wineYear : 'Année' }}" row="6" class="criterias-title-no-margin" width="70" />
-				<Slider value="{{ wineYear }}" minValue="1950" maxValue="2016" row="6" col="1" class="criterias-margin" />
-				<Label text="{{ alcoholFromattedValue ? alcoholFromattedValue + '%' : '% Alcool' }}" row="7" class="criterias-title-no-margin" width="70" />
-				<Slider id="alcohol-slider" value="{{ alcoholValue }}" minValue="30" maxValue="180" row="7" col="1" class="criterias-margin" />
-				<Label text="Biologique" row="8" colspan="2" class="criterias-title" />
-				<Switch checked="{{ wineTasting.isBiologic }}" row="8" col="1" />
-				<Label text="Biodynamique" row="9" colspan="2" class="criterias-title" />
-				<Switch checked="{{ wineTasting.isBiodynamic }}" row="9" col="1" />
-				<TextView text="{{ wineTasting.wineTabNotes }}" hint="Commentaires" row="10" colspan="2" />
+                <Button text="Sélectionner" tap="onSelectCountry" row="4" col="1" class="white-button" visibility="{{ wineTasting.country ? 'collapse' : 'visible' }}" />
+                <Button text="{{ (wineTasting.country ||{}).label }}" tap="onDeleteCountry" row="4" col="1" class="white-button" style="horizontal-align: right;" visibility="{{ wineTasting.country ? 'visible' : 'collapse' }}" />
+                <Label text="{{ wineYear ? wineYear : 'Année' }}" row="5" class="criterias-title-no-margin" width="70" />
+				<Slider value="{{ wineYear }}" minValue="1950" maxValue="2016" row="5" col="1" class="criterias-margin" />
+				<Label text="{{ alcoholFromattedValue ? alcoholFromattedValue + '%' : '% Alcool' }}" row="6" class="criterias-title-no-margin" width="70" />
+				<Slider id="alcohol-slider" value="{{ alcoholValue }}" minValue="30" maxValue="180" row="6" col="1" class="criterias-margin" />
+				<Label text="Biologique" row="7" colspan="2" class="criterias-title" />
+				<Switch checked="{{ wineTasting.isBiologic }}" row="7" col="1" />
+				<Label text="Biodynamique" row="8" colspan="2" class="criterias-title" />
+                <Switch checked="{{ wineTasting.isBiodynamic }}" row="8" col="1" />
+                <Label text="Cépages" row="9" class="criterias-title" />
+                <Button text="Sélectionner" tap="onSelectGrapes" row="9" col="1" class="white-button" />
+                <vs:ValuesSelector items="{{ wineTasting.grapes }}" deleteOnClick="true" row="10" colspan="2" />
+				<TextView text="{{ wineTasting.wineTabNotes }}" hint="Commentaires" row="11" colspan="2" />
 			</GridLayout>
 		  </ScrollView>
 	   </TabViewItem.view>

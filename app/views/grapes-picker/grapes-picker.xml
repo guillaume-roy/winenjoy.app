@@ -1,0 +1,15 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+        shownModally="onShownModally">
+    <GridLayout rows="auto, *, auto">
+        <SearchBar hint="Rechercher un cépage" id="searchBar" textFieldHintColor="#FFFFFF" />
+        <ListView items="{{ grapeCriterias }}" itemTap="onSelectGrape" row="1">
+            <ListView.itemTemplate>
+                <GridLayout class="list-item">
+                    <Label text="{{ grape.label }}" />
+                    <Label text="✓" visibility="{{ isSelected ? 'visible' : 'collapsed' }}" class="check-icon" />
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+        <Button text="Valider" row="2" tap="onValidate" class="validate-button" />
+    </GridLayout>
+</Page>

@@ -1,0 +1,275 @@
+[
+	{
+		"language": "fr",
+		"data": [
+            {
+                "id":"dc3160a6-2f1a-42c6-861b-583331a619bb",
+                "label":"Airén"
+            },
+            {
+                "id":"21cf5aed-df4d-4691-868d-97c04b62db92",
+                "label":"Alicante Bouschet"
+            },
+            {
+                "id":"761f47d3-75a6-4df3-a46e-1117fe328f71",
+                "label":"Aligoté"
+            },
+            {
+                "id":"48795915-862b-4818-9479-558721e52af7",
+                "label":"Ansonica"
+            },
+            {
+                "id":"3003498d-e49d-40d4-bae9-71b7dfeb552a",
+                "label":"Aramon noir"
+            },
+            {
+                "id":"1fb8789f-1ed9-45e6-967f-06a82c7f5177",
+                "label":"Bobal"
+            },
+            {
+                "id":"15333d84-b5de-415b-a85b-4b1498314cb3",
+                "label":"Cabernet franc"
+            },
+            {
+                "id":"ef0f2361-faeb-4030-91fc-57a2dc9316b2",
+                "label":"Cabernet-sauvignon"
+            },
+            {
+                "id":"2c55c3ee-39fd-44f1-9032-787da97add81",
+                "label":"Cardinal"
+            },
+            {
+                "id":"ed9e8452-067a-41d5-96f9-d6a24e89885f",
+                "label":"Carignan N"
+            },
+            {
+                "id":"03f695f0-b027-4115-957f-12a706425bdc",
+                "label":"Catarratto bianco comune"
+            },
+            {
+                "id":"bee374d1-21e5-473a-8c90-26d880de853c",
+                "label":"Catarratto bianco lucido"
+            },
+            {
+                "id":"9b637184-e8c2-41ac-a722-7531a68853e3",
+                "label":"Cayetana blanca"
+            },
+            {
+                "id":"69274868-9053-4bab-bd33-c4129c2ade8e",
+                "label":"Cereza"
+            },
+            {
+                "id":"d41aa32e-a828-4880-8d29-887e4d10d098",
+                "label":"Chardonnay"
+            },
+            {
+                "id":"bf67985a-922c-4d77-8c21-26d8787dfebc",
+                "label":"Chasselas"
+            },
+            {
+                "id":"e3cd01ea-c5b3-45fe-9a68-88da4d5ef3dd",
+                "label":"Chelva"
+            },
+            {
+                "id":"bcff8d0b-794f-4511-b2d1-22ef61cc492e",
+                "label":"Chenin"
+            },
+            {
+                "id":"8f689a46-4ab5-493e-8fef-5093869ea769",
+                "label":"Cinsaut"
+            },
+            {
+                "id":"fe5b44f9-f730-4bad-91d2-99b6d3c521ca",
+                "label":"Colombard"
+            },
+            {
+                "id":"372eb0fd-7baf-474d-b5ff-14a4044ee170",
+                "label":"Concord"
+            },
+            {
+                "id":"6a2e2a77-c33b-46b5-897d-d1c9224ae4d3",
+                "label":"Criolla grande"
+            },
+            {
+                "id":"4dbff5e6-1cb8-4fc8-8fd9-b680b22ee7c6",
+                "label":"Crljenak Kaštelanski"
+            },
+            {
+                "id":"089089e6-487e-46d5-a3df-8595c4543da3",
+                "label":"Dattier de Beyrouth"
+            },
+            {
+                "id":"213ca6fb-9f82-4935-a2b9-c8683e3ed30b",
+                "label":"Fernão Pires"
+            },
+            {
+                "id":"f53df029-5e29-414c-aaef-2b70bfcba779",
+                "label":"Gamay"
+            },
+            {
+                "id":"0f535dc5-e22d-42cb-9ccf-331f23351c7f",
+                "label":"Garganega"
+            },
+            {
+                "id":"537ab519-0bda-428e-8dc6-4785bf83b357",
+                "label":"Gewurztraminer"
+            },
+            {
+                "id":"54eb2504-6beb-4e03-b348-89654d631a8e",
+                "label":"Grenache blanc"
+            },
+            {
+                "id":"241c649c-fba8-4136-a25a-8bafefc04636",
+                "label":"Grenache noir"
+            },
+            {
+                "id":"cbedb8c3-bebd-41ef-be43-4950a0781d52",
+                "label":"Grüner Veltliner"
+            },
+            {
+                "id":"1ac6a526-12f5-4a05-a45d-7e3a6e4f53eb",
+                "label":"Kadarka"
+            },
+            {
+                "id":"5704ae4d-c32e-4e7f-b7cb-d3c8cb15e519",
+                "label":"Macabeo"
+            },
+            {
+                "id":"dfb1eb6a-fa61-4795-9e08-ff08fb26c9a0",
+                "label":"Malbec"
+            },
+            {
+                "id":"33643ad6-e437-4f15-a4f4-b209db010c1a",
+                "label":"Melon de Bourgogne"
+            },
+            {
+                "id":"910b07ab-20ce-4ccd-bcf4-8987f101a5fe",
+                "label":"Mencia"
+            },
+            {
+                "id":"802a6131-8c61-4e79-be22-26eab19f800c",
+                "label":"Merlot"
+            },
+            {
+                "id":"eec6d879-0ab6-40df-928f-a88778f818d1",
+                "label":"Monsastrell +Mourvèdre"
+            },
+            {
+                "id":"00126cd6-9836-45e2-9ce7-b9d321edd288",
+                "label":"Muscat blanc à petits grains"
+            },
+            {
+                "id":"28b78c92-4dbc-4a78-861f-3d969342409a",
+                "label":"Muscat d'Alexandrie"
+            },
+            {
+                "id":"18d2d406-5d9f-4f6c-852d-e83966933b76",
+                "label":"Muscat de Hambourg"
+            },
+            {
+                "id":"cf0cea09-1bb6-4b1e-8aa7-0592bdbfe799",
+                "label":"Müller-thurgau"
+            },
+            {
+                "id":"c1e5991b-f080-488e-9dde-b63db535f789",
+                "label":"Nuragus"
+            },
+            {
+                "id":"20784edf-120a-4567-8226-598cca5d6d8e",
+                "label":"Négrette"
+            },
+            {
+                "id":"05c5897f-e7e5-410a-8f0e-c7698c086de0",
+                "label":"Palomino"
+            },
+            {
+                "id":"fb8c7903-8e0d-4864-aad8-ca3386a36f39",
+                "label":"Pardillo"
+            },
+            {
+                "id":"b6270997-a378-4ad9-8f8b-1efea8a57146",
+                "label":"Parellada"
+            },
+            {
+                "id":"fa5575b9-1a59-4cb6-be22-ac56dced9856",
+                "label":"País"
+            },
+            {
+                "id":"0da10298-b4b2-4c79-b78c-6f0669b0b947",
+                "label":"Pedro Ximénez"
+            },
+            {
+                "id":"2dd3a594-d1fa-480f-b182-3b302c9a5304",
+                "label":"Pinot blanc"
+            },
+            {
+                "id":"0d5867cd-4a3b-4ef1-812d-d5f95fdccdc8",
+                "label":"Pinot gris"
+            },
+            {
+                "id":"f6f7a720-d203-41cb-adef-953d48643416",
+                "label":"Pinot meunier"
+            },
+            {
+                "id":"8c628e86-5199-48b1-859e-9e3f26761a84",
+                "label":"Pinot noir"
+            },
+            {
+                "id":"12b3cc45-cb06-46fd-a0a1-714b32f62b8b",
+                "label":"Plavac mali"
+            },
+            {
+                "id":"35842b51-1918-47cf-8f3a-a2b64475f5d6",
+                "label":"Portugais bleu"
+            },
+            {
+                "id":"97ac5f61-031e-45ae-b160-a51f6304961e",
+                "label":"Riesling"
+            },
+            {
+                "id":"726bfefc-dafe-4194-9cce-562fa4e7a167",
+                "label":"Rkatsiteli"
+            },
+            {
+                "id":"7ca93565-fad4-4c5a-b96c-c4d57cca0031",
+                "label":"Sangiovese"
+            },
+            {
+                "id":"ae0886b9-32c3-4d99-b7a2-480ce64e246d",
+                "label":"Sauvignon blanc"
+            },
+            {
+                "id":"56a18228-1afd-43ee-85c0-9ad79505c95f",
+                "label":"Sultanine"
+            },
+            {
+                "id":"3331b524-4247-407a-9032-b4012295f2c7",
+                "label":"Sylvaner"
+            },
+            {
+                "id":"d30d9055-f80e-4b2b-b9d2-f902c9a53577",
+                "label":"Syrah"
+            },
+            {
+                "id":"8f546d6a-4c9a-423d-99c6-686c5e8d6fd1",
+                "label":"Sémillon"
+            },
+            {
+                "id":"77cac9c6-1081-4ee3-81f2-be7bd59fb09f",
+                "label":"Tempranillo"
+            },
+            {
+                "id":"f39d0191-950c-4bee-94d1-35e1706b69f0",
+                "label":"Trebbiano + Variationen"
+            },
+            {
+                "id":"ac3cbc2d-6493-42e5-97ee-923a937cdc3c",
+                "label":"Welschriesling"
+            },
+            {
+                "id":"833b607c-a9a9-4113-8efe-b1ba53fd0004",
+                "label":"Xarell-Lo"
+            }
+        ]
+    }
+]

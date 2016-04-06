@@ -48,6 +48,16 @@ export function onSaveTasting() {
     }
 }
 
+export function onSelectGrapes() {
+    page.showModal(
+        Views.grapesPicker,
+        viewModel.wineTasting.grapes,
+        function(selectedGrapes) {
+            viewModel.setGrapes(selectedGrapes);
+        },
+        true);
+}
+
 export function onSelectColor() {
     page.showModal(
         Views.gradientColorPicker,

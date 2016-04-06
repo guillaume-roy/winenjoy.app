@@ -48,6 +48,6 @@ export class CountryPickerViewModel extends Observable {
     }
 
     public selectCountry(item: Observable) {
-        this._selectedItem = _.find(_.flattenDeep(this.geoData.map(g => g.get("value").values)), v => v.id === item.id));
+        this._selectedItem = _.find(_.flattenDeep(this.geoData.map(g => g.get("value").values)), v => v.id === item.id);
     }
 }

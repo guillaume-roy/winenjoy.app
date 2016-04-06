@@ -6,4 +6,5 @@ export class Views {
     public static aromasPicker: string = "views/aromas-picker/aromas-picker";
     public static login: string = "views/login/login";
     public static countryPicker: string = "views/country-picker/country-picker";
+    public static grapesPicker: string = "views/grapes-picker/grapes-picker";
 }
