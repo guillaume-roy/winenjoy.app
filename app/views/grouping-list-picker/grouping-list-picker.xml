@@ -1,0 +1,27 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+        shownModally="onShownModally">
+    <GridLayout rows="auto, *, auto">
+        <Label class="title" text="{{ searchBarHintText }}" />
+        <ListView items="{{ items }}" row="1">
+            <ListView.itemTemplate>
+                <GridLayout rows="auto, auto">
+                    <GridLayout columns="auto,*,24" class="{{ isExpanded ? 'list-item expanded-item' : 'list-item' }}" tap="onToggleGroup">
+                        <Label text="{{ groupingIcon }}" class="material-icon left-icon" />
+                        <Label text="{{ item.label }}" col="1" />
+                        <Label text="expand_more" class="material-icon" col="2" visibility="{{ isExpanded ? 'collapse' : 'visible' }}" />
+                        <Label text="expand_less" class="material-icon" col="2" visibility="{{ isExpanded ? 'visible' : 'collapse' }}" />
+                    </GridLayout>
+                    <ListView class="items-list" itemTap="onSelectItem" items="{{ item.values }}" separatorColor="transparent" row="1" height="{{ item.values.length * 55 }}" visibility="{{ isExpanded ? 'visible' : 'collapse' }}">
+                        <ListView.itemTemplate>
+                            <GridLayout class="{{ isSelected ? 'list-item expanded-item' : 'list-item' }}">
+                                <Label text="{{ item.label }}" />
+                                <Label text="check" visibility="{{ isSelected ? 'visible' : 'collapse' }}" class="material-icon check-icon" />
+                            </GridLayout>
+                        </ListView.itemTemplate>
+                </ListView>
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+        <Button text="Valider" row="2" tap="onValidate" class="validate-button" visibility="{{ multiple ? 'visible' : 'collapse' }}" />
+    </GridLayout>
+</Page>

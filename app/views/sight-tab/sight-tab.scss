@@ -1,0 +1,29 @@
+@import "../../styles/_common";
+@import "../../styles/_values-selector";
+@import "../../styles/_bottom-navigation";
+
+.modal-button {
+    height: 60;
+}
+
+ValuesSelector {
+    margin-bottom: 8;
+    horizontal-align: center;
+}
+
+.criterias-title-no-margin {
+    color: $primary-text-color;
+    font-size: 18;
+    vertical-align: center;
+    margin-left: 6;
+}
+
+.criterias-margin {
+    margin-top: 8;
+    margin-bottom:8;
+}
+
+.criterias-title {
+    @extend .criterias-title-no-margin;
+    @extend .criterias-margin;
+}

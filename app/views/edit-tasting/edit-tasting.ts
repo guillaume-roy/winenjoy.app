@@ -13,7 +13,7 @@ export function navigatedTo(args: EventData) {
     page = <Page>args.object;
 
     setTimeout(() => {
-       viewModel = new EditTastingViewModel();
+       viewModel = new EditTastingViewModel(page.navigationContext);
         page.bindingContext = viewModel;
         if (geolocation.isEnabled()) {
             geolocation.getCurrentLocation({timeout: 5000}).
@@ -50,8 +50,12 @@ export function onSaveTasting() {
 
 export function onSelectGrapes() {
     page.showModal(
-        Views.grapesPicker,
-        viewModel.wineTasting.grapes,
+        Views.listPicker,
+        {
+            criterias: "grapes",
+            searchBarHintText: "Rechercher un cépage",
+            selectedItems: viewModel.wineTasting.grapes
+        },
         function(selectedGrapes) {
             viewModel.setGrapes(selectedGrapes);
         },
@@ -63,6 +67,7 @@ export function onSelectColor() {
         Views.gradientColorPicker,
         viewModel.wineTasting,
         function(selectedColor) {
+            console.log("here");
             viewModel.wineTasting.color = selectedColor;
             viewModel.notifyPropertyChange("wineTasting", viewModel.wineTasting);
         },
@@ -76,8 +81,13 @@ export function onDeleteColor() {
 
 export function onSelectCountry() {
     page.showModal(
-        Views.countryPicker,
-        viewModel.wineTasting.country,
+        Views.groupingListPicker,
+        {
+            criterias: "geo",
+            groupingIcon: "public",
+            multiple: false,
+            searchBarHintText: "Sélectionez un pays"
+        },
         function(data) {
             viewModel.setCountry(data);
         },
@@ -104,10 +114,13 @@ export function onDeleteYear() {
 
 export function onAddAromas() {
     page.showModal(
-        Views.aromasPicker,
+        Views.groupingListPicker,
         {
-            isDefects: false,
-            values: viewModel.wineTasting.aromas
+            criterias: "aromas",
+            groupingIcon: "whatshot",
+            multiple: true,
+            searchBarHintText: "Sélectionez des arômes",
+            selectedItems: viewModel.wineTasting.aromas
         },
         function(data) {
             viewModel.setAromas(data);
@@ -117,30 +130,39 @@ export function onAddAromas() {
 
 export function onAddDefects() {
     page.showModal(
-        Views.aromasPicker,
+        Views.listPicker,
         {
-            isDefects: true,
-            values: viewModel.wineTasting.defects
+            criterias: "aromas",
+            searchBarHintText: "Rechercher un défaut",
+            selectedItems: viewModel.wineTasting.defects
         },
-        function(data) {
-            viewModel.setDefects(data);
+        function(items) {
+            viewModel.setDefects(items);
         },
         true);
 }
 
 export function cancel() {
-    dialogs.confirm({
-        cancelButtonText: "Non",
-        message: "Etes-vous sûr de vouloir annuler cette dégustation ?",
-        okButtonText: "Oui",
-        title: "Annuler"
-    }).then(result => {
-        if (result) {
-            frameModule.topmost().navigate({
-                animated: false,
-                backstackVisible: false,
-                moduleName: Views.main
-            });
-        }
-    });
+    if (viewModel.isEditMode) {
+        frameModule.topmost().navigate({
+            animated: false,
+            backstackVisible: false,
+            moduleName: Views.main
+        });
+    } else {
+        dialogs.confirm({
+            cancelButtonText: "Non",
+            message: "Etes-vous sûr de vouloir annuler cette dégustation ?",
+            okButtonText: "Oui",
+            title: "Annuler"
+        }).then(result => {
+            if (result) {
+                frameModule.topmost().navigate({
+                    animated: false,
+                    backstackVisible: false,
+                    moduleName: Views.main
+                });
+            }
+        });
+    }
 }

@@ -28,32 +28,6 @@ export class ViewTastingViewModel extends Observable {
         this.alcoholValue = this.wineTasting.alcohol * 10;
     }
 
-    public getShareMessage() {
-        let wineColor = this.wineTasting.wineType.label;
-        let year = this.wineTasting.year;
-
-        let cuvee = this.wineTasting.cuvee;
-        let estate = this.wineTasting.estate;
-
-        let result = "#Dégustation d'un #vin #" + wineColor;
-
-        if (cuvee) {
-            result = result + " " + cuvee;
-        }
-
-        if (estate) {
-            result = result + " " + estate;
-        }
-
-        if (year) {
-            result = result + " #" + year;
-        }
-
-        result = result + " via @WinenjoyApp";
-
-        return result;
-    }
-
     public deleteTasting() {
         new TastingsService().deleteTasting(this.wineTasting);
     }

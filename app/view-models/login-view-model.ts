@@ -8,7 +8,7 @@ export class LoginViewModel extends Observable {
     private _isBusy: boolean;
 
     public get email() {
-        return this.email;
+        return this._email;
     }
     public set email(value: string) {
         this._email = value;

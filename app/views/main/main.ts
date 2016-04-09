@@ -36,7 +36,7 @@ export function onCreateNewTasting(args: EventData) {
     }).then(v => {
         frameModule.topmost().navigate({
             animated: false,
-            moduleName: Views.editTasting,
+            moduleName: Views.sightTab,
             transition: null
         });
 
@@ -62,6 +62,7 @@ export function onCreateFirstTasting() {
 
 export function onViewTasting(args: listViewModule.ItemEventData) {
     let wineTasting = viewModel.tastings[args.index];
+
     frameModule.topmost().navigate({
         animated: false,
         context: wineTasting,

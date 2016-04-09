@@ -7,10 +7,14 @@
 }
 
 .list-item {
-    height: 48;
+    height: 52;
     font-size: 16;
     color: $primary-text-color;
     padding: 16;
+}
+
+.list-item-selected {
+    color: $accent-color;
 }
 
 .validate-button {
@@ -20,6 +24,6 @@
     font-size:16;
 }
 
-.check-icon {
+.material-icon {
     horizontal-align: right;
 }

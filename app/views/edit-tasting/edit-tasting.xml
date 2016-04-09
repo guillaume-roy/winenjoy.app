@@ -4,7 +4,7 @@
         xmlns:vs="components/values-selector"
 		navigatedTo="navigatedTo">
   <Page.actionBar>
-	<ActionBar title="Nouvelle dégustation">
+	<ActionBar title="{{ isEditMode ? 'Modifier dégustation' : 'Nouvelle dégustation' }}">
 	  <NavigationButton icon="res://ic_close_white_24dp" tap="cancel"/>
 	  <ActionBar.actionItems>
 		<ActionItem icon="res://ic_check_white_24dp"
@@ -18,6 +18,7 @@
    <TabView.items>
 	 <TabViewItem title="Vin">
 	   <TabViewItem.view>
+        <GridLayout rows="*, auto">
 		<ScrollView>
 			<GridLayout columns="auto,*" rows="*,*,*,*,*,*,*,*,*,*,auto,*" class="tab-view-content">
                 <SegmentedBar colspan="2" selectedIndex="{{ wineTypeSelectedIndex }}">
@@ -48,6 +49,17 @@
 				<TextView text="{{ wineTasting.wineTabNotes }}" hint="Commentaires" row="11" colspan="2" />
 			</GridLayout>
 		  </ScrollView>
+            <GridLayout columns="*, *, *, *" row="1" height="56" style="background-color: #795548; color: #FFFFFF;">
+                <Label text="&#xe90a;" class="winenjoy-icon" style="horizontal-align: center; font-size:42;vertical-align:center" />
+                <Label text="Aspect" style="horizontal-align:center;vertical-align:bottom;margin-bottom:4" />
+                <Label text="&#xe90b;" class="winenjoy-icon" style="horizontal-align: center; font-size:42vertical-align:center" col="1" />
+                <Label text="Arômes" style="horizontal-align:center;vertical-align:bottom;margin-bottom:4" col="1" />
+                <Label text="&#xe90c;" class="winenjoy-icon" style="horizontal-align: center; font-size:42;vertical-align:center" col="2" />
+                <Label text="Saveurs" style="horizontal-align:center;vertical-align:bottom;margin-bottom:4" col="2" />
+                <Label text="&#xe909;" class="winenjoy-icon" style="horizontal-align: center; font-size:36;vertical-align:center" col="3" />
+                <Label text="Vin" style="horizontal-align:center;vertical-align:bottom;margin-bottom:4" col="3" />
+            </GridLayout>
+          </GridLayout>
 	   </TabViewItem.view>
 	 </TabViewItem>
 	 <TabViewItem title="Aspect">

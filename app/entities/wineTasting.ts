@@ -15,6 +15,7 @@ export interface WineTasting {
     wineTabNotes?: string;
     startDate?: number;
     endDate?: number;
+    lastModificationDate?: number;
     synthesisTabNotes?: string;
     color?: string;
     finalRating?: string;

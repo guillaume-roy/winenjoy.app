@@ -1,5 +1,6 @@
 import {User} from "../entities/user";
 import appSettings = require("application-settings");
+import _ = require("lodash");
 
 export class UserService {
     private static USER_KEY = "USER";
@@ -14,9 +15,7 @@ export class UserService {
         appSettings.setString(UserService.USER_KEY, JSON.stringify(value));
     }
 
-    public isLogged(): Promise<boolean> {
-        return new Promise<boolean>((resolve, reject) => {
-            resolve(this.getUser() !== null);
-        });
+    public isLogged() {
+        return !_.isEmpty(appSettings.getString(UserService.USER_KEY));
     }
 }

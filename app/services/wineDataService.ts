@@ -6,18 +6,23 @@ import appSettings = require("application-settings");
 
 export class WineDataService {
     private static DEFAULT_LANGUAGE = "fr";
+    private static ENABLE_CACHE = false;
 
     public getCriterias(name: string): Promise<CriteriaItem[]> {
         return new Promise<CriteriaItem[]>((resolve, reject) => {
             let existsInCache = appSettings.hasKey(name);
 
-            if (existsInCache) {
+            if (existsInCache && WineDataService.ENABLE_CACHE) {
                 resolve(<CriteriaItem[]>JSON.parse(appSettings.getString(name)));
             } else {
                 fs.File.fromPath(fs.path.join(fs.knownFolders.currentApp().path, "data", name + ".json")).readText()
                 .then(fileContent => {
                     let criterias = this.internalLoadCriterias(fileContent);
-                    appSettings.setString(name, JSON.stringify(criterias));
+
+                    if (WineDataService.ENABLE_CACHE) {
+                        appSettings.setString(name, JSON.stringify(criterias));
+                    }
+
                     resolve(criterias);
                 }).catch(error => reject(error));
             }

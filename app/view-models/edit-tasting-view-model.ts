@@ -25,6 +25,8 @@ export class EditTastingViewModel extends Observable {
     private _wineTypes: CriteriaItem[];
     private _attackCriterias: CriteriaItem[];
     private _wineYear: number;
+    private _isEditMode: boolean;
+    private _firstBindingTime: boolean;
 
     public get wineYear() {
         return this._wineYear;
@@ -35,6 +37,15 @@ export class EditTastingViewModel extends Observable {
         this.notifyPropertyChange("wineYear", value);
 
         this.wineTasting.year = value;
+    }
+
+    public get isEditMode() {
+        return this._isEditMode;
+    }
+
+    public set isEditMode(value) {
+        this._isEditMode = value;
+        this.notifyPropertyChange("isEditMode", value);
     }
 
     public get attackCriterias() {
@@ -94,10 +105,12 @@ export class EditTastingViewModel extends Observable {
         this._wineTypeSelectedIndex = value;
         this.notifyPropertyChange("wineTypeSelectedIndex", value);
 
-        this.wineTasting.wineType = this.wineTypes[value];
-        this.wineTasting.color = null;
-        this.wineTasting.balances = [];
-        this.wineTasting.attacks = [];
+        if (!this._firstBindingTime) {
+            this.wineTasting.wineType = this.wineTypes[value];
+            this.wineTasting.color = null;
+            this.wineTasting.balances = [];
+            this.wineTasting.attacks = [];
+        }
 
         let criteriasName = "";
         switch (this.wineTasting.wineType.code) {
@@ -209,24 +222,35 @@ export class EditTastingViewModel extends Observable {
         this.notifyPropertyChange("wineTypes", value);
     }
 
-    constructor() {
+    constructor(wineTasting: WineTasting) {
         super();
 
-        this.wineTasting = {
-            attacks: [],
-            balances: [],
-            bubbles: [],
-            country: null,
-            finalRating: "NEUTRAL",
-            intensities: [],
-            length: [],
-            limpidities: [],
-            shines: [],
-            startDate: Date.now(),
-            tears: []
-        };
+        this.isEditMode = !_.isEmpty(wineTasting);
 
-        this.alcoholValue = 0;
+        if (!this.isEditMode) {
+            this.wineTasting = {
+                aromas: [],
+                attacks: [],
+                balances: [],
+                bubbles: [],
+                country: null,
+                defects: [],
+                finalRating: "NEUTRAL",
+                intensities: [],
+                length: [],
+                limpidities: [],
+                shines: [],
+                startDate: Date.now(),
+                tears: []
+            };
+
+            this.alcoholValue = 0;
+        } else {
+            this._firstBindingTime = true;
+            this.wineTasting = wineTasting;
+            this.alcoholValue = wineTasting.alcohol * 10;
+            this.hasBubbles = this.wineTasting.bubbles.length > 0;
+        }
 
         this.formIsValid = true;
 
@@ -261,7 +285,8 @@ export class EditTastingViewModel extends Observable {
         this._wineDataService.getCriterias("wineTypes")
             .then(data => {
                 this.wineTypes = data;
-                this.wineTypeSelectedIndex = 0;
+                this.wineTypeSelectedIndex = this.isEditMode ? data.indexOf(_.find(data, this.wineTasting.wineType)) : 0;
+                this._firstBindingTime = false;
             });
     }
 
@@ -269,7 +294,13 @@ export class EditTastingViewModel extends Observable {
         if (!this.hasBubbles) {
             this.wineTasting.bubbles = [];
         }
-        this.wineTasting.endDate = Date.now();
+
+        if (!this.isEditMode) {
+            this.wineTasting.endDate = Date.now();
+        } else {
+            this.wineTasting.lastModificationDate = Date.now();
+
+        }
         new TastingsService().saveTasting(this.wineTasting);
     }
 

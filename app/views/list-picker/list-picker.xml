@@ -1,0 +1,15 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+        shownModally="onShownModally">
+    <GridLayout rows="auto, *, auto">
+        <SearchBar hint="{{ searchBarHintText }}" id="searchBar" textFieldHintColor="#FFFFFF" />
+        <ListView items="{{ items }}" itemTap="onSelectItem" row="1">
+            <ListView.itemTemplate>
+                <GridLayout class="{{ isSelected ? 'list-item list-item-selected' : 'list-item' }}">
+                    <Label text="{{ item.label }}" />
+                    <Label text="check" visibility="{{ isSelected ? 'visible' : 'collapsed' }}" class="material-icon" />
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+        <Button text="Valider" row="2" tap="onValidate" class="validate-button" />
+    </GridLayout>
+</Page>

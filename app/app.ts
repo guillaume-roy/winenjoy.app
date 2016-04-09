@@ -60,8 +60,6 @@ application.resources.foregroundColorConverter = function(backgroundColor: strin
     return ColorUtils.getForegroundColor(backgroundColor);
 };
 
-new UserService().isLogged().then(isLogged => {
-   application.start({
-        moduleName: isLogged ? Views.main : Views.login
-    });
+ application.start({
+    moduleName: new UserService().isLogged() ? Views.main : Views.login
 });

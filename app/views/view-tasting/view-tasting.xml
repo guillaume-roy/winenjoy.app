@@ -7,10 +7,10 @@
 	<ActionBar title="{{ 'Vin ' + wineTasting.wineType.label }}">
 	  <NavigationButton icon="res://ic_arrow_back_white_24dp" tap="cancel"/>
 	  <ActionBar.actionItems>
-        <ActionItem text="Partager"
+        <ActionItem text="Modifier"
                     ios.position="right"
                     android.position="popup"
-                    tap="onShareTasting"
+                    tap="onEditTasting"
                     visibility="visible" />
         <ActionItem text="Supprimer"
                     ios.position="right"

@@ -1,17 +1,17 @@
 import pages = require("ui/page");
 import {Page} from "ui/page";
-import {GrapesPickerViewModel} from "../../view-models/grapes-picker-view-model";
+import {ListPickerViewModel} from "../../view-models/list-picker-view-model";
 import {SearchBar} from "ui/search-bar";
 import listViewModule = require("ui/list-view");
 
 let closeCallback: Function;
-let viewModel: GrapesPickerViewModel;
+let viewModel: ListPickerViewModel;
 
 export function onShownModally(args: pages.ShownModallyData) {
     closeCallback = args.closeCallback;
 
     setTimeout(function() {
-        viewModel = new GrapesPickerViewModel(args.context);
+        viewModel = new ListPickerViewModel(args.context);
         let page = <Page>args.object;
         page.bindingContext = viewModel;
 
@@ -22,7 +22,7 @@ export function onShownModally(args: pages.ShownModallyData) {
     }, 0);
 }
 
-export function onSelectGrape(args: listViewModule.ItemEventData) {
+export function onSelectItem(args: listViewModule.ItemEventData) {
     viewModel.toggleItem(args.index);
 }
 

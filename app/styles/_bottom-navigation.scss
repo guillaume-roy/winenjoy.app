@@ -1,0 +1,36 @@
+@import "_material-theme";
+
+.bottom-navigation {
+    background-color: $primary-color-text;
+    height: 56;
+
+    .separator {
+        border-width:1;
+        border-color:#f1f1f1;
+    }
+
+    .icon {
+        horizontal-align: center;
+        font-size:46;
+    }
+
+    .label {
+        horizontal-align:center;
+        vertical-align:bottom;
+        margin-bottom:4;
+    }
+
+    .aromas-icon {
+        margin-top: 2;
+    }
+
+    .wine-icon {
+        horizontal-align: center;
+        font-size:32;
+        margin-top:2;
+    }
+
+    .selected {
+        color: $primary-color;
+    }
+}

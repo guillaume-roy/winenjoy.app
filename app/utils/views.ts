@@ -5,7 +5,8 @@ export class Views {
     public static gradientColorPicker: string = "views/gradient-color-picker/gradient-color-picker";
     public static aromasPicker: string = "views/aromas-picker/aromas-picker";
     public static login: string = "views/login/login";
-    public static countryPicker: string = "views/country-picker/country-picker";
-    public static grapesPicker: string = "views/grapes-picker/grapes-picker";
     public static yearPicker: string = "views/year-picker/year-picker";
+    public static listPicker: string = "views/list-picker/list-picker";
+    public static groupingListPicker: string = "views/grouping-list-picker/grouping-list-picker";
+    public static sightTab: string = "views/sight-tab/sight-tab";
 }

@@ -1,0 +1,51 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+    xmlns:vs="components/values-selector"
+    navigatedTo="navigatedTo">
+    <Page.actionBar>
+        <ActionBar title="{{ isEditMode ? 'Modifier dégustation' : 'Nouvelle dégustation' }}">
+            <NavigationButton icon="res://ic_close_white_24dp" tap="cancel"/>
+            <ActionBar.actionItems>
+                <ActionItem icon="res://ic_check_white_24dp"
+                    ios.position="right"
+                    android.position="actionBar"
+                tap="onSaveTasting" />
+            </ActionBar.actionItems>
+        </ActionBar>
+    </Page.actionBar>
+    <GridLayout rows="*, auto">
+        <ScrollView>
+            <GridLayout rows="*,*,*,*,*,*,*,*,auto,*,auto" columns="*, auto">
+                <SegmentedBar colspan="2" selectedIndex="{{ wineTypeSelectedIndex }}">
+                    <SegmentedBar.items>
+                        <SegmentedBarItem title="Blanc" />
+                        <SegmentedBarItem title="Rosé" />
+                        <SegmentedBarItem title="Rouge" />
+                    </SegmentedBar.items>
+                </SegmentedBar>
+                <Button text="Sélectionner la robe" tap="onSelectColor" visibility="{{ wineTasting.color ? 'collpase' : 'visible' }}" row="1" colspan="2" class="modal-button" />
+                <Button text="Supprimer la robe" tap="onDeleteColor" row="1" color="{{wineTasting.color | foregroundColorConverter}}" backgroundColor="{{wineTasting.color}}" visibility="{{ wineTasting.color ? 'visible' : 'collapse' }}" colspan="2" />
+				<Label text="Limpidité" class="criterias-title" row="2" colspan="2" />
+				<vs:ValuesSelector items="{{ limpidityCriterias }}" selectedItems="{{ wineTasting.limpidities }}" row="3" colspan="2" />
+				<Label text="Brillance" class="criterias-title" row="4" colspan="2" />
+				<vs:ValuesSelector items="{{ shineCriterias }}" selectedItems="{{ wineTasting.shines }}" row="5" colspan="2" />
+                <Label text="Larmes" class="criterias-title" row="6" colspan="2" />
+				<vs:ValuesSelector items="{{ tearCriterias }}" selectedItems="{{ wineTasting.tears }}" row="7" colspan="2" />
+                <Label text="Bulles" class="criterias-title" row="8" />
+                <Switch style="horizontal-align: right" checked="{{ hasBubbles }}" row="8" col="1" />
+				<vs:ValuesSelector items="{{ bubbleCriterias }}" selectedItems="{{ wineTasting.bubbles }}" visibility="{{ hasBubbles ? 'visible' : 'collapse' }}" row="9" colspan="2" />
+				<TextView text="{{ wineTasting.sightTabNotes }}" hint="Commentaires" row="10" colspan="2" />
+			</GridLayout>
+        </ScrollView>
+        <GridLayout columns="*, *, *, *" rows="auto,*" row="1" class="bottom-navigation">
+            <StackLayout colspan="4" class="separator" />
+            <Label text="&#xe90a;" class="winenjoy-icon icon selected" row="1" />
+            <Label text="Aspect" class="label selected" row="1" />
+            <Label text="&#xe90b;" class="winenjoy-icon icon aromas-icon" col="1" row="1" />
+            <Label text="Arômes" class="label" col="1" row="1" />
+            <Label text="&#xe90c;" class="winenjoy-icon icon" col="2" row="1" />
+            <Label text="Saveurs" class="label" col="2" row="1" />
+            <Label text="vignette" class="material-icon wine-icon" col="3" row="1" />
+            <Label text="Synthèse" class="label" col="3" row="1" />
+        </GridLayout>
+    </GridLayout>
+  </Page>
