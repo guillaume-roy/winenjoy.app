@@ -38,6 +38,10 @@ export class MainViewModel extends Observable {
     }
 
     public new() {
-        new TastingsService().newTasting();
+        this._service.newTasting();
+    }
+
+    public edit(wineTastingId: string) {
+        return this._service.editTasting(wineTastingId);
     }
 }

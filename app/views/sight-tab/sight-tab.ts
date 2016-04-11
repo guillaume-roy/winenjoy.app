@@ -4,6 +4,7 @@ import {SightTabViewModel} from "../../view-models/sight-tab-view-model";
 import {Views} from "../../utils/views";
 import geolocation = require("nativescript-geolocation");
 import scrollViewModule = require("ui/scroll-view");
+import frameModule = require("ui/frame");
 
 let viewModel: SightTabViewModel;
 let page: Page;
@@ -45,6 +46,17 @@ export function onSelectColor() {
 export function onDeleteColor() {
     viewModel.wineTasting.color = null;
     viewModel.notifyPropertyChange("wineTasting", viewModel.wineTasting);
+}
+
+export function saveTasting() {
+    viewModel.saveTasting();
+
+    frameModule.topmost().navigate({
+        animated: false,
+        backstackVisible: false,
+        clearHistory: true,
+        moduleName: Views.main
+    });
 }
 
 function manageFabVisibility() {

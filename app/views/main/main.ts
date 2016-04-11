@@ -21,7 +21,7 @@ export function navigatedTo(args: EventData) {
 
 export function onCreateNewTasting(args: EventData) {
     let button = <View>args.object;
-    button.icon = "res://blank";
+    (<any>button).icon = "res://blank";
     button.animate({
         curve: "easeOut",
         duration: 250,
@@ -37,8 +37,7 @@ export function onCreateNewTasting(args: EventData) {
         viewModel.new();
         frameModule.topmost().navigate({
             animated: false,
-            moduleName: Views.sightTab,
-            transition: null
+            moduleName: Views.sightTab
         });
 
         button.animate({ // reset to original state
@@ -46,9 +45,9 @@ export function onCreateNewTasting(args: EventData) {
             delay: 250,
             duration: 0,
             scale: { x: 1, y: 1 },
-            translate: { x: 0, y: 0 },
+            translate: { x: 0, y: 0 }
         }).then(function(){
-            button.icon = "res://ic_add_white_24dp";
+            (<any>button).icon = "res://ic_add_white_24dp";
         });
     });
 }
@@ -57,18 +56,15 @@ export function onCreateFirstTasting() {
     viewModel.new();
     frameModule.topmost().navigate({
         animated: false,
-        moduleName: Views.sightTab,
-        transition: null
+        moduleName: Views.sightTab
     });
 }
 
 export function onViewTasting(args: listViewModule.ItemEventData) {
-    let wineTasting = viewModel.tastings[args.index];
-
-    frameModule.topmost().navigate({
-        animated: false,
-        context: wineTasting,
-        moduleName: Views.viewTasting,
-        transition: null
+    viewModel.edit(viewModel.tastings[args.index].id).then(result => {
+        frameModule.topmost().navigate({
+            animated: false,
+            moduleName: Views.sightTab
+        });
     });
 }

@@ -74,7 +74,7 @@ export class TasteTabViewModel extends Observable {
         this._tastingsService = new TastingsService();
 
         let wineTasting = this._tastingsService.loadTasting();
-        this.isEditMode = !_.isEmpty(wineTasting);
+        this.isEditMode = !_.isEmpty(wineTasting.id);
         this.wineTasting = wineTasting;
 
         this._wineDataService = new WineDataService();
@@ -111,5 +111,16 @@ export class TasteTabViewModel extends Observable {
 
     public storeTasting() {
         this._tastingsService.storeTasting(this.wineTasting);
+    }
+
+    public saveTasting() {
+        if (!this.isEditMode) {
+            this.wineTasting.endDate = Date.now();
+        } else {
+            this.wineTasting.lastModificationDate = Date.now();
+
+        }
+
+        this._tastingsService.saveTasting(this.wineTasting);
     }
 }

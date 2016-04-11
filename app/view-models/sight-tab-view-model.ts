@@ -97,7 +97,7 @@ export class SightTabViewModel extends Observable {
         this._tastingsService = new TastingsService();
 
         let wineTasting = this._tastingsService.loadTasting();
-        this.isEditMode = !_.isEmpty(wineTasting);
+        this.isEditMode = !_.isEmpty(wineTasting.id);
         this.wineTasting = wineTasting;
         this.hasBubbles = this.wineTasting.bubbles.length > 0;
 
@@ -125,6 +125,21 @@ export class SightTabViewModel extends Observable {
 
     public storeTasting() {
         this._tastingsService.storeTasting(this.wineTasting);
+    }
+
+    public saveTasting() {
+         if (!this.hasBubbles) {
+            this.wineTasting.bubbles = [];
+        }
+
+        if (!this.isEditMode) {
+            this.wineTasting.endDate = Date.now();
+        } else {
+            this.wineTasting.lastModificationDate = Date.now();
+
+        }
+
+        this._tastingsService.saveTasting(this.wineTasting);
     }
 
     private onChangeWineType() {

@@ -4,6 +4,7 @@ import {InformationsTabViewModel} from "../../view-models/informations-tab-view-
 import scrollViewModule = require("ui/scroll-view");
 import {Views} from "../../utils/views";
 import _ = require("lodash");
+import frameModule = require("ui/frame");
 
 let viewModel: InformationsTabViewModel;
 let page: Page;
@@ -21,6 +22,17 @@ export function navigatedTo(args: EventData) {
 
 export function navigatedFrom() {
     viewModel.storeTasting();
+}
+
+export function saveTasting() {
+    viewModel.saveTasting();
+
+    frameModule.topmost().navigate({
+        animated: false,
+        backstackVisible: false,
+        clearHistory: true,
+        moduleName: Views.main
+    });
 }
 
 export function onSelectCountry() {

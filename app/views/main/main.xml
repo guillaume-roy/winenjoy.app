@@ -1,9 +1,6 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd"
       xmlns:FAB="nativescript-floatingactionbutton"
       navigatedTo="navigatedTo">
-    <Page.actionBar>
-        <ActionBar title="Winenjoy - v0.1 beta" />
-    </Page.actionBar>
   <GridLayout>
     <ListView items="{{ tastings }}" visibility="{{ tastings && tastings.length !== 0 && !betaIsClosed ? 'visible' : 'collapse' }}" itemTap="onViewTasting" id="tastings-list">
         <ListView.itemTemplate>

@@ -16,7 +16,7 @@
                     </SegmentedBar.items>
                 </SegmentedBar>
                 <Button text="Sélectionner la robe" tap="onSelectColor" visibility="{{ wineTasting.color ? 'collpase' : 'visible' }}" row="1" colspan="2" class="modal-button" />
-                <Button text="Supprimer la robe" tap="onDeleteColor" row="1" color="{{wineTasting.color | foregroundColorConverter}}" backgroundColor="{{wineTasting.color}}" visibility="{{ wineTasting.color ? 'visible' : 'collapse' }}" colspan="2" />
+                <Button text="Supprimer la robe" tap="onDeleteColor" row="1" color="{{wineTasting.color | foregroundColorConverter}}" backgroundColor="{{wineTasting.color}}" visibility="{{ wineTasting.color ? 'visible' : 'collapse' }}" colspan="2" class="modal-button" />
 				<Label text="Limpidité" class="criterias-title" row="2" colspan="2" />
 				<vs:ValuesSelector items="{{ limpidityCriterias }}" selectedItems="{{ wineTasting.limpidities }}" row="3" colspan="2" />
 				<Label text="Brillance" class="criterias-title" row="4" colspan="2" />
@@ -32,7 +32,8 @@
         <FAB:fab id="fab"
             icon="res://ic_check_white_24dp"
             rippleColor="#f1f1f1"
-            class="fab-button" />
+            class="fab-button"
+            tap="saveTasting" />
         <bn:BottomNavigation row="1" selectedItem="SIGHT" />
     </GridLayout>
   </Page>

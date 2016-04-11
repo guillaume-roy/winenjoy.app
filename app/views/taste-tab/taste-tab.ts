@@ -2,6 +2,8 @@ import {EventData} from "data/observable";
 import {Page} from "ui/page";
 import {TasteTabViewModel} from "../../view-models/taste-tab-view-model";
 import scrollViewModule = require("ui/scroll-view");
+import frameModule = require("ui/frame");
+import {Views} from "../../utils/views";
 
 let viewModel: TasteTabViewModel;
 let page: Page;
@@ -19,6 +21,17 @@ export function navigatedTo(args: EventData) {
 
 export function navigatedFrom() {
     viewModel.storeTasting();
+}
+
+export function saveTasting() {
+    viewModel.saveTasting();
+
+    frameModule.topmost().navigate({
+        animated: false,
+        backstackVisible: false,
+        clearHistory: true,
+        moduleName: Views.main
+    });
 }
 
 function manageFabVisibility() {

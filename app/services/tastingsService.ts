@@ -26,6 +26,15 @@ export class TastingsService {
             }));
     }
 
+    public editTasting(wineTastingId: string): Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
+            this.getTastings().then(tastings => {
+                this.storeTasting(_.find(tastings, { id: wineTastingId }));
+                resolve(true);
+            });
+        });
+    }
+
     public loadTasting(): WineTasting {
         return <WineTasting>JSON.parse(appSettings.getString(TastingsService.TASTING_KEY));
     }
@@ -54,6 +63,8 @@ export class TastingsService {
                     });
                 });
             }
+
+            appSettings.remove(TastingsService.TASTING_KEY);
         });
     }
 

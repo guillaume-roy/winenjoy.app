@@ -21,7 +21,8 @@
           <FAB:fab id="fab"
             icon="res://ic_check_white_24dp"
             rippleColor="#f1f1f1"
-            class="fab-button" />
+            class="fab-button"
+            tap="saveTasting" />
         <bn:BottomNavigation row="1" selectedItem="TASTE" />
     </GridLayout>
   </Page>

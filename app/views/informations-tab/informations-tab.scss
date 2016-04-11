@@ -2,9 +2,11 @@
 @import "../../styles/_bottom-navigation";
 @import "../../styles/_final-rating";
 @import "../../styles/_fab";
+@import "../../styles/_values-selector";
 
 .modal-button {
     height: 60;
+    margin: 10;
 }
 
 ValuesSelector {

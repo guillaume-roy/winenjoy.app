@@ -2,6 +2,7 @@ import _ = require("lodash");
 import {EventData} from "data/observable";
 import {Page} from "ui/page";
 import {SmellTabViewModel} from "../../view-models/smell-tab-view-model";
+import frameModule = require("ui/frame");
 import {Views} from "../../utils/views";
 import scrollViewModule = require("ui/scroll-view");
 
@@ -21,6 +22,17 @@ export function navigatedTo(args: EventData) {
 
 export function navigatedFrom() {
     viewModel.storeTasting();
+}
+
+export function saveTasting() {
+    viewModel.saveTasting();
+
+    frameModule.topmost().navigate({
+        animated: false,
+        backstackVisible: false,
+        clearHistory: true,
+        moduleName: Views.main
+    });
 }
 
 export function onAddAromas() {
