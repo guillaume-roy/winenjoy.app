@@ -1,36 +1,55 @@
 @import "_material-theme";
 
 .bottom-navigation {
-    background-color: $primary-color-text;
+    background-color: $primary-color;
     height: 56;
-
-    .separator {
-        border-width:1;
-        border-color:#f1f1f1;
-    }
+    color: $primary-color-text;
 
     .icon {
         horizontal-align: center;
         font-size:46;
     }
 
-    .label {
-        horizontal-align:center;
-        vertical-align:bottom;
-        margin-bottom:4;
+    .icon-selected {
+        @extend .icon;
     }
 
-    .aromas-icon {
-        margin-top: 2;
+    .icon-unselected {
+        @extend .icon;
+        vertical-align: center;
     }
 
     .wine-icon {
         horizontal-align: center;
-        font-size:32;
-        margin-top:2;
+        font-size: 32;
     }
 
-    .selected {
-        color: $primary-color;
+    .wine-icon-unselected {
+        @extend .wine-icon;
+        margin-top: 6;
+    }
+
+    .wine-icon-selected {
+        @extend .wine-icon;
+    }
+
+    .label {
+        horizontal-align: center;
+        vertical-align: bottom;
+        margin-bottom: 4;
+    }
+
+    .label-unselected {
+        @extend .label;
+        visibility: collapse;
+    }
+
+    .label-selected {
+        @extend .label;
+        visibility: visible;
+    }
+
+    .aromas-icon {
+        margin-top: 3;
     }
 }

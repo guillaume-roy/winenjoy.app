@@ -1,27 +1,19 @@
+import _ = require("lodash");
 import {EventData} from "data/observable";
 import {Page} from "ui/page";
-import {SightTabViewModel} from "../../view-models/sight-tab-view-model";
+import {SmellTabViewModel} from "../../view-models/smell-tab-view-model";
 import {Views} from "../../utils/views";
-import geolocation = require("nativescript-geolocation");
 import scrollViewModule = require("ui/scroll-view");
 
-let viewModel: SightTabViewModel;
+let viewModel: SmellTabViewModel;
 let page: Page;
 
 export function navigatedTo(args: EventData) {
     page = <Page>args.object;
 
     setTimeout(() => {
-       viewModel = new SightTabViewModel();
+       viewModel = new SmellTabViewModel();
         page.bindingContext = viewModel;
-        if (geolocation.isEnabled() && !viewModel.isEditMode) {
-            geolocation.getCurrentLocation({timeout: 5000}).
-            then(function(loc) {
-                viewModel.wineTasting.latitude = loc.latitude;
-                viewModel.wineTasting.longitude = loc.longitude;
-                viewModel.wineTasting.altitude = loc.altitude;
-            });
-        }
 
         manageFabVisibility();
     });
@@ -31,20 +23,38 @@ export function navigatedFrom() {
     viewModel.storeTasting();
 }
 
-export function onSelectColor() {
+export function onAddAromas() {
     page.showModal(
-        Views.gradientColorPicker,
-        viewModel.wineTasting,
-        function(selectedColor) {
-            viewModel.wineTasting.color = selectedColor;
-            viewModel.notifyPropertyChange("wineTasting", viewModel.wineTasting);
+        Views.groupingListPicker,
+        {
+            criterias: "aromas",
+            groupingIcon: "whatshot",
+            multiple: true,
+            searchBarHintText: "Sélectionez des arômes",
+            selectedItems: viewModel.wineTasting.aromas
         },
-        false);
+        function(data) {
+            if (_.isArray(data)) {
+                viewModel.setAromas(data);
+            }
+        },
+        true);
 }
 
-export function onDeleteColor() {
-    viewModel.wineTasting.color = null;
-    viewModel.notifyPropertyChange("wineTasting", viewModel.wineTasting);
+export function onAddDefects() {
+    page.showModal(
+        Views.listPicker,
+        {
+            criterias: "aromas",
+            searchBarHintText: "Rechercher un défaut",
+            selectedItems: viewModel.wineTasting.defects
+        },
+        function(items) {
+            if (_.isArray(items)) {
+                viewModel.setDefects(items);
+            }
+        },
+        true);
 }
 
 function manageFabVisibility() {

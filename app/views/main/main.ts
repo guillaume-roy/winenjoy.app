@@ -34,6 +34,7 @@ export function onCreateNewTasting(args: EventData) {
             y: -200
         }
     }).then(v => {
+        viewModel.new();
         frameModule.topmost().navigate({
             animated: false,
             moduleName: Views.sightTab,
@@ -53,9 +54,10 @@ export function onCreateNewTasting(args: EventData) {
 }
 
 export function onCreateFirstTasting() {
+    viewModel.new();
     frameModule.topmost().navigate({
         animated: false,
-        moduleName: Views.editTasting,
+        moduleName: Views.sightTab,
         transition: null
     });
 }

@@ -5,6 +5,34 @@ import _ = require("lodash");
 
 export class TastingsService {
     private static TASTINGS_KEY = "TASTINGS";
+    private static TASTING_KEY = "TASTING";
+
+    public newTasting() {
+        appSettings.setString(TastingsService.TASTING_KEY, JSON.stringify(
+            <WineTasting>{
+                aromas: [],
+                attacks: [],
+                balances: [],
+                bubbles: [],
+                country: null,
+                defects: [],
+                finalRating: "NEUTRAL",
+                intensities: [],
+                length: [],
+                limpidities: [],
+                shines: [],
+                startDate: Date.now(),
+                tears: []
+            }));
+    }
+
+    public loadTasting(): WineTasting {
+        return <WineTasting>JSON.parse(appSettings.getString(TastingsService.TASTING_KEY));
+    }
+
+    public storeTasting(wineTasting: WineTasting) {
+        appSettings.setString(TastingsService.TASTING_KEY, JSON.stringify(wineTasting));
+    }
 
     public getTastings(): Promise<WineTasting[]> {
         return new Promise<WineTasting[]>((resolve, reject) => {
@@ -40,7 +68,6 @@ export class TastingsService {
     }
 
     private saveTastings(wineTastings: WineTasting[]) {
-        console.dump(wineTastings);
         appSettings.setString(TastingsService.TASTINGS_KEY, JSON.stringify(wineTastings));
     }
 }

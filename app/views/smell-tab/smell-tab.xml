@@ -1,0 +1,26 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+    xmlns:vs="components/values-selector"
+    xmlns:bn="components/bottom-navigation"
+    xmlns:FAB="nativescript-floatingactionbutton"
+    navigatedTo="navigatedTo"
+    navigatedFrom="navigatedFrom"
+    actionBarHidden="true">
+    <GridLayout rows="*, auto">
+        <ScrollView id="scrollView">
+            <GridLayout rows="*,*,*,*,*,*,*">
+                <Button text="Sélectionner les arômes" tap="onAddAromas" class="modal-button" />
+                <vs:ValuesSelector items="{{ wineTasting.aromas }}" deleteOnClick="true" row="1" />
+                <Button text="Sélectionner les défauts" tap="onAddDefects" row="2" class="modal-button" />
+                <vs:ValuesSelector items="{{ wineTasting.defects }}" deleteOnClick="true" row="3" />
+                <Label text="Intensité" row="4" class="criterias-title" />
+                <vs:ValuesSelector items="{{ intensityCriterias }}" selectedItems="{{ wineTasting.intensities }}" row="5" />
+                <TextView text="{{ wineTasting.smellTabNotes }}" hint="Commentaires" row="6" />
+            </GridLayout>
+        </ScrollView>
+        <FAB:fab id="fab"
+            icon="res://ic_check_white_24dp"
+            rippleColor="#f1f1f1"
+            class="fab-button" />
+        <bn:BottomNavigation row="1" selectedItem="SMELL" />
+    </GridLayout>
+  </Page>

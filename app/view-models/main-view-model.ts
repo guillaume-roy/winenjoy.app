@@ -3,7 +3,9 @@ import {TastingsService} from "../services/tastingsService";
 import {WineTasting} from "../entities/wineTasting";
 
 export class MainViewModel extends Observable {
+    private _service: TastingsService;
     private _tastings: WineTasting[];
+
     private _betaIsClosed: boolean;
 
     public get tastings() {
@@ -27,9 +29,15 @@ export class MainViewModel extends Observable {
 
         this.betaIsClosed = new Date().getTime() > new Date(2016, 3, 17).getTime();
 
+        this._service = new TastingsService();
+
         this.tastings = [];
-        new TastingsService().getTastings().then(data => {
+        this._service.getTastings().then(data => {
             this.tastings = data;
         });
+    }
+
+    public new() {
+        new TastingsService().newTasting();
     }
 }

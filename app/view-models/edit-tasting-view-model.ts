@@ -304,20 +304,6 @@ export class EditTastingViewModel extends Observable {
         new TastingsService().saveTasting(this.wineTasting);
     }
 
-    public setAromas(aromas: CriteriaItem[]) {
-        this.wineTasting.aromas = null;
-        this.notifyPropertyChange("wineTasting", this.wineTasting);
-        this.wineTasting.aromas = aromas;
-        this.notifyPropertyChange("wineTasting", this.wineTasting);
-    }
-
-    public setDefects(defects: CriteriaItem[]) {
-        this.wineTasting.defects = null;
-        this.notifyPropertyChange("wineTasting", this.wineTasting);
-        this.wineTasting.defects = defects;
-        this.notifyPropertyChange("wineTasting", this.wineTasting);
-    }
-
     public setGrapes(grapes: CriteriaItem[]) {
         this.wineTasting.grapes = null;
         this.notifyPropertyChange("wineTasting", this.wineTasting);

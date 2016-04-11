@@ -1,19 +1,12 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd"
     xmlns:vs="components/values-selector"
-    navigatedTo="navigatedTo">
-    <Page.actionBar>
-        <ActionBar title="{{ isEditMode ? 'Modifier dégustation' : 'Nouvelle dégustation' }}">
-            <NavigationButton icon="res://ic_close_white_24dp" tap="cancel"/>
-            <ActionBar.actionItems>
-                <ActionItem icon="res://ic_check_white_24dp"
-                    ios.position="right"
-                    android.position="actionBar"
-                tap="onSaveTasting" />
-            </ActionBar.actionItems>
-        </ActionBar>
-    </Page.actionBar>
+    xmlns:bn="components/bottom-navigation"
+    xmlns:FAB="nativescript-floatingactionbutton"
+    navigatedTo="navigatedTo"
+    navigatedFrom="navigatedFrom"
+    actionBarHidden="true">
     <GridLayout rows="*, auto">
-        <ScrollView>
+        <ScrollView id="scrollView">
             <GridLayout rows="*,*,*,*,*,*,*,*,auto,*,auto" columns="*, auto">
                 <SegmentedBar colspan="2" selectedIndex="{{ wineTypeSelectedIndex }}">
                     <SegmentedBar.items>
@@ -36,16 +29,10 @@
 				<TextView text="{{ wineTasting.sightTabNotes }}" hint="Commentaires" row="10" colspan="2" />
 			</GridLayout>
         </ScrollView>
-        <GridLayout columns="*, *, *, *" rows="auto,*" row="1" class="bottom-navigation">
-            <StackLayout colspan="4" class="separator" />
-            <Label text="&#xe90a;" class="winenjoy-icon icon selected" row="1" />
-            <Label text="Aspect" class="label selected" row="1" />
-            <Label text="&#xe90b;" class="winenjoy-icon icon aromas-icon" col="1" row="1" />
-            <Label text="Arômes" class="label" col="1" row="1" />
-            <Label text="&#xe90c;" class="winenjoy-icon icon" col="2" row="1" />
-            <Label text="Saveurs" class="label" col="2" row="1" />
-            <Label text="vignette" class="material-icon wine-icon" col="3" row="1" />
-            <Label text="Synthèse" class="label" col="3" row="1" />
-        </GridLayout>
+        <FAB:fab id="fab"
+            icon="res://ic_check_white_24dp"
+            rippleColor="#f1f1f1"
+            class="fab-button" />
+        <bn:BottomNavigation row="1" selectedItem="SIGHT" />
     </GridLayout>
   </Page>

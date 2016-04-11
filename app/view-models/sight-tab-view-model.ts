@@ -7,6 +7,7 @@ import {TastingsService} from "../services/tastingsService";
 
 export class SightTabViewModel extends Observable {
     private _wineDataService: WineDataService;
+    private _tastingsService: TastingsService;
     private _wineTypes: CriteriaItem[];
     private _wineTypeSelectedIndex: number;
     private _wineTasting: WineTasting;
@@ -51,13 +52,7 @@ export class SightTabViewModel extends Observable {
     public set wineTypeSelectedIndex(value: number) {
         this._wineTypeSelectedIndex = value;
         this.notifyPropertyChange("wineTypeSelectedIndex", value);
-
-        if (!this._firstBindingTime) {
-            // this.wineTasting.wineType = this.wineTypes[value];
-            this.wineTasting.color = null;
-            this.wineTasting.balances = [];
-            this.wineTasting.attacks = [];
-        }
+        this.onChangeWineType();
     }
 
      public get hasBubbles() {
@@ -94,26 +89,17 @@ export class SightTabViewModel extends Observable {
         this.notifyPropertyChange("wineTasting", value);
     }
 
-    constructor(wineTasting: WineTasting) {
+    constructor() {
         super();
 
-        this.isEditMode = !_.isEmpty(wineTasting);
+        this._firstBindingTime = true;
 
-        this.wineTasting = {
-            aromas: [],
-            attacks: [],
-            balances: [],
-            bubbles: [],
-            country: null,
-            defects: [],
-            finalRating: "NEUTRAL",
-            intensities: [],
-            length: [],
-            limpidities: [],
-            shines: [],
-            startDate: Date.now(),
-            tears: []
-        };
+        this._tastingsService = new TastingsService();
+
+        let wineTasting = this._tastingsService.loadTasting();
+        this.isEditMode = !_.isEmpty(wineTasting);
+        this.wineTasting = wineTasting;
+        this.hasBubbles = this.wineTasting.bubbles.length > 0;
 
         this.limpidityCriterias = [];
         this.shineCriterias = [];
@@ -129,5 +115,25 @@ export class SightTabViewModel extends Observable {
             .then(data => this.tearCriterias = data);
         this._wineDataService.getCriterias("bubbles")
             .then(data => this.bubbleCriterias = data);
+        this._wineDataService.getCriterias("wineTypes")
+            .then(data => {
+                this._wineTypes = data;
+                this.wineTypeSelectedIndex = this.isEditMode ? data.indexOf(_.find(data, this.wineTasting.wineType)) : 0;
+                this._firstBindingTime = false;
+            });
+    }
+
+    public storeTasting() {
+        this._tastingsService.storeTasting(this.wineTasting);
+    }
+
+    private onChangeWineType() {
+        this.wineTasting.wineType = this._wineTypes[this.wineTypeSelectedIndex];
+
+        if (!this._firstBindingTime) {
+            this.wineTasting.color = null;
+            this.wineTasting.balances = [];
+            this.wineTasting.attacks = [];
+        }
     }
 }
