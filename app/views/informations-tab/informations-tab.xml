@@ -8,7 +8,7 @@
     actionBarHidden="true">
     <GridLayout rows="*, auto">
         <ScrollView id="scrollView">
-			<GridLayout columns="auto,*" rows="*,*,*,*,*,*,*,*,*,*,auto,*,*">
+			<GridLayout columns="auto,*" rows="*,*,*,*,*,*,*,*,*,*,*,*,auto,*">
                 <fr:FinalRating selectedValue="{{ wineTasting.finalRating }}" style="margin-top: 8;horizontal-align: center;" colspan="2" />
                 <TextField text="{{ wineTasting.cuvee }}" hint="Cuvée" row="2" colspan="2" />
                 <TextField text="{{ wineTasting.estate }}" hint="Domaine" row="3" colspan="2" />
@@ -25,10 +25,12 @@
 				<Switch checked="{{ wineTasting.isBiologic }}" row="8" col="1" />
 				<Label text="Biodynamique" row="9" colspan="2" class="criterias-title" />
                 <Switch checked="{{ wineTasting.isBiodynamic }}" row="9" col="1" />
-                <Label text="Cépages" row="10" class="criterias-title" />
-                <Button text="Sélectionner" tap="onSelectGrapes" row="10" col="1" class="white-button" />
-                <vs:ValuesSelector items="{{ wineTasting.grapes }}" deleteOnClick="true" row="11" colspan="2" />
-				<TextView text="{{ wineTasting.synthesisTabNotes }}" hint="Commentaires" row="12" colspan="2" />
+                <Label text="Dégustation à l'aveugle" row="10" colspan="2" class="criterias-title" />
+                <Switch checked="{{ wineTasting.isBlindTasting }}" row="10" col="1" />
+                <Label text="Cépages" row="11" class="criterias-title" />
+                <Button text="Sélectionner" tap="onSelectGrapes" row="11" col="1" class="white-button" />
+                <vs:ValuesSelector items="{{ wineTasting.grapes }}" deleteOnClick="true" row="12" colspan="2" />
+				<TextView text="{{ wineTasting.synthesisTabNotes }}" hint="Commentaires" row="13" colspan="2" />
 			</GridLayout>
         </ScrollView>
         <FAB:fab id="fab"
