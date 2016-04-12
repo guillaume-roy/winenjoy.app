@@ -1,5 +1,4 @@
 import gridLayoutModule = require("ui/layouts/grid-layout");
-import stackLayoutModule = require("ui/layouts/stack-layout");
 import {Label} from "ui/label";
 import dependencyObservableModule = require("ui/core/dependency-observable");
 import {EventData} from "data/observable";

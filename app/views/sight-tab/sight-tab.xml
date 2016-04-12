@@ -34,6 +34,12 @@
             rippleColor="#f1f1f1"
             class="fab-button"
             tap="saveTasting" />
+        <FAB:fab id="fab-delete"
+            icon="res://ic_close_white_24dp"
+            rippleColor="#f1f1f1"
+            visibility="{{ isEditMode ? 'visible' : 'collapse' }}"
+            class="fab-button-delete"
+            tap="deleteTasting" />
         <bn:BottomNavigation row="1" selectedItem="SIGHT" />
     </GridLayout>
   </Page>

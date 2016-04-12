@@ -1,10 +1,9 @@
 import {EventData} from "data/observable";
 import {Page} from "ui/page";
 import {InformationsTabViewModel} from "../../view-models/informations-tab-view-model";
-import scrollViewModule = require("ui/scroll-view");
 import {Views} from "../../utils/views";
 import _ = require("lodash");
-import frameModule = require("ui/frame");
+import editTastingUtils = require("../../utils/edit-tasting");
 
 let viewModel: InformationsTabViewModel;
 let page: Page;
@@ -16,23 +15,20 @@ export function navigatedTo(args: EventData) {
        viewModel = new InformationsTabViewModel();
         page.bindingContext = viewModel;
 
-        manageFabVisibility();
+        editTastingUtils.manageFabVisibility("scrollView", "fab", "fab-delete", page);
     });
 }
 
 export function navigatedFrom() {
-    viewModel.storeTasting();
+    editTastingUtils.navigatedFrom(viewModel);
 }
 
 export function saveTasting() {
-    viewModel.saveTasting();
+    editTastingUtils.saveTasting(viewModel);
+}
 
-    frameModule.topmost().navigate({
-        animated: false,
-        backstackVisible: false,
-        clearHistory: true,
-        moduleName: Views.main
-    });
+export function deleteTasting() {
+    editTastingUtils.deleteTasting(viewModel);
 }
 
 export function onSelectCountry() {
@@ -86,28 +82,4 @@ export function onSelectGrapes() {
             }
         },
         true);
-}
-
-function manageFabVisibility() {
-    let scrollView = page.getViewById("scrollView");
-    scrollView.on("scroll", (scrollEvent: scrollViewModule.ScrollEventData) => {
-        let src = page.getViewById("fab");
-        if (scrollEvent.scrollY !== 0) {
-            src.animate({
-                duration: 300,
-                translate: {
-                    x: 200,
-                    y: 0
-                }
-            });
-        } else {
-            src.animate({
-                duration: 300,
-                translate: {
-                    x: 0,
-                    y: 0
-                }
-            });
-        }
-    });
 }

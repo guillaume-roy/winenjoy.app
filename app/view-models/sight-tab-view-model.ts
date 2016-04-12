@@ -1,22 +1,16 @@
 import _ = require("lodash");
-import {Observable} from "data/observable";
-import {WineTasting} from "../entities/wineTasting";
 import {CriteriaItem} from "../entities/criteriaItem";
 import {WineDataService} from "../services/wineDataService";
-import {TastingsService} from "../services/tastingsService";
+import {EditTastingViewModel} from "./edit-tasting-view-model";
 
-export class SightTabViewModel extends Observable {
-    private _wineDataService: WineDataService;
-    private _tastingsService: TastingsService;
+export class SightTabViewModel extends EditTastingViewModel {
     private _wineTypes: CriteriaItem[];
     private _wineTypeSelectedIndex: number;
-    private _wineTasting: WineTasting;
     private _limpidityCriterias: CriteriaItem[];
     private _shineCriterias: CriteriaItem[];
     private _tearCriterias: CriteriaItem[];
     private _bubbleCriterias: CriteriaItem[];
     private _hasBubbles: boolean;
-    private _isEditMode: boolean;
     private _firstBindingTime: boolean;
 
     public get tearCriterias() {
@@ -63,15 +57,6 @@ export class SightTabViewModel extends Observable {
         this.notifyPropertyChange("hasBubbles", value);
     }
 
-    public get isEditMode() {
-        return this._isEditMode;
-    }
-
-    public set isEditMode(value) {
-        this._isEditMode = value;
-        this.notifyPropertyChange("isEditMode", value);
-    }
-
      public get limpidityCriterias() {
         return this._limpidityCriterias;
     }
@@ -81,24 +66,11 @@ export class SightTabViewModel extends Observable {
         this.notifyPropertyChange("limpidityCriterias", value);
     }
 
-    public get wineTasting() {
-        return this._wineTasting;
-    }
-    public set wineTasting(value) {
-        this._wineTasting = value;
-        this.notifyPropertyChange("wineTasting", value);
-    }
-
     constructor() {
         super();
 
         this._firstBindingTime = true;
 
-        this._tastingsService = new TastingsService();
-
-        let wineTasting = this._tastingsService.loadTasting();
-        this.isEditMode = !_.isEmpty(wineTasting.id);
-        this.wineTasting = wineTasting;
         this.hasBubbles = this.wineTasting.bubbles.length > 0;
 
         this.limpidityCriterias = [];
@@ -124,22 +96,17 @@ export class SightTabViewModel extends Observable {
     }
 
     public storeTasting() {
-        this._tastingsService.storeTasting(this.wineTasting);
+        if (!this.hasBubbles) {
+            this.wineTasting.bubbles = [];
+        }
+        super.storeTasting();
     }
 
     public saveTasting() {
          if (!this.hasBubbles) {
             this.wineTasting.bubbles = [];
         }
-
-        if (!this.isEditMode) {
-            this.wineTasting.endDate = Date.now();
-        } else {
-            this.wineTasting.lastModificationDate = Date.now();
-
-        }
-
-        this._tastingsService.saveTasting(this.wineTasting);
+        super.saveTasting();
     }
 
     private onChangeWineType() {
