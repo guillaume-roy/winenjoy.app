@@ -106,7 +106,7 @@ export class SightTabViewModel extends EditTastingViewModel {
          if (!this.hasBubbles) {
             this.wineTasting.bubbles = [];
         }
-        super.saveTasting();
+        return super.saveTasting();
     }
 
     private onChangeWineType() {

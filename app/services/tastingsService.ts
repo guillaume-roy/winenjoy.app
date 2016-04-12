@@ -49,24 +49,28 @@ export class TastingsService {
         });
     }
 
-    public saveTasting(wineTasting: WineTasting) {
-        this.getTastings().then(wineTastings => {
-            if (_.isEmpty(wineTasting.id)) {
-                wineTasting.id = UUID.generate();
-                wineTasting.endDate = Date.now();
-                wineTastings.push(wineTasting);
-                this.saveTastings(wineTastings);
-            } else {
-                this.deleteTasting(wineTasting).then(result => {
-                    this.getTastings().then(tastings => {
-                        wineTasting.lastModificationDate = Date.now();
-                        tastings.push(wineTasting);
-                        this.saveTastings(tastings);
+    public saveTasting(wineTasting: WineTasting): Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
+            this.getTastings().then(wineTastings => {
+                if (_.isEmpty(wineTasting.id)) {
+                    wineTasting.id = UUID.generate();
+                    wineTasting.endDate = Date.now();
+                    wineTastings.push(wineTasting);
+                    this.saveTastings(wineTastings);
+                    appSettings.remove(TastingsService.TASTING_KEY);
+                    resolve(true);
+                } else {
+                    this.deleteTasting(wineTasting).then(result => {
+                        this.getTastings().then(tastings => {
+                            wineTasting.lastModificationDate = Date.now();
+                            tastings.push(wineTasting);
+                            this.saveTastings(tastings);
+                            appSettings.remove(TastingsService.TASTING_KEY);
+                            resolve(true);
+                        });
                     });
-                });
-            }
-
-            appSettings.remove(TastingsService.TASTING_KEY);
+                }
+            });
         });
     }
 

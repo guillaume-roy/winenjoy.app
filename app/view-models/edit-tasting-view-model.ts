@@ -43,10 +43,10 @@ export class EditTastingViewModel extends Observable {
     }
 
     public saveTasting() {
-        this._tastingsService.saveTasting(this.wineTasting);
+        return this._tastingsService.saveTasting(this.wineTasting);
     }
 
     public deleteTasting() {
-        this._tastingsService.deleteTasting(this.wineTasting;
+        return this._tastingsService.deleteTasting(this.wineTasting);
     }
 }

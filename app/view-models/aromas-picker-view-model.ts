@@ -63,7 +63,7 @@ export class AromasPickerViewModel extends Observable {
                     ? (d) => d.code === "DEFECTS"
                     : (d) => d.code !== "DEFECTS";
 
-                this._aromaCriteriasSource = _.orderBy(_.flattenDeep(
+                this._aromaCriteriasSource = _.orderBy(_.flattenDeep<Observable>(
                     data.filter(filterFunction).map(a => {
                         return a.values.map(i => {
                             return new Observable({

@@ -3,23 +3,26 @@ import {Views} from "../utils/views";
 import scrollViewModule = require("ui/scroll-view");
 import frameModule = require("ui/frame");
 import dialogs = require("ui/dialogs");
+import {EditTastingViewModel} from "../view-models/edit-tasting-view-model";
 
-export function navigatedFrom(viewModel: any) {
+export function navigatedFrom(viewModel: EditTastingViewModel) {
     viewModel.storeTasting();
 }
 
-export function saveTasting(viewModel: any) {
-    viewModel.saveTasting();
-
-    frameModule.topmost().navigate({
-        animated: false,
-        backstackVisible: false,
-        clearHistory: true,
-        moduleName: Views.main
-    });
+export function saveTasting(viewModel: EditTastingViewModel) {
+    setTimeout(() => {
+        viewModel.saveTasting().then(result => {
+            frameModule.topmost().navigate({
+                animated: false,
+                backstackVisible: false,
+                clearHistory: true,
+                moduleName: Views.main
+            });
+        });
+    }, 0);
 }
 
-export function deleteTasting(viewModel: any) {
+export function deleteTasting(viewModel: EditTastingViewModel) {
     dialogs.confirm({
         cancelButtonText: "Non",
         message: "Etes-vous sûr de vouloir supprimer cette dégustation ?",
@@ -27,13 +30,16 @@ export function deleteTasting(viewModel: any) {
         title: "Suppression"
     }).then(result => {
         if (result) {
-            viewModel.deleteTasting();
-            frameModule.topmost().navigate({
-                animated: false,
-                backstackVisible: false,
-                clearHistory: true,
-                moduleName: Views.main
-            });
+            setTimeout(() => {
+                viewModel.deleteTasting().then(r => {
+                    frameModule.topmost().navigate({
+                        animated: false,
+                        backstackVisible: false,
+                        clearHistory: true,
+                        moduleName: Views.main
+                    });
+                });
+            }, 0);
         }
     });
 }
