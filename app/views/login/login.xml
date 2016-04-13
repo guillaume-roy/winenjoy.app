@@ -1,8 +1,5 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd"
       navigatedTo="navigatedTo">
-    <Page.actionBar>
-        <ActionBar title="Winenjoy - v0.1 beta" />
-    </Page.actionBar>
   <GridLayout>
     <ScrollView>
         <StackLayout style="padding: 8">

@@ -29,6 +29,6 @@
         <Button text="Créer une dégustation" class="first-tasting-button" tap="onCreateFirstTasting" />
     </StackLayout>
 
-    <Label text="Cette version beta est terminée. Merci." class="beta-message" visibility="{{ betaIsClosed ? 'visible' : 'collapse' }}"/>
+    <Label text="Cette version beta est terminée. Merci de mettre à jour l'application." class="beta-message" visibility="{{ betaIsClosed ? 'visible' : 'collapse' }}"/>
   </GridLayout>
 </Page>

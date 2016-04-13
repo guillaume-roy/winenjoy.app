@@ -18,6 +18,6 @@
     "gulp": "^3.9.1",
     "gulp-sass": "^2.2.0",
     "nativescript-dev-typescript": "^0.3.0",
-    "typescript": "^1.7.5"
+    "typescript": "^1.8.10"
   }
 }
