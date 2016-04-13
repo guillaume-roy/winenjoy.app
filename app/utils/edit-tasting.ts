@@ -15,7 +15,6 @@ export function saveTasting(viewModel: EditTastingViewModel) {
             frameModule.topmost().navigate({
                 animated: false,
                 backstackVisible: false,
-                clearHistory: true,
                 moduleName: Views.main
             });
         });
@@ -35,7 +34,6 @@ export function deleteTasting(viewModel: EditTastingViewModel) {
                     frameModule.topmost().navigate({
                         animated: false,
                         backstackVisible: false,
-                        clearHistory: true,
                         moduleName: Views.main
                     });
                 });

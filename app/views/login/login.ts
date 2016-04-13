@@ -21,8 +21,7 @@ export function onLogin() {
                 animated: false,
                 backstackVisible: false,
                 clearHistory: true,
-                moduleName: Views.main,
-                transition: null
+                moduleName: Views.main
             });
         } else {
             dialogs.alert({

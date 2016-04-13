@@ -11,6 +11,7 @@ let viewModel: MainViewModel;
 
 export function navigatedTo(args: EventData) {
     let page = <Page>args.object;
+
     viewModel = new MainViewModel();
     page.bindingContext = viewModel;
 
