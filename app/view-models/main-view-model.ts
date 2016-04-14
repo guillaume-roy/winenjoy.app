@@ -27,7 +27,7 @@ export class MainViewModel extends Observable {
     constructor() {
         super();
 
-        this.betaIsClosed = new Date().getTime() > new Date(2016, 4, 1).getTime();
+        this.betaIsClosed = new Date().getTime() > new Date(2016, 4, 15).getTime();
 
         this._service = new TastingsService();
 

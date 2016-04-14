@@ -38,6 +38,7 @@ export function onCreateNewTasting(args: EventData) {
         viewModel.new();
         frameModule.topmost().navigate({
             animated: false,
+            backstackVisible: false,
             moduleName: Views.sightTab
         });
 
@@ -57,6 +58,7 @@ export function onCreateFirstTasting() {
     viewModel.new();
     frameModule.topmost().navigate({
         animated: false,
+        backstackVisible: false,
         moduleName: Views.sightTab
     });
 }
@@ -65,6 +67,7 @@ export function onViewTasting(args: listViewModule.ItemEventData) {
     viewModel.edit(viewModel.tastings[args.index].id).then(result => {
         frameModule.topmost().navigate({
             animated: false,
+            backstackVisible: false,
             moduleName: Views.sightTab
         });
     });

@@ -3,6 +3,7 @@
     xmlns:bn="components/bottom-navigation"
     xmlns:vs="components/values-selector"
     xmlns:FAB="nativescript-floatingactionbutton"
+    loaded="loaded"
     navigatedTo="navigatedTo"
     navigatedFrom="navigatedFrom"
     actionBarHidden="true">

@@ -4,6 +4,7 @@ import scrollViewModule = require("ui/scroll-view");
 import frameModule = require("ui/frame");
 import dialogs = require("ui/dialogs");
 import {EditTastingViewModel} from "../view-models/edit-tasting-view-model";
+import application = require("application");
 
 export function navigatedFrom(viewModel: EditTastingViewModel) {
     viewModel.storeTasting();
@@ -14,7 +15,6 @@ export function saveTasting(viewModel: EditTastingViewModel) {
         viewModel.saveTasting().then(result => {
             frameModule.topmost().navigate({
                 animated: false,
-                backstackVisible: false,
                 moduleName: Views.main
             });
         });
@@ -33,7 +33,6 @@ export function deleteTasting(viewModel: EditTastingViewModel) {
                 viewModel.deleteTasting().then(r => {
                     frameModule.topmost().navigate({
                         animated: false,
-                        backstackVisible: false,
                         moduleName: Views.main
                     });
                 });
@@ -96,4 +95,43 @@ export function manageFabVisibility(scrollViewId: string, fabButtonId: string, f
             }
         });
     }
+}
+
+export function attachBackButtonConfirmation(viewModel: EditTastingViewModel) {
+    if (viewModel.isEditMode) {
+        return;
+    }
+
+    if (application.android) {
+        application.android.on(application.AndroidApplication.activityBackPressedEvent, backEvent);
+    }
+}
+
+export function detachBackButtonConfirmation(viewModel: EditTastingViewModel) {
+    if (viewModel.isEditMode) {
+        return;
+    }
+
+    // We only want to un-register the event on Android
+    if (application.android) {
+        application.android.off(application.AndroidApplication.activityBackPressedEvent, backEvent);
+    }
+};
+
+function backEvent(args: any) {
+    args.cancel = true;
+
+    dialogs.confirm({
+        cancelButtonText: "Non",
+        message: "Etes-vous sûr de vouloir annuler cette dégustation ?",
+        okButtonText: "Oui",
+        title: "Annuler"
+    }).then(result => {
+        if (result) {
+            frameModule.topmost().navigate({
+                animated: false,
+                moduleName: Views.main
+            });
+        }
+    });
 }

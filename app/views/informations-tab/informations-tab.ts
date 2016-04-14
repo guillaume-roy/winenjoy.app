@@ -8,18 +8,22 @@ import editTastingUtils = require("../../utils/edit-tasting");
 let viewModel: InformationsTabViewModel;
 let page: Page;
 
-export function navigatedTo(args: EventData) {
+export function loaded(args: EventData) {
     page = <Page>args.object;
 
-    setTimeout(() => {
-       viewModel = new InformationsTabViewModel();
-        page.bindingContext = viewModel;
+    viewModel = new InformationsTabViewModel();
+    page.bindingContext = viewModel;
+}
 
+export function navigatedTo(args: EventData) {
+    setTimeout(() => {
+        editTastingUtils.attachBackButtonConfirmation(viewModel);
         editTastingUtils.manageFabVisibility("scrollView", "fab", "fab-delete", page);
     });
 }
 
 export function navigatedFrom() {
+    editTastingUtils.detachBackButtonConfirmation(viewModel);
     editTastingUtils.navigatedFrom(viewModel);
 }
 

@@ -17,7 +17,7 @@ export function onShownModally(args: pages.ShownModallyData) {
 }
 
 export function onToggleGroup(args: EventData) {
-    viewModel.toggleGroup(args.object.bindingContext);
+    viewModel.toggleGroup((<any>args.object).bindingContext);
 }
 
 export function onSelectItem(args) {

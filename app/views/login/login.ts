@@ -20,7 +20,6 @@ export function onLogin() {
             frameModule.topmost().navigate({
                 animated: false,
                 backstackVisible: false,
-                clearHistory: true,
                 moduleName: Views.main
             });
         } else {

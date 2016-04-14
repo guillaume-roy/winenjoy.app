@@ -8,16 +8,17 @@ import editTastingUtils = require("../../utils/edit-tasting");
 let viewModel: SightTabViewModel;
 let page: Page;
 
-export function navigatedTo(args: EventData) {
+export function loaded(args: EventData) {
     page = <Page>args.object;
 
-    setTimeout(() => {
-       viewModel = new SightTabViewModel();
-        page.bindingContext = viewModel;
+    viewModel = new SightTabViewModel();
+    page.bindingContext = viewModel;
+}
 
+export function navigatedTo(args: EventData) {
+    setTimeout(() => {
         if (geolocation.isEnabled() && !viewModel.isEditMode) {
-            geolocation.getCurrentLocation({timeout: 5000}).
-            then(function(loc) {
+            geolocation.getCurrentLocation({timeout: 5000}).then(loc => {
                 viewModel.wineTasting.latitude = loc.latitude;
                 viewModel.wineTasting.longitude = loc.longitude;
                 viewModel.wineTasting.altitude = loc.altitude;
@@ -25,10 +26,12 @@ export function navigatedTo(args: EventData) {
         }
 
         editTastingUtils.manageFabVisibility("scrollView", "fab", "fab-delete", page);
+        editTastingUtils.attachBackButtonConfirmation(viewModel);
     });
 }
 
 export function navigatedFrom() {
+    editTastingUtils.detachBackButtonConfirmation(viewModel);
     editTastingUtils.navigatedFrom(viewModel);
 }
 
