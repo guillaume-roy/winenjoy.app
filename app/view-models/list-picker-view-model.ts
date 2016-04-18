@@ -2,6 +2,7 @@ import _ = require("lodash");
 import {Observable} from "data/observable";
 import {CriteriaItem} from "../entities/criteriaItem";
 import {WineDataService} from "../services/wineDataService";
+import {Diacritics} from "../utils/diacritics";
 
 export class ListPickerViewModel extends Observable {
     private _items: any[];
@@ -9,6 +10,7 @@ export class ListPickerViewModel extends Observable {
     private _searchingText: string;
     private _selectedItems: CriteriaItem[];
     private _searchBarHintText: string;
+    private _diacriticsHelper: Diacritics;
 
     public get items() {
         return this._items;
@@ -37,7 +39,9 @@ export class ListPickerViewModel extends Observable {
             this.items = this._itemsSource;
         } else {
             this.items = this._itemsSource.filter(v => {
-                return v.item.label.toLowerCase().startsWith(value.trim().toLowerCase());
+                let searchTerm = this._diacriticsHelper.remove(value.trim()).toLowerCase();
+                let currentTerm = this._diacriticsHelper.remove(v.item.label).toLowerCase();
+                return currentTerm.indexOf(searchTerm) > -1;
             });
         }
     }
@@ -49,6 +53,7 @@ export class ListPickerViewModel extends Observable {
     constructor(args: any) {
         super();
 
+        this._diacriticsHelper = new Diacritics();
         this.searchBarHintText = args.searchBarHintText;
 
         if (_.isArray(args.selectedItems)) {
