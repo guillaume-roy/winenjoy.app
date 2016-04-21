@@ -1,42 +1,37 @@
 [
-	{
-		"language": "fr",
-		"data": [
-            {
-                "id": "099f4160-e96b-4398-968f-59bac30fea12",
-                "label": "Acide",
-                "order": 0
-            },
-            {
-                "id": "fd9d5558-0c7f-4bf3-bc94-5bc30c1b7a3b",
-                "label": "Mordant",
-                "order": 1
-            },
-            {
-                "id": "08d6dda2-3485-4a38-84e1-62981378de20",
-                "label": "Vert",
-                "order": 2
-            },
-            {
-                "id": "a272c312-64f3-4967-b3c5-aac8d0ecd618",
-                "label": "Vif",
-                "order": 3
-            },
-            {
-                "id": "32d46ed0-23b5-4478-9ec3-13fc696e0a4a",
-                "label": "Frais",
-                "order": 4
-            },
-            {
-                "id": "e82fb7c8-439f-47a3-b20d-64d55d90e4f1",
-                "label": "Plat",
-                "order": 5
-            },
-            {
-                "id": "7f9042fc-312e-4f49-9ce4-9a68ce8ddb8d",
-                "label": "Mou",
-                "order": 6
-            }
-        ]
-    }
+  {
+    "id":"099f4160-e96b-4398-968f-59bac30fea12",
+    "label":"Acide",
+    "order":0
+  },
+  {
+    "id":"fd9d5558-0c7f-4bf3-bc94-5bc30c1b7a3b",
+    "label":"Mordant",
+    "order":1
+  },
+  {
+    "id":"08d6dda2-3485-4a38-84e1-62981378de20",
+    "label":"Vert",
+    "order":2
+  },
+  {
+    "id":"a272c312-64f3-4967-b3c5-aac8d0ecd618",
+    "label":"Vif",
+    "order":3
+  },
+  {
+    "id":"32d46ed0-23b5-4478-9ec3-13fc696e0a4a",
+    "label":"Frais",
+    "order":4
+  },
+  {
+    "id":"e82fb7c8-439f-47a3-b20d-64d55d90e4f1",
+    "label":"Plat",
+    "order":5
+  },
+  {
+    "id":"7f9042fc-312e-4f49-9ce4-9a68ce8ddb8d",
+    "label":"Mou",
+    "order":6
+  }
 ]

@@ -58,7 +58,7 @@ export class LoginViewModel extends Observable {
                     });
                     resolve(true);
                 },
-                "beta-testers",
+                "beta_testers",
                 {
                     orderBy: {
                         type: firebase.QueryOrderByType.CHILD,

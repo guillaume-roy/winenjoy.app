@@ -1,25 +1,20 @@
 [
-	{
-		"language": "fr",
-		"data": [
-            {
-				"id": "a6c2b5ed-e2e2-432b-be32-d29e2b1f3371",
-				"label": "Blanc",
-                "code": "WHITE",
-                "order": 0
-			},
-            {
-				"id": "aeac6641-a7ef-42b3-bd57-f3461fce9ce1",
-				"label": "Rosé",
-                "code": "ROSE",
-                "order": 1
-			},
-            {
-				"id": "9c201c0a-f11b-47bd-8256-52f328d13dc4",
-				"label": "Rouge",
-                "code": "RED",
-                "order": 2
-			}
-        ]
-    }
+  {
+    "id":"a6c2b5ed-e2e2-432b-be32-d29e2b1f3371",
+    "label":"Blanc",
+    "code":"WHITE",
+    "order":0
+  },
+  {
+    "id":"aeac6641-a7ef-42b3-bd57-f3461fce9ce1",
+    "label":"Rosé",
+    "code":"ROSE",
+    "order":1
+  },
+  {
+    "id":"9c201c0a-f11b-47bd-8256-52f328d13dc4",
+    "label":"Rouge",
+    "code":"RED",
+    "order":2
+  }
 ]

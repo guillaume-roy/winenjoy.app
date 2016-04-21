@@ -1,37 +1,32 @@
 [
-	{
-		"language": "fr",
-		"data": [
-            {
-				"id": "4ad36962-c3ea-46d7-a4f6-fc032c3ef239",
-				"label": "Courte",
-                "order": 0
-			},
-            {
-				"id": "57cc01fb-e2b2-4973-8bd0-8683536ab305",
-				"label": "Moyenne",
-                "order": 1
-			},
-            {
-				"id": "16d5a464-1496-49f1-ac8d-bcd0c5e2921a",
-				"label": "Bonne",
-                "order": 2
-			},
-            {
-				"id": "cd4998ee-a125-428d-9565-3f3e0071ae66",
-				"label": "Longue",
-                "order": 3
-			},
-            {
-				"id": "c261a225-84f3-455e-a7e2-58a6243a508b",
-				"label": "Très longue",
-                "order": 4
-			},
-            {
-				"id": "0ca257cc-4f83-4e29-92bf-6a17fa314089",
-				"label": "Persistante",
-                "order": 5
-			}
-        ]
-    }
+  {
+    "id":"4ad36962-c3ea-46d7-a4f6-fc032c3ef239",
+    "label":"Courte",
+    "order":0
+  },
+  {
+    "id":"57cc01fb-e2b2-4973-8bd0-8683536ab305",
+    "label":"Moyenne",
+    "order":1
+  },
+  {
+    "id":"16d5a464-1496-49f1-ac8d-bcd0c5e2921a",
+    "label":"Bonne",
+    "order":2
+  },
+  {
+    "id":"cd4998ee-a125-428d-9565-3f3e0071ae66",
+    "label":"Longue",
+    "order":3
+  },
+  {
+    "id":"c261a225-84f3-455e-a7e2-58a6243a508b",
+    "label":"Très longue",
+    "order":4
+  },
+  {
+    "id":"0ca257cc-4f83-4e29-92bf-6a17fa314089",
+    "label":"Persistante",
+    "order":5
+  }
 ]

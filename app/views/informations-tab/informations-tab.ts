@@ -39,7 +39,7 @@ export function onSelectCountry() {
     page.showModal(
         Views.groupingListPicker,
         {
-            criterias: "geo",
+            criterias: "countries",
             groupingIcon: "public",
             multiple: false,
             searchBarHintText: "Sélectionnez un pays"
@@ -53,6 +53,42 @@ export function onSelectCountry() {
 }
 
 export function onDeleteCountry() {
+    viewModel.setCountry(null);
+}
+
+export function onSelectRegion() {
+   page.showModal(
+        Views.listPicker,
+        {
+            criterias: "regions",
+            searchBarHintText: "Rechercher une région",
+            selectedItems: viewModel.wineTasting.region
+        },
+        function(selectedRegion) {
+            viewModel.setRegion(selectedRegion);
+        },
+        true);
+}
+
+export function onDeleteRegion() {
+    viewModel.setCountry(null);
+}
+
+export function onSelectAoc() {
+   page.showModal(
+        Views.listPicker,
+        {
+            criterias: "aoc",
+            searchBarHintText: "Rechercher un AOC",
+            selectedItems: viewModel.wineTasting.aoc
+        },
+        function(selectedAoc) {
+            viewModel.setAoc(selectedAoc);
+        },
+        true);
+}
+
+export function onDeleteAoc() {
     viewModel.setCountry(null);
 }
 

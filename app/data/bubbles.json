@@ -1,32 +1,27 @@
 [
-	{
-		"language": "fr",
-		"data": [
-            {
-				"id": "4c37d75d-c15c-47a1-a44d-a57ad63286db",
-				"label": "Très fines",
-                "order": 0
-			},
-            {
-				"id": "17d3d953-8a92-4695-b953-318c72bad8e3",
-				"label": "Fines",
-                "order": 1
-			},
-            {
-				"id": "d33c0877-b2ff-4f83-9e1c-b0245935e94a",
-				"label": "Moyennes",
-                "order": 2
-			},
-            {
-				"id": "c899f856-7626-4b33-8fd7-9627118c4261",
-				"label": "Grosses",
-                "order": 3
-			},
-            {
-				"id": "e2980336-bd2d-4788-82e5-782952ba8035",
-				"label": "Très grosses",
-                "order": 4
-			}
-        ]
-    }
+  {
+    "id":"4c37d75d-c15c-47a1-a44d-a57ad63286db",
+    "label":"Très fines",
+    "order":0
+  },
+  {
+    "id":"17d3d953-8a92-4695-b953-318c72bad8e3",
+    "label":"Fines",
+    "order":1
+  },
+  {
+    "id":"d33c0877-b2ff-4f83-9e1c-b0245935e94a",
+    "label":"Moyennes",
+    "order":2
+  },
+  {
+    "id":"c899f856-7626-4b33-8fd7-9627118c4261",
+    "label":"Grosses",
+    "order":3
+  },
+  {
+    "id":"e2980336-bd2d-4788-82e5-782952ba8035",
+    "label":"Très grosses",
+    "order":4
+  }
 ]

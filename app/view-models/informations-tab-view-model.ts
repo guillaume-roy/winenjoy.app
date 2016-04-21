@@ -41,6 +41,17 @@ export class InformationsTabViewModel extends EditTastingViewModel {
         this.notifyPropertyChange("wineTasting", this.wineTasting);
     }
 
+    public setAoc(aoc: CriteriaItem[]) {
+        this.wineTasting.aoc = aoc;
+        this.notifyPropertyChange("wineTasting", this.wineTasting);
+    }
+
+    public setRegion(region: CriteriaItem) {
+        this.wineTasting.region = region;
+        this.notifyPropertyChange("wineTasting", this.wineTasting);
+    }
+
+
     public setCountry(country: CriteriaItem) {
         this.wineTasting.country = country;
         this.notifyPropertyChange("wineTasting", this.wineTasting);

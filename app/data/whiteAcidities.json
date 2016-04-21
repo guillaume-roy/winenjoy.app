@@ -1,72 +1,67 @@
 [
-	{
-		"language": "fr",
-		"data": [
-            {
-				"id": "f61e43ff-fd83-4104-b555-c7a7bbc838c9",
-				"label": "Mince",
-                "order": 0
-			},
-            {
-				"id": "e2f54590-640d-477e-a5f8-e454f6b3ec5a",
-				"label": "Plat",
-                "order": 1
-			},
-            {
-				"id": "d06c559e-97b6-4c58-add1-a24602ae2892",
-				"label": "Lourd",
-                "order": 2
-			},
-            {
-				"id": "8f877e27-3465-42d6-b79d-06515b7569ed",
-				"label": "Gras",
-                "order": 3
-			},
-            {
-				"id": "ae8ea268-2815-4316-af4b-de0d6106261f",
-				"label": "Moelleux",
-                "order": 4
-			},
-            {
-				"id": "f19bcbbd-7ead-417d-bd89-5f77ab9f0ce7",
-				"label": "Soutenu",
-                "order": 5
-			},
-            {
-				"id": "9a16d685-d682-4932-b76a-8d788ee45ab4",
-				"label": "Nerveux",
-                "order": 6
-			},
-            {
-				"id": "827a32a9-c8c4-40e6-a3ad-d0b035ed80e2",
-				"label": "Vif",
-                "order": 7
-			},
-            {
-				"id": "1f9000cc-ff9f-46f3-baf6-4344225abcb5",
-				"label": "Acide",
-                "order": 8
-			},
-            {
-				"id": "4d04ffa0-48ae-4464-915e-3ea8751474e9",
-				"label": "Frais",
-                "order": 9
-			},
-            {
-				"id": "cec81a25-2f36-433c-8e1e-7e5d13be2bb0",
-				"label": "Vert",
-                "order": 10
-			},
-            {
-				"id": "9bde16ef-16d1-4084-886a-a70fb23e9f98",
-				"label": "Sec",
-                "order": 11
-			},
-            {
-				"id": "232069e0-9c54-40a2-b62b-131919921d35",
-				"label": "Creux",
-                "order": 12
-			}
-        ]
-    }
+  {
+    "id":"f61e43ff-fd83-4104-b555-c7a7bbc838c9",
+    "label":"Mince",
+    "order":0
+  },
+  {
+    "id":"e2f54590-640d-477e-a5f8-e454f6b3ec5a",
+    "label":"Plat",
+    "order":1
+  },
+  {
+    "id":"d06c559e-97b6-4c58-add1-a24602ae2892",
+    "label":"Lourd",
+    "order":2
+  },
+  {
+    "id":"8f877e27-3465-42d6-b79d-06515b7569ed",
+    "label":"Gras",
+    "order":3
+  },
+  {
+    "id":"ae8ea268-2815-4316-af4b-de0d6106261f",
+    "label":"Moelleux",
+    "order":4
+  },
+  {
+    "id":"f19bcbbd-7ead-417d-bd89-5f77ab9f0ce7",
+    "label":"Soutenu",
+    "order":5
+  },
+  {
+    "id":"9a16d685-d682-4932-b76a-8d788ee45ab4",
+    "label":"Nerveux",
+    "order":6
+  },
+  {
+    "id":"827a32a9-c8c4-40e6-a3ad-d0b035ed80e2",
+    "label":"Vif",
+    "order":7
+  },
+  {
+    "id":"1f9000cc-ff9f-46f3-baf6-4344225abcb5",
+    "label":"Acide",
+    "order":8
+  },
+  {
+    "id":"4d04ffa0-48ae-4464-915e-3ea8751474e9",
+    "label":"Frais",
+    "order":9
+  },
+  {
+    "id":"cec81a25-2f36-433c-8e1e-7e5d13be2bb0",
+    "label":"Vert",
+    "order":10
+  },
+  {
+    "id":"9bde16ef-16d1-4084-886a-a70fb23e9f98",
+    "label":"Sec",
+    "order":11
+  },
+  {
+    "id":"232069e0-9c54-40a2-b62b-131919921d35",
+    "label":"Creux",
+    "order":12
+  }
 ]
