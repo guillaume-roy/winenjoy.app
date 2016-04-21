@@ -10,4 +10,5 @@ export class Views {
     public static smellTab: string = "views/smell-tab/smell-tab";
     public static tasteTab: string = "views/taste-tab/taste-tab";
     public static informationsTab: string = "views/informations-tab/informations-tab";
+    public static editTasting: string = "views/edit-tasting/edit-tasting";
 }

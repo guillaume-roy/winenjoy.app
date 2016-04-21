@@ -5,11 +5,9 @@ import _ = require("lodash");
 
 export class TastingsService {
     private static TASTINGS_KEY = "TASTINGS";
-    private static TASTING_KEY = "TASTING";
 
     public newTasting() {
-        appSettings.setString(TastingsService.TASTING_KEY, JSON.stringify(
-            <WineTasting>{
+        return <WineTasting>{
                 aromas: [],
                 attacks: [],
                 balances: [],
@@ -23,24 +21,7 @@ export class TastingsService {
                 shines: [],
                 startDate: Date.now(),
                 tears: []
-            }));
-    }
-
-    public editTasting(wineTastingId: string): Promise<boolean> {
-        return new Promise<boolean>((resolve, reject) => {
-            this.getTastings().then(tastings => {
-                this.storeTasting(_.find(tastings, { id: wineTastingId }));
-                resolve(true);
-            });
-        });
-    }
-
-    public loadTasting(): WineTasting {
-        return <WineTasting>JSON.parse(appSettings.getString(TastingsService.TASTING_KEY));
-    }
-
-    public storeTasting(wineTasting: WineTasting) {
-        appSettings.setString(TastingsService.TASTING_KEY, JSON.stringify(wineTasting));
+            };
     }
 
     public getTastings(): Promise<WineTasting[]> {
@@ -57,7 +38,6 @@ export class TastingsService {
                     wineTasting.endDate = Date.now();
                     wineTastings.push(wineTasting);
                     this.saveTastings(wineTastings);
-                    appSettings.remove(TastingsService.TASTING_KEY);
                     resolve(true);
                 } else {
                     this.deleteTasting(wineTasting).then(result => {
@@ -65,7 +45,6 @@ export class TastingsService {
                             wineTasting.lastModificationDate = Date.now();
                             tastings.push(wineTasting);
                             this.saveTastings(tastings);
-                            appSettings.remove(TastingsService.TASTING_KEY);
                             resolve(true);
                         });
                     });
@@ -79,7 +58,6 @@ export class TastingsService {
             this.getTastings().then(wineTastings => {
                 _.remove(wineTastings, w => w.id === wineTasting.id);
                 this.saveTastings(wineTastings);
-                appSettings.remove(TastingsService.TASTING_KEY);
                 resolve(true);
             });
         });

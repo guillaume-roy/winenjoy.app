@@ -37,11 +37,7 @@ export class MainViewModel extends Observable {
         });
     }
 
-    public new() {
-        this._service.newTasting();
-    }
-
-    public edit(wineTastingId: string) {
-        return this._service.editTasting(wineTastingId);
+    public newTasting() {
+        return this._service.newTasting();
     }
 }

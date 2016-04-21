@@ -35,10 +35,11 @@ export function onCreateNewTasting(args: EventData) {
             y: -200
         }
     }).then(v => {
-        viewModel.new();
+        // viewModel.new();
         frameModule.topmost().navigate({
             animated: false,
             backstackVisible: false,
+            context: viewModel.newTasting(),
             moduleName: Views.sightTab
         });
 
@@ -55,20 +56,22 @@ export function onCreateNewTasting(args: EventData) {
 }
 
 export function onCreateFirstTasting() {
-    viewModel.new();
+    console.log(new Date().toISOString(), "navigating from main");
+
     frameModule.topmost().navigate({
         animated: false,
         backstackVisible: false,
-        moduleName: Views.sightTab
+        context: viewModel.newTasting(),
+        moduleName: Views.editTasting
     });
 }
 
 export function onViewTasting(args: listViewModule.ItemEventData) {
-    viewModel.edit(viewModel.tastings[args.index].id).then(result => {
-        frameModule.topmost().navigate({
-            animated: false,
-            backstackVisible: false,
-            moduleName: Views.sightTab
-        });
-    });
+    // viewModel.edit(viewModel.tastings[args.index].id).then(result => {
+    //     frameModule.topmost().navigate({
+    //         animated: false,
+    //         backstackVisible: false,
+    //         moduleName: Views.sightTab
+    //     });
+    // });
 }
