@@ -2,14 +2,18 @@
         shownModally="onShownModally">
     <GridLayout rows="auto, *, auto">
         <SearchBar hint="{{ searchBarHintText }}" id="searchBar" textFieldHintColor="#FFFFFF" />
-        <ListView items="{{ items }}" itemTap="onSelectItem" row="1">
+        <ListView items="{{ items }}" itemTap="onSelectItem" row="1" visibility="{{ items.length !== 0 ? 'visible' : 'collapse' }}">
             <ListView.itemTemplate>
                 <GridLayout class="{{ isSelected ? 'list-item list-item-selected' : 'list-item' }}">
                     <Label text="{{ item.label }}" />
-                    <Label text="check" visibility="{{ isSelected ? 'visible' : 'collapsed' }}" class="material-icon" />
+                    <Label text="check" visibility="{{ isSelected ? 'visible' : 'collapse' }}" class="material-icon" />
                 </GridLayout>
             </ListView.itemTemplate>
         </ListView>
-        <Button text="Valider" row="2" tap="onValidate" class="validate-button" />
+        <StackLayout row="1" visibility="{{ items.length === 0 ? 'visible' : 'collapse' }}">
+            <Label text="Aucun résultat" class="no-result-label" />
+            <Button text="Utiliser cet élément" class="accent-button modal-button" visibility="{{ searchingText.length !== 0 && !multiple ? 'visible' : 'collapse' }}" tap="useNewElement" />
+        </StackLayout>
+        <Button text="Valider" row="2" tap="onValidate" class="validate-button" visibility="{{ items.length !== 0 ? 'visible' : 'collapse' }}" />
     </GridLayout>
 </Page>

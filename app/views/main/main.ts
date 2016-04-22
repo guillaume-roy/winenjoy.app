@@ -35,12 +35,13 @@ export function onCreateNewTasting(args: EventData) {
             y: -200
         }
     }).then(v => {
-        // viewModel.new();
+        console.log(new Date().toISOString(), "navigating from main");
+
         frameModule.topmost().navigate({
             animated: false,
             backstackVisible: false,
             context: viewModel.newTasting(),
-            moduleName: Views.sightTab
+            moduleName: Views.editTasting
         });
 
         button.animate({ // reset to original state

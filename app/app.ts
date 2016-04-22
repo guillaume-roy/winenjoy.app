@@ -24,12 +24,32 @@ application.resources.labelConverter = function(value) {
     }
 };
 
-application.resources.finalRatingToImageConverter = function(value: string) {
+application.resources.finalRatingToImageConverter = function(value: any) {
     if (!value) {
         return null;
     }
 
-    return "res://ic_" + value.toLowerCase();
+    let result = "";
+
+    switch (parseInt(value, 10)) {
+        case 0:
+            result = "sentiment_very_dissatisfied";
+            break;
+        case 1:
+            result = "sentiment_dissatisfied";
+            break;
+        case 2:
+            result = "sentiment_neutral";
+            break;
+        case 3:
+            result = "sentiment_satisfied";
+            break;
+        case 4:
+            result = "sentiment_very_satisfied";
+            break;
+    }
+
+    return result;
 };
 
 application.resources.wineLocationConverter = function(value: any) {

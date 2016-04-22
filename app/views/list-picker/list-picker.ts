@@ -24,8 +24,19 @@ export function onShownModally(args: pages.ShownModallyData) {
 
 export function onSelectItem(args: listViewModule.ItemEventData) {
     viewModel.toggleItem(args.index);
+
+    if (!viewModel.multiple) {
+        closeCallback(viewModel.selectedItem);
+    }
 }
 
 export function onValidate() {
     closeCallback(viewModel.selectedItems);
+}
+
+export function useNewElement() {
+    if (!viewModel.multiple) {
+        viewModel.useNewElement();
+        closeCallback(viewModel.selectedItem);
+    }
 }

@@ -8,9 +8,15 @@ import {Views} from "../../utils/views";
 import scrollViewModule = require("ui/scroll-view");
 import application = require("application");
 import tabViewModule = require("ui/tab-view");
+import _ = require("lodash");
+import {View} from "ui/core/view";
 
 let page: Page;
 let viewModel: EditTastingViewModel;
+let fabButton: View;
+let fabDeleteButton: View;
+let fabButtonDelay = 0;
+let tabView: tabViewModule.TabView;
 
 export function navigatedTo(args: EventData) {
     console.log(new Date().toISOString(), "navigated to edit-tasting");
@@ -38,6 +44,18 @@ export function navigatedTo(args: EventData) {
 
 export function navigatedFrom() {
     detachBackButtonConfirmation();
+    tabView.off(tabViewModule.TabView.selectedIndexChangedEvent, attachToScroll);
+    attachToScroll({
+        eventName: tabViewModule.TabView.selectedIndexChangedEvent,
+        newIndex: -1,
+        object: null,
+        oldIndex: tabView.selectedIndex
+    });
+}
+
+export function onSelectFinalRating(args) {
+    let finalRating = args.object.className.match(/final-rating-(\d)/)[1];
+    viewModel.setFinalRating(parseInt(finalRating, 10));
 }
 
 export function onSelectColor() {
@@ -79,6 +97,7 @@ export function onAddDefects() {
         Views.listPicker,
         {
             criterias: "aromas",
+            multiple: true,
             searchBarHintText: "Rechercher un défaut",
             selectedItems: viewModel.wineTasting.defects
         },
@@ -116,6 +135,7 @@ export function onSelectRegion() {
         Views.listPicker,
         {
             criterias: "regions",
+            parentCode: (viewModel.wineTasting.country || {}).code,
             searchBarHintText: "Rechercher une région",
             selectedItems: viewModel.wineTasting.region
         },
@@ -126,7 +146,7 @@ export function onSelectRegion() {
 }
 
 export function onDeleteRegion() {
-    viewModel.setCountry(null);
+    viewModel.setRegion(null);
 }
 
 export function onSelectAoc() {
@@ -134,6 +154,7 @@ export function onSelectAoc() {
         Views.listPicker,
         {
             criterias: "aoc",
+            parentCode: (viewModel.wineTasting.region || {}).code,
             searchBarHintText: "Rechercher un AOC",
             selectedItems: viewModel.wineTasting.aoc
         },
@@ -144,7 +165,7 @@ export function onSelectAoc() {
 }
 
 export function onDeleteAoc() {
-    viewModel.setCountry(null);
+    viewModel.setAoc(null);
 }
 
 export function onSelectYear() {
@@ -168,6 +189,7 @@ export function onSelectGrapes() {
         Views.listPicker,
         {
             criterias: "grapes",
+            multiple: true,
             searchBarHintText: "Rechercher un cépage",
             selectedItems: viewModel.wineTasting.grapes
         },
@@ -249,96 +271,77 @@ function backEvent(args: any) {
     });
 }
 
-function manageFabVisibility() {
-    let tabView = page.getViewById("tab-view");
-
-    if (tabView) {
-        tabView.on(tabViewModule.TabView.selectedIndexChangedEvent, (data: tabViewModule.SelectedIndexChangedEventData) => {
-            let fabButton = page.getViewById("fab");
-            let fabDeleteButton = page.getViewById("fab-delete");
-            let fabButtonDelay = 0;
-
-            if (fabDeleteButton) {
-                fabButtonDelay = 100;
-
-                fabDeleteButton.animate({
-                    duration: 300,
-                    translate: {
-                        x: 0,
-                        y: 0
-                    }
-                });
-            }
-
-            if (fabButton) {
-                fabButton.animate({
-                    delay: fabButtonDelay,
-                    duration: 300,
-                    translate: {
-                        x: 0,
-                        y: 0
-                    }
-                });
-            }
-        });
-    }
-
-    let scrollViewIds = [ "scroll-0", "scroll-1", "scroll-2", "scroll-3", "scroll-4" ];
-
-    for (let i = 0; i < scrollViewIds.length; i++) {
-
-        let scrollView = page.getViewById(scrollViewIds[i]);
-
-        if (scrollView) {
-            scrollView.on("scroll", (scrollEvent: scrollViewModule.ScrollEventData) => {
-                let fabButton = page.getViewById("fab");
-                let fabDeleteButton = page.getViewById("fab-delete");
-                let fabButtonDelay = 0;
-
-                if (fabDeleteButton) {
-                    fabButtonDelay = 100;
-
-                    if (scrollEvent.scrollY !== 0) {
-                        fabDeleteButton.animate({
-                            duration: 300,
-                            translate: {
-                                x: 200,
-                                y: 0
-                            }
-                        });
-                    } else {
-                        fabDeleteButton.animate({
-                            duration: 300,
-                            translate: {
-                                x: 0,
-                                y: 0
-                            }
-                        });
-                    }
+function animateFabButtons(scrollEvent: scrollViewModule.ScrollEventData) {
+    if (fabDeleteButton) {
+        if (scrollEvent.scrollY !== 0) {
+            fabDeleteButton.animate({
+                duration: 300,
+                translate: {
+                    x: 200,
+                    y: 0
                 }
-
-                if (fabButton) {
-                    if (scrollEvent.scrollY !== 0) {
-                        fabButton.animate({
-                            delay: fabButtonDelay,
-                            duration: 300,
-                            translate: {
-                                x: 200,
-                                y: 0
-                            }
-                        });
-                    } else {
-                        fabButton.animate({
-                            delay: fabButtonDelay,
-                            duration: 300,
-                            translate: {
-                                x: 0,
-                                y: 0
-                            }
-                        });
-                    }
+            });
+        } else {
+            fabDeleteButton.animate({
+                duration: 300,
+                translate: {
+                    x: 0,
+                    y: 0
                 }
             });
         }
     }
+
+    if (fabButton) {
+        if (scrollEvent.scrollY !== 0) {
+            fabButton.animate({
+                delay: fabButtonDelay,
+                duration: 300,
+                translate: {
+                    x: 200,
+                    y: 0
+                }
+            });
+        } else {
+            fabButton.animate({
+                delay: fabButtonDelay,
+                duration: 300,
+                translate: {
+                    x: 0,
+                    y: 0
+                }
+            });
+        }
+    }
+}
+
+function attachToScroll(args: tabViewModule.SelectedIndexChangedEventData) {
+    let scrollViewIds = [ "scroll-0", "scroll-1", "scroll-2", "scroll-3", "scroll-4" ];
+
+    if (args.newIndex >= 0) {
+        let scrollViewToAttach = page.getViewById(scrollViewIds[args.newIndex]);
+        if (scrollViewToAttach) {
+            scrollViewToAttach.on(scrollViewModule.ScrollView.scrollEvent, animateFabButtons);
+        }
+    }
+
+    if (args.oldIndex >= 0) {
+        let scrollViewToDetach = page.getViewById(scrollViewIds[args.oldIndex]);
+        if (scrollViewToDetach) {
+            scrollViewToDetach.off(scrollViewModule.ScrollView.scrollEvent, animateFabButtons);
+        }
+    }
+}
+
+function manageFabVisibility() {
+    fabButton = page.getViewById("fab");
+    fabDeleteButton = page.getViewById("fab-delete");
+    fabButtonDelay = fabDeleteButton ? 100 : 0;
+
+    tabView = <tabViewModule.TabView>page.getViewById("tab-view");
+    if (tabView) {
+        tabView.on(tabViewModule.TabView.selectedIndexChangedEvent, attachToScroll);
+    }
+
+    attachToScroll({ eventName: tabViewModule.TabView.selectedIndexChangedEvent, newIndex: 0, object: null, oldIndex: -1 });
 }

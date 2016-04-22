@@ -3,6 +3,7 @@ import {Observable} from "data/observable";
 import {CriteriaItem} from "../entities/criteriaItem";
 import {WineDataService} from "../services/wineDataService";
 import {Diacritics} from "../utils/diacritics";
+import {UUID} from "../utils/uuid";
 
 export class ListPickerViewModel extends Observable {
     private _items: any[];
@@ -11,6 +12,24 @@ export class ListPickerViewModel extends Observable {
     private _selectedItems: CriteriaItem[];
     private _searchBarHintText: string;
     private _diacriticsHelper: Diacritics;
+    private _multiple: boolean;
+    private _parentCode: string;
+
+    public get parentCode() {
+        return this._parentCode;
+    }
+    public set parentCode(value) {
+        this._parentCode = value;
+        this.notifyPropertyChange("parentCode", value);
+    }
+
+    public get multiple() {
+        return this._multiple;
+    }
+    public set multiple(value) {
+        this._multiple = value;
+        this.notifyPropertyChange("multiple", value);
+    }
 
     public get items() {
         return this._items;
@@ -50,11 +69,21 @@ export class ListPickerViewModel extends Observable {
         return this._selectedItems;
     }
 
+    public get selectedItem() {
+        return this._selectedItems[0];
+    }
+
     constructor(args: any) {
         super();
 
+        this._itemsSource = [];
+        this.items = [];
         this._diacriticsHelper = new Diacritics();
+
+        this.parentCode = args.parentCode;
+        this.multiple = args.multiple;
         this.searchBarHintText = args.searchBarHintText;
+        this.searchingText = "";
 
         if (_.isArray(args.selectedItems)) {
             this._selectedItems = args.selectedItems;
@@ -80,6 +109,12 @@ export class ListPickerViewModel extends Observable {
         } else {
             new WineDataService().getCriterias(args.criterias)
             .then(data => {
+                if (!_.isEmpty(this.parentCode)) {
+                    data = data.filter(d => {
+                        return d.parentCode === this.parentCode;
+                    });
+                }
+
                 this._itemsSource = data.map(a => {
                     return new Observable({
                         isSelected: _.some(this._selectedItems, a),
@@ -94,12 +129,27 @@ export class ListPickerViewModel extends Observable {
     public toggleItem(index: number) {
         let selectedItem = this.items[index];
 
-        if (selectedItem.isSelected) {
-            _.remove(this._selectedItems, selectedItem.item);
+        if (!this.multiple) {
+            this._selectedItems = [ selectedItem.item ];
         } else {
-            this._selectedItems.push(selectedItem.item);
-        }
+            if (selectedItem.isSelected) {
+                _.remove(this._selectedItems, selectedItem.item);
+            } else {
+                this._selectedItems.push(selectedItem.item);
+            }
 
-        selectedItem.isSelected = !selectedItem.isSelected;
+            selectedItem.isSelected = !selectedItem.isSelected;
+        }
+    }
+
+    public useNewElement() {
+        if (!this.multiple) {
+            this._selectedItems = [{
+                id: UUID.generate(),
+                isCustom: true,
+                label: _.capitalize(this.searchingText),
+                parentCode: this.parentCode
+            }];
+        }
     }
 }

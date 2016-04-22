@@ -14,7 +14,7 @@ export class TastingsService {
                 bubbles: [],
                 country: null,
                 defects: [],
-                finalRating: "NEUTRAL",
+                finalRating: 2,
                 intensities: [],
                 length: [],
                 limpidities: [],

@@ -239,6 +239,11 @@ export class EditTastingViewModel extends Observable {
         this.notifyPropertyChange("wineTasting", this.wineTasting);
     }
 
+    public setFinalRating(rating: number) {
+        this.wineTasting.finalRating = rating;
+        this.notifyPropertyChange("wineTasting", this.wineTasting);
+    }
+
     public setGrapes(grapes: CriteriaItem[]) {
         this.wineTasting.grapes = null;
         this.notifyPropertyChange("wineTasting", this.wineTasting);
@@ -253,12 +258,12 @@ export class EditTastingViewModel extends Observable {
 
     public setRegion(region: CriteriaItem) {
         this.wineTasting.region = region;
-        this.notifyPropertyChange("wineTasting", this.wineTasting);
+        this.setAoc(null);
     }
 
     public setCountry(country: CriteriaItem) {
         this.wineTasting.country = country;
-        this.notifyPropertyChange("wineTasting", this.wineTasting);
+        this.setRegion(null);
     }
 
     public setYear(year: number) {

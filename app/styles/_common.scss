@@ -5,10 +5,16 @@ ActionBar {
     color: $primary-color-text;
 }
 
-.icon-24 {
-    font-size: 24;
-}
-
 .white-button {
     background-color: $primary-color-text;
+}
+
+.accent-button {
+    background-color: $accent-color;
+    color: $primary-color-text;
+}
+
+.modal-button {
+    height: 60;
+    margin: 10;
 }

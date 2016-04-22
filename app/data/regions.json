@@ -2,81 +2,81 @@
   {
     "code":"ALS",
     "label":"Alsace",
-    "parent_code":"FR"
+    "parentCode":"FR"
   },
   {
     "code":"BEA",
     "label":"Beaujolais",
-    "parent_code":"FR"
+    "parentCode":"FR"
   },
   {
     "code":"BOR",
     "label":"Bordeaux",
-    "parent_code":"FR"
+    "parentCode":"FR"
   },
   {
     "code":"BOU",
     "label":"Bourgogne",
-    "parent_code":"FR"
+    "parentCode":"FR"
   },
   {
     "code":"CHA",
     "label":"Champagne",
-    "parent_code":"FR"
+    "parentCode":"FR"
   },
   {
     "code":"COR",
     "label":"Corse",
-    "parent_code":"FR"
+    "parentCode":"FR"
   },
   {
     "code":"JUR",
     "label":"Jura",
-    "parent_code":"FR"
+    "parentCode":"FR"
   },
   {
     "code":"LAN",
     "label":"Languedoc-Roussillon",
-    "parent_code":"FR"
+    "parentCode":"FR"
   },
   {
     "code":"PRO",
     "label":"Provence",
-    "parent_code":"FR"
+    "parentCode":"FR"
   },
   {
     "code":"SAV",
     "label":"Savoie",
-    "parent_code":"FR"
+    "parentCode":"FR"
   },
   {
     "code":"SUD",
     "label":"Sud-Ouest",
-    "parent_code":"FR"
+    "parentCode":"FR"
   },
   {
     "code":"LOI",
     "label":"Vallée de la Loire",
-    "parent_code":"FR"
+    "parentCode":"FR"
   },
   {
     "code":"RHO",
     "label":"Vallée du Rhône",
-    "parent_code":"FR"
+    "parentCode":"FR"
   },
   {
     "code":"BUG",
     "label":"Bugey",
-    "parent_code":"FR"
+    "parentCode":"FR"
   },
   {
     "code":"LOR",
     "label":"Lorraine",
-    "parent_code":"FR"
+    "parentCode":"FR"
   },
   {
     "code":"LYO",
     "label":"Lyonnais",
-    "parent_code":"FR"
+    "parentCode":"FR"
   }
 ]

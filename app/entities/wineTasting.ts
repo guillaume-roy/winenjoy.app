@@ -20,7 +20,7 @@ export interface WineTasting {
     lastModificationDate?: number;
     synthesisTabNotes?: string;
     color?: string;
-    finalRating?: string;
+    finalRating?: number;
     sightTabNotes?: string;
     smellTabNotes?: string;
     tasteTabNotes?: string;

@@ -11,32 +11,44 @@
                     <TabViewItem.view>
                         <ScrollView id="scroll-0">
                             <StackLayout class="tab-view-content">
-                                <TextField text="{{ wineTasting.cuvee }}" hint="Cuvée" />
-                                <TextField text="{{ wineTasting.estate }}" hint="Domaine" />
+                                <SegmentedBar selectedIndex="{{ wineTypeSelectedIndex }}">
+                                    <SegmentedBar.items>
+                                        <SegmentedBarItem title="Blanc" />
+                                        <SegmentedBarItem title="Rosé" />
+                                        <SegmentedBarItem title="Rouge" />
+                                    </SegmentedBar.items>
+                                </SegmentedBar>
+                                <Label text="Cuvée" class="criterias-title" />
+                                <TextField text="{{ wineTasting.cuvee }}" />
+                                <Label text="Domaine" class="criterias-title" />
+                                <TextField text="{{ wineTasting.estate }}" />
                                 <Label text="Pays" class="criterias-title" />
-                                <Button text="Sélectionner" tap="onSelectCountry" class="white-button" visibility="{{ wineTasting.country ? 'collapse' : 'visible' }}" />
-                                <Button text="{{ (wineTasting.country ||{}).label }}" tap="onDeleteCountry" class="white-button" visibility="{{ wineTasting.country ? 'visible' : 'collapse' }}" />
+                                <Button text="Sélectionner" tap="onSelectCountry" class="white-button modal-button" visibility="{{ wineTasting.country ? 'collapse' : 'visible' }}" />
+                                <Button text="{{ (wineTasting.country ||{}).label }}" tap="onDeleteCountry" class="accent-button modal-button" visibility="{{ wineTasting.country ? 'visible' : 'collapse' }}" />
                                 <Label text="Région" class="criterias-title" />
-                                <Button text="Sélectionner" tap="onSelectRegion" class="white-button" visibility="{{ wineTasting.region ? 'collapse' : 'visible' }}" />
-                                <Button text="{{ (wineTasting.region ||{}).label }}" tap="onDeleteRegion" class="white-button" visibility="{{ wineTasting.region ? 'visible' : 'collapse' }}" />
+                                <Button text="Sélectionner" tap="onSelectRegion" class="white-button modal-button" visibility="{{ wineTasting.region ? 'collapse' : 'visible' }}" />
+                                <Button text="{{ (wineTasting.region ||{}).label }}" tap="onDeleteRegion" class="accent-button modal-button" visibility="{{ wineTasting.region ? 'visible' : 'collapse' }}" />
                                 <Label text="AOC" class="criterias-title" />
-                                <Button text="Sélectionner" tap="onSelectAoc" class="white-button" visibility="{{ wineTasting.aoc ? 'collapse' : 'visible' }}" />
-                                <Button text="{{ (wineTasting.region ||{}).label }}" tap="onDeleteAoc" class="white-button" visibility="{{ wineTasting.aoc ? 'visible' : 'collapse' }}" />
+                                <Button text="Sélectionner" tap="onSelectAoc" class="white-button modal-button" visibility="{{ wineTasting.aoc ? 'collapse' : 'visible' }}" />
+                                <Button text="{{ (wineTasting.aoc ||{}).label }}" tap="onDeleteAoc" class="accent-button modal-button" visibility="{{ wineTasting.aoc ? 'visible' : 'collapse' }}" />
                                 <Label text="Année" class="criterias-title" />
-                                <Button text="Sélectionner" tap="onSelectYear" class="white-button" visibility="{{ wineTasting.year ? 'collapse' : 'visible' }}" />
-                                <Button text="{{ wineTasting.year }}" tap="onDeleteYear" class="white-button" visibility="{{ wineTasting.year ? 'visible' : 'collapse' }}" />
-                                <Label text="{{ alcoholFormattedValue ? alcoholFormattedValue + '%' : '% Alcool' }}" class="criterias-title-no-margin" width="70" />
-                                <Slider id="alcohol-slider" value="{{ alcoholValue }}" minValue="30" maxValue="180" class="criterias-margin" />
-                                <Label text="Biologique" class="criterias-title" />
-                                <Switch checked="{{ wineTasting.isBiologic }}" />
-                                <Label text="Biodynamique" class="criterias-title" />
-                                <Switch checked="{{ wineTasting.isBiodynamic }}" />
-                                <Label text="Dégustation à l'aveugle" class="criterias-title" />
-                                <Switch checked="{{ wineTasting.isBlindTasting }}" />
+                                <Button text="Sélectionner" tap="onSelectYear" class="white-button modal-button" visibility="{{ wineTasting.year ? 'collapse' : 'visible' }}" />
+                                <Button text="{{ wineTasting.year }}" tap="onDeleteYear" class="accent-button modal-button" visibility="{{ wineTasting.year ? 'visible' : 'collapse' }}" />
+                                <Label text="{{ alcoholFormattedValue ? 'Alcool : ' + alcoholFormattedValue + '%' : 'Alcool' }}" class="criterias-title" />
+                                <Slider id="alcohol-slider" value="{{ alcoholValue }}" minValue="30" maxValue="180" style="margin: 10" />
+                                <DockLayout class="switch-criteria">
+                                    <Label text="Vin Biologique" class="criterias-title"/>
+                                    <Switch checked="{{ wineTasting.isBiologic }}" dock="right" />
+                                </DockLayout>
+                                <DockLayout class="switch-criteria">
+                                    <Label text="Vin Biodynamique" class="criterias-title" />
+                                    <Switch checked="{{ wineTasting.isBiodynamic }}" dock="right" />
+                                </DockLayout>
                                 <Label text="Cépages" class="criterias-title" />
-                                <Button text="Sélectionner" tap="onSelectGrapes" class="white-button" />
+                                <Button text="Sélectionner" tap="onSelectGrapes" class="white-button modal-button" />
                                 <vs:ValuesSelector items="{{ wineTasting.grapes }}" deleteOnClick="true" />
-                                <TextView text="{{ wineTasting.wineTabNotes }}" hint="Commentaires" />
+                                <Label text="Commentaires" class="criterias-title" />
+                                <TextView text="{{ wineTasting.wineTabNotes }}" />
                             </StackLayout>
                         </ScrollView>
                     </TabViewItem.view>
@@ -45,25 +57,22 @@
                     <TabViewItem.view>
                         <ScrollView id="scroll-1">
                             <StackLayout class="tab-view-content">
-                                <SegmentedBar selectedIndex="{{ wineTypeSelectedIndex }}">
-                                    <SegmentedBar.items>
-                                        <SegmentedBarItem title="Blanc" />
-                                        <SegmentedBarItem title="Rosé" />
-                                        <SegmentedBarItem title="Rouge" />
-                                    </SegmentedBar.items>
-                                </SegmentedBar>
-                                <Button text="Sélectionner la robe" tap="onSelectColor" visibility="{{ wineTasting.color ? 'collpase' : 'visible' }}" class="modal-button" />
-                                <Button text="Supprimer la robe" tap="onDeleteColor" color="{{wineTasting.color | foregroundColorConverter}}" backgroundColor="{{wineTasting.color}}" visibility="{{ wineTasting.color ? 'visible' : 'collapse' }}" class="modal-button" />
+                                <Label text="Robe" class="criterias-title" />
+                                <Button text="Sélectionner" tap="onSelectColor" visibility="{{ wineTasting.color ? 'collapse' : 'visible' }}" class="modal-button white-button" />
+                                <Button tap="onDeleteColor" backgroundColor="{{wineTasting.color}}" visibility="{{ wineTasting.color ? 'visible' : 'collapse' }}" class="modal-button" />
                                 <Label text="Limpidité" class="criterias-title" />
                                 <vs:ValuesSelector items="{{ limpidityCriterias }}" selectedItems="{{ wineTasting.limpidities }}" />
                                 <Label text="Brillance" class="criterias-title" />
                                 <vs:ValuesSelector items="{{ shineCriterias }}" selectedItems="{{ wineTasting.shines }}" />
                                 <Label text="Larmes" class="criterias-title" />
                                 <vs:ValuesSelector items="{{ tearCriterias }}" selectedItems="{{ wineTasting.tears }}" />
-                                <Label text="Bulles" class="criterias-title" />
-                                <Switch style="horizontal-align: right" checked="{{ hasBubbles }}" />
+                                <DockLayout class="switch-criteria">
+                                    <Label text="Bulles" class="criterias-title" />
+                                    <Switch checked="{{ hasBubbles }}" dock="right" />
+                                </DockLayout>
                                 <vs:ValuesSelector items="{{ bubbleCriterias }}" selectedItems="{{ wineTasting.bubbles }}" visibility="{{ hasBubbles ? 'visible' : 'collapse' }}" />
-                                <TextView text="{{ wineTasting.sightTabNotes }}" hint="Commentaires" />
+                                <Label text="Commentaires" class="criterias-title" />
+                                <TextView text="{{ wineTasting.sightTabNotes }}" />
                             </StackLayout>
                         </ScrollView>
                     </TabViewItem.view>
@@ -72,13 +81,16 @@
                     <TabViewItem.view>
                         <ScrollView id="scroll-2">
                             <StackLayout class="tab-view-content">
-                                <Button text="Sélectionner les arômes" tap="onAddAromas" class="modal-button" />
+                                <Label text="Arômes" class="criterias-title" />
+                                <Button text="Sélectionner" tap="onAddAromas" class="modal-button white-button" />
                                 <vs:ValuesSelector items="{{ wineTasting.aromas }}" deleteOnClick="true"/>
-                                <Button text="Sélectionner les défauts" tap="onAddDefects" class="modal-button" />
+                                <Label text="Défauts" class="criterias-title" />
+                                <Button text="Sélectionner" tap="onAddDefects" class="modal-button white-button" />
                                 <vs:ValuesSelector items="{{ wineTasting.defects }}" deleteOnClick="true"/>
                                 <Label text="Intensité" class="criterias-title" />
                                 <vs:ValuesSelector items="{{ intensityCriterias }}" selectedItems="{{ wineTasting.intensities }}"/>
-                                <TextView text="{{ wineTasting.smellTabNotes }}" hint="Commentaires" />
+                                <Label text="Commentaires" class="criterias-title" />
+                                <TextView text="{{ wineTasting.smellTabNotes }}" />
                             </StackLayout>
                         </ScrollView>
                     </TabViewItem.view>
@@ -94,7 +106,8 @@
                                 <vs:ValuesSelector items="{{ acidityCriterias }}" selectedItems="{{ wineTasting.balances }}" visibility="{{ wineTasting.wineType.code === 'WHITE' ? 'visible' : 'collapse'}}" />
                                 <Label text="Finale" class="criterias-title" />
                                 <vs:ValuesSelector items="{{ lengthCriterias }}" selectedItems="{{ wineTasting.length }}" />
-                                <TextView hint="Commentaires" text="{{ wineTasting.tasteTabNotes }}" />
+                                <Label text="Commentaires" class="criterias-title" />
+                                <TextView text="{{ wineTasting.tasteTabNotes }}" />
                             </StackLayout>
                         </ScrollView>
                     </TabViewItem.view>
@@ -103,8 +116,20 @@
                     <TabViewItem.view>
                         <ScrollView id="scroll-4">
                             <StackLayout class="tab-view-content">
-                                <!--<fr:FinalRating selectedValue="{{ wineTasting.finalRating }}" style="margin-top: 8;horizontal-align: center;" colspan="2" />-->
-                                <TextView text="{{ wineTasting.synthesisTabNotes }}" hint="Commentaires" />
+                                <Label text="Avis global" class="criterias-title" />
+                                <StackLayout orientation="horizontal" class="final-rating">
+                                    <Label text="sentiment_very_satisfied" class="{{ wineTasting.finalRating == 4 ? 'material-icon final-rating-4 selected': 'material-icon final-rating-4' }}" tap="onSelectFinalRating" />
+                                    <Label text="sentiment_satisfied" class="{{ wineTasting.finalRating == 3 ? 'material-icon final-rating-3 selected': 'material-icon final-rating-3' }}" tap="onSelectFinalRating" />
+                                    <Label text="sentiment_neutral" class="{{ wineTasting.finalRating == 2 ? 'material-icon final-rating-2 selected': 'material-icon final-rating-2' }}" tap="onSelectFinalRating" />
+                                    <Label text="sentiment_dissatisfied" class="{{ wineTasting.finalRating == 1 ? 'material-icon final-rating-1 selected': 'material-icon final-rating-1' }}" tap="onSelectFinalRating" />
+                                    <Label text="sentiment_very_dissatisfied" class="{{ wineTasting.finalRating == 0 ? 'material-icon final-rating-0 selected': 'material-icon final-rating-0' }}" tap="onSelectFinalRating" />
+                                </StackLayout>
+                                <DockLayout class="switch-criteria">
+                                    <Label text="Dégustation à l'aveugle" class="criterias-title" />
+                                    <Switch checked="{{ wineTasting.isBlindTasting }}" dock="right" />
+                                </DockLayout>
+                                <Label text="Commentaires" class="criterias-title" />
+                                <TextView text="{{ wineTasting.synthesisTabNotes }}" />
                             </StackLayout>
                         </ScrollView>
                     </TabViewItem.view>
