@@ -68,11 +68,12 @@ export function onCreateFirstTasting() {
 }
 
 export function onViewTasting(args: listViewModule.ItemEventData) {
-    // viewModel.edit(viewModel.tastings[args.index].id).then(result => {
-    //     frameModule.topmost().navigate({
-    //         animated: false,
-    //         backstackVisible: false,
-    //         moduleName: Views.sightTab
-    //     });
-    // });
+    console.log(new Date().toISOString(), "navigating from main");
+
+    frameModule.topmost().navigate({
+        animated: false,
+        backstackVisible: true,
+        context: viewModel.tastings[args.index],
+        moduleName: Views.editTasting
+    });
 }

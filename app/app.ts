@@ -1,28 +1,6 @@
 import application = require("application");
 import {Views} from "./utils/views";
 import {UserService} from "./services/userService";
-import {ColorUtils} from "./utils/color";
-
-// TODO : Use moment.js
-application.resources.dateConverter = function(value) {
-    let date = new Date(value);
-    let day = date.getDate();
-    let month = date.getMonth();
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    return (day < 10 ? "0" + day : day) + "/" + (month < 10 ? "0" + month : month) + "/" + date.getFullYear() +
-        " " + (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes);
-};
-
-application.resources.labelConverter = function(value) {
-    if (value && value.length > 0) {
-        return value.map(v => {
-            return v.label;
-        });
-    } else {
-        return [];
-    }
-};
 
 application.resources.finalRatingToImageConverter = function(value: any) {
     if (!value) {
@@ -74,10 +52,6 @@ application.resources.wineLocationConverter = function(value: any) {
     }
 
     return result;
-};
-
-application.resources.foregroundColorConverter = function(backgroundColor: string) {
-    return ColorUtils.getForegroundColor(backgroundColor);
 };
 
  application.start({
