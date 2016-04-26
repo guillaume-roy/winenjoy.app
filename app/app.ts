@@ -1,6 +1,7 @@
 import application = require("application");
 import {Views} from "./utils/views";
 import {UserService} from "./services/userService";
+import {AnalyticsService} from "./services/analyticsService";
 
 application.resources.finalRatingToImageConverter = function(value: any) {
     if (!value) {
@@ -53,6 +54,17 @@ application.resources.wineLocationConverter = function(value: any) {
 
     return result;
 };
+
+let analyticsService = new AnalyticsService();
+
+application.on(application.launchEvent, args => {
+    analyticsService.initialize();
+});
+
+application.on(application.uncaughtErrorEvent, (args: application.ApplicationEventData) => {
+    console.log(args.object);
+    analyticsService.logException(true);
+});
 
  application.start({
     moduleName: new UserService().isLogged() ? Views.main : Views.login

@@ -10,6 +10,7 @@ import application = require("application");
 import tabViewModule = require("ui/tab-view");
 import _ = require("lodash");
 import {View} from "ui/core/view";
+import {AnalyticsService} from "../../services/analyticsService";
 
 let page: Page;
 let viewModel: EditTastingViewModel;
@@ -17,9 +18,14 @@ let fabButton: View;
 let fabDeleteButton: View;
 let fabButtonDelay = 0;
 let tabView: tabViewModule.TabView;
+let analyticsService: AnalyticsService;
 
 export function navigatedTo(args: EventData) {
     console.log(new Date().toISOString(), "navigated to edit-tasting");
+
+    analyticsService = new AnalyticsService();
+    analyticsService.logView("edit-tasting");
+    analyticsService.stopTimer("Navigation from main to edit-tasting");
 
     page = <Page>args.object;
 
@@ -56,6 +62,7 @@ export function navigatedFrom() {
 export function onSelectFinalRating(args) {
     let finalRating = args.object.className.match(/final-rating-(\d)/)[1];
     viewModel.setFinalRating(parseInt(finalRating, 10));
+    analyticsService.logEvent("Navigation", "User Input", "onSelectFinalRating");
 }
 
 export function onSelectColor() {
@@ -65,8 +72,10 @@ export function onSelectColor() {
         function(selectedColor) {
             viewModel.wineTasting.color = selectedColor;
             viewModel.notifyPropertyChange("wineTasting", viewModel.wineTasting);
+            analyticsService.logEvent("Navigation", "User Input", "onSelectedColor");
         },
         false);
+    analyticsService.logEvent("Navigation", "User Input", "onSelectColor");
 }
 
 export function onDeleteColor() {
@@ -87,9 +96,11 @@ export function onAddAromas() {
         function(data) {
             if (_.isArray(data)) {
                 viewModel.setAromas(data);
+                analyticsService.logEvent("Navigation", "User Input", "onAddedAromas");
             }
         },
         true);
+    analyticsService.logEvent("Navigation", "User Input", "onAddAromas");
 }
 
 export function onAddDefects() {
@@ -104,9 +115,11 @@ export function onAddDefects() {
         function(items) {
             if (_.isArray(items)) {
                 viewModel.setDefects(items);
+                analyticsService.logEvent("Navigation", "User Input", "onAddedDefects");
             }
         },
         true);
+    analyticsService.logEvent("Navigation", "User Input", "onAddDefects");
 }
 
 export function onSelectCountry() {
@@ -121,9 +134,11 @@ export function onSelectCountry() {
         data => {
             if (!_.isEmpty(data)) {
                 viewModel.setCountry(data);
+                analyticsService.logEvent("Navigation", "User Input", "onSelectedCountry");
             }
         },
         true);
+    analyticsService.logEvent("Navigation", "User Input", "onSelectCountry");
 }
 
 export function onDeleteCountry() {
@@ -141,8 +156,10 @@ export function onSelectRegion() {
         },
         function(selectedRegion) {
             viewModel.setRegion(selectedRegion);
+            analyticsService.logEvent("Navigation", "User Input", "onSelectedRegion");
         },
         true);
+    analyticsService.logEvent("Navigation", "User Input", "onSelectRegion");
 }
 
 export function onDeleteRegion() {
@@ -160,8 +177,10 @@ export function onSelectAoc() {
         },
         function(selectedAoc) {
             viewModel.setAoc(selectedAoc);
+            analyticsService.logEvent("Navigation", "User Input", "onSelectedAoc");
         },
         true);
+    analyticsService.logEvent("Navigation", "User Input", "onSelectAoc");
 }
 
 export function onDeleteAoc() {
@@ -175,9 +194,11 @@ export function onSelectYear() {
         data => {
             if (_.isNumber(data)) {
                 viewModel.setYear(data);
+                analyticsService.logEvent("Navigation", "User Input", "onSelectedYear");
             }
         },
         false);
+    analyticsService.logEvent("Navigation", "User Input", "onSelectYear");
 }
 
 export function onDeleteYear() {
@@ -196,14 +217,19 @@ export function onSelectGrapes() {
         function(selectedGrapes) {
             if (_.isArray(selectedGrapes)) {
                 viewModel.setGrapes(selectedGrapes);
+                analyticsService.logEvent("Navigation", "User Input", "onSelectedGrapes");
             }
         },
         true);
+    analyticsService.logEvent("Navigation", "User Input", "onSelectGrapes");
 }
 
 export function saveTasting() {
+    analyticsService.startTimer("Saving tasting", "Action", "saveTasting");
     setTimeout(() => {
         viewModel.saveTasting().then(result => {
+            analyticsService.stopTimer("Saving tasting");
+            analyticsService.logEvent("Navigation", "User Input", "saveTasting");
             frameModule.topmost().navigate({
                 animated: false,
                 moduleName: Views.main
@@ -220,8 +246,11 @@ export function deleteTasting() {
         title: "Suppression"
     }).then(result => {
         if (result) {
+            analyticsService.startTimer("Delete tasting", "Action", "deleteTasting");
             setTimeout(() => {
                 viewModel.deleteTasting().then(r => {
+                    analyticsService.stopTimer("Delete tasting");
+                    analyticsService.logEvent("Navigation", "User Input", "deleteTasting");
                     frameModule.topmost().navigate({
                         animated: false,
                         moduleName: Views.main

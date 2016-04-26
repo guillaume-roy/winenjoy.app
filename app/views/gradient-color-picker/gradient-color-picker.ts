@@ -2,6 +2,7 @@ import pages = require("ui/page");
 import observable = require("data/observable");
 import {Page} from "ui/page";
 import {GradientColorPickerViewModel} from "../../view-models/gradient-color-picker-view-model";
+import {AnalyticsService} from "../../services/analyticsService";
 
 let closeCallback: Function;
 let viewModel: GradientColorPickerViewModel;
@@ -17,5 +18,7 @@ export function onShownModally(args: pages.ShownModallyData) {
             data => {
                 closeCallback(viewModel.selectedColor);
             });
+
+            new AnalyticsService().logView("gradient-color-picker");
     }, 0);
 }

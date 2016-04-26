@@ -6,8 +6,10 @@ import {View} from "ui/core/view";
 import {Views} from "../../utils/views";
 import geolocation = require("nativescript-geolocation");
 import listViewModule = require("ui/list-view");
+import {AnalyticsService} from "../../services/analyticsService";
 
 let viewModel: MainViewModel;
+let analyticsService: AnalyticsService;
 
 export function navigatedTo(args: EventData) {
     let page = <Page>args.object;
@@ -18,6 +20,9 @@ export function navigatedTo(args: EventData) {
     if (!geolocation.isEnabled()) {
         geolocation.enableLocationRequest();
     }
+
+    analyticsService = new AnalyticsService();
+    analyticsService.logView("main");
 }
 
 export function onCreateNewTasting(args: EventData) {
@@ -36,6 +41,8 @@ export function onCreateNewTasting(args: EventData) {
         }
     }).then(v => {
         console.log(new Date().toISOString(), "navigating from main");
+        analyticsService.logEvent("Navigation", "User Input", "onCreateNewTasting");
+        analyticsService.startTimer("Navigation from main to edit-tasting", "Navigation", "onCreateNewTasting");
 
         frameModule.topmost().navigate({
             animated: false,
@@ -58,7 +65,8 @@ export function onCreateNewTasting(args: EventData) {
 
 export function onCreateFirstTasting() {
     console.log(new Date().toISOString(), "navigating from main");
-
+    analyticsService.logEvent("Navigation", "User Input", "onCreateFirstTasting");
+    analyticsService.startTimer("Navigation from main to edit-tasting", "Navigation", "onCreateFirstTasting");
     frameModule.topmost().navigate({
         animated: false,
         backstackVisible: false,
@@ -69,7 +77,8 @@ export function onCreateFirstTasting() {
 
 export function onViewTasting(args: listViewModule.ItemEventData) {
     console.log(new Date().toISOString(), "navigating from main");
-
+    analyticsService.logEvent("Navigation", "User Input", "onViewTasting");
+    analyticsService.startTimer("Navigation from main to edit-tasting", "Navigation", "onViewTasting");
     frameModule.topmost().navigate({
         animated: false,
         backstackVisible: true,

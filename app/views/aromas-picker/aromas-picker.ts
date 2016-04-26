@@ -3,6 +3,7 @@ import {Page} from "ui/page";
 import {AromasPickerViewModel} from "../../view-models/aromas-picker-view-model";
 import {SearchBar} from "ui/search-bar";
 import listViewModule = require("ui/list-view");
+import {AnalyticsService} from "../../services/analyticsService";
 
 let closeCallback: Function;
 let viewModel: AromasPickerViewModel;
@@ -19,6 +20,8 @@ export function onShownModally(args: pages.ShownModallyData) {
         searchBar.on(SearchBar.propertyChangeEvent, searchBarArgs => {
             viewModel.searchingText = searchBar.text;
         });
+
+        new AnalyticsService().logView("aromas-picker");
     }, 0);
 }
 

@@ -6,9 +6,5 @@ export class Views {
     public static yearPicker: string = "views/year-picker/year-picker";
     public static listPicker: string = "views/list-picker/list-picker";
     public static groupingListPicker: string = "views/grouping-list-picker/grouping-list-picker";
-    public static sightTab: string = "views/sight-tab/sight-tab";
-    public static smellTab: string = "views/smell-tab/smell-tab";
-    public static tasteTab: string = "views/taste-tab/taste-tab";
-    public static informationsTab: string = "views/informations-tab/informations-tab";
     public static editTasting: string = "views/edit-tasting/edit-tasting";
 }
