@@ -38,4 +38,5 @@ export interface WineTasting {
     longitude?: number;
     latitude?: number;
     altitude?: number;
+    picture?: string;
 }

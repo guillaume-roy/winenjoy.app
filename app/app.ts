@@ -1,7 +1,7 @@
 import application = require("application");
 import {Views} from "./utils/views";
-import {UserService} from "./services/userService";
 import {AnalyticsService} from "./services/analyticsService";
+import {ImageSource} from "image-source";
 
 application.resources.finalRatingToImageConverter = function(value: any) {
     if (!value) {
@@ -55,17 +55,27 @@ application.resources.wineLocationConverter = function(value: any) {
     return result;
 };
 
+application.resources.base64ToImageConverter = function(base64Image: string) {
+    if (!base64Image) {
+        return null;
+    }
+
+    let imageSource = new ImageSource();
+    imageSource.loadFromBase64(base64Image);
+
+    return imageSource;
+};
+
 let analyticsService = new AnalyticsService();
 
-application.on(application.launchEvent, args => {
+application.onLaunch = (context: any) => {
     analyticsService.initialize();
-});
+};
 
-application.on(application.uncaughtErrorEvent, (args: application.ApplicationEventData) => {
-    console.log(args.object);
-    analyticsService.logException(true);
-});
+application.onUncaughtError = (error: application.NativeScriptError) => {
+    analyticsService.logException("Name : " + error.name + " - Message : " + error.message, true);
+};
 
  application.start({
-    moduleName: new UserService().isLogged() ? Views.main : Views.login
+    moduleName: Views.main
 });

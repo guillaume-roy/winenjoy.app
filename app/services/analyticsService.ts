@@ -4,8 +4,8 @@ import {Config} from "../utils/config";
 export class AnalyticsService {
     public initialize() {
         let config = new Config();
-
-        googleAnalytics.initialize({
+        googleAnalytics.initalize({
+            dispatchInterval: 30,
             trackingId: config.GoogleAnalyticsTrackingID_TEST
         });
     }

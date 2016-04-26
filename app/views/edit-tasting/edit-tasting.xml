@@ -124,6 +124,10 @@
                                     <Label text="sentiment_dissatisfied" class="{{ wineTasting.finalRating == 1 ? 'material-icon final-rating-1 selected': 'material-icon final-rating-1' }}" tap="onSelectFinalRating" />
                                     <Label text="sentiment_very_dissatisfied" class="{{ wineTasting.finalRating == 0 ? 'material-icon final-rating-0 selected': 'material-icon final-rating-0' }}" tap="onSelectFinalRating" />
                                 </StackLayout>
+                                <Label text="Photo" class="criterias-title" />
+                                <Button text="Ajouter" tap="onTakePicture" class="modal-button white-button" visibility="{{ wineTasting.picture ? 'collapse' : 'visible' }}" />
+                                <Image class="tasting-picture" stretch="aspectFill" imageSource="{{ wineTasting.picture | base64ToImageConverter }}" />
+                                <Button text="Supprimer" tap="onDeletePicture" class="modal-button accent-button"  visibility="{{ wineTasting.picture ? 'visible' : 'collapse' }}" />
                                 <DockLayout class="switch-criteria">
                                     <Label text="Dégustation à l'aveugle" class="criterias-title" />
                                     <Switch checked="{{ wineTasting.isBlindTasting }}" dock="right" />

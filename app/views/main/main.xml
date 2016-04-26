@@ -10,7 +10,6 @@
                 <Label text="{{ estate }}" class="list-item-secondary" row="1" col="1" />
                 <Label text="{{ $value | wineLocationConverter }}" class="list-item-secondary" row="2" col="1" />
                 <Label text="{{ year }}" class="list-item-secondary" col="2" />
-                <!--<Image src="{{ finalRating | finalRatingToImageConverter }}" col="2" row="1" rowspan="2" height="24" width="24" />-->
                 <Label text="{{ finalRating | finalRatingToImageConverter }}" col="2" row="1" rowspan="2" class="{{ finalRating ? 'material-icon final-rating final-rating-' + finalRating : 'material-icon final-rating' }}" />
             </GridLayout>
         </ListView.itemTemplate>

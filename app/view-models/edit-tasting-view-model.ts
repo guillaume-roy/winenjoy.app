@@ -244,6 +244,13 @@ export class EditTastingViewModel extends Observable {
         this.notifyPropertyChange("wineTasting", this.wineTasting);
     }
 
+    public setPicture(base64Image: string) {
+        this.wineTasting.picture = null;
+        this.notifyPropertyChange("wineTasting", this.wineTasting);
+        this.wineTasting.picture = base64Image;
+        this.notifyPropertyChange("wineTasting", this.wineTasting);
+    }
+
     public setGrapes(grapes: CriteriaItem[]) {
         this.wineTasting.grapes = null;
         this.notifyPropertyChange("wineTasting", this.wineTasting);

@@ -11,6 +11,8 @@ import tabViewModule = require("ui/tab-view");
 import _ = require("lodash");
 import {View} from "ui/core/view";
 import {AnalyticsService} from "../../services/analyticsService";
+import camera = require("camera");
+import imageSource = require("image-source");
 
 let page: Page;
 let viewModel: EditTastingViewModel;
@@ -224,12 +226,27 @@ export function onSelectGrapes() {
     analyticsService.logEvent("Navigation", "User Input", "onSelectGrapes");
 }
 
+export function onTakePicture() {
+    camera.takePicture({
+        height: 320,
+        keepAspectRatio: true,
+        width: 320
+    }).then((img: imageSource.ImageSource) => {
+        viewModel.setPicture(img.toBase64String("png", 70));
+    });
+}
+
+export function onDeletePicture() {
+    viewModel.setPicture(null);
+}
+
 export function saveTasting() {
     analyticsService.startTimer("Saving tasting", "Action", "saveTasting");
     setTimeout(() => {
         viewModel.saveTasting().then(result => {
             analyticsService.stopTimer("Saving tasting");
             analyticsService.logEvent("Navigation", "User Input", "saveTasting");
+            analyticsService.dispatch();
             frameModule.topmost().navigate({
                 animated: false,
                 moduleName: Views.main
@@ -247,6 +264,7 @@ export function deleteTasting() {
     }).then(result => {
         if (result) {
             analyticsService.startTimer("Delete tasting", "Action", "deleteTasting");
+            analyticsService.dispatch();
             setTimeout(() => {
                 viewModel.deleteTasting().then(r => {
                     analyticsService.stopTimer("Delete tasting");
@@ -292,6 +310,7 @@ function backEvent(args: any) {
         title: "Annuler"
     }).then(result => {
         if (result) {
+            analyticsService.dispatch();
             frameModule.topmost().navigate({
                 animated: false,
                 moduleName: Views.main
