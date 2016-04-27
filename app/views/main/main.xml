@@ -4,7 +4,7 @@
   <Page.actionBar>
     <ActionBar>
       <ActionBar.actionItems>
-        <ActionItem text="Exporter les dégustations" ios.position="right" android.position="popup" tap="onExportTastings" />
+        <ActionItem text="Import/Export" ios.position="right" android.position="popup" tap="onExportTastings" />
       </ActionBar.actionItems>
     </ActionBar>
   </Page.actionBar>

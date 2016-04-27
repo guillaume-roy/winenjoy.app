@@ -1,13 +1,52 @@
 import {TastingsService} from "./tastingsService";
 
 export class ExportDataService {
-    public exportTastingsToJson() {
-        return new Promise<boolean>((resolve, reject) => {
-            let externalStorageState = android.os.Environment.getExternalStorageState();
+    private _storageDirectory: string;
+    private _canRead: boolean;
+    private _canWrite: boolean;
+
+    public get storageDirectory() {
+        return this._storageDirectory;
+    }
+    public set storageDirectory(value) {
+        this._storageDirectory = value;
+    }
+
+    public get canRead() {
+        return this._canRead;
+    }
+    public set canRead(value) {
+        this._canRead = value;
+    }
+
+    public get canWrite() {
+        return this._canWrite;
+    }
+    public set canWrite(value) {
+        this._canWrite = value;
+    }
+
+    constructor() {
+        let externalStorageState = android.os.Environment.getExternalStorageState();
+
+        if (android.os.Environment.MEDIA_MOUNTED !== externalStorageState) {
+            this._canRead = false;
+            this._canWrite = false;
+        } else {
             let externalStorageDirectory = android.os.Environment.getExternalStoragePublicDirectory(
                 android.os.Environment.DIRECTORY_DOWNLOADS);
 
-            if (android.os.Environment.MEDIA_MOUNTED === externalStorageState && externalStorageDirectory.canWrite()) {
+            this._canRead = externalStorageDirectory.canRead();
+            this._canWrite = externalStorageDirectory.canWrite();
+            this._storageDirectory = externalStorageDirectory.getAbsolutePath() + "/winenjoy_tastings.json";
+        }
+    }
+
+    public exportTastingsToJson() {
+        return new Promise<string>((resolve, reject) => {
+            if (this._canWrite) {
+                let externalStorageDirectory = android.os.Environment.getExternalStoragePublicDirectory(
+                    android.os.Environment.DIRECTORY_DOWNLOADS);
                 externalStorageDirectory.mkdirs();
 
                 let tastingsService = new TastingsService();
@@ -21,7 +60,7 @@ export class ExportDataService {
                     printer.close();
                     exportFileStream.close();
 
-                    resolve(true);
+                    resolve(exportFile.getAbsolutePath());
                 });
             }
         });
@@ -29,11 +68,9 @@ export class ExportDataService {
 
     public importTastingsFromJson() {
         return new Promise<boolean>((resolve, reject) => {
-            let externalStorageState = android.os.Environment.getExternalStorageState();
-            let externalStorageDirectory = android.os.Environment.getExternalStoragePublicDirectory(
-                android.os.Environment.DIRECTORY_DOWNLOADS);
-
-            if (android.os.Environment.MEDIA_MOUNTED === externalStorageState && externalStorageDirectory.canRead()) {
+            if (this._canRead) {
+                let externalStorageDirectory = android.os.Environment.getExternalStoragePublicDirectory(
+                    android.os.Environment.DIRECTORY_DOWNLOADS);
                 let importFile = new java.io.File(externalStorageDirectory, "winenjoy_tastings.json");
 
                 if (importFile.exists()) {

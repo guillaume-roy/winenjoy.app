@@ -1,0 +1,19 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+      navigatedTo="navigatedTo">
+  <Page.actionBar>
+    <ActionBar title="Import/Export">
+      <NavigationButton text="Retour" icon="res://ic_arrow_back_white_24dp" tap="goBack"/>
+    </ActionBar>
+  </Page.actionBar>
+  <StackLayout>
+    <Label textWrap="true" text="Cet écran vous permet d'exporter ou d'importer vos dégustations depuis un fichier externe." style="font-size: 16;text-align: center;margin:10" />
+    <Label textWrap="true" text="Cela peut s'avérer utile si vous changer de téléphone ou de tablette." style="font-size: 16;text-align: center;margin:10" />
+    <StackLayout style="margin: 10">
+      <Label textWrap="true" text="Chemin d'export / import :" />
+      <Label textWrap="true" text="{{ storageDirectory }}" />
+    </StackLayout>
+    <Button text="Exporter mes dégustations" class="modal-button accent-button" tap="onExportTastings" isEnabled="{{ canWrite }}" />
+    <Button text="Importer mes dégustations" class="modal-button accent-button" tap="onImportTastings" isEnabled="{{ canRead }}" />
+    <Label textWrap="true" text="{{ resultMessage }}" style="margin: 10;text-align: center;font-weight: bold;font-size:16" />
+  </StackLayout>
+</Page>

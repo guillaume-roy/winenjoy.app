@@ -7,4 +7,5 @@ export class Views {
     public static listPicker: string = "views/list-picker/list-picker";
     public static groupingListPicker: string = "views/grouping-list-picker/grouping-list-picker";
     public static editTasting: string = "views/edit-tasting/edit-tasting";
+    public static importExportData: string = "views/import-export-data/import-export-data";
 }
