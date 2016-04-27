@@ -7,6 +7,7 @@ import {Views} from "../../utils/views";
 import geolocation = require("nativescript-geolocation");
 import listViewModule = require("ui/list-view");
 import {AnalyticsService} from "../../services/analyticsService";
+import {ExportDataService} from "../../services/exportDataService";
 
 let viewModel: MainViewModel;
 let analyticsService: AnalyticsService;
@@ -23,6 +24,13 @@ export function navigatedTo(args: EventData) {
 
     analyticsService = new AnalyticsService();
     analyticsService.logView("main");
+}
+
+export function onExportTastings() {
+    let exportDataService = new ExportDataService();
+    exportDataService.exportTastingsToJson().then(res => {
+        analyticsService.logEvent("Action", "User Input", "onExportTastings");
+    });
 }
 
 export function onCreateNewTasting(args: EventData) {

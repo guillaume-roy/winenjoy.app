@@ -21,7 +21,7 @@ export class AnalyticsService {
         googleAnalytics.logView(viewName);
     }
 
-    public logEvent(category: string, action: string, label: string, value?: string) {
+    public logEvent(category: string, action: string, label: string, value?: number) {
         googleAnalytics.logEvent({
             action: action,
             category: category,

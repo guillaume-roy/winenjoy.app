@@ -1,6 +1,13 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd"
       xmlns:FAB="nativescript-floatingactionbutton"
       navigatedTo="navigatedTo">
+  <Page.actionBar>
+    <ActionBar>
+      <ActionBar.actionItems>
+        <ActionItem text="Exporter les dégustations" ios.position="right" android.position="popup" tap="onExportTastings" />
+      </ActionBar.actionItems>
+    </ActionBar>
+  </Page.actionBar>
   <GridLayout>
     <ListView items="{{ tastings }}" visibility="{{ tastings && tastings.length !== 0 && !betaIsClosed ? 'visible' : 'collapse' }}" itemTap="onViewTasting" id="tastings-list">
         <ListView.itemTemplate>

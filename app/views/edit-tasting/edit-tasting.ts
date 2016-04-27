@@ -245,7 +245,7 @@ export function saveTasting() {
     setTimeout(() => {
         viewModel.saveTasting().then(result => {
             analyticsService.stopTimer("Saving tasting");
-            analyticsService.logEvent("Navigation", "User Input", "saveTasting");
+            analyticsService.logEvent("Action", "User Input", "saveTasting");
             analyticsService.dispatch();
             frameModule.topmost().navigate({
                 animated: false,
@@ -268,7 +268,8 @@ export function deleteTasting() {
             setTimeout(() => {
                 viewModel.deleteTasting().then(r => {
                     analyticsService.stopTimer("Delete tasting");
-                    analyticsService.logEvent("Navigation", "User Input", "deleteTasting");
+                    analyticsService.logEvent("Action", "User Input", "deleteTasting");
+                    analyticsService.dispatch();
                     frameModule.topmost().navigate({
                         animated: false,
                         moduleName: Views.main

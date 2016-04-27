@@ -7,3 +7,4 @@
 /// <reference path="./node_modules/nativescript-geolocation/location.d.ts" />
 /// <reference path="./node_modules/nativescript-plugin-firebase/firebase-common.d.ts" />
 /// <reference path="./node_modules/nativescript-plugin-firebase/firebase.d.ts" />
+/// <reference path="./node_modules/nativescript-google-analytics/index.d.ts" />

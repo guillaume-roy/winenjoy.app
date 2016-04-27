@@ -63,7 +63,7 @@ export class TastingsService {
         });
     }
 
-    private saveTastings(wineTastings: WineTasting[]) {
+    public saveTastings(wineTastings: WineTasting[]) {
         appSettings.setString(TastingsService.TASTINGS_KEY, JSON.stringify(wineTastings));
     }
 }
