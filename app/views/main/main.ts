@@ -10,9 +10,10 @@ import {AnalyticsService} from "../../services/analyticsService";
 
 let viewModel: MainViewModel;
 let analyticsService: AnalyticsService;
+let page: Page;
 
 export function navigatedTo(args: EventData) {
-    let page = <Page>args.object;
+    page = <Page>args.object;
 
     viewModel = new MainViewModel();
     page.bindingContext = viewModel;
@@ -94,4 +95,17 @@ export function onViewTasting(args: listViewModule.ItemEventData) {
         context: viewModel.tastings[args.index],
         moduleName: Views.editTasting
     });
+}
+
+export function onChangePassword() {
+    page.showModal(
+        Views.changePassword,
+        null,
+        function(result) {
+            if (result) {
+                analyticsService.logEvent("Navigation", "User Input", "onChangedPassword");
+            }
+        },
+        false);
+    analyticsService.logEvent("Navigation", "User Input", "onChangePassword");
 }

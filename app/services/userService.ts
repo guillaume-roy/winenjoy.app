@@ -1,6 +1,5 @@
 import {User} from "../entities/user";
 import appSettings = require("application-settings");
-import _ = require("lodash");
 import firebase = require("nativescript-plugin-firebase");
 import {Config} from "../utils/config";
 
@@ -12,25 +11,32 @@ export class UserService {
         this._config = new Config();
     }
 
-    // public getUser(): Promise<User> {
-    //     return new Promise<User>((resolve, reject) => {
-    //        resolve(<User>JSON.parse(appSettings.getString(UserService.USER_KEY)));
-    //     });
-    // }
+    public getUser() {
+        return <User>JSON.parse(appSettings.getString(UserService.USER_KEY, null));
+    }
 
     public setUser(value: User) {
         appSettings.setString(UserService.USER_KEY, JSON.stringify(value));
     }
 
-    // public isLogged() {
-    //     return !_.isEmpty(appSettings.getString(UserService.USER_KEY));
-    // }
+    public isLogged() {
+        let user = this.getUser();
+
+        if (!user) {
+            return false;
+        }
+
+        let date = new Date();
+        let seconds = date.getTime() / 1000;
+
+        return user.firebaseExpiration > seconds;
+    }
 
     public login(email: string, password: string) {
         return new Promise<boolean>((resolve, reject) => {
             firebase.init({
                 url: this._config.FirebaseUrl
-            }). then(() => {
+            }).then(() => {
                 firebase.login({
                     email: email,
                     password: password,
@@ -38,7 +44,9 @@ export class UserService {
                 }).then(res => {
                     this.setUser({
                         email: email,
-                        password: password
+                        firebaseExpiration: res.expiresAtUnixEpochSeconds,
+                        firebaseToken: res.token,
+                        firebaseUid: res.uid
                     });
                     resolve(true);
                 }).catch(error => {
@@ -52,7 +60,7 @@ export class UserService {
         return new Promise<boolean>((resolve, reject) => {
             firebase.init({
                 url: this._config.FirebaseUrl
-            }). then(() => {
+            }).then(() => {
                 firebase.createUser({
                     email: email,
                     password: password
@@ -80,7 +88,7 @@ export class UserService {
         return new Promise<boolean>((resolve, reject) => {
             firebase.init({
                 url: this._config.FirebaseUrl
-            }). then(() => {
+            }).then(() => {
                 firebase.resetPassword({
                     email: email
                 }).then(res => {
@@ -96,6 +104,17 @@ export class UserService {
                 //             break;
                 //     }
                 });
+            });
+        });
+    }
+
+    public changePassword(email: string, oldPassword: string, newPassword: string) {
+        return new Promise<boolean>((resolve, reject) => {
+            firebase.init({
+                url: this._config.FirebaseUrl
+            }).then(() => {
+                // Waiting the plugin
+                resolve(true);
             });
         });
     }

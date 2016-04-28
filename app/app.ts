@@ -1,6 +1,7 @@
 import application = require("application");
 import {Views} from "./utils/views";
 import {AnalyticsService} from "./services/analyticsService";
+import {UserService} from "./services/userService";
 import {ImageSource} from "image-source";
 
 application.resources.finalRatingToImageConverter = function(value: any) {
@@ -76,6 +77,8 @@ application.onUncaughtError = (error: any)  => {
     analyticsService.logException(null, true);
 };
 
+let userService = new UserService();
+
  application.start({
-    moduleName: Views.login
+    moduleName: userService.isLogged() ? Views.main : Views.login
 });

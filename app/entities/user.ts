@@ -1,4 +1,6 @@
 export interface User {
     email?: string;
-    password?: string;
+    firebaseUid?: string;
+    firebaseToken?: string;
+    firebaseExpiration?: number;
 }

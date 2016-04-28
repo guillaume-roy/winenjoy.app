@@ -11,7 +11,7 @@
         <TextField id="password" hint="Mot de passe" secure="true" text="{{ password }}" isEnabled="{{ !isBusy }}" />
         <Button text="Connexion" class="modal-button accent-button" tap="onLogin" isEnabled="{{ !isBusy && canSubmit }}" />
         <Button text="Créer mon compte" class="modal-button white-button" tap="onSignup" isEnabled="{{ !isBusy && canSubmit }}" />
-        <Button text="Mot de passe oublié" class="forgot-password" tap="onForgotPassword" isEnabled="{{ !isBusy && canForgotPassword }}" />
+        <!--<Button text="Mot de passe oublié" class="forgot-password" tap="onForgotPassword" isEnabled="{{ !isBusy && canForgotPassword }}" />-->
         <ActivityIndicator busy="{{ isBusy }}" />
     </StackLayout>
   </StackLayout>

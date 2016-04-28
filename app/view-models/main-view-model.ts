@@ -40,4 +40,8 @@ export class MainViewModel extends Observable {
     public newTasting() {
         return this._service.newTasting();
     }
+
+    public changePassword(email: string, oldPassword: string, newPassword: string) {
+
+    }
 }
