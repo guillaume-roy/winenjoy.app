@@ -72,10 +72,10 @@ application.onLaunch = (context: any) => {
     analyticsService.initialize();
 };
 
-application.onUncaughtError = (error: application.NativeScriptError) => {
-    analyticsService.logException("Name : " + error.name + " - Message : " + error.message, true);
+application.onUncaughtError = (error: any)  => {
+    analyticsService.logException(null, true);
 };
 
  application.start({
-    moduleName: Views.main
+    moduleName: Views.login
 });

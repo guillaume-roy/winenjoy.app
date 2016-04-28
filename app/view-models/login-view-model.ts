@@ -1,11 +1,13 @@
 import {Observable} from "data/observable";
-import firebase = require("nativescript-plugin-firebase");
-import {Config} from "../utils/config";
 import {UserService} from "../services/userService";
 
 export class LoginViewModel extends Observable {
     private _email: string;
+    private _password: string;
     private _isBusy: boolean;
+    private _canSubmit: boolean;
+    private _canForgotPassword: boolean;
+    private _service: UserService;
 
     public get email() {
         return this._email;
@@ -13,6 +15,25 @@ export class LoginViewModel extends Observable {
     public set email(value: string) {
         this._email = value;
         this.notifyPropertyChange("email", value);
+        this.updateCanSubmit();
+        this.updateCanForgotPassword();
+    }
+
+    public get password() {
+        return this._password;
+    }
+    public set password(value: string) {
+        this._password = value;
+        this.notifyPropertyChange("password", value);
+        this.updateCanSubmit();
+    }
+
+    public get canForgotPassword() {
+        return this._canForgotPassword;
+    }
+    public set canForgotPassword(value: boolean) {
+        this._canForgotPassword = value;
+        this.notifyPropertyChange("canForgotPassword", value);
     }
 
     public get isBusy() {
@@ -23,60 +44,76 @@ export class LoginViewModel extends Observable {
         this.notifyPropertyChange("isBusy", value);
     }
 
-    public login(): Promise<boolean> {
+    public get canSubmit() {
+        return this._canSubmit;
+    }
+    public set canSubmit(value: boolean) {
+        this._canSubmit = value;
+        this.notifyPropertyChange("canSubmit", value);
+    }
+
+    constructor() {
+        super();
+
+        this.canForgotPassword = false;
+        this.canSubmit = false;
+        this.isBusy = false;
+
+        this._service = new UserService();
+    }
+
+    public signup() {
+        this.isBusy = true;
         return new Promise<boolean>((resolve, reject) => {
-           this.isBusy = true;
-
-           if (!this.email || this.email.length < 1) {
-               this.isBusy = false;
-               resolve(false);
-           }
-
-            firebase.init({
-                url: new Config().FirebaseUrl
-            }).then(() => {
-                firebase.query(result => {
+            let email = this.email.toLowerCase().trim();
+            this._service.signup(email, this.password).then(signupRes => {
+               this._service.login(email, this.password).then(loginRes => {
+                   this.isBusy = false;
+                   resolve(true);
+               }).catch(loginError => {
                     this.isBusy = false;
-
-                    if (!result) {
-                        resolve(false);
-                        return;
-                    }
-
-                    if (!result.value) {
-                        resolve(false);
-                        return;
-                    }
-
-                    if (result.value.length === 0) {
-                        resolve(false);
-                        return;
-                    }
-
-                    new UserService().setUser({
-                        email: this.email.toLowerCase().trim()
-                    });
-                    resolve(true);
-                },
-                "beta-testers",
-                {
-                    orderBy: {
-                        type: firebase.QueryOrderByType.CHILD,
-                        value: "email"
-                    },
-                    range: {
-                        type: firebase.QueryRangeType.EQUAL_TO,
-                        value: this.email.toLowerCase().trim()
-                    },
-                    singleEvent: true
-                }).catch(e => {
-                    this.isBusy = false;
-                    reject(e);
+                    reject(loginError);
                 });
-            }, error => {
+            }).catch(signupError => {
+                this.isBusy = false;
+                reject(signupError);
+            });
+        });
+    }
+
+    public forgotPassword() {
+        this.isBusy = true;
+        return new Promise<boolean>((resolve, reject) => {
+            let email = this.email.toLowerCase().trim();
+            this._service.forgotPassword(email).then(res => {
+                this.isBusy = false;
+                resolve(true);
+            }).catch(error => {
                 this.isBusy = false;
                 reject(error);
             });
         });
+    }
+
+    public login() {
+        this.isBusy = true;
+        return new Promise<boolean>((resolve, reject) => {
+            let email = this.email.toLowerCase().trim();
+            this._service.login(email, this.password).then(loginRes => {
+                this.isBusy = false;
+                resolve(true);
+            }).catch(error => {
+                this.isBusy = false;
+                reject(error);
+            });
+        });
+    }
+
+    private updateCanSubmit() {
+        this.canSubmit = this.email.length > 0 && this.password.length > 0;
+    }
+
+    private updateCanForgotPassword() {
+        this.canForgotPassword = this.email.length > 0;
     }
 }

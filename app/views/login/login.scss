@@ -1,0 +1,43 @@
+@import "../../styles/_common";
+
+.page-container {
+    background-color: $primary-color;
+}
+
+.logo-container {
+    horizontal-align: center;
+    vertical-align:center;
+    margin-top: 30;
+
+    Image {
+        height:64;
+        width:64;
+    }
+
+    .logo-title {
+        color: $primary-color-text;
+        font-size:32;
+        margin-top:10;
+    }
+}
+
+.form-container {
+    margin-left: 10;
+    margin-right: 10;
+    margin-top: 30;
+
+    TextField {
+        color: $primary-color-text;
+    }
+
+    .forgot-password {
+        horizontal-align: center;
+        color: $primary-color-text;
+        background-color: transparent;
+        margin:10;
+    }
+
+    ActivityIndicator {
+        margin-top: 10;
+    }
+}
