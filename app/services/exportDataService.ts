@@ -1,6 +1,7 @@
 import {TastingsService} from "./tastingsService";
 
 export class ExportDataService {
+    private _exportFilename = "winenjoy_tastings.db";
     private _storageDirectory: string;
     private _canRead: boolean;
     private _canWrite: boolean;
@@ -38,7 +39,7 @@ export class ExportDataService {
 
             this._canRead = externalStorageDirectory.canRead();
             this._canWrite = externalStorageDirectory.canWrite();
-            this._storageDirectory = externalStorageDirectory.getAbsolutePath() + "/winenjoy_tastings.json";
+            this._storageDirectory = externalStorageDirectory.getAbsolutePath() + "/" + this._exportFilename;
         }
     }
 
@@ -51,7 +52,7 @@ export class ExportDataService {
 
                 let tastingsService = new TastingsService();
                 tastingsService.getTastings().then(data => {
-                    let exportFile = new java.io.File(externalStorageDirectory, "winenjoy_tastings.json");
+                    let exportFile = new java.io.File(externalStorageDirectory, this._exportFilename);
                     let exportFileStream = new java.io.FileOutputStream(exportFile);
                     let printer = new java.io.PrintWriter(exportFileStream);
 
@@ -71,7 +72,7 @@ export class ExportDataService {
             if (this._canRead) {
                 let externalStorageDirectory = android.os.Environment.getExternalStoragePublicDirectory(
                     android.os.Environment.DIRECTORY_DOWNLOADS);
-                let importFile = new java.io.File(externalStorageDirectory, "winenjoy_tastings.json");
+                let importFile = new java.io.File(externalStorageDirectory, this._exportFilename);
 
                 if (importFile.exists()) {
                     let sb = new java.lang.StringBuilder();
