@@ -101,11 +101,14 @@ export function onChangePassword() {
     page.showModal(
         Views.changePassword,
         null,
-        function(result) {
-            if (result) {
-                analyticsService.logEvent("Navigation", "User Input", "onChangedPassword");
+        res => {
+            if (res) {
+               frameModule.topmost().navigate({
+                    animated: false,
+                    backstackVisible: true,
+                    moduleName: Views.login
+                });
             }
-        },
-        false);
+         });
     analyticsService.logEvent("Navigation", "User Input", "onChangePassword");
 }

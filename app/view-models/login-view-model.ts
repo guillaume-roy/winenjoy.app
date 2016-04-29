@@ -1,5 +1,6 @@
 import {Observable} from "data/observable";
 import {UserService} from "../services/userService";
+import _ = require("lodash");
 
 export class LoginViewModel extends Observable {
     private _email: string;
@@ -110,10 +111,10 @@ export class LoginViewModel extends Observable {
     }
 
     private updateCanSubmit() {
-        this.canSubmit = this.email.length > 0 && this.password.length > 0;
+        this.canSubmit = !_.isEmpty(this.email) && !_.isEmpty(this.password);
     }
 
     private updateCanForgotPassword() {
-        this.canForgotPassword = this.email.length > 0;
+        this.canForgotPassword = !_.isEmpty(this.email);
     }
 }

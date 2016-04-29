@@ -1,5 +1,6 @@
 import {Observable} from "data/observable";
 import {UserService} from "../services/userService";
+import _ = require("lodash");
 
 export class ChangePasswordViewModel extends Observable {
     private _email: string;
@@ -15,7 +16,6 @@ export class ChangePasswordViewModel extends Observable {
         this._email = value;
         this.notifyPropertyChange("email", value);
         this.updateCanSubmit();
-        this.updateCanForgotPassword();
     }
 
     public get oldPassword() {
@@ -48,16 +48,17 @@ export class ChangePasswordViewModel extends Observable {
         super();
 
         this._service = new UserService();
-
-        this.canSubmit = false;
         this.email = this._service.getUser().email;
+        this.canSubmit = false;
     }
 
     public changePassword() {
         return new Promise<boolean>((resolve, reject) => {
             let email = this.email.toLowerCase().trim();
             this._service.changePassword(email, this.oldPassword, this.newPassword).then(res => {
-               resolve(true);
+                this._service.logout().then(result => {
+                    resolve(true);
+                });
             }).catch(err => {
                 reject(err);
             });
@@ -65,9 +66,9 @@ export class ChangePasswordViewModel extends Observable {
     }
 
     private updateCanSubmit() {
-        this.canSubmit = this.email.length > 0
-            && this.oldPassword.length > 0
-            && this.newPassword.length > 0
+        this.canSubmit = !_.isEmpty(this.email)
+            && !_.isEmpty(this.oldPassword)
+            && !_.isEmpty(this.newPassword)
             && this.oldPassword !== this.newPassword;
     }
 }

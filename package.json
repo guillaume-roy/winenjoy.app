@@ -4,14 +4,14 @@
 	"nativescript": {
 		"id": "com.winenjoy.app",
 		"tns-android": {
-			"version": "2.0.0"
+			"version": "2.0.0-2016-04-28-553"
 		}
 	},
 	"dependencies": {
 		"lodash": "^4.11.1",
 		"nativescript-floatingactionbutton": "^2.2.1",
 		"nativescript-geolocation": "^0.0.9",
-		"nativescript-google-analytics": "^0.2.5",
+		"nativescript-google-analytics": "^0.2.7",
 		"nativescript-plugin-firebase": "^2.1.6",
 		"tns-core-modules": "^2.0.0"
 	},

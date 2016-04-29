@@ -113,7 +113,26 @@ export class UserService {
             firebase.init({
                 url: this._config.FirebaseUrl
             }).then(() => {
-                // Waiting the plugin
+                firebase.changePassword({
+                    email: email,
+                    newPassword: newPassword,
+                    oldPassword: oldPassword
+                }).then(res => {
+                   resolve(true);
+                }).catch(err => {
+                    reject(err);
+                });
+            });
+        });
+    }
+
+    public logout() {
+        return new Promise<boolean>((resolve, reject) => {
+            firebase.init({
+                url: this._config.FirebaseUrl
+            }).then(() => {
+                firebase.logout();
+                this.setUser(null);
                 resolve(true);
             });
         });
