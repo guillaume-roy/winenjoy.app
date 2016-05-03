@@ -6,6 +6,7 @@ export class AnalyticsService {
         let config = new Config();
         googleAnalytics.initalize({
             dispatchInterval: 30,
+            logging: false,
             trackingId: config.GoogleAnalyticsTrackingID_TEST
         });
     }

@@ -7,6 +7,7 @@ import {Views} from "../../utils/views";
 import geolocation = require("nativescript-geolocation");
 import listViewModule = require("ui/list-view");
 import {AnalyticsService} from "../../services/analyticsService";
+import _  = require("lodash");
 
 let viewModel: MainViewModel;
 let analyticsService: AnalyticsService;
@@ -89,6 +90,11 @@ export function onViewTasting(args: listViewModule.ItemEventData) {
     console.log(new Date().toISOString(), "navigating from main");
     analyticsService.logEvent("Navigation", "User Input", "onViewTasting");
     analyticsService.startTimer("Navigation from main to edit-tasting", "Navigation", "onViewTasting");
+
+    if (!_.isEmpty(viewModel.tastings[args.index]["$value"])) {
+        delete viewModel.tastings[args.index]["$value"];
+    }
+
     frameModule.topmost().navigate({
         animated: false,
         backstackVisible: true,

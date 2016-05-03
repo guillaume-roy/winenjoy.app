@@ -8,19 +8,44 @@ export class TastingsService {
 
     public newTasting() {
         return <WineTasting>{
+                alcohol: null,
+                altitude: null,
+                aoc: null,
                 aromas: [],
                 attacks: [],
                 balances: [],
                 bubbles: [],
+                color: null,
                 country: null,
+                cuvee: null,
                 defects: [],
+                endDate: null,
+                estate: null,
                 finalRating: 2,
+                grapes: [],
+                id: null,
                 intensities: [],
+                isBiodynamic: false,
+                isBiologic: false,
+                isBlindTasting: false,
+                lastModificationDate: null,
+                latitude: null,
                 length: [],
                 limpidities: [],
+                longitude: null,
+                meatsNotes: null,
+                picture: null,
+                region: null,
                 shines: [],
+                sightTabNotes: null,
+                smellTabNotes: null,
                 startDate: Date.now(),
-                tears: []
+                synthesisTabNotes: null,
+                tasteTabNotes: null,
+                tears: [],
+                wineTabNotes: null,
+                wineType: null,
+                year: null
             };
     }
 
