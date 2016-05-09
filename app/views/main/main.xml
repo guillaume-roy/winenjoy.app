@@ -5,16 +5,15 @@
     <ActionBar>
       <ActionBar.actionItems>
         <ActionItem text="Import/Export" ios.position="right" android.position="popup" tap="onExportTastings" />
-        <ActionItem text="Changer mot de passe" ios.position="right" android.position="popup" tap="onChangePassword" />
       </ActionBar.actionItems>
     </ActionBar>
   </Page.actionBar>
   <GridLayout>
-    <ListView items="{{ tastings }}" visibility="{{ tastings && tastings.length !== 0 && !betaIsClosed ? 'visible' : 'collapse' }}" itemTap="onViewTasting" id="tastings-list">
+    <ListView items="{{ tastings }}" visibility="{{ tastings && tastings.length !== 0 ? 'visible' : 'collapse' }}" itemTap="onViewTasting" id="tastings-list">
         <ListView.itemTemplate>
             <GridLayout class="list-item" rows="*,*,*" columns="56, *, auto">
                 <StackLayout backgroundColor="{{ color }}" class="list-item-icon" rowSpan="3" id="toto" />
-                <Label text="{{ cuvee }}" class="list-item-title" col="1" />
+                <Label text="{{ cuvee ? cuvee : ( aoc ? 'AOC ' + aoc.Label : '' ) }}" class="list-item-title" col="1" />
                 <Label text="{{ estate }}" class="list-item-secondary" row="1" col="1" />
                 <Label text="{{ $value | wineLocationConverter }}" class="list-item-secondary" row="2" col="1" />
                 <Label text="{{ year }}" class="list-item-secondary" col="2" />
@@ -22,7 +21,7 @@
             </GridLayout>
         </ListView.itemTemplate>
     </ListView>
-    <FAB:fab visibility="{{ tastings && tastings.length !== 0 && !betaIsClosed ? 'visible' : 'collapse' }}"
+    <FAB:fab visibility="{{ tastings && tastings.length !== 0 ? 'visible' : 'collapse' }}"
         tap="onCreateNewTasting"
         icon="res://ic_add_white_24dp"
         rippleColor="#f1f1f1"
@@ -36,7 +35,5 @@
         </StackLayout>
         <Button text="Créer une dégustation" class="first-tasting-button" tap="onCreateFirstTasting" />
     </StackLayout>
-
-    <Label text="Cette version beta est terminée. Merci de mettre à jour l'application." class="beta-message" visibility="{{ betaIsClosed ? 'visible' : 'collapse' }}"/>
   </GridLayout>
 </Page>

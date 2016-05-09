@@ -6,8 +6,6 @@ export class MainViewModel extends Observable {
     private _service: TastingsService;
     private _tastings: WineTasting[];
 
-    private _betaIsClosed: boolean;
-
     public get tastings() {
         return this._tastings;
     }
@@ -15,19 +13,8 @@ export class MainViewModel extends Observable {
         this._tastings = value;
         this.notifyPropertyChange("tastings", value);
     }
-
-    public get betaIsClosed() {
-        return this._betaIsClosed;
-    }
-    public set betaIsClosed(value) {
-        this._betaIsClosed = value;
-        this.notifyPropertyChange("betaIsClosed", value);
-    }
-
     constructor() {
         super();
-
-        this.betaIsClosed = new Date().getTime() > new Date(2016, 4, 15).getTime();
 
         this._service = new TastingsService();
 
