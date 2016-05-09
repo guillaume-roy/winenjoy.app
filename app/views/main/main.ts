@@ -91,12 +91,6 @@ export function onViewTasting(args: listViewModule.ItemEventData) {
     analyticsService.logEvent("Navigation", "User Input", "onViewTasting");
     analyticsService.startTimer("Navigation from main to edit-tasting", "Navigation", "onViewTasting");
 
-    console.log(viewModel.tastings[args.index]);
-
-    if (!_.isEmpty(viewModel.tastings[args.index]["$value"])) {
-        delete viewModel.tastings[args.index]["$value"];
-    }
-
     frameModule.topmost().navigate({
         animated: false,
         backstackVisible: true,

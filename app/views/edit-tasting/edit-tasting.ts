@@ -322,7 +322,7 @@ function backEvent(args: any) {
 
 function animateFabButtons(scrollEvent: scrollViewModule.ScrollEventData) {
     if (fabDeleteButton) {
-        if (scrollEvent.scrollY !== 0) {
+        if (scrollEvent.scrollY > 10) {
             fabDeleteButton.animate({
                 duration: 300,
                 translate: {
@@ -342,7 +342,7 @@ function animateFabButtons(scrollEvent: scrollViewModule.ScrollEventData) {
     }
 
     if (fabButton) {
-        if (scrollEvent.scrollY !== 0) {
+        if (scrollEvent.scrollY > 10) {
             fabButton.animate({
                 delay: fabButtonDelay,
                 duration: 300,

@@ -10,10 +10,10 @@
   "dependencies": {
     "lodash": "^4.11.2",
     "nativescript-floatingactionbutton": "^2.2.1",
-    "nativescript-geolocation": "^0.0.10",
+    "nativescript-geolocation": "^0.0.11",
     "nativescript-google-analytics": "^0.2.7",
     "nativescript-plugin-firebase": "^2.1.7",
-    "tns-core-modules": "^2.0.0"
+    "tns-core-modules": "^2.0.0-2016-05-09-2902"
   },
   "devDependencies": {
     "babel-traverse": "6.8.0",
