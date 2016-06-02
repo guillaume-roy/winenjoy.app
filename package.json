@@ -1,6 +1,6 @@
 {
   "name": "winenjoy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "nativescript": {
     "id": "com.winenjoy.app",
     "tns-android": {
