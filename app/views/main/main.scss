@@ -3,17 +3,15 @@
 @import "../../styles/_final-rating";
 
 .list-item {
-    height: 88;
-    padding-left: 16;
-    padding-right: 16;
-    padding-bottom: 20;
-    padding-top: 20;
+    padding: 16;
 }
 
 .list-item-icon {
-    height: 24;
-    width: 24;
-    horizontal-align: left;
+    height: 40;
+    width: 40;
+    border-radius: 20;
+    margin-right: 16;
+    vertical-align: top;
 }
 
 .list-item-title {
@@ -23,7 +21,7 @@
 
 .list-item-secondary {
     font-size: 14;
-    color: $secondary-text-color;
+    color: $primary-text-color;
 }
 
 .empty-container {
@@ -66,9 +64,4 @@
     font-size: 32;
     horizontal-align: center;
     vertical-align:center;
-}
-
-.beta-message {
-    vertical-align: center;
-    horizontal-align: center;
 }

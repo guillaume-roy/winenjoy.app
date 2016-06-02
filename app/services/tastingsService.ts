@@ -51,7 +51,7 @@ export class TastingsService {
 
     public getTastings(): Promise<WineTasting[]> {
         return new Promise<WineTasting[]>((resolve, reject) => {
-            resolve(<WineTasting[]>JSON.parse(appSettings.getString(TastingsService.TASTINGS_KEY, "[]")));
+            resolve(_.orderBy(<WineTasting[]>JSON.parse(appSettings.getString(TastingsService.TASTINGS_KEY, "[]")), ["endDate"], ["desc"]));
         });
     }
 

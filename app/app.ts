@@ -2,6 +2,29 @@ import application = require("application");
 import {Views} from "./utils/views";
 import {AnalyticsService} from "./services/analyticsService";
 import {ImageSource} from "image-source";
+import {WineTasting} from "./entities/wineTasting";
+import _ = require("lodash");
+
+application.resources.regionConverterConverter = function(value: WineTasting) {
+    let regionIsEmpty = _.isEmpty(value.region);
+    let countryIsEmpty = _.isEmpty(value.country);
+
+    if (regionIsEmpty && countryIsEmpty) {
+        return "";
+    } else if (!regionIsEmpty && !countryIsEmpty) {
+        return value.region.label + " - " + value.country.label;
+    } else if (!regionIsEmpty) {
+        return value.region.label;
+    } else {
+        return value.country.label;
+    }
+};
+
+application.resources.visibilityConverter = function(value: any) {
+    return _.isEmpty(value)
+        ? "collapse"
+        : "visible";
+};
 
 application.resources.finalRatingToImageConverter = function(value: any) {
     if (!value) {
@@ -26,30 +49,6 @@ application.resources.finalRatingToImageConverter = function(value: any) {
         case 4:
             result = "sentiment_very_satisfied";
             break;
-    }
-
-    return result;
-};
-
-application.resources.wineLocationConverter = function(value: any) {
-    if (!value) {
-        return null;
-    }
-
-    let result = "";
-
-    if (value.region || value.country) {
-        if (value.region) {
-            result = value.region.Label;
-        }
-
-        if (value.country) {
-            if (result.length > 0) {
-              result = result + " - " + value.country.label;
-            } else {
-                result = value.country.label;
-            }
-        }
     }
 
     return result;

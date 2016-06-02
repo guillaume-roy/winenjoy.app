@@ -11,13 +11,18 @@
   <GridLayout>
     <ListView items="{{ tastings }}" visibility="{{ tastings && tastings.length !== 0 ? 'visible' : 'collapse' }}" itemTap="onViewTasting" id="tastings-list">
         <ListView.itemTemplate>
-            <GridLayout class="list-item" rows="*,*,*" columns="56, *, auto">
-                <StackLayout backgroundColor="{{ color }}" class="list-item-icon" rowSpan="3" id="toto" />
-                <Label text="{{ cuvee ? cuvee : ( aoc ? 'AOC ' + aoc.label : '' ) }}" class="list-item-title" col="1" />
-                <Label text="{{ estate }}" class="list-item-secondary" row="1" col="1" />
-                <Label text="{{ $value | wineLocationConverter }}" class="list-item-secondary" row="2" col="1" />
-                <Label text="{{ year }}" class="list-item-secondary" col="2" />
-                <Label text="{{ finalRating | finalRatingToImageConverter }}" col="2" row="1" rowspan="2" class="{{ finalRating ? 'material-icon final-rating final-rating-' + finalRating : 'material-icon final-rating' }}" />
+            <GridLayout columns="auto, *, auto" class="list-item">
+                <StackLayout backgroundColor="{{ color }}" class="list-item-icon" />
+                <StackLayout col="1">
+                    <Label text="{{ cuvee }}" visibility="{{ cuvee | visibilityConverter }}" class="list-item-title" />
+                    <Label text="{{ estate }}" visibility="{{ estate | visibilityConverter }}" class="list-item-title" />
+                    <Label text="{{ 'AOC ' + aoc.label }}" visibility="{{ aoc | visibilityConverter }}" class="list-item-secondary" />
+                    <Label text="{{ $value | regionConverterConverter }}" />
+                </StackLayout>
+                <StackLayout col="2">
+                    <Label text="{{ year }}" class="list-item-secondary" />
+                    <Label text="{{ finalRating | finalRatingToImageConverter }}" class="{{ finalRating ? 'material-icon final-rating final-rating-' + finalRating : 'material-icon final-rating' }}" />
+                </StackLayout>
             </GridLayout>
         </ListView.itemTemplate>
     </ListView>
