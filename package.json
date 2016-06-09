@@ -8,11 +8,11 @@
     }
   },
   "dependencies": {
-    "lodash": "^4.11.2",
-    "nativescript-floatingactionbutton": "^2.2.1",
+    "lodash": "^4.13.1",
+    "nativescript-floatingactionbutton": "2.2.4",
     "nativescript-geolocation": "^0.0.11",
-    "nativescript-google-analytics": "^0.2.7",
-    "nativescript-plugin-firebase": "^2.1.7",
+    "nativescript-google-analytics": "^0.2.8",
+    "nativescript-plugin-firebase": "^3.0.1",
     "tns-core-modules": "^2.0.1"
   },
   "devDependencies": {

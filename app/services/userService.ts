@@ -35,7 +35,7 @@ export class UserService {
     public login(email: string, password: string) {
         return new Promise<boolean>((resolve, reject) => {
             firebase.init({
-                url: this._config.FirebaseUrl
+                url: null
             }).then(() => {
                 firebase.login({
                     email: email,
@@ -59,7 +59,7 @@ export class UserService {
     public signup(email: string, password: string) {
         return new Promise<boolean>((resolve, reject) => {
             firebase.init({
-                url: this._config.FirebaseUrl
+                url: null
             }).then(() => {
                 firebase.createUser({
                     email: email,
@@ -87,7 +87,7 @@ export class UserService {
     public forgotPassword(email: string) {
         return new Promise<boolean>((resolve, reject) => {
             firebase.init({
-                url: this._config.FirebaseUrl
+                url: null
             }).then(() => {
                 firebase.resetPassword({
                     email: email
@@ -111,7 +111,7 @@ export class UserService {
     public changePassword(email: string, oldPassword: string, newPassword: string) {
         return new Promise<boolean>((resolve, reject) => {
             firebase.init({
-                url: this._config.FirebaseUrl
+                url: null
             }).then(() => {
                 firebase.changePassword({
                     email: email,
@@ -129,7 +129,7 @@ export class UserService {
     public logout() {
         return new Promise<boolean>((resolve, reject) => {
             firebase.init({
-                url: this._config.FirebaseUrl
+                url: null
             }).then(() => {
                 firebase.logout();
                 this.setUser(null);
