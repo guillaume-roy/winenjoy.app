@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="__PACKAGE__"
 	android:versionCode="27"
-	android:versionName="1.1">
+	android:versionName="1.1.0">
 
 	<supports-screens
 		android:smallScreens="true"
@@ -23,7 +23,7 @@
 		android:name="com.tns.NativeScriptApplication"
 		android:allowBackup="true"
 		android:icon="@drawable/icon"
-		android:label="Winenjoy"
+		android:label="@string/app_name"
 		android:theme="@style/AppTheme" >
 		<activity
 			android:name="com.tns.NativeScriptActivity"
