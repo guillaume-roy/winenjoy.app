@@ -5,7 +5,7 @@
     <ActionBar>
       <ActionBar.actionItems>
         <ActionItem text="Import/Export" ios.position="right" android.position="popup" tap="onExportTastings" />
-        <ActionItem text="Changer mot de passe" ios.position="right" android.position="popup" tap="onChangePassword" />
+        <!--<ActionItem text="Changer mot de passe" ios.position="right" android.position="popup" tap="onChangePassword" />-->
       </ActionBar.actionItems>
     </ActionBar>
   </Page.actionBar>

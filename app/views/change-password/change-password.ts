@@ -28,7 +28,7 @@ export function onChangePassword() {
             analyticsService.logException(error, false);
             analyticsService.dispatch();
             dialogs.alert({
-                message: error,
+                message: "Erreur lors du changement de mot de passe.",
                 okButtonText: "OK",
                 title: "Erreur"
             });

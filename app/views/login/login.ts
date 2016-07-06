@@ -60,7 +60,7 @@ export function onSignup() {
             analyticsService.logException(error, false);
             analyticsService.dispatch();
             dialogs.alert({
-                message: error,
+                message: "Erreur lors de la création du compte.",
                 okButtonText: "OK",
                 title: "Erreur"
             });
@@ -82,7 +82,7 @@ export function onForgotPassword() {
             analyticsService.logException(error, false);
             analyticsService.dispatch();
             dialogs.alert({
-                message: error,
+                message: "Erreur lors de la réinitialisation du mot de passe.",
                 okButtonText: "OK",
                 title: "Erreur"
             });

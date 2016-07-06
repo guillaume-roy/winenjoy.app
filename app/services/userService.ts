@@ -1,15 +1,10 @@
 import {User} from "../entities/user";
 import appSettings = require("application-settings");
 import firebase = require("nativescript-plugin-firebase");
-import {Config} from "../utils/config";
+import _ = require("lodash");
 
 export class UserService {
     private static USER_KEY = "USER";
-    private _config: Config;
-
-    constructor() {
-        this._config = new Config();
-    }
 
     public getUser() {
         return <User>JSON.parse(appSettings.getString(UserService.USER_KEY, null));
@@ -21,120 +16,94 @@ export class UserService {
 
     public isLogged() {
         let user = this.getUser();
+        return !_.isEmpty(user);
+    }
 
-        if (!user) {
-            return false;
-        }
-
-        let date = new Date();
-        let seconds = date.getTime() / 1000;
-
-        return user.firebaseExpiration > seconds;
+    public init() {
+        console.log("BEGIN firebase init");
+        firebase.init({
+            url: null
+        }).then(() => {
+            console.log("END firebase init");
+        }, error => {
+            console.log("ERROR firebase init : " + error);
+        });
     }
 
     public login(email: string, password: string) {
         return new Promise<boolean>((resolve, reject) => {
-            firebase.init({
-                url: null
-            }).then(() => {
-                firebase.login({
+            console.log("BEGIN firebase login");
+            firebase.login({
+                email: email,
+                password: password,
+                type: firebase.LoginType.PASSWORD
+            }).then(res => {
+                console.log("END firebase login");
+                this.setUser({
                     email: email,
-                    password: password,
-                    type: firebase.LoginType.PASSWORD
-                }).then(res => {
-                    this.setUser({
-                        email: email,
-                        firebaseExpiration: res.expiresAtUnixEpochSeconds,
-                        firebaseToken: res.token,
-                        firebaseUid: res.uid
-                    });
-                    resolve(true);
-                }).catch(error => {
-                    reject(error);
+                    uid: res.uid
                 });
+                resolve(true);
+            }).catch(error => {
+                console.log("ERROR firebase login : " + error);
+                reject(error);
             });
         });
     }
 
     public signup(email: string, password: string) {
         return new Promise<boolean>((resolve, reject) => {
-            firebase.init({
-                url: null
-            }).then(() => {
-                firebase.createUser({
-                    email: email,
-                    password: password
-                }).then(res => {
-                    resolve(true);
-                }).catch(error => {
-                    reject(error);
-                    // switch (error.code) {
-                    //     case "EMAIL_TAKEN":
-                    //         reject("Cet email est déjà utilisé.");
-                    //         break;
-                    //     case "INVALID_EMAIL":
-                    //         reject("Cet email est invalide.");
-                    //         break;
-                    //     default:
-                    //         reject("Erreur lors de la création de votre compte.");
-                    //         break;
-                    // }
-                });
+            console.log("BEGIN firebase createUser");
+            firebase.createUser({
+                email: email,
+                password: password
+            }).then(res => {
+                console.log("END firebase createUser");
+                resolve(true);
+            }).catch(createUserError => {
+                console.log("ERROR firebase createUser : " + createUserError);
+                reject(createUserError);
             });
         });
     }
 
     public forgotPassword(email: string) {
         return new Promise<boolean>((resolve, reject) => {
-            firebase.init({
-                url: null
-            }).then(() => {
-                firebase.resetPassword({
-                    email: email
-                }).then(res => {
-                    resolve(true);
-                }).catch(error => {
-                    reject(error);
-                //    switch (error.code) {
-                //         case "INVALID_USER":
-                //             reject("Cet utilisateur n'existe pas.");
-                //             break;
-                //         default:
-                //             reject("Erreur lors de la réinitialisation de votre mot de passe.");
-                //             break;
-                //     }
-                });
+            console.log("BEGIN firebase resetPassword");
+            firebase.resetPassword({
+                email: email
+            }).then(res => {
+                console.log("END firebase resetPassword");
+                resolve(true);
+            }).catch(error => {
+                console.log("ERROR firebase resetPassword : " + error);
+                reject(error);
             });
         });
     }
 
     public changePassword(email: string, oldPassword: string, newPassword: string) {
         return new Promise<boolean>((resolve, reject) => {
-            firebase.init({
-                url: null
-            }).then(() => {
-                firebase.changePassword({
-                    email: email,
-                    newPassword: newPassword,
-                    oldPassword: oldPassword
-                }).then(res => {
-                   resolve(true);
-                }).catch(err => {
-                    reject(err);
-                });
+            console.log("BEGIN firebase changePassword");
+            firebase.changePassword({
+                email: email,
+                newPassword: newPassword,
+                oldPassword: oldPassword
+            }).then(res => {
+                console.log("END firebase changePassword");
+                resolve(true);
+            }).catch(err => {
+                console.log("ERROR firebase changePassword : " + err);
+                reject(err);
             });
         });
     }
 
     public logout() {
         return new Promise<boolean>((resolve, reject) => {
-            firebase.init({
-                url: null
-            }).then(() => {
-                firebase.logout();
-                this.setUser(null);
-                resolve(true);
-            });
+            firebase.logout();
+            this.setUser(null);
+            resolve(true);
         });
     }
 }

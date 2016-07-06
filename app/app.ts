@@ -77,7 +77,8 @@ application.onUncaughtError = (error: any)  => {
 };
 
 let userService = new UserService();
+userService.init();
 
- application.start({
+application.start({
     moduleName: userService.isLogged() ? Views.main : Views.login
 });
