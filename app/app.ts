@@ -5,6 +5,7 @@ import {UserService} from "./services/userService";
 import {ImageSource} from "image-source";
 import {WineTasting} from "./entities/wineTasting";
 import _ = require("lodash");
+import frameModule = require("ui/frame");
 
 application.resources.regionConverterConverter = function(value: WineTasting) {
     let regionIsEmpty = _.isEmpty(value.region);
@@ -77,8 +78,16 @@ application.onUncaughtError = (error: any)  => {
 };
 
 let userService = new UserService();
-userService.init();
+userService.init().then(loggedIn => {
+    if (loggedIn) {
+        frameModule.topmost().navigate({
+            animated: false,
+            backstackVisible: true,
+            moduleName: Views.main
+        });
+    }
+});
 
 application.start({
-    moduleName: userService.isLogged() ? Views.main : Views.login
+    moduleName: Views.login
 });
