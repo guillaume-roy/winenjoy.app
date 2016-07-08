@@ -51,11 +51,11 @@ export function onSignup() {
         viewModel.signup().then(res => {
             analyticsService.logEvent("Action", "User Input", "onSignup");
             analyticsService.dispatch();
-            // frameModule.topmost().navigate({
-            //     animated: false,
-            //     backstackVisible: true,
-            //     moduleName: Views.main
-            // });
+            frameModule.topmost().navigate({
+                animated: false,
+                backstackVisible: true,
+                moduleName: Views.main
+            });
         }).catch(error => {
             analyticsService.logException(error, false);
             analyticsService.dispatch();

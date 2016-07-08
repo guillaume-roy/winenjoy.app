@@ -2,7 +2,6 @@ import application = require("application");
 import {Views} from "./utils/views";
 import {AnalyticsService} from "./services/analyticsService";
 import {UserService} from "./services/userService";
-import {ImageSource} from "image-source";
 import {WineTasting} from "./entities/wineTasting";
 import _ = require("lodash");
 import frameModule = require("ui/frame");
@@ -54,17 +53,6 @@ application.resources.finalRatingToImageConverter = function(value: any) {
     }
 
     return result;
-};
-
-application.resources.base64ToImageConverter = function(base64Image: string) {
-    if (!base64Image) {
-        return null;
-    }
-
-    let imageSource = new ImageSource();
-    imageSource.loadFromBase64(base64Image);
-
-    return imageSource;
 };
 
 let analyticsService = new AnalyticsService();

@@ -232,7 +232,7 @@ export function onTakePicture() {
         keepAspectRatio: true,
         width: 390
     }).then((img: imageSource.ImageSource) => {
-        viewModel.setPicture(img.toBase64String("png", 70));
+        viewModel.setPicture(img);
     });
 }
 

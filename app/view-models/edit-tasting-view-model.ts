@@ -4,6 +4,8 @@ import {WineTasting} from "../entities/wineTasting";
 import {CriteriaItem} from "../entities/criteriaItem";
 import {WineDataService} from "../services/wineDataService";
 import {TastingsService} from "../services/tastingsService";
+import imageSource = require("image-source");
+import fs = require("file-system");
 
 export class EditTastingViewModel extends Observable {
     private _wineDataService: WineDataService;
@@ -25,6 +27,17 @@ export class EditTastingViewModel extends Observable {
     private _alcoholFormattedValue: number;
     private _hasBubbles: boolean;
     private _firstBindingTime: boolean;
+    private _wineTastingPicture: imageSource.ImageSource;
+
+    public get wineTastingPicture() {
+        return this._wineTastingPicture;
+    }
+
+    public set wineTastingPicture(value) {
+        this._wineTastingPicture = value;
+        this.notifyPropertyChange("wineTastingPicture", value);
+        this.wineTasting.containsPicture = !_.isEmpty(value);
+    }
 
     public get isEditMode() {
         return this._isEditMode;
@@ -218,10 +231,25 @@ export class EditTastingViewModel extends Observable {
             this.wineTasting.bubbles = [];
         }
 
-        return this._tastingsService.saveTasting(this.wineTasting);
+        let wineTastingPicturePath = null;
+        if (!_.isEmpty(this.wineTastingPicture)) {
+            wineTastingPicturePath = fs.path.join(fs.knownFolders.temp().path, Date.now() + ".png");
+            this.wineTastingPicture.saveToFile(wineTastingPicturePath, "png", 70);
+        }
+
+        return new Promise<boolean>((resolve, reject) => {
+            this._tastingsService.saveTasting(this.wineTasting, wineTastingPicturePath)
+            .then(() => {
+                if (fs.File.exists(wineTastingPicturePath)) {
+                    fs.File.fromPath(wineTastingPicturePath).remove();
+                }
+                resolve(true);
+            });
+        }) ;
     }
 
     public deleteTasting() {
+        // TODO : Delete tasting picture
         return this._tastingsService.deleteTasting(this.wineTasting);
     }
 
@@ -244,11 +272,8 @@ export class EditTastingViewModel extends Observable {
         this.notifyPropertyChange("wineTasting", this.wineTasting);
     }
 
-    public setPicture(base64Image: string) {
-        this.wineTasting.picture = null;
-        this.notifyPropertyChange("wineTasting", this.wineTasting);
-        this.wineTasting.picture = base64Image;
-        this.notifyPropertyChange("wineTasting", this.wineTasting);
+    public setPicture(image: imageSource.ImageSource) {
+        this.wineTastingPicture = image;
     }
 
     public setGrapes(grapes: CriteriaItem[]) {

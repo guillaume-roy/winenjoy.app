@@ -2,6 +2,7 @@ import {User} from "../entities/user";
 import {UserStats} from "../entities/userStats";
 import appSettings = require("application-settings");
 import firebase = require("nativescript-plugin-firebase");
+import {Config} from "../utils/config";
 import _ = require("lodash");
 
 export class UserService {
@@ -26,6 +27,7 @@ export class UserService {
 
     public initAuthentication() {
         return new Promise<boolean>((resolve, reject) => {
+            let config = new Config();
             firebase.init({
                 onAuthStateChanged: (data: any) => {
                     if (data.loggedIn) {
@@ -34,7 +36,8 @@ export class UserService {
                         this.setUser(null);
                         resolve(false);
                     }
-                }
+                },
+                storageBucket: config.FirebaseStorageBucket
             }).catch(error => {
                 console.log("ERROR firebase init : " + error);
                 reject(error);
@@ -130,6 +133,21 @@ export class UserService {
         });
     }
 
+    public updateUserStats(userStats: UserStats) {
+        return new Promise<boolean>((resolve, reject) => {
+            let uid = this.getUser().uid;
+            firebase.setValue("/user_stats/" + uid, userStats)
+            .then(data => {
+                this.setUserStats(userStats);
+                resolve(true);
+            })
+            .catch(setValueError => {
+                console.log("ERROR firebase updateUserStats : " + setValueError);
+                reject(setValueError);
+            });
+        });
+    }
+
     private createUserProfile(email: string, uid: string) {
         return new Promise<boolean>((resolve, reject) => {
             let user = <User>{
@@ -155,24 +173,24 @@ export class UserService {
         return new Promise<boolean>((resolve, reject) => {
             let userStats = <UserStats>{
                 averageRating: 0,
-                tastingsByAoc: [],
-                tastingsByAromaDefects: [],
-                tastingsByAromas: [],
-                tastingsByBubbles: [],
-                tastingsByCountry: [],
-                tastingsByCuvee: [],
-                tastingsByEstate: [],
-                tastingsByFlavorDefects: [],
-                tastingsByFlavors: [],
-                tastingsByGrape: [],
-                tastingsByIsBiodynamic: [],
-                tastingsByIsBiological: [],
-                tastingsByIsBlind: [],
-                tastingsByRating: [],
-                tastingsByRegion: [],
-                tastingsByTastingYear: [],
-                tastingsByWineType: [],
-                tastingsByWineYear: [],
+                tastingsByAoc: {},
+                tastingsByAromaDefects: {},
+                tastingsByAromas: {},
+                tastingsByBubbles: {},
+                tastingsByCountry: {},
+                tastingsByCuvee: {},
+                tastingsByEstate: {},
+                tastingsByFlavorDefects: {},
+                tastingsByFlavors: {},
+                tastingsByGrape: {},
+                tastingsByIsBiodynamic: {},
+                tastingsByIsBiological: {},
+                tastingsByIsBlind: {},
+                tastingsByRating: {},
+                tastingsByRegion: {},
+                tastingsByTastingYear: {},
+                tastingsByWineType: {},
+                tastingsByWineYear: {},
                 totalRatings: 0,
                 totalTastings: 0,
                 uid: uid

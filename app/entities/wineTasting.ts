@@ -25,7 +25,7 @@ export interface WineTasting {
     smellTabNotes?: string;
     tasteTabNotes?: string;
     aromas?: CriteriaItem[];
-    aromaDefects?: CriteriaItem[];
+    defects?: CriteriaItem[];
     flavors?: CriteriaItem[];
     flavorDefects?: CriteriaItem[];
     attacks?: CriteriaItem[];
@@ -40,5 +40,5 @@ export interface WineTasting {
     longitude?: number;
     latitude?: number;
     altitude?: number;
-    picture?: string;
+    containsPicture?: boolean;
 }
