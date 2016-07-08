@@ -12,7 +12,7 @@
     "nativescript-floatingactionbutton": "^2.2.4",
     "nativescript-geolocation": "^0.0.12",
     "nativescript-google-analytics": "^0.2.8",
-    "nativescript-plugin-firebase": "^3.3.0",
+    "nativescript-plugin-firebase": "^3.4.0",
     "tns-core-modules": "^2.1.0"
   },
   "devDependencies": {

@@ -78,8 +78,9 @@ application.onUncaughtError = (error: any)  => {
 };
 
 let userService = new UserService();
-userService.init().then(loggedIn => {
+userService.initAuthentication().then(loggedIn => {
     if (loggedIn) {
+        userService.updateLastConnectionDate();
         frameModule.topmost().navigate({
             animated: false,
             backstackVisible: true,

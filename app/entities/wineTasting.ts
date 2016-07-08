@@ -25,7 +25,9 @@ export interface WineTasting {
     smellTabNotes?: string;
     tasteTabNotes?: string;
     aromas?: CriteriaItem[];
-    defects?: CriteriaItem[];
+    aromaDefects?: CriteriaItem[];
+    flavors?: CriteriaItem[];
+    flavorDefects?: CriteriaItem[];
     attacks?: CriteriaItem[];
     limpidities?: CriteriaItem[];
     shines?: CriteriaItem[];

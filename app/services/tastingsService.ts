@@ -1,7 +1,11 @@
 import {WineTasting} from "../entities/wineTasting";
 import appSettings = require("application-settings");
+import {User} from "../entities/user";
+import {UserStats} from "../entities/userStats";
 import {UUID} from "../utils/uuid";
 import _ = require("lodash");
+import firebase = require("nativescript-plugin-firebase");
+import {UserService} from "./userService";
 
 export class TastingsService {
     private static TASTINGS_KEY = "TASTINGS";
@@ -90,5 +94,27 @@ export class TastingsService {
 
     public saveTastings(wineTastings: WineTasting[]) {
         appSettings.setString(TastingsService.TASTINGS_KEY, JSON.stringify(wineTastings));
+    }
+
+    public saveTastingOnFirebase(wineTasting: WineTasting): Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
+            wineTasting.id = UUID.generate();
+            wineTasting.endDate = Date.now();
+
+            // TODO : Update stats & image
+
+            let userId = new UserService().getUser().uid;
+            firebase.push("/tastings/" + userId, wineTasting);
+
+            // firebase.setValue("/user_stats/" + uid, userStats)
+            // .then(data => {
+            //     this.setUserStats(userStats);
+            //     resolve(true);
+            // })
+            // .catch(setValueError => {
+            //     console.log("ERROR firebase updateUserStats : " + setValueError);
+            //     reject(setValueError);
+            // });
+        });
     }
 }
