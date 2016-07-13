@@ -228,9 +228,9 @@ export function onSelectGrapes() {
 
 export function onTakePicture() {
     camera.takePicture({
-        height: 390,
+        height: 800,
         keepAspectRatio: true,
-        width: 390
+        width: 800
     }).then((img: imageSource.ImageSource) => {
         viewModel.setPicture(img);
     });

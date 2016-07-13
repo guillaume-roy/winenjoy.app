@@ -234,7 +234,7 @@ export class EditTastingViewModel extends Observable {
         let wineTastingPicturePath = null;
         if (!_.isEmpty(this.wineTastingPicture)) {
             wineTastingPicturePath = fs.path.join(fs.knownFolders.temp().path, Date.now() + ".png");
-            this.wineTastingPicture.saveToFile(wineTastingPicturePath, "png", 70);
+            this.wineTastingPicture.saveToFile(wineTastingPicturePath, "png");
         }
 
         return new Promise<boolean>((resolve, reject) => {

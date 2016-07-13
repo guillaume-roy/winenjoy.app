@@ -126,6 +126,8 @@ export class TastingsService {
         });
     }
 
+    //TODO : Edit/delete on firebase + img + stats
+
     private saveTastingPictureOnFirebase(wineTastingId, wineTastingPicture) {
         return new Promise<boolean>((resolve, reject) => {
             let userId = this._userService.getUser().uid;
