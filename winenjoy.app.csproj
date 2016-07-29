@@ -1,0 +1,490 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{D418107A-6D5C-47CB-9177-DD5300B94394}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <OutputPath>bin</OutputPath>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include="app\app.css">
+      <DependentUpon>app.scss</DependentUpon>
+    </Content>
+    <Content Include="app\app.js">
+      <DependentUpon>app.ts</DependentUpon>
+    </Content>
+    <Content Include="app\App_Resources\Android\AndroidManifest.xml" />
+    <Content Include="app\App_Resources\Android\drawable-hdpi\blank.png" />
+    <Content Include="app\App_Resources\Android\drawable-hdpi\icon.png" />
+    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_add_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_arrow_back_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_check_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_close_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_delete_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_happy.png" />
+    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_neutral.png" />
+    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_sad.png" />
+    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_share_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_very_happy.png" />
+    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_very_sad.png" />
+    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_wineglass_white.png" />
+    <Content Include="app\App_Resources\Android\drawable-ldpi\blank.png" />
+    <Content Include="app\App_Resources\Android\drawable-ldpi\icon.png" />
+    <Content Include="app\App_Resources\Android\drawable-mdpi\blank.png" />
+    <Content Include="app\App_Resources\Android\drawable-mdpi\icon.png" />
+    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_add_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_arrow_back_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_check_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_close_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_delete_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_happy.png" />
+    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_neutral.png" />
+    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_sad.png" />
+    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_share_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_very_happy.png" />
+    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_very_sad.png" />
+    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_wineglass_white.png" />
+    <Content Include="app\App_Resources\Android\drawable-xhdpi\blank.png" />
+    <Content Include="app\App_Resources\Android\drawable-xhdpi\icon.png" />
+    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_add_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_arrow_back_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_check_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_close_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_delete_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_happy.png" />
+    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_neutral.png" />
+    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_sad.png" />
+    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_share_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_very_happy.png" />
+    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_very_sad.png" />
+    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_wineglass_white.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxhdpi\blank.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxhdpi\icon.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_add_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_arrow_back_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_check_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_close_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_delete_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_happy.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_neutral.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_sad.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_share_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_very_happy.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_very_sad.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_wineglass_white.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\blank.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\icon.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_add_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_arrow_back_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_check_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_close_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_delete_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_happy.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_neutral.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_sad.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_share_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_very_happy.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_very_sad.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_wineglass_white.png" />
+    <Content Include="app\App_Resources\Android\values-v21\colors.xml" />
+    <Content Include="app\App_Resources\Android\values-v21\strings.xml" />
+    <Content Include="app\App_Resources\Android\values-v21\styles.xml" />
+    <Content Include="app\App_Resources\Android\values\colors.xml" />
+    <Content Include="app\App_Resources\Android\values\strings.xml" />
+    <Content Include="app\App_Resources\Android\values\styles.xml" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\AppIcon.appiconset\icon-29%402x.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\AppIcon.appiconset\icon-29%403x.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\AppIcon.appiconset\icon-29.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\AppIcon.appiconset\icon-40%402x.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\AppIcon.appiconset\icon-40%403x.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\AppIcon.appiconset\icon-40.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\AppIcon.appiconset\icon-50%402x.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\AppIcon.appiconset\icon-50.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\AppIcon.appiconset\icon-57%402x.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\AppIcon.appiconset\icon-57.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\AppIcon.appiconset\icon-60%402x.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\AppIcon.appiconset\icon-60%403x.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\AppIcon.appiconset\icon-72%402x.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\AppIcon.appiconset\icon-72.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\AppIcon.appiconset\icon-76%402x.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\AppIcon.appiconset\icon-76.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\AppIcon.appiconset\icon-83.5%402x.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\LaunchImage.launchimage\Default%402x.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\LaunchImage.launchimage\Default-568h%402x.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\LaunchImage.launchimage\Default-667h%402x.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\LaunchImage.launchimage\Default-736h%403x.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\LaunchImage.launchimage\Default-Landscape%402x.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\LaunchImage.launchimage\Default-Landscape%403x.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\LaunchImage.launchimage\Default-Landscape.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\LaunchImage.launchimage\Default-Portrait%402x.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\LaunchImage.launchimage\Default-Portrait.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\LaunchImage.launchimage\Default.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\LaunchScreen.AspectFill.imageset\LaunchScreen-AspectFill%402x.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\LaunchScreen.AspectFill.imageset\LaunchScreen-AspectFill.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\LaunchScreen.Center.imageset\LaunchScreen-Center%402x.png" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\LaunchScreen.Center.imageset\LaunchScreen-Center.png" />
+    <Content Include="app\App_Resources\iOS\blank.png" />
+    <Content Include="app\App_Resources\iOS\icon%402x.png" />
+    <Content Include="app\App_Resources\iOS\icon.png" />
+    <Content Include="app\App_Resources\iOS\ic_add_white.png" />
+    <Content Include="app\App_Resources\iOS\ic_add_white_2x.png" />
+    <Content Include="app\App_Resources\iOS\ic_add_white_3x.png" />
+    <Content Include="app\App_Resources\iOS\ic_arrow_back_white_24dp.png" />
+    <Content Include="app\App_Resources\iOS\ic_arrow_back_white_24dp_2x.png" />
+    <Content Include="app\App_Resources\iOS\ic_arrow_back_white_24dp_3x.png" />
+    <Content Include="app\App_Resources\iOS\ic_check_white.png" />
+    <Content Include="app\App_Resources\iOS\ic_check_white_2x.png" />
+    <Content Include="app\App_Resources\iOS\ic_check_white_3x.png" />
+    <Content Include="app\App_Resources\iOS\ic_close_white.png" />
+    <Content Include="app\App_Resources\iOS\ic_close_white_2x.png" />
+    <Content Include="app\App_Resources\iOS\ic_close_white_3x.png" />
+    <Content Include="app\App_Resources\iOS\ic_delete_white_24dp.png" />
+    <Content Include="app\App_Resources\iOS\ic_delete_white_24dp_2x.png" />
+    <Content Include="app\App_Resources\iOS\ic_delete_white_24dp_3x.png" />
+    <Content Include="app\App_Resources\iOS\ic_happy.png" />
+    <Content Include="app\App_Resources\iOS\ic_happy_2x.png" />
+    <Content Include="app\App_Resources\iOS\ic_happy_3x.png" />
+    <Content Include="app\App_Resources\iOS\ic_neutral.png" />
+    <Content Include="app\App_Resources\iOS\ic_neutral_2x.png" />
+    <Content Include="app\App_Resources\iOS\ic_neutral_3x.png" />
+    <Content Include="app\App_Resources\iOS\ic_sad.png" />
+    <Content Include="app\App_Resources\iOS\ic_sad_2x.png" />
+    <Content Include="app\App_Resources\iOS\ic_sad_3x.png" />
+    <Content Include="app\App_Resources\iOS\ic_share_white_24dp.png" />
+    <Content Include="app\App_Resources\iOS\ic_share_white_24dp_2x.png" />
+    <Content Include="app\App_Resources\iOS\ic_share_white_24dp_3x.png" />
+    <Content Include="app\App_Resources\iOS\ic_very_happy.png" />
+    <Content Include="app\App_Resources\iOS\ic_very_happy_2x.png" />
+    <Content Include="app\App_Resources\iOS\ic_very_happy_3x.png" />
+    <Content Include="app\App_Resources\iOS\ic_very_sad.png" />
+    <Content Include="app\App_Resources\iOS\ic_very_sad_2x.png" />
+    <Content Include="app\App_Resources\iOS\ic_very_sad_3x.png" />
+    <Content Include="app\App_Resources\iOS\ic_wineglass_white _2x.png" />
+    <Content Include="app\App_Resources\iOS\ic_wineglass_white _3x.png" />
+    <Content Include="app\App_Resources\iOS\ic_wineglass_white.png" />
+    <Content Include="app\components\gradient-color-picker.js">
+      <DependentUpon>gradient-color-picker.ts</DependentUpon>
+    </Content>
+    <Content Include="app\components\value-button.js">
+      <DependentUpon>value-button.ts</DependentUpon>
+    </Content>
+    <Content Include="app\components\values-selector.js">
+      <DependentUpon>values-selector.ts</DependentUpon>
+    </Content>
+    <Content Include="app\entities\criteriaItem.js">
+      <DependentUpon>criteriaItem.ts</DependentUpon>
+    </Content>
+    <Content Include="app\entities\user.js">
+      <DependentUpon>user.ts</DependentUpon>
+    </Content>
+    <Content Include="app\entities\userStats.js">
+      <DependentUpon>userStats.ts</DependentUpon>
+    </Content>
+    <Content Include="app\entities\wineTasting.js">
+      <DependentUpon>wineTasting.ts</DependentUpon>
+    </Content>
+    <Content Include="app\services\analyticsService.js">
+      <DependentUpon>analyticsService.ts</DependentUpon>
+    </Content>
+    <Content Include="app\services\exportDataService.js">
+      <DependentUpon>exportDataService.ts</DependentUpon>
+    </Content>
+    <Content Include="app\services\tastingsService.js">
+      <DependentUpon>tastingsService.ts</DependentUpon>
+    </Content>
+    <Content Include="app\services\userService.js">
+      <DependentUpon>userService.ts</DependentUpon>
+    </Content>
+    <Content Include="app\services\wineDataService.js">
+      <DependentUpon>wineDataService.ts</DependentUpon>
+    </Content>
+    <Content Include="app\utils\color.js">
+      <DependentUpon>color.ts</DependentUpon>
+    </Content>
+    <Content Include="app\utils\config.js">
+      <DependentUpon>config.ts</DependentUpon>
+    </Content>
+    <Content Include="app\utils\diacritics.js">
+      <DependentUpon>diacritics.ts</DependentUpon>
+    </Content>
+    <Content Include="app\utils\uuid.js">
+      <DependentUpon>uuid.ts</DependentUpon>
+    </Content>
+    <Content Include="app\utils\views.js">
+      <DependentUpon>views.ts</DependentUpon>
+    </Content>
+    <Content Include="app\view-models\aromas-picker-view-model.js">
+      <DependentUpon>aromas-picker-view-model.ts</DependentUpon>
+    </Content>
+    <Content Include="app\view-models\change-password-view-model.js">
+      <DependentUpon>change-password-view-model.ts</DependentUpon>
+    </Content>
+    <Content Include="app\view-models\edit-tasting-view-model.js">
+      <DependentUpon>edit-tasting-view-model.ts</DependentUpon>
+    </Content>
+    <Content Include="app\view-models\gradient-color-picker-view-model.js">
+      <DependentUpon>gradient-color-picker-view-model.ts</DependentUpon>
+    </Content>
+    <Content Include="app\view-models\grouping-list-picker-view-model.js">
+      <DependentUpon>grouping-list-picker-view-model.ts</DependentUpon>
+    </Content>
+    <Content Include="app\view-models\import-export-data-view-model.js">
+      <DependentUpon>import-export-data-view-model.ts</DependentUpon>
+    </Content>
+    <Content Include="app\view-models\list-picker-view-model.js">
+      <DependentUpon>list-picker-view-model.ts</DependentUpon>
+    </Content>
+    <Content Include="app\view-models\login-view-model.js">
+      <DependentUpon>login-view-model.ts</DependentUpon>
+    </Content>
+    <Content Include="app\view-models\main-view-model.js">
+      <DependentUpon>main-view-model.ts</DependentUpon>
+    </Content>
+    <Content Include="app\view-models\year-picker-view-model.js">
+      <DependentUpon>year-picker-view-model.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\aromas-picker\aromas-picker.css">
+      <DependentUpon>aromas-picker.scss</DependentUpon>
+    </Content>
+    <Content Include="app\views\aromas-picker\aromas-picker.js">
+      <DependentUpon>aromas-picker.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\aromas-picker\aromas-picker.xml" />
+    <Content Include="app\views\change-password\change-password.css">
+      <DependentUpon>change-password.scss</DependentUpon>
+    </Content>
+    <Content Include="app\views\change-password\change-password.js">
+      <DependentUpon>change-password.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\change-password\change-password.xml" />
+    <Content Include="app\views\edit-tasting\edit-tasting.css">
+      <DependentUpon>edit-tasting.scss</DependentUpon>
+    </Content>
+    <Content Include="app\views\edit-tasting\edit-tasting.js">
+      <DependentUpon>edit-tasting.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\edit-tasting\edit-tasting.xml" />
+    <Content Include="app\views\gradient-color-picker\gradient-color-picker.css">
+      <DependentUpon>gradient-color-picker.scss</DependentUpon>
+    </Content>
+    <Content Include="app\views\gradient-color-picker\gradient-color-picker.js">
+      <DependentUpon>gradient-color-picker.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\gradient-color-picker\gradient-color-picker.xml" />
+    <Content Include="app\views\grouping-list-picker\grouping-list-picker.css">
+      <DependentUpon>grouping-list-picker.scss</DependentUpon>
+    </Content>
+    <Content Include="app\views\grouping-list-picker\grouping-list-picker.js">
+      <DependentUpon>grouping-list-picker.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\grouping-list-picker\grouping-list-picker.xml" />
+    <Content Include="app\views\import-export-data\import-export-data.css">
+      <DependentUpon>import-export-data.scss</DependentUpon>
+    </Content>
+    <Content Include="app\views\import-export-data\import-export-data.js">
+      <DependentUpon>import-export-data.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\import-export-data\import-export-data.xml" />
+    <Content Include="app\views\list-picker\list-picker.css">
+      <DependentUpon>list-picker.scss</DependentUpon>
+    </Content>
+    <Content Include="app\views\list-picker\list-picker.js">
+      <DependentUpon>list-picker.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\list-picker\list-picker.xml" />
+    <Content Include="app\views\login\login.css">
+      <DependentUpon>login.scss</DependentUpon>
+    </Content>
+    <Content Include="app\views\login\login.js">
+      <DependentUpon>login.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\login\login.xml" />
+    <Content Include="app\views\main\main.css">
+      <DependentUpon>main.scss</DependentUpon>
+    </Content>
+    <Content Include="app\views\main\main.js">
+      <DependentUpon>main.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\main\main.xml" />
+    <Content Include="app\views\year-picker\year-picker.css">
+      <DependentUpon>year-picker.scss</DependentUpon>
+    </Content>
+    <Content Include="app\views\year-picker\year-picker.js">
+      <DependentUpon>year-picker.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\year-picker\year-picker.xml" />
+    <Content Include="gulpfile.js" />
+    <Content Include="resources\img\bottle.svg" />
+    <Content Include="resources\img\earth.svg" />
+    <Content Include="resources\img\empty.svg" />
+    <Content Include="resources\img\glass.svg" />
+    <Content Include="resources\img\happy.svg" />
+    <Content Include="resources\img\logo.svg" />
+    <Content Include="resources\img\neutral.svg" />
+    <Content Include="resources\img\sad.svg" />
+    <Content Include="resources\img\sight.svg" />
+    <Content Include="resources\img\smell.svg" />
+    <Content Include="resources\img\taste.svg" />
+    <Content Include="resources\img\very_happy.svg" />
+    <Content Include="resources\img\very_sad.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\app.scss" />
+    <Content Include="app\App_Resources\Android\app.gradle" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\AppIcon.appiconset\Contents.json" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\Contents.json" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\LaunchImage.launchimage\Contents.json" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\LaunchScreen.AspectFill.imageset\Contents.json" />
+    <Content Include="app\App_Resources\iOS\Assets.xcassets\LaunchScreen.Center.imageset\Contents.json" />
+    <Content Include="app\App_Resources\iOS\build.xcconfig" />
+    <Content Include="app\App_Resources\iOS\Info.plist" />
+    <Content Include="app\App_Resources\iOS\LaunchScreen.storyboard" />
+    <Content Include="app\data\aoc.json" />
+    <Content Include="app\data\aromas.json" />
+    <Content Include="app\data\bubbles.json" />
+    <Content Include="app\data\countries.json" />
+    <Content Include="app\data\grapes.json" />
+    <Content Include="app\data\intensities.json" />
+    <Content Include="app\data\length.json" />
+    <Content Include="app\data\limpidities.json" />
+    <Content Include="app\data\redAttacks.json" />
+    <Content Include="app\data\redTannics.json" />
+    <Content Include="app\data\regions.json" />
+    <Content Include="app\data\roseAttacks.json" />
+    <Content Include="app\data\shines.json" />
+    <Content Include="app\data\tears.json" />
+    <Content Include="app\data\whiteAcidities.json" />
+    <Content Include="app\data\whiteAttacks.json" />
+    <Content Include="app\data\wineTypes.json" />
+    <Content Include="app\fonts\MaterialIcons-Regular.ttf" />
+    <Content Include="app\fonts\winenjoy.ttf" />
+    <Content Include="app\package.json" />
+    <Content Include="app\styles\_bottom-navigation.scss" />
+    <Content Include="app\styles\_common.scss" />
+    <Content Include="app\styles\_fab.scss" />
+    <Content Include="app\styles\_final-rating.scss" />
+    <Content Include="app\styles\_fonts.scss" />
+    <Content Include="app\styles\_material-theme.scss" />
+    <Content Include="app\styles\_values-selector.scss" />
+    <Content Include="app\views\aromas-picker\aromas-picker.scss" />
+    <Content Include="app\views\change-password\change-password.scss" />
+    <Content Include="app\views\edit-tasting\edit-tasting.scss" />
+    <Content Include="app\views\gradient-color-picker\gradient-color-picker.scss" />
+    <Content Include="app\views\grouping-list-picker\grouping-list-picker.scss" />
+    <Content Include="app\views\import-export-data\import-export-data.scss" />
+    <Content Include="app\views\list-picker\list-picker.scss" />
+    <Content Include="app\views\login\login.scss" />
+    <Content Include="app\views\main\main.scss" />
+    <Content Include="app\views\year-picker\year-picker.scss" />
+    <Content Include="package.json" />
+    <Content Include="resources\fonts\selection.json" />
+    <Content Include="resources\fonts\winenjoy.ttf" />
+    <Content Include="tsconfig.json" />
+    <Content Include="tslint.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="app\app.ts" />
+    <TypeScriptCompile Include="app\components\gradient-color-picker.ts" />
+    <TypeScriptCompile Include="app\components\value-button.ts" />
+    <TypeScriptCompile Include="app\components\values-selector.ts" />
+    <TypeScriptCompile Include="app\entities\criteriaItem.ts" />
+    <TypeScriptCompile Include="app\entities\user.ts" />
+    <TypeScriptCompile Include="app\entities\userStats.ts" />
+    <TypeScriptCompile Include="app\entities\wineTasting.ts" />
+    <TypeScriptCompile Include="app\references.d.ts" />
+    <TypeScriptCompile Include="app\services\analyticsService.ts" />
+    <TypeScriptCompile Include="app\services\exportDataService.ts" />
+    <TypeScriptCompile Include="app\services\tastingsService.ts" />
+    <TypeScriptCompile Include="app\services\userService.ts" />
+    <TypeScriptCompile Include="app\services\wineDataService.ts" />
+    <TypeScriptCompile Include="app\utils\color.ts" />
+    <TypeScriptCompile Include="app\utils\config.ts" />
+    <TypeScriptCompile Include="app\utils\diacritics.ts" />
+    <TypeScriptCompile Include="app\utils\uuid.ts" />
+    <TypeScriptCompile Include="app\utils\views.ts" />
+    <TypeScriptCompile Include="app\view-models\aromas-picker-view-model.ts" />
+    <TypeScriptCompile Include="app\view-models\change-password-view-model.ts" />
+    <TypeScriptCompile Include="app\view-models\edit-tasting-view-model.ts" />
+    <TypeScriptCompile Include="app\view-models\gradient-color-picker-view-model.ts" />
+    <TypeScriptCompile Include="app\view-models\grouping-list-picker-view-model.ts" />
+    <TypeScriptCompile Include="app\view-models\import-export-data-view-model.ts" />
+    <TypeScriptCompile Include="app\view-models\list-picker-view-model.ts" />
+    <TypeScriptCompile Include="app\view-models\login-view-model.ts" />
+    <TypeScriptCompile Include="app\view-models\main-view-model.ts" />
+    <TypeScriptCompile Include="app\view-models\year-picker-view-model.ts" />
+    <TypeScriptCompile Include="app\views\aromas-picker\aromas-picker.ts" />
+    <TypeScriptCompile Include="app\views\change-password\change-password.ts" />
+    <TypeScriptCompile Include="app\views\edit-tasting\edit-tasting.ts" />
+    <TypeScriptCompile Include="app\views\gradient-color-picker\gradient-color-picker.ts" />
+    <TypeScriptCompile Include="app\views\grouping-list-picker\grouping-list-picker.ts" />
+    <TypeScriptCompile Include="app\views\import-export-data\import-export-data.ts" />
+    <TypeScriptCompile Include="app\views\list-picker\list-picker.ts" />
+    <TypeScriptCompile Include="app\views\login\login.ts" />
+    <TypeScriptCompile Include="app\views\main\main.ts" />
+    <TypeScriptCompile Include="app\views\year-picker\year-picker.ts" />
+    <TypeScriptCompile Include="references.d.ts" />
+    <TypeScriptCompile Include="typings\lodash.d.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>winenjoy.app</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets')" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>60269</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:60269/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>false</TypeScriptSourceMap>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+</Project>

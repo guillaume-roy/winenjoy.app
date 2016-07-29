@@ -11,9 +11,11 @@ import fs = require("file-system");
 export class TastingsService {
     private static TASTINGS_KEY = "TASTINGS";
     private _userService: UserService;
+    private _userId: string;
 
     constructor() {
         this._userService = new UserService();
+        this._userId = this._userService.getUser().uid;
     }
 
     public newTasting() {
@@ -32,6 +34,8 @@ export class TastingsService {
                 endDate: null,
                 estate: null,
                 finalRating: 2,
+                flavorDefects: [],
+                flavors: [],
                 grapes: [],
                 id: null,
                 intensities: [],
@@ -65,26 +69,38 @@ export class TastingsService {
         });
     }
 
-    public saveTasting(wineTasting: WineTasting, wineTastingPicturePath: string): Promise<boolean> {
+    // public saveTasting(wineTasting: WineTasting, wineTastingPicturePath: string): Promise<boolean> {
+    //     return new Promise<boolean>((resolve, reject) => {
+    //         this.getTastings().then(wineTastings => {
+    //             if (_.isEmpty(wineTasting.id)) {
+    //                 wineTasting.id = UUID.generate();
+    //                 wineTasting.endDate = Date.now();
+    //                 wineTastings.push(wineTasting);
+    //                 this.saveTastings(wineTastings);
+    //                 this.saveTastingOnFirebase(wineTasting, wineTastingPicturePath);
+    //                 resolve(true);
+    //             } else {
+    //                 this.deleteTasting(wineTasting).then(result => {
+    //                     this.getTastings().then(tastings => {
+    //                         wineTasting.lastModificationDate = Date.now();
+    //                         tastings.push(wineTasting);
+    //                         this.saveTastings(tastings);
+    //                         resolve(true);
+    //                     });
+    //                 });
+    //             }
+    //         });
+    //     });
+    // }
+
+    public saveTasting(wineTasting: WineTasting, wineTastingPicturePath: string) {
         return new Promise<boolean>((resolve, reject) => {
-            this.getTastings().then(wineTastings => {
-                if (_.isEmpty(wineTasting.id)) {
-                    wineTasting.id = UUID.generate();
-                    wineTasting.endDate = Date.now();
-                    wineTastings.push(wineTasting);
-                    this.saveTastings(wineTastings);
-                    this.saveTastingOnFirebase(wineTasting, wineTastingPicturePath);
-                    resolve(true);
-                } else {
-                    this.deleteTasting(wineTasting).then(result => {
-                        this.getTastings().then(tastings => {
-                            wineTasting.lastModificationDate = Date.now();
-                            tastings.push(wineTasting);
-                            this.saveTastings(tastings);
-                            resolve(true);
-                        });
-                    });
-                }
+            this.saveTastingOnFirebase(wineTasting)
+            .then(newTasting => {
+                this.saveTastingPictureOnFirebase(newTasting.id, wineTastingPicturePath)
+                .then(() => {
+                    this._userService.increaseUserStats(newTasting);
+                });
             });
         });
     }
@@ -99,121 +115,71 @@ export class TastingsService {
         });
     }
 
+    public deleteTastingOnFirebase(wineTasting: WineTasting) {
+        return new Promise<boolean>((resolve, reject) => {
+            let userId = this._userService.getUser().uid;
+            firebase.remove(`/tastings/${userId}/${wineTasting.id}`)
+            .then(() => {
+                this.deleteTastingPictureOnFirebase(wineTasting.id)
+                .then(() => {
+                    this._userService.decreaseUserStats(wineTasting);
+                });
+            });
+        });
+    }
+
     public saveTastings(wineTastings: WineTasting[]) {
         appSettings.setString(TastingsService.TASTINGS_KEY, JSON.stringify(wineTastings));
     }
 
-    private saveTastingOnFirebase(wineTasting: WineTasting, wineTastingPicturePath: string): Promise<boolean> {
+    private deleteTastingPictureOnFirebase(wineTastingId: string) {
         return new Promise<boolean>((resolve, reject) => {
-            wineTasting.id = UUID.generate();
-            wineTasting.endDate = Date.now();
-
             let userId = this._userService.getUser().uid;
-            firebase.push("/tastings/" + userId, wineTasting)
-            .then(res => {
-                this.updateUserStats(wineTasting);
-                if (!_.isEmpty(wineTastingPicturePath)) {
-                    this.saveTastingPictureOnFirebase(res.key, wineTastingPicturePath)
-                    .then(() => resolve(true));
-                } else {
-                    resolve(true);
-                }
-            })
-            .catch(error => {
-                console.log("ERROR saveTastingOnFirebase : " + error);
-                reject(error);
+            firebase.deleteFile({
+                remoteFullPath: "/tastings/" + userId + "/" + wineTastingId
+            }).then(() => {
+                resolve(true);
             });
         });
     }
 
-    //TODO : Edit/delete on firebase + img + stats
+    private updateTastingOnFirebase(wineTasting: WineTasting, wineTastingPicturePath: string) {
+        return new Promise<boolean>((resolve, reject) => {
+            let userId = this._userService.getUser().uid;
+            firebase.setValue("/tastings/" + userId + "/" + wineTasting.id, wineTasting)
+            .then(() => {
+                if (_.isEmpty(wineTastingPicturePath)) {
+                    this.deleteTastingPictureOnFirebase(wineTasting.id);
+                } else {
+                    this.saveTastingPictureOnFirebase(wineTasting.id, wineTastingPicturePath);
+                }
+            });
+        });
+    }
+
+    private saveTastingOnFirebase(wineTasting: WineTasting) {
+        return new Promise<WineTasting>(resolve => {
+            wineTasting.endDate = Date.now();
+            firebase.push(`/tastings/${this._userId}`, {})
+            .then(res => {
+                wineTasting.id = res.key;
+                firebase.setValue(`/tastings/${this._userId}/${wineTasting.id}`, wineTasting)
+                .then(() => resolve(wineTasting));
+            });
+        });
+    }
 
     private saveTastingPictureOnFirebase(wineTastingId, wineTastingPicture) {
         return new Promise<boolean>((resolve, reject) => {
-            let userId = this._userService.getUser().uid;
+            if (_.isEmpty(wineTastingPicture)) {
+                resolve(true);
+            }
             firebase.uploadFile({
                 localFile: fs.File.fromPath(wineTastingPicture),
-                remoteFullPath: "tastings/" + userId + "/" + wineTastingId
+                remoteFullPath: `/tastings/${this._userId}/${wineTastingId}`
             }).then(res => {
                 resolve(true);
-            }).catch(error => {
-                console.log("ERROR saveTastingPictureOnFirebase : " + error);
-                reject(error);
             });
         });
-    }
-
-    private fillCriteriaStat(criteriaStat: { [id: string]: string[] }, code: any, wineTastingId: string) {
-        if (_.isEmpty(criteriaStat)) {
-            criteriaStat = {};
-        }
-        if (_.isEmpty(criteriaStat[code])) {
-            criteriaStat[code] = [];
-        }
-        criteriaStat[code].push(wineTastingId);
-
-        return criteriaStat;
-    }
-
-    private updateUserStats(wineTasting: WineTasting) {
-        let userStats = this._userService.getUserStats();
-
-        userStats.totalTastings += 1;
-        userStats.totalRatings += wineTasting.finalRating;
-        userStats.averageRating = userStats.totalRatings / userStats.totalTastings;
-
-        userStats.tastingsByWineType = this.fillCriteriaStat(userStats.tastingsByWineType, wineTasting.wineType.code, wineTasting.id);
-        userStats.tastingsByRating = this.fillCriteriaStat(userStats.tastingsByRating, wineTasting.finalRating, wineTasting.id);
-        userStats.tastingsByEstate = this.fillCriteriaStat(userStats.tastingsByEstate, wineTasting.estate, wineTasting.id);
-        userStats.tastingsByRegion = this.fillCriteriaStat(userStats.tastingsByRegion, wineTasting.region.code, wineTasting.id);
-        userStats.tastingsByCuvee = this.fillCriteriaStat(userStats.tastingsByCuvee, wineTasting.cuvee, wineTasting.id);
-        userStats.tastingsByCountry = this.fillCriteriaStat(userStats.tastingsByCountry, wineTasting.country.code, wineTasting.id);
-        userStats.tastingsByAoc = this.fillCriteriaStat(userStats.tastingsByAoc, wineTasting.aoc.code, wineTasting.id);
-        userStats.tastingsByWineYear = this.fillCriteriaStat(userStats.tastingsByWineYear, wineTasting.year, wineTasting.id);
-        userStats.tastingsByIsBiological = this.fillCriteriaStat(userStats.tastingsByIsBiological, wineTasting.isBiologic, wineTasting.id);
-        userStats.tastingsByIsBiodynamic = this.fillCriteriaStat(
-            userStats.tastingsByIsBiodynamic, wineTasting.isBiodynamic, wineTasting.id);
-        userStats.tastingsByIsBlind = this.fillCriteriaStat(userStats.tastingsByIsBlind, wineTasting.isBlindTasting, wineTasting.id);
-        userStats.tastingsByBubbles = this.fillCriteriaStat(
-            userStats.tastingsByBubbles, (!_.isEmpty(wineTasting.bubbles) && wineTasting.bubbles.length > 0), wineTasting.id);
-        userStats.tastingsByTastingYear = this.fillCriteriaStat(
-            userStats.tastingsByTastingYear, new Date(wineTasting.startDate).getFullYear(), wineTasting.id);
-
-        if (!_.isEmpty(wineTasting.grapes)) {
-            for (let i = 0; i < wineTasting.grapes.length; i++) {
-                userStats.tastingsByGrape = this.fillCriteriaStat(
-                    userStats.tastingsByGrape, wineTasting.grapes[i].code, wineTasting.id);
-            }
-        }
-
-        if (!_.isEmpty(wineTasting.aromas)) {
-            for (let i = 0; i < wineTasting.aromas.length; i++) {
-                userStats.tastingsByAromas = this.fillCriteriaStat(
-                    userStats.tastingsByAromas, wineTasting.aromas[i].code, wineTasting.id);
-            }
-        }
-
-        if (!_.isEmpty(wineTasting.defects)) {
-            for (let i = 0; i < wineTasting.defects.length; i++) {
-                userStats.tastingsByAromaDefects = this.fillCriteriaStat(
-                    userStats.tastingsByAromaDefects, wineTasting.defects[i].code, wineTasting.id);
-            }
-        }
-
-        if (!_.isEmpty(wineTasting.flavors)) {
-            for (let i = 0; i < wineTasting.flavors.length; i++) {
-                userStats.tastingsByFlavors = this.fillCriteriaStat(
-                    userStats.tastingsByFlavors, wineTasting.flavors[i].code, wineTasting.id);
-            }
-        }
-
-        if (!_.isEmpty(wineTasting.flavorDefects)) {
-            for (let i = 0; i < wineTasting.flavorDefects.length; i++) {
-                userStats.tastingsByFlavorDefects = this.fillCriteriaStat(
-                    userStats.tastingsByFlavorDefects, wineTasting.flavorDefects[i].code, wineTasting.id);
-            }
-        }
-
-        this._userService.updateUserStats(userStats);
     }
 }

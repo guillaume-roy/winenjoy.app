@@ -249,7 +249,6 @@ export class EditTastingViewModel extends Observable {
     }
 
     public deleteTasting() {
-        // TODO : Delete tasting picture
         return this._tastingsService.deleteTasting(this.wineTasting);
     }
 
