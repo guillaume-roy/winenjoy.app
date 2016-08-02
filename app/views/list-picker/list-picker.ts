@@ -11,7 +11,7 @@ let viewModel: ListPickerViewModel;
 export function onShownModally(args: pages.ShownModallyData) {
     closeCallback = args.closeCallback;
 
-    setTimeout(function() {
+    setTimeout(() => {
         viewModel = new ListPickerViewModel(args.context);
         let page = <Page>args.object;
         page.bindingContext = viewModel;

@@ -1,3 +1,5 @@
+/// <binding ProjectOpened='default' />
+
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 

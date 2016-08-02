@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "lodash": "^4.13.1",
+    "nativescript-appversion": "^1.2.0",
     "nativescript-floatingactionbutton": "^2.2.4",
     "nativescript-geolocation": "^0.0.12",
     "nativescript-google-analytics": "^0.2.8",

@@ -75,7 +75,7 @@ export class GroupingListPickerViewModel extends Observable {
 
         if (args.criterias === "aromas") {
             new WineDataService().getCriterias(args.criterias).then(data => {
-                this.items = this.processChild(data.filter(d => d.code !== "DEFECTS").map(g => new Observable({
+                this.items = this.processChild(data.filter(d => d.type !== "DEFECTS").map(g => new Observable({
                     groupingIcon: this.groupingIcon,
                     isExpanded: false,
                     item: g

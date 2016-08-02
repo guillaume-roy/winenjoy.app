@@ -63,14 +63,19 @@ export class TastingsService {
         };
     }
 
+    public getTasting(wineTastingId: string) {
+        return new Promise<boolean>((resolve, reject) => {
+            this.getTastings()
+                .then(tastings => {
+                    return _.find(tastings, t => t.id === wineTastingId);
+                });
+        });
+    }
+
     public getTastings(): Promise<WineTasting[]> {
         return new Promise<WineTasting[]>((resolve, reject) => {
             resolve(_.orderBy(<WineTasting[]>JSON.parse(appSettings.getString(TastingsService.TASTINGS_KEY, "[]")), ["endDate"], ["desc"]));
         });
-    }
-
-    public saveTastings(wineTastings: WineTasting[]) {
-        appSettings.setString(TastingsService.TASTINGS_KEY, JSON.stringify(wineTastings));
     }
 
     public saveTasting(wineTasting: WineTasting, wineTastingPicturePath: string) {
@@ -89,18 +94,24 @@ export class TastingsService {
         return new Promise<boolean>((resolve, reject) => {
             this.deleteTastingPictureOnFirebase(wineTasting.id).then(() => {
                 this.deleteTastingOnFirebase(wineTasting).then(() => {
-                    this._userService.decreaseUserStats(wineTasting).then(() => resolve(true));
+                    this._userService.decreaseUserStats(wineTasting).then(() => {
+                        this.deleteTastingLocally(wineTasting.id).then(() => resolve(true));
+                    });
                 });
             });
         });
     }
 
-    public updateTasting(wineTasting: WineTasting, wineTastingPicturePath: string, pictureEditMode: string, oldWineTasting: WineTasting) {
+    public updateTasting(wineTasting: WineTasting, wineTastingPicturePath: string, pictureEditMode: string) {
         return new Promise<boolean>((resolve, reject) => {
             this.updateTastingOnFirebase(wineTasting).then(() => {
                 var endOfUpdate = () => {
-                    this._userService.decreaseUserStats(oldWineTasting).then(() => {
-                        this._userService.increaseUserStats(wineTasting).then(() => resolve(true));
+                    this.getTasting(wineTasting.id).then(oldWineTasting => {
+                        this._userService.decreaseUserStats(oldWineTasting).then(() => {
+                            this._userService.increaseUserStats(wineTasting).then(() => {
+                                this.updateTastingLocally(wineTasting).then(() => resolve(true));
+                            });
+                        });
                     });
                 };
                 switch (pictureEditMode) {
@@ -116,6 +127,20 @@ export class TastingsService {
                 }
             });
         });
+    }
+
+    public getTastingPictureUrl(wineTastingId) {
+        return new Promise<string>((resolve, reject) => {
+            firebase.getDownloadUrl({
+                remoteFullPath: `/tastings/${this._userId}/${wineTastingId}`
+            }).then(url => {
+                resolve(url);
+            });
+        });
+    }
+
+    public saveTastings(wineTastings: WineTasting[]) {
+        appSettings.setString(TastingsService.TASTINGS_KEY, JSON.stringify(wineTastings));
     }
 
     private deleteTastingOnFirebase(wineTasting: WineTasting) {

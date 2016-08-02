@@ -1,155 +1,265 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd"
-    xmlns:vs="components/values-selector"
-    xmlns:FAB="nativescript-floatingactionbutton"
-    navigatedTo="navigatedTo"
-    navigatedFrom="navigatedFrom"
-    actionBarHidden="true">
-    <GridLayout>
-        <TabView id="tab-view">
-            <TabView.items>
-                <TabViewItem title="Vin">
-                    <TabViewItem.view>
-                        <ScrollView id="scroll-0">
-                            <StackLayout class="tab-view-content">
-                                <SegmentedBar selectedIndex="{{ wineTypeSelectedIndex }}">
-                                    <SegmentedBar.items>
-                                        <SegmentedBarItem title="Blanc" />
-                                        <SegmentedBarItem title="Rosé" />
-                                        <SegmentedBarItem title="Rouge" />
-                                    </SegmentedBar.items>
-                                </SegmentedBar>
-                                <Label text="Cuvée" class="criterias-title" />
-                                <TextField text="{{ wineTasting.cuvee }}" />
-                                <Label text="Domaine" class="criterias-title" />
-                                <TextField text="{{ wineTasting.estate }}" />
-                                <Label text="Pays" class="criterias-title" />
-                                <Button text="Sélectionner" tap="onSelectCountry" class="white-button modal-button" visibility="{{ wineTasting.country ? 'collapse' : 'visible' }}" />
-                                <Button text="{{ (wineTasting.country ||{}).label }}" tap="onDeleteCountry" class="accent-button modal-button" visibility="{{ wineTasting.country ? 'visible' : 'collapse' }}" />
-                                <Label text="Région" class="criterias-title" />
-                                <Button text="Sélectionner" tap="onSelectRegion" class="white-button modal-button" visibility="{{ wineTasting.region ? 'collapse' : 'visible' }}" />
-                                <Button text="{{ (wineTasting.region ||{}).label }}" tap="onDeleteRegion" class="accent-button modal-button" visibility="{{ wineTasting.region ? 'visible' : 'collapse' }}" />
-                                <Label text="AOC" class="criterias-title" />
-                                <Button text="Sélectionner" tap="onSelectAoc" class="white-button modal-button" visibility="{{ wineTasting.aoc ? 'collapse' : 'visible' }}" />
-                                <Button text="{{ (wineTasting.aoc ||{}).label }}" tap="onDeleteAoc" class="accent-button modal-button" visibility="{{ wineTasting.aoc ? 'visible' : 'collapse' }}" />
-                                <Label text="Année" class="criterias-title" />
-                                <Button text="Sélectionner" tap="onSelectYear" class="white-button modal-button" visibility="{{ wineTasting.year ? 'collapse' : 'visible' }}" />
-                                <Button text="{{ wineTasting.year }}" tap="onDeleteYear" class="accent-button modal-button" visibility="{{ wineTasting.year ? 'visible' : 'collapse' }}" />
-                                <Label text="{{ alcoholFormattedValue ? 'Alcool : ' + alcoholFormattedValue + '%' : 'Alcool' }}" class="criterias-title" />
-                                <Slider id="alcohol-slider" value="{{ alcoholValue }}" minValue="30" maxValue="180" style="margin: 10" />
-                                <DockLayout class="switch-criteria">
-                                    <Label text="Vin Biologique" class="criterias-title"/>
-                                    <Switch checked="{{ wineTasting.isBiologic }}" dock="right" />
-                                </DockLayout>
-                                <DockLayout class="switch-criteria">
-                                    <Label text="Vin Biodynamique" class="criterias-title" />
-                                    <Switch checked="{{ wineTasting.isBiodynamic }}" dock="right" />
-                                </DockLayout>
-                                <Label text="Cépages" class="criterias-title" />
-                                <Button text="Sélectionner" tap="onSelectGrapes" class="white-button modal-button" />
-                                <vs:ValuesSelector items="{{ wineTasting.grapes }}" deleteOnClick="true" />
-                                <Label text="Commentaires" class="criterias-title" />
-                                <TextView text="{{ wineTasting.wineTabNotes }}" />
-                            </StackLayout>
-                        </ScrollView>
-                    </TabViewItem.view>
-                </TabViewItem>
-                <TabViewItem title="Aspect">
-                    <TabViewItem.view>
-                        <ScrollView id="scroll-1">
-                            <StackLayout class="tab-view-content">
-                                <Label text="Robe" class="criterias-title" />
-                                <Button text="Sélectionner" tap="onSelectColor" visibility="{{ wineTasting.color ? 'collapse' : 'visible' }}" class="modal-button white-button" />
-                                <Button tap="onDeleteColor" backgroundColor="{{wineTasting.color}}" visibility="{{ wineTasting.color ? 'visible' : 'collapse' }}" class="modal-button" />
-                                <Label text="Limpidité" class="criterias-title" />
-                                <vs:ValuesSelector items="{{ limpidityCriterias }}" selectedItems="{{ wineTasting.limpidities }}" />
-                                <Label text="Brillance" class="criterias-title" />
-                                <vs:ValuesSelector items="{{ shineCriterias }}" selectedItems="{{ wineTasting.shines }}" />
-                                <Label text="Larmes" class="criterias-title" />
-                                <vs:ValuesSelector items="{{ tearCriterias }}" selectedItems="{{ wineTasting.tears }}" />
-                                <DockLayout class="switch-criteria">
-                                    <Label text="Bulles" class="criterias-title" />
-                                    <Switch checked="{{ hasBubbles }}" dock="right" />
-                                </DockLayout>
-                                <vs:ValuesSelector items="{{ bubbleCriterias }}" selectedItems="{{ wineTasting.bubbles }}" visibility="{{ hasBubbles ? 'visible' : 'collapse' }}" />
-                                <Label text="Commentaires" class="criterias-title" />
-                                <TextView text="{{ wineTasting.sightTabNotes }}" />
-                            </StackLayout>
-                        </ScrollView>
-                    </TabViewItem.view>
-                </TabViewItem>
-                <TabViewItem title="Arômes">
-                    <TabViewItem.view>
-                        <ScrollView id="scroll-2">
-                            <StackLayout class="tab-view-content">
-                                <Label text="Arômes" class="criterias-title" />
-                                <Button text="Sélectionner" tap="onAddAromas" class="modal-button white-button" />
-                                <vs:ValuesSelector items="{{ wineTasting.aromas }}" deleteOnClick="true"/>
-                                <Label text="Défauts" class="criterias-title" />
-                                <Button text="Sélectionner" tap="onAddDefects" class="modal-button white-button" />
-                                <vs:ValuesSelector items="{{ wineTasting.defects }}" deleteOnClick="true"/>
-                                <Label text="Intensité" class="criterias-title" />
-                                <vs:ValuesSelector items="{{ intensityCriterias }}" selectedItems="{{ wineTasting.intensities }}"/>
-                                <Label text="Commentaires" class="criterias-title" />
-                                <TextView text="{{ wineTasting.smellTabNotes }}" />
-                            </StackLayout>
-                        </ScrollView>
-                    </TabViewItem.view>
-                </TabViewItem>
-                <TabViewItem title="Saveurs">
-                    <TabViewItem.view>
-                        <ScrollView id="scroll-3">
-                            <StackLayout class="tab-view-content">
-                                <Label text="Attaque" class="criterias-title" />
-                                <vs:ValuesSelector items="{{ attackCriterias }}" selectedItems="{{ wineTasting.attacks }}" />
-                                <Label text="Equilibre" class="criterias-title" />
-                                <vs:ValuesSelector items="{{ tannicCriterias }}" selectedItems="{{ wineTasting.balances }}" visibility="{{ (wineTasting.wineType.code === 'RED' || wineTasting.wineType.code === 'ROSE') ? 'visible' : 'collapse'}}" />
-                                <vs:ValuesSelector items="{{ acidityCriterias }}" selectedItems="{{ wineTasting.balances }}" visibility="{{ wineTasting.wineType.code === 'WHITE' ? 'visible' : 'collapse'}}" />
-                                <Label text="Finale" class="criterias-title" />
-                                <vs:ValuesSelector items="{{ lengthCriterias }}" selectedItems="{{ wineTasting.length }}" />
-                                <Label text="Commentaires" class="criterias-title" />
-                                <TextView text="{{ wineTasting.tasteTabNotes }}" />
-                            </StackLayout>
-                        </ScrollView>
-                    </TabViewItem.view>
-                </TabViewItem>
-                <TabViewItem title="Synthèse">
-                    <TabViewItem.view>
-                        <ScrollView id="scroll-4">
-                            <StackLayout class="tab-view-content">
-                                <Label text="Avis global" class="criterias-title" />
-                                <StackLayout orientation="horizontal" class="final-rating">
-                                    <Label text="sentiment_very_satisfied" class="{{ wineTasting.finalRating == 4 ? 'material-icon final-rating-4 selected': 'material-icon final-rating-4' }}" tap="onSelectFinalRating" />
-                                    <Label text="sentiment_satisfied" class="{{ wineTasting.finalRating == 3 ? 'material-icon final-rating-3 selected': 'material-icon final-rating-3' }}" tap="onSelectFinalRating" />
-                                    <Label text="sentiment_neutral" class="{{ wineTasting.finalRating == 2 ? 'material-icon final-rating-2 selected': 'material-icon final-rating-2' }}" tap="onSelectFinalRating" />
-                                    <Label text="sentiment_dissatisfied" class="{{ wineTasting.finalRating == 1 ? 'material-icon final-rating-1 selected': 'material-icon final-rating-1' }}" tap="onSelectFinalRating" />
-                                    <Label text="sentiment_very_dissatisfied" class="{{ wineTasting.finalRating == 0 ? 'material-icon final-rating-0 selected': 'material-icon final-rating-0' }}" tap="onSelectFinalRating" />
-                                </StackLayout>
-                                <Label text="Photo" class="criterias-title" />
-                                <Button text="Ajouter" tap="onTakePicture" class="modal-button white-button" visibility="{{ wineTastingPicture ? 'collapse' : 'visible' }}" />
-                                <Image class="tasting-picture" stretch="aspectFill" imageSource="{{ wineTastingPicture }}" />
-                                <Button text="Supprimer" tap="onDeletePicture" class="modal-button accent-button"  visibility="{{ wineTastingPicture ? 'visible' : 'collapse' }}" />
-                                <DockLayout class="switch-criteria">
-                                    <Label text="Dégustation à l'aveugle" class="criterias-title" />
-                                    <Switch checked="{{ wineTasting.isBlindTasting }}" dock="right" />
-                                </DockLayout>
-                                <Label text="Commentaires" class="criterias-title" />
-                                <TextView text="{{ wineTasting.synthesisTabNotes }}" />
-                            </StackLayout>
-                        </ScrollView>
-                    </TabViewItem.view>
-                </TabViewItem>
-            </TabView.items>
-        </TabView>
-        <FAB:fab id="fab"
-            icon="res://ic_check_white_24dp"
-            rippleColor="#f1f1f1"
-            class="fab-button"
-            tap="saveTasting" />
-        <FAB:fab id="fab-delete"
-            icon="res://ic_close_white_24dp"
-            rippleColor="#f1f1f1"
-            visibility="{{ isEditMode ? 'visible' : 'collapse' }}"
-            class="fab-button-delete"
-            tap="deleteTasting" />
-    </GridLayout>
+      xmlns:vs="components/values-selector"
+      xmlns:FAB="nativescript-floatingactionbutton"
+      navigatedTo="navigatedTo"
+      navigatedFrom="navigatedFrom"
+      actionBarHidden="true">
+  <GridLayout>
+    <ActivityIndicator busy="{{ isBusy }}"
+                       visibility="{{ isBusy ? 'visible' : 'collapse' }}" />
+    <TabView id="tab-view"
+             visibility="{{ isBusy ? 'collapse' : 'visible' }}">
+      <TabView.items>
+        <TabViewItem title="Vin">
+          <TabViewItem.view>
+            <ScrollView id="scroll-0">
+              <StackLayout class="tab-view-content">
+                <SegmentedBar selectedIndex="{{ wineTypeSelectedIndex }}">
+                  <SegmentedBar.items>
+                    <SegmentedBarItem title="Blanc" />
+                    <SegmentedBarItem title="Rosé" />
+                    <SegmentedBarItem title="Rouge" />
+                  </SegmentedBar.items>
+                </SegmentedBar>
+                <Label text="Cuvée"
+                       class="criterias-title" />
+                <TextField text="{{ wineTasting.cuvee }}" />
+                <Label text="Domaine"
+                       class="criterias-title" />
+                <TextField text="{{ wineTasting.estate }}" />
+                <Label text="Pays"
+                       class="criterias-title" />
+                <Button text="Sélectionner"
+                        tap="onSelectCountry"
+                        class="white-button modal-button"
+                        visibility="{{ wineTasting.country ? 'collapse' : 'visible' }}" />
+                <Button text="{{ (wineTasting.country ||{}).label }}"
+                        tap="onDeleteCountry"
+                        class="accent-button modal-button"
+                        visibility="{{ wineTasting.country ? 'visible' : 'collapse' }}" />
+                <Label text="Région"
+                       class="criterias-title" />
+                <Button text="Sélectionner"
+                        tap="onSelectRegion"
+                        class="white-button modal-button"
+                        visibility="{{ wineTasting.region ? 'collapse' : 'visible' }}" />
+                <Button text="{{ (wineTasting.region ||{}).label }}"
+                        tap="onDeleteRegion"
+                        class="accent-button modal-button"
+                        visibility="{{ wineTasting.region ? 'visible' : 'collapse' }}" />
+                <Label text="AOC"
+                       class="criterias-title" />
+                <Button text="Sélectionner"
+                        tap="onSelectAoc"
+                        class="white-button modal-button"
+                        visibility="{{ wineTasting.aoc ? 'collapse' : 'visible' }}" />
+                <Button text="{{ (wineTasting.aoc ||{}).label }}"
+                        tap="onDeleteAoc"
+                        class="accent-button modal-button"
+                        visibility="{{ wineTasting.aoc ? 'visible' : 'collapse' }}" />
+                <Label text="Année"
+                       class="criterias-title" />
+                <Button text="Sélectionner"
+                        tap="onSelectYear"
+                        class="white-button modal-button"
+                        visibility="{{ wineTasting.year ? 'collapse' : 'visible' }}" />
+                <Button text="{{ wineTasting.year }}"
+                        tap="onDeleteYear"
+                        class="accent-button modal-button"
+                        visibility="{{ wineTasting.year ? 'visible' : 'collapse' }}" />
+                <Label text="{{ alcoholFormattedValue ? 'Alcool : ' + alcoholFormattedValue + '%' : 'Alcool' }}"
+                       class="criterias-title" />
+                <Slider id="alcohol-slider"
+                        value="{{ alcoholValue }}"
+                        minValue="30"
+                        maxValue="180"
+                        style="margin: 10" />
+                <DockLayout class="switch-criteria">
+                  <Label text="Vin Biologique"
+                         class="criterias-title"/>
+                  <Switch checked="{{ wineTasting.isBiologic }}"
+                          dock="right" />
+                </DockLayout>
+                <DockLayout class="switch-criteria">
+                  <Label text="Vin Biodynamique"
+                         class="criterias-title" />
+                  <Switch checked="{{ wineTasting.isBiodynamic }}"
+                          dock="right" />
+                </DockLayout>
+                <Label text="Cépages"
+                       class="criterias-title" />
+                <Button text="Sélectionner"
+                        tap="onSelectGrapes"
+                        class="white-button modal-button" />
+                <vs:ValuesSelector items="{{ wineTasting.grapes }}"
+                                   deleteOnClick="true" />
+                <Label text="Commentaires"
+                       class="criterias-title" />
+                <TextView text="{{ wineTasting.wineTabNotes }}" />
+              </StackLayout>
+            </ScrollView>
+          </TabViewItem.view>
+        </TabViewItem>
+        <TabViewItem title="Aspect">
+          <TabViewItem.view>
+            <ScrollView id="scroll-1">
+              <StackLayout class="tab-view-content">
+                <Label text="Robe"
+                       class="criterias-title" />
+                <Button text="Sélectionner"
+                        tap="onSelectColor"
+                        visibility="{{ wineTasting.color ? 'collapse' : 'visible' }}"
+                        class="modal-button white-button" />
+                <Button tap="onDeleteColor"
+                        backgroundColor="{{wineTasting.color}}"
+                        visibility="{{ wineTasting.color ? 'visible' : 'collapse' }}"
+                        class="modal-button" />
+                <Label text="Limpidité"
+                       class="criterias-title" />
+                <vs:ValuesSelector items="{{ limpidityCriterias }}"
+                                   selectedItems="{{ wineTasting.limpidities }}" />
+                <Label text="Brillance"
+                       class="criterias-title" />
+                <vs:ValuesSelector items="{{ shineCriterias }}"
+                                   selectedItems="{{ wineTasting.shines }}" />
+                <Label text="Larmes"
+                       class="criterias-title" />
+                <vs:ValuesSelector items="{{ tearCriterias }}"
+                                   selectedItems="{{ wineTasting.tears }}" />
+                <DockLayout class="switch-criteria">
+                  <Label text="Bulles"
+                         class="criterias-title" />
+                  <Switch checked="{{ hasBubbles }}"
+                          dock="right" />
+                </DockLayout>
+                <vs:ValuesSelector items="{{ bubbleCriterias }}"
+                                   selectedItems="{{ wineTasting.bubbles }}"
+                                   visibility="{{ hasBubbles ? 'visible' : 'collapse' }}" />
+                <Label text="Commentaires"
+                       class="criterias-title" />
+                <TextView text="{{ wineTasting.sightTabNotes }}" />
+              </StackLayout>
+            </ScrollView>
+          </TabViewItem.view>
+        </TabViewItem>
+        <TabViewItem title="Arômes">
+          <TabViewItem.view>
+            <ScrollView id="scroll-2">
+              <StackLayout class="tab-view-content">
+                <Label text="Arômes"
+                       class="criterias-title" />
+                <Button text="Sélectionner"
+                        tap="onAddAromas"
+                        class="modal-button white-button" />
+                <vs:ValuesSelector items="{{ wineTasting.aromas }}"
+                                   deleteOnClick="true"/>
+                <Label text="Défauts"
+                       class="criterias-title" />
+                <Button text="Sélectionner"
+                        tap="onAddDefects"
+                        class="modal-button white-button" />
+                <vs:ValuesSelector items="{{ wineTasting.defects }}"
+                                   deleteOnClick="true"/>
+                <Label text="Intensité"
+                       class="criterias-title" />
+                <vs:ValuesSelector items="{{ intensityCriterias }}"
+                                   selectedItems="{{ wineTasting.intensities }}"/>
+                <Label text="Commentaires"
+                       class="criterias-title" />
+                <TextView text="{{ wineTasting.smellTabNotes }}" />
+              </StackLayout>
+            </ScrollView>
+          </TabViewItem.view>
+        </TabViewItem>
+        <TabViewItem title="Saveurs">
+          <TabViewItem.view>
+            <ScrollView id="scroll-3">
+              <StackLayout class="tab-view-content">
+                <Label text="Attaque"
+                       class="criterias-title" />
+                <vs:ValuesSelector items="{{ attackCriterias }}"
+                                   selectedItems="{{ wineTasting.attacks }}" />
+                <Label text="Equilibre"
+                       class="criterias-title" />
+                <vs:ValuesSelector items="{{ tannicCriterias }}"
+                                   selectedItems="{{ wineTasting.balances }}"
+                                   visibility="{{ (wineTasting.wineType.code === 'RED' || wineTasting.wineType.code === 'ROSE') ? 'visible' : 'collapse'}}" />
+                <vs:ValuesSelector items="{{ acidityCriterias }}"
+                                   selectedItems="{{ wineTasting.balances }}"
+                                   visibility="{{ wineTasting.wineType.code === 'WHITE' ? 'visible' : 'collapse'}}" />
+                <Label text="Finale"
+                       class="criterias-title" />
+                <vs:ValuesSelector items="{{ lengthCriterias }}"
+                                   selectedItems="{{ wineTasting.length }}" />
+                <Label text="Commentaires"
+                       class="criterias-title" />
+                <TextView text="{{ wineTasting.tasteTabNotes }}" />
+              </StackLayout>
+            </ScrollView>
+          </TabViewItem.view>
+        </TabViewItem>
+        <TabViewItem title="Synthèse">
+          <TabViewItem.view>
+            <ScrollView id="scroll-4">
+              <StackLayout class="tab-view-content">
+                <Label text="Avis global"
+                       class="criterias-title" />
+                <StackLayout orientation="horizontal"
+                             class="final-rating">
+                  <Label text="sentiment_very_satisfied"
+                         class="{{ wineTasting.finalRating == 4 ? 'material-icon final-rating-4 selected': 'material-icon final-rating-4' }}"
+                         tap="onSelectFinalRating" />
+                  <Label text="sentiment_satisfied"
+                         class="{{ wineTasting.finalRating == 3 ? 'material-icon final-rating-3 selected': 'material-icon final-rating-3' }}"
+                         tap="onSelectFinalRating" />
+                  <Label text="sentiment_neutral"
+                         class="{{ wineTasting.finalRating == 2 ? 'material-icon final-rating-2 selected': 'material-icon final-rating-2' }}"
+                         tap="onSelectFinalRating" />
+                  <Label text="sentiment_dissatisfied"
+                         class="{{ wineTasting.finalRating == 1 ? 'material-icon final-rating-1 selected': 'material-icon final-rating-1' }}"
+                         tap="onSelectFinalRating" />
+                  <Label text="sentiment_very_dissatisfied"
+                         class="{{ wineTasting.finalRating == 0 ? 'material-icon final-rating-0 selected': 'material-icon final-rating-0' }}"
+                         tap="onSelectFinalRating" />
+                </StackLayout>
+                <Label text="Photo"
+                       class="criterias-title" />
+                <Button text="Ajouter"
+                        tap="onTakePicture"
+                        class="modal-button white-button"
+                        visibility="{{ wineTastingPicture ? 'collapse' : 'visible' }}" />
+                <Image class="tasting-picture"
+                       stretch="aspectFill"
+                       src="{{ wineTastingPicture }}" />
+                <Button text="Supprimer"
+                        tap="onDeletePicture"
+                        class="modal-button accent-button"
+                        visibility="{{ wineTastingPicture ? 'visible' : 'collapse' }}" />
+                <DockLayout class="switch-criteria">
+                  <Label text="Dégustation à l'aveugle"
+                         class="criterias-title" />
+                  <Switch checked="{{ wineTasting.isBlindTasting }}"
+                          dock="right" />
+                </DockLayout>
+                <Label text="Commentaires"
+                       class="criterias-title" />
+                <TextView text="{{ wineTasting.synthesisTabNotes }}" />
+              </StackLayout>
+            </ScrollView>
+          </TabViewItem.view>
+        </TabViewItem>
+      </TabView.items>
+    </TabView>
+    <FAB:fab id="fab"
+             icon="res://ic_check_white_24dp"
+             rippleColor="#f1f1f1"
+             class="fab-button"
+             tap="saveTasting" />
+    <FAB:fab id="fab-delete"
+             icon="res://ic_close_white_24dp"
+             rippleColor="#f1f1f1"
+             visibility="{{ isEditMode ? 'visible' : 'collapse' }}"
+             class="fab-button-delete"
+             tap="deleteTasting" />
+  </GridLayout>
 </Page>

@@ -5,6 +5,7 @@
 /// <reference path="../node_modules/nativescript-geolocation/location.d.ts" />
 /// <reference path="../node_modules/nativescript-plugin-firebase/firebase-common.d.ts" />
 /// <reference path="../node_modules/nativescript-plugin-firebase/firebase.d.ts" />
+/// <reference path="../node_modules/nativescript-appversion/appversion.d.ts" />
 
 declare var android: any;
 declare var java: any;

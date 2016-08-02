@@ -28,6 +28,17 @@ export class EditTastingViewModel extends Observable {
     private _hasBubbles: boolean;
     private _firstBindingTime: boolean;
     private _wineTastingPicture: imageSource.ImageSource;
+    private _pictureEditMode: string;
+    private _isBusy: boolean;
+
+    public get isBusy() {
+        return this._isBusy;
+    }
+
+    public set isBusy(value) {
+        this._isBusy = value;
+        this.notifyPropertyChange("isBusy", value);
+    }
 
     public get wineTastingPicture() {
         return this._wineTastingPicture;
@@ -51,6 +62,7 @@ export class EditTastingViewModel extends Observable {
     public get wineTasting() {
         return this._wineTasting;
     }
+
     public set wineTasting(value) {
         this._wineTasting = value;
         this.notifyPropertyChange("wineTasting", value);
@@ -151,21 +163,23 @@ export class EditTastingViewModel extends Observable {
     public get wineTypeSelectedIndex() {
         return this._wineTypeSelectedIndex;
     }
+
     public set wineTypeSelectedIndex(value: number) {
         this._wineTypeSelectedIndex = value;
         this.notifyPropertyChange("wineTypeSelectedIndex", value);
         this.onChangeWineType();
     }
 
-     public get hasBubbles() {
+    public get hasBubbles() {
         return this._hasBubbles;
     }
+
     public set hasBubbles(value) {
         this._hasBubbles = value;
         this.notifyPropertyChange("hasBubbles", value);
     }
 
-     public get limpidityCriterias() {
+    public get limpidityCriterias() {
         return this._limpidityCriterias;
     }
 
@@ -224,6 +238,13 @@ export class EditTastingViewModel extends Observable {
             .then(data => this.tannicCriterias = data);
         this._wineDataService.getCriterias("whiteAcidities")
             .then(data => this.acidityCriterias = data);
+
+        if (this.isEditMode) {
+            this._tastingsService.getTastingPictureUrl(this.wineTasting.id)
+                .then(url => {
+                    this.wineTastingPicture = <any>url;
+                });
+        }
     }
 
     public saveTasting() {
@@ -238,14 +259,24 @@ export class EditTastingViewModel extends Observable {
         }
 
         return new Promise<boolean>((resolve, reject) => {
-            this._tastingsService.saveTasting(this.wineTasting, wineTastingPicturePath)
-            .then(() => {
-                if (fs.File.exists(wineTastingPicturePath)) {
+            var deleteTempPicture = () => {
+                if (!_.isEmpty(wineTastingPicturePath) && fs.File.exists(wineTastingPicturePath)) {
                     fs.File.fromPath(wineTastingPicturePath).remove();
                 }
-                resolve(true);
-            });
-        }) ;
+            };
+
+            if (_.isEmpty(this.wineTasting.id)) {
+                this._tastingsService.saveTasting(this.wineTasting, wineTastingPicturePath).then(() => {
+                    deleteTempPicture();
+                    resolve(true);
+                });
+            } else {
+                this._tastingsService.updateTasting(this.wineTasting, wineTastingPicturePath, this._pictureEditMode).then(() => {
+                    deleteTempPicture();
+                    resolve(true);
+                });
+            }
+        });
     }
 
     public deleteTasting() {
@@ -272,6 +303,12 @@ export class EditTastingViewModel extends Observable {
     }
 
     public setPicture(image: imageSource.ImageSource) {
+        if (_.isEmpty(image)) {
+            this._pictureEditMode = "DELETE";
+        } else {
+            this._pictureEditMode = "EDIT";
+        }
+
         this.wineTastingPicture = image;
     }
 
@@ -309,13 +346,13 @@ export class EditTastingViewModel extends Observable {
         switch (this.wineTasting.wineType.code) {
             case "WHITE":
                 criteriasName = "whiteAttacks";
-            break;
+                break;
             case "ROSE":
                 criteriasName = "roseAttacks";
-            break;
+                break;
             case "RED":
                 criteriasName = "redAttacks";
-            break;
+                break;
         }
 
         this._wineDataService.getCriterias(criteriasName).then(data => {

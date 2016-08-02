@@ -1,4 +1,4 @@
-import {EventData} from "data/observable";
+﻿import {EventData} from "data/observable";
 import {Page} from "ui/page";
 import {MainViewModel} from "../../view-models/main-view-model";
 import frameModule = require("ui/frame");
@@ -7,7 +7,9 @@ import {Views} from "../../utils/views";
 import geolocation = require("nativescript-geolocation");
 import listViewModule = require("ui/list-view");
 import {AnalyticsService} from "../../services/analyticsService";
-import _  = require("lodash");
+import _ = require("lodash");
+import dialogs = require("ui/dialogs");
+import application = require("application");
 
 let viewModel: MainViewModel;
 let analyticsService: AnalyticsService;
@@ -25,6 +27,24 @@ export function navigatedTo(args: EventData) {
 
     analyticsService = new AnalyticsService();
     analyticsService.logView("main");
+
+    viewModel.needToUpdateApp().then(needToUpdate => {
+        if (needToUpdate) {
+            dialogs.alert({
+                message: "Une nouvelle mise à jour est disponible pour l'application.",
+                title: "Mise à jour",
+                okButtonText: "Mettre à jour"
+            }).then(() => {
+                var intent = new android.content.Intent(
+                    android.content.Intent.ACTION_VIEW,
+                    android.net.Uri.parse("https://play.google.com/store/apps/details?id=com.winenjoy.app"));
+                intent.setFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
+                application.android.context.startActivity(intent);
+                application.android.foregroundActivity.finishAffinity();
+                java.lang.System.exit(0);
+            });
+        }
+    });
 }
 
 export function onExportTastings() {
@@ -68,7 +88,7 @@ export function onCreateNewTasting(args: EventData) {
             duration: 0,
             scale: { x: 1, y: 1 },
             translate: { x: 0, y: 0 }
-        }).then(function(){
+        }).then(function () {
             (<any>button).icon = "res://ic_add_white_24dp";
         });
     });
@@ -105,12 +125,12 @@ export function onChangePassword() {
         null,
         res => {
             if (res) {
-               frameModule.topmost().navigate({
+                frameModule.topmost().navigate({
                     animated: false,
                     backstackVisible: true,
                     moduleName: Views.login
                 });
             }
-         });
+        });
     analyticsService.logEvent("Navigation", "User Input", "onChangePassword");
 }

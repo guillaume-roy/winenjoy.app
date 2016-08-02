@@ -13,14 +13,14 @@ export class ListPickerViewModel extends Observable {
     private _searchBarHintText: string;
     private _diacriticsHelper: Diacritics;
     private _multiple: boolean;
-    private _parentCode: string;
+    private _parentId: string;
 
-    public get parentCode() {
-        return this._parentCode;
+    public get parentId() {
+        return this._parentId;
     }
-    public set parentCode(value) {
-        this._parentCode = value;
-        this.notifyPropertyChange("parentCode", value);
+    public set parentId(value) {
+        this._parentId = value;
+        this.notifyPropertyChange("parentId", value);
     }
 
     public get multiple() {
@@ -80,7 +80,7 @@ export class ListPickerViewModel extends Observable {
         this.items = [];
         this._diacriticsHelper = new Diacritics();
 
-        this.parentCode = args.parentCode;
+        this.parentId = args.parentId;
         this.multiple = args.multiple;
         this.searchBarHintText = args.searchBarHintText;
         this.searchingText = "";
@@ -95,7 +95,7 @@ export class ListPickerViewModel extends Observable {
             new WineDataService().getCriterias("aromas")
                 .then(data => {
                     this._itemsSource = _.orderBy(_.flattenDeep<Observable>(
-                        data.filter(d => d.code === "DEFECTS").map(a => {
+                        data.filter(d => d.type === "DEFECTS").map(a => {
                             return a.values.map(i => {
                                 return new Observable({
                                     isSelected: _.some(this._selectedItems, i),
@@ -109,9 +109,9 @@ export class ListPickerViewModel extends Observable {
         } else {
             new WineDataService().getCriterias(args.criterias)
             .then(data => {
-                if (!_.isEmpty(this.parentCode)) {
+                if (!_.isEmpty(this.parentId)) {
                     data = data.filter(d => {
-                        return d.parentCode === this.parentCode;
+                        return d.parentId === this.parentId;
                     });
                 }
 
@@ -148,7 +148,7 @@ export class ListPickerViewModel extends Observable {
                 id: UUID.generate(),
                 isCustom: true,
                 label: _.capitalize(this.searchingText),
-                parentCode: this.parentCode
+                parentId: this.parentId
             }];
         }
     }

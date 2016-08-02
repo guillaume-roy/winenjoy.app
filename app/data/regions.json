@@ -1,82 +1,82 @@
 [
   {
-    "code":"ALS",
-    "label":"Alsace",
-    "parentCode":"FR"
+    "id": "32766575-e416-445d-b7aa-75c08d5bb00a",
+    "label": "Alsace",
+    "parentId": "8f2a07f7-fde9-4052-8024-700e2e6a328a"
   },
   {
-    "code":"BEA",
-    "label":"Beaujolais",
-    "parentCode":"FR"
+    "id": "141102b9-2789-4f65-bcd1-9d21f757eecf",
+    "label": "Beaujolais",
+    "parentId": "8f2a07f7-fde9-4052-8024-700e2e6a328a"
   },
   {
-    "code":"BOR",
-    "label":"Bordeaux",
-    "parentCode":"FR"
+    "id": "483c434b-1fba-4bb5-8579-ff15fb676c7c",
+    "label": "Bordeaux",
+    "parentId": "8f2a07f7-fde9-4052-8024-700e2e6a328a"
   },
   {
-    "code":"BOU",
-    "label":"Bourgogne",
-    "parentCode":"FR"
+    "id": "3bb72022-6ca8-4faf-b2ac-5dd8b4f010a7",
+    "label": "Bourgogne",
+    "parentId": "8f2a07f7-fde9-4052-8024-700e2e6a328a"
   },
   {
-    "code":"CHA",
-    "label":"Champagne",
-    "parentCode":"FR"
+    "id": "2fcb8de9-0323-443c-92ed-6447722dbdff",
+    "label": "Champagne",
+    "parentId": "8f2a07f7-fde9-4052-8024-700e2e6a328a"
   },
   {
-    "code":"COR",
-    "label":"Corse",
-    "parentCode":"FR"
+    "id": "6043fed2-404e-4d91-922f-71e0e120f369",
+    "label": "Corse",
+    "parentId": "8f2a07f7-fde9-4052-8024-700e2e6a328a"
   },
   {
-    "code":"JUR",
-    "label":"Jura",
-    "parentCode":"FR"
+    "id": "755fa6c7-26a7-4015-a496-ef3270d33376",
+    "label": "Jura",
+    "parentId": "8f2a07f7-fde9-4052-8024-700e2e6a328a"
   },
   {
-    "code":"LAN",
-    "label":"Languedoc-Roussillon",
-    "parentCode":"FR"
+    "id": "5ca657d2-cd27-4c8b-a9c2-c05e4550ab73",
+    "label": "Languedoc-Roussillon",
+    "parentId": "8f2a07f7-fde9-4052-8024-700e2e6a328a"
   },
   {
-    "code":"PRO",
-    "label":"Provence",
-    "parentCode":"FR"
+    "id": "4728e13b-ba5b-4e80-9403-63b58705029f",
+    "label": "Provence",
+    "parentId": "8f2a07f7-fde9-4052-8024-700e2e6a328a"
   },
   {
-    "code":"SAV",
-    "label":"Savoie",
-    "parentCode":"FR"
+    "id": "59abccf0-8f2d-4399-a94d-76fa0ab3b900",
+    "label": "Savoie",
+    "parentId": "8f2a07f7-fde9-4052-8024-700e2e6a328a"
   },
   {
-    "code":"SUD",
-    "label":"Sud-Ouest",
-    "parentCode":"FR"
+    "id": "39ea7401-2c96-4e51-b64c-59a56f09871e",
+    "label": "Sud-Ouest",
+    "parentId": "8f2a07f7-fde9-4052-8024-700e2e6a328a"
   },
   {
-    "code":"LOI",
-    "label":"Vallée de la Loire",
-    "parentCode":"FR"
+    "id": "fe4e6af7-d2a8-4c61-a39f-f9ed1b5fbf05",
+    "label": "Vallée de la Loire",
+    "parentId": "8f2a07f7-fde9-4052-8024-700e2e6a328a"
   },
   {
-    "code":"RHO",
-    "label":"Vallée du Rhône",
-    "parentCode":"FR"
+    "id": "93c1bd38-d51e-4178-a674-2d15c35e8cb7",
+    "label": "Vallée du Rhône",
+    "parentId": "8f2a07f7-fde9-4052-8024-700e2e6a328a"
   },
   {
-    "code":"BUG",
-    "label":"Bugey",
-    "parentCode":"FR"
+    "id": "bb685649-c50d-4ce0-9fb9-6aa6d2f25ad0",
+    "label": "Bugey",
+    "parentId": "8f2a07f7-fde9-4052-8024-700e2e6a328a"
   },
   {
-    "code":"LOR",
-    "label":"Lorraine",
-    "parentCode":"FR"
+    "id": "091b6f43-8e21-4152-9c91-ba68f3c327e5",
+    "label": "Lorraine",
+    "parentId": "8f2a07f7-fde9-4052-8024-700e2e6a328a"
   },
   {
-    "code":"LYO",
-    "label":"Lyonnais",
-    "parentCode":"FR"
+    "id": "b793e6a5-8f89-4e21-9088-26cf8f35ecdf",
+    "label": "Lyonnais",
+    "parentId": "8f2a07f7-fde9-4052-8024-700e2e6a328a"
   }
 ]

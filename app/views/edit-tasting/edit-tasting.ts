@@ -71,7 +71,7 @@ export function onSelectColor() {
     page.showModal(
         Views.gradientColorPicker,
         viewModel.wineTasting,
-        function(selectedColor) {
+        selectedColor => {
             viewModel.wineTasting.color = selectedColor;
             viewModel.notifyPropertyChange("wineTasting", viewModel.wineTasting);
             analyticsService.logEvent("Navigation", "User Input", "onSelectedColor");
@@ -95,7 +95,7 @@ export function onAddAromas() {
             searchBarHintText: "Sélectionez des arômes",
             selectedItems: viewModel.wineTasting.aromas
         },
-        function(data) {
+        data => {
             if (_.isArray(data)) {
                 viewModel.setAromas(data);
                 analyticsService.logEvent("Navigation", "User Input", "onAddedAromas");
@@ -114,7 +114,7 @@ export function onAddDefects() {
             searchBarHintText: "Rechercher un défaut",
             selectedItems: viewModel.wineTasting.defects
         },
-        function(items) {
+        items => {
             if (_.isArray(items)) {
                 viewModel.setDefects(items);
                 analyticsService.logEvent("Navigation", "User Input", "onAddedDefects");
@@ -152,11 +152,11 @@ export function onSelectRegion() {
         Views.listPicker,
         {
             criterias: "regions",
-            parentCode: (viewModel.wineTasting.country || {}).code,
+            parentId: (viewModel.wineTasting.country || {}).id,
             searchBarHintText: "Rechercher une région",
             selectedItems: viewModel.wineTasting.region
         },
-        function(selectedRegion) {
+        selectedRegion => {
             viewModel.setRegion(selectedRegion);
             analyticsService.logEvent("Navigation", "User Input", "onSelectedRegion");
         },
@@ -173,11 +173,11 @@ export function onSelectAoc() {
         Views.listPicker,
         {
             criterias: "aoc",
-            parentCode: (viewModel.wineTasting.region || {}).code,
+            parentId: (viewModel.wineTasting.region || {}).id,
             searchBarHintText: "Rechercher un AOC",
             selectedItems: viewModel.wineTasting.aoc
         },
-        function(selectedAoc) {
+        selectedAoc => {
             viewModel.setAoc(selectedAoc);
             analyticsService.logEvent("Navigation", "User Input", "onSelectedAoc");
         },
@@ -216,7 +216,7 @@ export function onSelectGrapes() {
             searchBarHintText: "Rechercher un cépage",
             selectedItems: viewModel.wineTasting.grapes
         },
-        function(selectedGrapes) {
+        selectedGrapes => {
             if (_.isArray(selectedGrapes)) {
                 viewModel.setGrapes(selectedGrapes);
                 analyticsService.logEvent("Navigation", "User Input", "onSelectedGrapes");
@@ -241,12 +241,14 @@ export function onDeletePicture() {
 }
 
 export function saveTasting() {
-    analyticsService.startTimer("Saving tasting", "Action", "saveTasting");
+    viewModel.isBusy = true;
     setTimeout(() => {
+        analyticsService.startTimer("Saving tasting", "Action", "saveTasting");
         viewModel.saveTasting().then(result => {
             analyticsService.stopTimer("Saving tasting");
             analyticsService.logEvent("Action", "User Input", "saveTasting");
             analyticsService.dispatch();
+            viewModel.isBusy = false;
             frameModule.topmost().navigate({
                 animated: false,
                 moduleName: Views.main

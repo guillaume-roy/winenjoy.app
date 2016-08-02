@@ -4,6 +4,7 @@ import {UserStats} from "../entities/userStats";
 import appSettings = require("application-settings");
 import firebase = require("nativescript-plugin-firebase");
 import {Config} from "../utils/config";
+import appversion = require("nativescript-appversion");
 import _ = require("lodash");
 
 export class UserService {
@@ -142,14 +143,32 @@ export class UserService {
             userStats.totalRatings -= wineTasting.finalRating;
             userStats.averageRating = userStats.totalRatings / userStats.totalTastings;
 
-            userStats.tastingsByWineType = this.popCriteriaStat(userStats.tastingsByWineType, wineTasting.wineType.code, wineTasting.id);
             userStats.tastingsByRating = this.popCriteriaStat(userStats.tastingsByRating, wineTasting.finalRating, wineTasting.id);
-            userStats.tastingsByEstate = this.popCriteriaStat(userStats.tastingsByEstate, wineTasting.estate, wineTasting.id);
-            userStats.tastingsByRegion = this.popCriteriaStat(userStats.tastingsByRegion, wineTasting.region.code, wineTasting.id);
-            userStats.tastingsByCuvee = this.popCriteriaStat(userStats.tastingsByCuvee, wineTasting.cuvee, wineTasting.id);
-            userStats.tastingsByCountry = this.popCriteriaStat(userStats.tastingsByCountry, wineTasting.country.code, wineTasting.id);
-            userStats.tastingsByAoc = this.popCriteriaStat(userStats.tastingsByAoc, wineTasting.aoc.code, wineTasting.id);
-            userStats.tastingsByWineYear = this.popCriteriaStat(userStats.tastingsByWineYear, wineTasting.year, wineTasting.id);
+
+            if (!_.isEmpty(wineTasting.wineType)) {
+                userStats.tastingsByWineType = this
+                    .popCriteriaStat(userStats.tastingsByWineType, wineTasting.wineType.code, wineTasting.id);
+            }
+            if (!_.isEmpty(wineTasting.estate)) {
+                userStats.tastingsByEstate = this
+                    .popCriteriaStat(userStats.tastingsByEstate, wineTasting.estate.toLowerCase(), wineTasting.id);
+            }
+            if (!_.isEmpty(wineTasting.region)) {
+                userStats.tastingsByRegion = this.popCriteriaStat(userStats.tastingsByRegion, wineTasting.region.id, wineTasting.id);
+            }
+            if (!_.isEmpty(wineTasting.cuvee)) {
+                userStats.tastingsByCuvee = this.popCriteriaStat(userStats.tastingsByCuvee, wineTasting.cuvee.toLowerCase(), wineTasting.id);
+            }
+            if (!_.isEmpty(wineTasting.country)) {
+                userStats.tastingsByCountry = this.popCriteriaStat(userStats.tastingsByCountry, wineTasting.country.id, wineTasting.id);
+            }
+            if (!_.isEmpty(wineTasting.aoc)) {
+                userStats.tastingsByAoc = this.popCriteriaStat(userStats.tastingsByAoc, wineTasting.aoc.id, wineTasting.id);
+            }
+            if (wineTasting.year) {
+                userStats.tastingsByWineYear = this.popCriteriaStat(userStats.tastingsByWineYear, wineTasting.year, wineTasting.id);
+            }
+
             userStats.tastingsByIsBiological = this.popCriteriaStat(
                 userStats.tastingsByIsBiological, wineTasting.isBiologic, wineTasting.id);
             userStats.tastingsByIsBiodynamic = this.popCriteriaStat(
@@ -163,35 +182,35 @@ export class UserService {
             if (!_.isEmpty(wineTasting.grapes)) {
                 for (let i = 0; i < wineTasting.grapes.length; i++) {
                     userStats.tastingsByGrape = this.popCriteriaStat(
-                        userStats.tastingsByGrape, wineTasting.grapes[i].code, wineTasting.id);
+                        userStats.tastingsByGrape, wineTasting.grapes[i].id, wineTasting.id);
                 }
             }
 
             if (!_.isEmpty(wineTasting.aromas)) {
                 for (let i = 0; i < wineTasting.aromas.length; i++) {
                     userStats.tastingsByAromas = this.popCriteriaStat(
-                        userStats.tastingsByAromas, wineTasting.aromas[i].code, wineTasting.id);
+                        userStats.tastingsByAromas, wineTasting.aromas[i].id, wineTasting.id);
                 }
             }
 
             if (!_.isEmpty(wineTasting.defects)) {
                 for (let i = 0; i < wineTasting.defects.length; i++) {
                     userStats.tastingsByAromaDefects = this.popCriteriaStat(
-                        userStats.tastingsByAromaDefects, wineTasting.defects[i].code, wineTasting.id);
+                        userStats.tastingsByAromaDefects, wineTasting.defects[i].id, wineTasting.id);
                 }
             }
 
             if (!_.isEmpty(wineTasting.flavors)) {
                 for (let i = 0; i < wineTasting.flavors.length; i++) {
                     userStats.tastingsByFlavors = this.popCriteriaStat(
-                        userStats.tastingsByFlavors, wineTasting.flavors[i].code, wineTasting.id);
+                        userStats.tastingsByFlavors, wineTasting.flavors[i].id, wineTasting.id);
                 }
             }
 
             if (!_.isEmpty(wineTasting.flavorDefects)) {
                 for (let i = 0; i < wineTasting.flavorDefects.length; i++) {
                     userStats.tastingsByFlavorDefects = this.popCriteriaStat(
-                        userStats.tastingsByFlavorDefects, wineTasting.flavorDefects[i].code, wineTasting.id);
+                        userStats.tastingsByFlavorDefects, wineTasting.flavorDefects[i].id, wineTasting.id);
                 }
             }
 
@@ -207,23 +226,37 @@ export class UserService {
             userStats.totalRatings += wineTasting.finalRating;
             userStats.averageRating = userStats.totalRatings / userStats.totalTastings;
 
-            userStats.tastingsByWineType = this
-                .pushCriteriaStat(userStats.tastingsByWineType, wineTasting.wineType.code, wineTasting.id);
             userStats.tastingsByRating = this
                 .pushCriteriaStat(userStats.tastingsByRating, wineTasting.finalRating, wineTasting.id);
-            userStats.tastingsByEstate = this
-                .pushCriteriaStat(userStats.tastingsByEstate, wineTasting.estate, wineTasting.id);
-            userStats.tastingsByRegion = this
-                .pushCriteriaStat(userStats.tastingsByRegion, wineTasting.region.code, wineTasting.id);
-            userStats.tastingsByCuvee = this
-                .pushCriteriaStat(userStats.tastingsByCuvee, wineTasting.cuvee, wineTasting.id);
-            userStats.tastingsByCountry = this
-                .pushCriteriaStat(userStats.tastingsByCountry, wineTasting.country.code, wineTasting.id);
-            userStats.tastingsByAoc = this.pushCriteriaStat(userStats.tastingsByAoc,
-                wineTasting.aoc.code,
-                wineTasting.id);
-            userStats.tastingsByWineYear = this
-                .pushCriteriaStat(userStats.tastingsByWineYear, wineTasting.year, wineTasting.id);
+            if (!_.isEmpty(wineTasting.wineType)) {
+                userStats.tastingsByWineType = this
+                    .pushCriteriaStat(userStats.tastingsByWineType, wineTasting.wineType.code, wineTasting.id);
+            }
+            if (!_.isEmpty(wineTasting.estate)) {
+                userStats.tastingsByEstate = this
+                    .pushCriteriaStat(userStats.tastingsByEstate, wineTasting.estate.toLowerCase(), wineTasting.id);
+            }
+            if (!_.isEmpty(wineTasting.region)) {
+                userStats.tastingsByRegion = this
+                    .pushCriteriaStat(userStats.tastingsByRegion, wineTasting.region.id, wineTasting.id);
+            }
+            if (!_.isEmpty(wineTasting.cuvee)) {
+                userStats.tastingsByCuvee = this
+                    .pushCriteriaStat(userStats.tastingsByCuvee, wineTasting.cuvee.toLowerCase(), wineTasting.id);
+            }
+            if (!_.isEmpty(wineTasting.country)) {
+                userStats.tastingsByCountry = this
+                    .pushCriteriaStat(userStats.tastingsByCountry, wineTasting.country.id, wineTasting.id);
+            }
+            if (!_.isEmpty(wineTasting.aoc)) {
+                userStats.tastingsByAoc = this.pushCriteriaStat(userStats.tastingsByAoc,
+                    wineTasting.aoc.id,
+                    wineTasting.id);
+            }
+            if (wineTasting.year) {
+                userStats.tastingsByWineYear = this
+                    .pushCriteriaStat(userStats.tastingsByWineYear, wineTasting.year, wineTasting.id);
+            }
             userStats.tastingsByIsBiological = this
                 .pushCriteriaStat(userStats.tastingsByIsBiological, wineTasting.isBiologic, wineTasting.id);
             userStats.tastingsByIsBiodynamic = this.pushCriteriaStat(
@@ -240,53 +273,66 @@ export class UserService {
                 userStats.tastingsByTastingYear,
                 new Date(wineTasting.startDate).getFullYear(),
                 wineTasting.id);
-
             if (!_.isEmpty(wineTasting.grapes)) {
                 for (let i = 0; i < wineTasting.grapes.length; i++) {
                     userStats.tastingsByGrape = this.pushCriteriaStat(
                         userStats.tastingsByGrape,
-                        wineTasting.grapes[i].code,
+                        wineTasting.grapes[i].id,
                         wineTasting.id);
                 }
             }
-
             if (!_.isEmpty(wineTasting.aromas)) {
                 for (let i = 0; i < wineTasting.aromas.length; i++) {
                     userStats.tastingsByAromas = this.pushCriteriaStat(
                         userStats.tastingsByAromas,
-                        wineTasting.aromas[i].code,
+                        wineTasting.aromas[i].id,
                         wineTasting.id);
                 }
             }
-
             if (!_.isEmpty(wineTasting.defects)) {
                 for (let i = 0; i < wineTasting.defects.length; i++) {
                     userStats.tastingsByAromaDefects = this.pushCriteriaStat(
                         userStats.tastingsByAromaDefects,
-                        wineTasting.defects[i].code,
+                        wineTasting.defects[i].id,
                         wineTasting.id);
                 }
             }
-
             if (!_.isEmpty(wineTasting.flavors)) {
                 for (let i = 0; i < wineTasting.flavors.length; i++) {
                     userStats.tastingsByFlavors = this.pushCriteriaStat(
                         userStats.tastingsByFlavors,
-                        wineTasting.flavors[i].code,
+                        wineTasting.flavors[i].id,
                         wineTasting.id);
                 }
             }
-
             if (!_.isEmpty(wineTasting.flavorDefects)) {
                 for (let i = 0; i < wineTasting.flavorDefects.length; i++) {
                     userStats.tastingsByFlavorDefects = this.pushCriteriaStat(
                         userStats.tastingsByFlavorDefects,
-                        wineTasting.flavorDefects[i].code,
+                        wineTasting.flavorDefects[i].id,
                         wineTasting.id);
                 }
             }
-
             this.updateUserStats(userStats).then(() => resolve(true));
+        });
+    }
+
+    public needToUpdateApp() {
+        return new Promise<boolean>((resolve, reject) => {
+            firebase.getRemoteConfig(<any>{
+                cacheExpirationSeconds: 60 * 60,
+                properties: [
+                    {
+                        key: "app_version",
+                        default: "0"
+                    }
+                ]
+            }).then(res => {
+                appversion.getVersionName()
+                    .then(localVersion => {
+                        resolve(localVersion !== res.properties["app_version"]);
+                    });
+            });
         });
     }
 
