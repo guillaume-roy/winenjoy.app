@@ -64,10 +64,10 @@ export class TastingsService {
     }
 
     public getTasting(wineTastingId: string) {
-        return new Promise<boolean>((resolve, reject) => {
+        return new Promise<WineTasting>((resolve, reject) => {
             this.getTastings()
                 .then(tastings => {
-                    return _.find(tastings, t => t.id === wineTastingId);
+                    resolve(_.find(tastings, t => t.id === wineTastingId));
                 });
         });
     }
@@ -92,13 +92,19 @@ export class TastingsService {
 
     public deleteTasting(wineTasting: WineTasting) {
         return new Promise<boolean>((resolve, reject) => {
-            this.deleteTastingPictureOnFirebase(wineTasting.id).then(() => {
+            var endOfDelete = () => {
                 this.deleteTastingOnFirebase(wineTasting).then(() => {
                     this._userService.decreaseUserStats(wineTasting).then(() => {
                         this.deleteTastingLocally(wineTasting.id).then(() => resolve(true));
                     });
                 });
-            });
+            };
+
+            if (wineTasting.containsPicture) {
+                this.deleteTastingPictureOnFirebase(wineTasting.id).then(() => endOfDelete());
+            } else {
+                endOfDelete();
+            }
         });
     }
 
@@ -133,9 +139,7 @@ export class TastingsService {
         return new Promise<string>((resolve, reject) => {
             firebase.getDownloadUrl({
                 remoteFullPath: `/tastings/${this._userId}/${wineTastingId}`
-            }).then(url => {
-                resolve(url);
-            });
+            }).then(url => resolve(url));
         });
     }
 
@@ -154,7 +158,9 @@ export class TastingsService {
         return new Promise<boolean>((resolve, reject) => {
             firebase.deleteFile({
                 remoteFullPath: `/tastings/${this._userId}/${wineTastingId}`
-            }).then(() => resolve(true));
+            }).then(() => {
+                resolve(true);
+            });
         });
     }
 

@@ -239,7 +239,7 @@ export class EditTastingViewModel extends Observable {
         this._wineDataService.getCriterias("whiteAcidities")
             .then(data => this.acidityCriterias = data);
 
-        if (this.isEditMode) {
+        if (this.isEditMode && this.wineTasting.containsPicture) {
             this._tastingsService.getTastingPictureUrl(this.wineTasting.id)
                 .then(url => {
                     this.wineTastingPicture = <any>url;
@@ -253,7 +253,7 @@ export class EditTastingViewModel extends Observable {
         }
 
         let wineTastingPicturePath = null;
-        if (!_.isEmpty(this.wineTastingPicture)) {
+        if (this._pictureEditMode === "EDIT" && !_.isEmpty(this.wineTastingPicture)) {
             wineTastingPicturePath = fs.path.join(fs.knownFolders.temp().path, Date.now() + ".png");
             this.wineTastingPicture.saveToFile(wineTastingPicturePath, "png");
         }

@@ -279,7 +279,9 @@
     <Content Include="app\views\edit-tasting\edit-tasting.js">
       <DependentUpon>edit-tasting.ts</DependentUpon>
     </Content>
-    <Content Include="app\views\edit-tasting\edit-tasting.xml" />
+    <Content Include="app\views\edit-tasting\edit-tasting.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="app\views\gradient-color-picker\gradient-color-picker.css">
       <DependentUpon>gradient-color-picker.scss</DependentUpon>
     </Content>

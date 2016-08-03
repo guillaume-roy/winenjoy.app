@@ -141,7 +141,7 @@ export class UserService {
 
             userStats.totalTastings -= 1;
             userStats.totalRatings -= wineTasting.finalRating;
-            userStats.averageRating = userStats.totalRatings / userStats.totalTastings;
+            userStats.averageRating = userStats.totalTastings > 0 ? userStats.totalRatings / userStats.totalTastings : 0;
 
             userStats.tastingsByRating = this.popCriteriaStat(userStats.tastingsByRating, wineTasting.finalRating, wineTasting.id);
 
@@ -168,14 +168,14 @@ export class UserService {
             if (wineTasting.year) {
                 userStats.tastingsByWineYear = this.popCriteriaStat(userStats.tastingsByWineYear, wineTasting.year, wineTasting.id);
             }
-
+            
             userStats.tastingsByIsBiological = this.popCriteriaStat(
                 userStats.tastingsByIsBiological, wineTasting.isBiologic, wineTasting.id);
             userStats.tastingsByIsBiodynamic = this.popCriteriaStat(
                 userStats.tastingsByIsBiodynamic, wineTasting.isBiodynamic, wineTasting.id);
             userStats.tastingsByIsBlind = this.popCriteriaStat(userStats.tastingsByIsBlind, wineTasting.isBlindTasting, wineTasting.id);
-            userStats.tastingsByBubbles = this.popCriteriaStat(
-                userStats.tastingsByBubbles, (!_.isEmpty(wineTasting.bubbles) && wineTasting.bubbles.length > 0), wineTasting.id);
+            userStats.tastingsByBubble = this.popCriteriaStat(
+                userStats.tastingsByBubble, (!_.isEmpty(wineTasting.bubbles) && wineTasting.bubbles.length > 0), wineTasting.id);
             userStats.tastingsByTastingYear = this.popCriteriaStat(
                 userStats.tastingsByTastingYear, new Date(wineTasting.startDate).getFullYear(), wineTasting.id);
 
@@ -188,29 +188,29 @@ export class UserService {
 
             if (!_.isEmpty(wineTasting.aromas)) {
                 for (let i = 0; i < wineTasting.aromas.length; i++) {
-                    userStats.tastingsByAromas = this.popCriteriaStat(
-                        userStats.tastingsByAromas, wineTasting.aromas[i].id, wineTasting.id);
+                    userStats.tastingsByAroma = this.popCriteriaStat(
+                        userStats.tastingsByAroma, wineTasting.aromas[i].id, wineTasting.id);
                 }
             }
 
             if (!_.isEmpty(wineTasting.defects)) {
                 for (let i = 0; i < wineTasting.defects.length; i++) {
-                    userStats.tastingsByAromaDefects = this.popCriteriaStat(
-                        userStats.tastingsByAromaDefects, wineTasting.defects[i].id, wineTasting.id);
+                    userStats.tastingsByAromaDefect = this.popCriteriaStat(
+                        userStats.tastingsByAromaDefect, wineTasting.defects[i].id, wineTasting.id);
                 }
             }
-
+            
             if (!_.isEmpty(wineTasting.flavors)) {
                 for (let i = 0; i < wineTasting.flavors.length; i++) {
-                    userStats.tastingsByFlavors = this.popCriteriaStat(
-                        userStats.tastingsByFlavors, wineTasting.flavors[i].id, wineTasting.id);
+                    userStats.tastingsByFlavor = this.popCriteriaStat(
+                        userStats.tastingsByFlavor, wineTasting.flavors[i].id, wineTasting.id);
                 }
             }
 
             if (!_.isEmpty(wineTasting.flavorDefects)) {
                 for (let i = 0; i < wineTasting.flavorDefects.length; i++) {
-                    userStats.tastingsByFlavorDefects = this.popCriteriaStat(
-                        userStats.tastingsByFlavorDefects, wineTasting.flavorDefects[i].id, wineTasting.id);
+                    userStats.tastingsByFlavorDefect = this.popCriteriaStat(
+                        userStats.tastingsByFlavorDefect, wineTasting.flavorDefects[i].id, wineTasting.id);
                 }
             }
 
@@ -265,8 +265,8 @@ export class UserService {
                 wineTasting.id);
             userStats.tastingsByIsBlind = this
                 .pushCriteriaStat(userStats.tastingsByIsBlind, wineTasting.isBlindTasting, wineTasting.id);
-            userStats.tastingsByBubbles = this.pushCriteriaStat(
-                userStats.tastingsByBubbles,
+            userStats.tastingsByBubble = this.pushCriteriaStat(
+                userStats.tastingsByBubble,
                 (!_.isEmpty(wineTasting.bubbles) && wineTasting.bubbles.length > 0),
                 wineTasting.id);
             userStats.tastingsByTastingYear = this.pushCriteriaStat(
@@ -283,32 +283,32 @@ export class UserService {
             }
             if (!_.isEmpty(wineTasting.aromas)) {
                 for (let i = 0; i < wineTasting.aromas.length; i++) {
-                    userStats.tastingsByAromas = this.pushCriteriaStat(
-                        userStats.tastingsByAromas,
+                    userStats.tastingsByAroma = this.pushCriteriaStat(
+                        userStats.tastingsByAroma,
                         wineTasting.aromas[i].id,
                         wineTasting.id);
                 }
             }
             if (!_.isEmpty(wineTasting.defects)) {
                 for (let i = 0; i < wineTasting.defects.length; i++) {
-                    userStats.tastingsByAromaDefects = this.pushCriteriaStat(
-                        userStats.tastingsByAromaDefects,
+                    userStats.tastingsByAromaDefect = this.pushCriteriaStat(
+                        userStats.tastingsByAromaDefect,
                         wineTasting.defects[i].id,
                         wineTasting.id);
                 }
             }
             if (!_.isEmpty(wineTasting.flavors)) {
                 for (let i = 0; i < wineTasting.flavors.length; i++) {
-                    userStats.tastingsByFlavors = this.pushCriteriaStat(
-                        userStats.tastingsByFlavors,
+                    userStats.tastingsByFlavor = this.pushCriteriaStat(
+                        userStats.tastingsByFlavor,
                         wineTasting.flavors[i].id,
                         wineTasting.id);
                 }
             }
             if (!_.isEmpty(wineTasting.flavorDefects)) {
                 for (let i = 0; i < wineTasting.flavorDefects.length; i++) {
-                    userStats.tastingsByFlavorDefects = this.pushCriteriaStat(
-                        userStats.tastingsByFlavorDefects,
+                    userStats.tastingsByFlavorDefect = this.pushCriteriaStat(
+                        userStats.tastingsByFlavorDefect,
                         wineTasting.flavorDefects[i].id,
                         wineTasting.id);
                 }

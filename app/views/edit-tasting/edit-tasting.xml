@@ -230,6 +230,7 @@
                         visibility="{{ wineTastingPicture ? 'collapse' : 'visible' }}" />
                 <Image class="tasting-picture"
                        stretch="aspectFill"
+                       loadMode="async"
                        src="{{ wineTastingPicture }}" />
                 <Button text="Supprimer"
                         tap="onDeletePicture"

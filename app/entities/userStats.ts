@@ -16,10 +16,10 @@ tastingsByIsBiological?: { [id: string]: string[] };
 tastingsByIsBiodynamic?: { [id: string]: string[] };
 tastingsByIsBlind?: { [id: string]: string[] };
 tastingsByGrape?: { [id: string]: string[] };
-tastingsByAromas?: { [id: string]: string[] };
-tastingsByAromaDefects?: { [id: string]: string[] };
-tastingsByBubbles?: { [id: string]: string[] };
-tastingsByFlavors?: { [id: string]: string[] };
-tastingsByFlavorDefects?: { [id: string]: string[] };
+tastingsByAroma?: { [id: string]: string[] };
+tastingsByAromaDefect?: { [id: string]: string[] };
+tastingsByBubble?: { [id: string]: string[] };
+tastingsByFlavor?: { [id: string]: string[] };
+tastingsByFlavorDefect?: { [id: string]: string[] };
 tastingsByTastingYear?: { [id: string]: string[] };
 }
