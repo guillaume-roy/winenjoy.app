@@ -1,0 +1,64 @@
+﻿<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:vs="components/values-selector"
+      navigatedTo="navigatedTo">
+  <Page.actionBar>
+    <ActionBar title="Conclusion">
+      <ActionBar.actionItems>
+        <ActionItem ios.position="right" icon="res://ic_share_white_24dp" />
+      </ActionBar.actionItems>
+    </ActionBar>
+  </Page.actionBar>
+  <ScrollView>
+    <StackLayout>
+      <Label text="Avis"
+             class="form-label" />
+      <StackLayout orientation="horizontal"
+                   class="final-rating">
+        <Label text="sentiment_very_satisfied"
+               class="{{ wineTasting.finalRating == 4 ? 'material-icon final-rating-4 selected': 'material-icon final-rating-4' }}" />
+        <Label text="sentiment_satisfied"
+               class="{{ wineTasting.finalRating == 3 ? 'material-icon final-rating-3 selected': 'material-icon final-rating-3' }}" />
+        <Label text="sentiment_neutral"
+               class="{{ wineTasting.finalRating == 2 ? 'material-icon final-rating-2 selected': 'material-icon final-rating-2' }}" />
+        <Label text="sentiment_dissatisfied"
+               class="{{ wineTasting.finalRating == 1 ? 'material-icon final-rating-1 selected': 'material-icon final-rating-1' }}" />
+        <Label text="sentiment_very_dissatisfied"
+               class="{{ wineTasting.finalRating == 0 ? 'material-icon final-rating-0 selected': 'material-icon final-rating-0' }}" />
+      </StackLayout>
+      <Label text="Potentiel"
+             class="form-label" />
+      <vs:ValuesSelector items="{{ potentials }}" />
+      <GridLayout columns="*, 100">
+        <Label text="Dégustation à l'aveugle"
+               class="form-label" />
+        <Switch col="1" />
+      </GridLayout>
+      <Label text="Nom"
+             class="form-label" />
+      <TextField />
+      <Label text="Domaine"
+             class="form-label" />
+      <TextField />
+      <Label text="Localisation"
+             class="form-label" />
+      <Label text="Année"
+             class="form-label" />
+      <Label text="Alcool"
+             class="form-label" />
+      <GridLayout columns="*, 100">
+        <Label text="Vin Biodynamique"
+               class="form-label" />
+        <Switch col="1" />
+      </GridLayout>
+      <Label text="Cépages"
+             class="form-label" />
+      <Label text="Accord mets &amp; vin"
+             class="form-label" />
+      <Label text="Photo"
+             class="form-label" />
+      <Label text="Commentaires"
+             class="form-label" />
+      <TextView />
+    </StackLayout>
+  </ScrollView>
+</Page>

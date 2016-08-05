@@ -1,0 +1,22 @@
+﻿[
+  {
+    "id": "3bca7b0e-2cb4-41bd-aaaa-e373562bbb6c",
+    "label": "Trop jeune",
+    "order": 0
+  },
+  {
+    "id": "301a4ac5-1b6e-4585-aeb0-3f2dc2a43ec2",
+    "label": "A garder",
+    "order": 1
+  },
+  {
+    "id": "ef104c1d-fdd4-4efe-ba55-a7c6da47ac8e",
+    "label": "Parfait",
+    "order": 2
+  },
+  {
+    "id": "8498b997-a39d-43b2-9897-22d2a969d3e4",
+    "label": "Passé",
+    "order": 3
+  }
+]

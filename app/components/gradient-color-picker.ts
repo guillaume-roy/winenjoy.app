@@ -55,14 +55,31 @@ export class GradientColorPicker extends WrapLayout {
     }
     public set selectedColor(value: string) {
         this._setValue(GradientColorPicker.selectedColorProperty, value);
+        //this.setSelectedColor();
     }
 
     private _gradientButtons: Button[];
+    private _noneBackground = "#D3D3D3";
 
     constructor() {
         super();
 
         this._gradientButtons = [];
+    }
+
+    private setSelectedColor() {
+        if (this._gradientButtons.length <= 0)
+            return;
+
+        for (var i = 0; i < this._gradientButtons.length; i++) {
+            var currentButton = this._gradientButtons[i];
+            currentButton.text = "";
+
+            if (currentButton.backgroundColor.hex.toUpperCase() === this.selectedColor.toUpperCase()) {
+                currentButton.color = new Color(ColorUtils.getForegroundColor(currentButton.style.backgroundColor.hex));
+                currentButton.text = "✓";
+            }
+        }
     }
 
     private generateGradient() {
@@ -91,24 +108,35 @@ export class GradientColorPicker extends WrapLayout {
 
     private displayGradient(gradient: any[]) {
         let resultLength = gradient.length;
+        let onSelectColor = (args: EventData) => {
+            let clickedButton = <Button>args.object;
+
+            for (let i = 0; i < this._gradientButtons.length; i++) {
+                this._gradientButtons[i].text = "";
+            }
+
+            clickedButton.color = new Color(ColorUtils.getForegroundColor(clickedButton.style.backgroundColor.hex));
+            clickedButton.text = "✓";
+            this.selectedColor = clickedButton.style.backgroundColor.hex.toUpperCase() === this._noneBackground
+                ? null
+                : clickedButton.style.backgroundColor.hex;
+        };
+
+        let noneButton = new Button();
+        noneButton.backgroundColor = new Color(this._noneBackground);
+        noneButton.height = 56;
+        noneButton.width = 56;
+        noneButton.on(Button.tapEvent, onSelectColor, this);
+        this._gradientButtons.push(noneButton);
+        this.addChild(noneButton);
 
         for (let i = 0; i < resultLength; i++) {
             let gradientButton = new Button();
             gradientButton.backgroundColor = new Color("#" + gradient[i]);
             gradientButton.color = new Color("white");
-            gradientButton.height = 72;
-            gradientButton.width = 72;
-
-            gradientButton.on(Button.tapEvent, function(args: EventData) {
-                let clickedButton = <Button>args.object;
-
-                for (let i = 0; i < this._gradientButtons.length; i++) {
-                    this._gradientButtons[i].text = "";
-                }
-
-                clickedButton.text = "✓";
-                this.selectedColor = clickedButton.style.backgroundColor.hex;
-            }, this);
+            gradientButton.height = 56;
+            gradientButton.width = 56;
+            gradientButton.on(Button.tapEvent, onSelectColor, this);
 
             this._gradientButtons.push(gradientButton);
             this.addChild(gradientButton);

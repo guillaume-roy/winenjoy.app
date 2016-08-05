@@ -1,0 +1,55 @@
+﻿<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:vs="components/values-selector"
+      xmlns:gcp="components/gradient-color-picker"
+      navigatedTo="navigatedTo">
+  <Page.actionBar>
+    <ActionBar title="Aspect" />
+  </Page.actionBar>
+  <ScrollView>
+    <StackLayout>
+      <SegmentedBar>
+        <SegmentedBar.items>
+          <SegmentedBarItem title="Vin Blanc" />
+          <SegmentedBarItem title="Vin Rosé" />
+          <SegmentedBarItem title="Vin Rouge" />
+        </SegmentedBar.items>
+      </SegmentedBar>
+      <Label text="Limpidité"
+             class="form-label" />
+      <vs:ValuesSelector items="{{ limpidities }}" />
+      <Label text="Brillance"
+             class="form-label" />
+      <vs:ValuesSelector items="{{ shines }}" />
+      <Label text="Couleur"
+             class="form-label" />
+      <ScrollView orientation="horizontal">
+        <gcp:GradientColorPicker startingColor="#FDF3C2"
+                                 endingColor="#F0C636"
+                                 colorsCount="5"/>
+      </ScrollView>
+      <!--<ScrollView orientation="horizontal">
+        <gcp:GradientColorPicker startingColor="#F7C7B1"
+                                 endingColor="#BF3E2B"
+                                 colorsCount="5"/>
+      </ScrollView>
+      <ScrollView orientation="horizontal">
+        <gcp:GradientColorPicker startingColor="#C23311"
+                                 endingColor="#3B022D"
+                                 colorsCount="5"/>
+      </ScrollView>-->
+      <Label text="Larmes"
+             class="form-label" />
+      <vs:ValuesSelector items="{{ tears }}" />
+      <GridLayout columns="*, 100">
+        <Label text="Dépôt"
+               class="form-label" />
+        <Switch col="1" />
+      </GridLayout>
+      <GridLayout columns="*, 100">
+        <Label text="Bulles"
+               class="form-label" />
+        <Switch col="1" />
+      </GridLayout>
+    </StackLayout>
+  </ScrollView>
+</Page>

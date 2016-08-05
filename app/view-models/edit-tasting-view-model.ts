@@ -199,7 +199,7 @@ export class EditTastingViewModel extends Observable {
 
         this._firstBindingTime = true;
 
-        this.hasBubbles = this.wineTasting.bubbles.length > 0;
+        this.hasBubbles = this.wineTasting.hasBubbles;
 
         if (_.isNumber(this.wineTasting.alcohol)) {
             this.alcoholValue = this.wineTasting.alcohol * 10;
@@ -248,10 +248,6 @@ export class EditTastingViewModel extends Observable {
     }
 
     public saveTasting() {
-        if (!this.hasBubbles) {
-            this.wineTasting.bubbles = [];
-        }
-
         let wineTastingPicturePath = null;
         if (this._pictureEditMode === "EDIT" && !_.isEmpty(this.wineTastingPicture)) {
             wineTastingPicturePath = fs.path.join(fs.knownFolders.temp().path, Date.now() + ".png");

@@ -1,0 +1,32 @@
+﻿<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:vs="components/values-selector"
+      navigatedTo="navigatedTo">
+  <Page.actionBar>
+    <ActionBar title="Saveurs" />
+  </Page.actionBar>
+  <ScrollView>
+    <StackLayout>
+      <Label text="Attaque"
+             class="form-label" />
+      <vs:ValuesSelector items="{{ attacks }}" />
+      <Label text="Acidité"
+             class="form-label" />
+      <vs:ValuesSelector items="{{ acidities }}" />
+      <Label text="Tanins"
+             class="form-label" />
+      <vs:ValuesSelector items="{{ tannins }}" />
+      <Label text="Saveurs"
+             class="form-label" />
+      <Button text="Ajouter" />
+      <Label text="Défauts"
+             class="form-label" />
+      <Button text="Ajouter" />
+      <Label text="Intensité"
+             class="form-label" />
+      <vs:ValuesSelector items="{{ intensities }}" />
+      <Label text="Finale"
+             class="form-label" />
+      <vs:ValuesSelector items="{{ length }}" />
+    </StackLayout>
+  </ScrollView>
+</Page>

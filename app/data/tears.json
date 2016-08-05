@@ -1,32 +1,27 @@
-[
+﻿[
   {
-    "id":"b37695e5-7e19-4f65-89f9-e57681403607",
-    "label":"Fluides",
-    "order":0
+    "id": "b37695e5-7e19-4f65-89f9-e57681403607",
+    "label": "Fluides",
+    "order": 0
   },
   {
-    "id":"f9c8f9bc-15e5-45de-9d46-fe6f32634b9e",
-    "label":"Moyennes",
-    "order":1
+    "id": "f9c8f9bc-15e5-45de-9d46-fe6f32634b9e",
+    "label": "Moyennes",
+    "order": 1
   },
   {
-    "id":"593276fb-dc9c-428f-ad5a-5052f4b15a43",
-    "label":"Denses",
-    "order":2
+    "id": "2763c477-c096-4725-9f8b-8734d1d96d53",
+    "label": "Epaisses",
+    "order": 2
   },
   {
-    "id":"2763c477-c096-4725-9f8b-8734d1d96d53",
-    "label":"Epaisses",
-    "order":3
+    "id": "593276fb-dc9c-428f-ad5a-5052f4b15a43",
+    "label": "Légères",
+    "order": 3
   },
   {
-    "id":"d6d89159-038f-4c5b-a332-4463588f2e2d",
-    "label":"Abondantes",
-    "order":4
-  },
-  {
-    "id":"7f11f372-8743-4a29-bca6-01cda9f7e442",
-    "label":"Sirupeuses",
-    "order":5
+    "id": "d6d89159-038f-4c5b-a332-4463588f2e2d",
+    "label": "Abondantes",
+    "order": 4
   }
 ]

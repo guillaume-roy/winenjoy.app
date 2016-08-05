@@ -238,6 +238,9 @@
     <Content Include="app\view-models\edit-tasting-view-model.js">
       <DependentUpon>edit-tasting-view-model.ts</DependentUpon>
     </Content>
+    <Content Include="app\view-models\final-step-view-model.js">
+      <DependentUpon>final-step-view-model.ts</DependentUpon>
+    </Content>
     <Content Include="app\view-models\gradient-color-picker-view-model.js">
       <DependentUpon>gradient-color-picker-view-model.ts</DependentUpon>
     </Content>
@@ -255,6 +258,15 @@
     </Content>
     <Content Include="app\view-models\main-view-model.js">
       <DependentUpon>main-view-model.ts</DependentUpon>
+    </Content>
+    <Content Include="app\view-models\nose-step-view-model.js">
+      <DependentUpon>nose-step-view-model.ts</DependentUpon>
+    </Content>
+    <Content Include="app\view-models\taste-step-view-model.js">
+      <DependentUpon>taste-step-view-model.ts</DependentUpon>
+    </Content>
+    <Content Include="app\view-models\visual-step-view-model.js">
+      <DependentUpon>visual-step-view-model.ts</DependentUpon>
     </Content>
     <Content Include="app\view-models\year-picker-view-model.js">
       <DependentUpon>year-picker-view-model.ts</DependentUpon>
@@ -282,6 +294,13 @@
     <Content Include="app\views\edit-tasting\edit-tasting.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="app\views\final-step\final-step.css">
+      <DependentUpon>final-step.scss</DependentUpon>
+    </Content>
+    <Content Include="app\views\final-step\final-step.js">
+      <DependentUpon>final-step.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\final-step\final-step.xml" />
     <Content Include="app\views\gradient-color-picker\gradient-color-picker.css">
       <DependentUpon>gradient-color-picker.scss</DependentUpon>
     </Content>
@@ -324,6 +343,31 @@
       <DependentUpon>main.ts</DependentUpon>
     </Content>
     <Content Include="app\views\main\main.xml" />
+    <Content Include="app\views\nose-step\nose-step.css">
+      <DependentUpon>nose-step.scss</DependentUpon>
+    </Content>
+    <Content Include="app\views\nose-step\nose-step.js">
+      <DependentUpon>nose-step.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\nose-step\nose-step.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="app\views\taste-step\taste-step.css">
+      <DependentUpon>taste-step.scss</DependentUpon>
+    </Content>
+    <Content Include="app\views\taste-step\taste-step.js">
+      <DependentUpon>taste-step.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\taste-step\taste-step.xml" />
+    <Content Include="app\views\visual-step\visual-step.css">
+      <DependentUpon>visual-step.scss</DependentUpon>
+    </Content>
+    <Content Include="app\views\visual-step\visual-step.js">
+      <DependentUpon>visual-step.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\visual-step\visual-step.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="app\views\year-picker\year-picker.css">
       <DependentUpon>year-picker.scss</DependentUpon>
     </Content>
@@ -365,14 +409,11 @@
     <Content Include="app\data\intensities.json" />
     <Content Include="app\data\length.json" />
     <Content Include="app\data\limpidities.json" />
-    <Content Include="app\data\redAttacks.json" />
-    <Content Include="app\data\redTannics.json" />
+    <Content Include="app\data\tannins.json" />
     <Content Include="app\data\regions.json" />
-    <Content Include="app\data\roseAttacks.json" />
     <Content Include="app\data\shines.json" />
     <Content Include="app\data\tears.json" />
-    <Content Include="app\data\whiteAcidities.json" />
-    <Content Include="app\data\whiteAttacks.json" />
+    <Content Include="app\data\acidities.json" />
     <Content Include="app\data\wineTypes.json" />
     <Content Include="app\fonts\MaterialIcons-Regular.ttf" />
     <Content Include="app\fonts\winenjoy.ttf" />
@@ -423,25 +464,54 @@
     <TypeScriptCompile Include="app\view-models\aromas-picker-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\change-password-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\edit-tasting-view-model.ts" />
+    <TypeScriptCompile Include="app\view-models\final-step-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\gradient-color-picker-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\grouping-list-picker-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\import-export-data-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\list-picker-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\login-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\main-view-model.ts" />
+    <TypeScriptCompile Include="app\view-models\nose-step-view-model.ts" />
+    <TypeScriptCompile Include="app\view-models\taste-step-view-model.ts" />
+    <TypeScriptCompile Include="app\view-models\visual-step-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\year-picker-view-model.ts" />
     <TypeScriptCompile Include="app\views\aromas-picker\aromas-picker.ts" />
     <TypeScriptCompile Include="app\views\change-password\change-password.ts" />
     <TypeScriptCompile Include="app\views\edit-tasting\edit-tasting.ts" />
+    <TypeScriptCompile Include="app\views\final-step\final-step.ts" />
     <TypeScriptCompile Include="app\views\gradient-color-picker\gradient-color-picker.ts" />
     <TypeScriptCompile Include="app\views\grouping-list-picker\grouping-list-picker.ts" />
     <TypeScriptCompile Include="app\views\import-export-data\import-export-data.ts" />
     <TypeScriptCompile Include="app\views\list-picker\list-picker.ts" />
     <TypeScriptCompile Include="app\views\login\login.ts" />
     <TypeScriptCompile Include="app\views\main\main.ts" />
+    <TypeScriptCompile Include="app\views\nose-step\nose-step.ts" />
+    <TypeScriptCompile Include="app\views\taste-step\taste-step.ts" />
+    <TypeScriptCompile Include="app\views\visual-step\visual-step.ts" />
     <TypeScriptCompile Include="app\views\year-picker\year-picker.ts" />
     <TypeScriptCompile Include="references.d.ts" />
     <TypeScriptCompile Include="typings\lodash.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\views\visual-step\visual-step.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\views\nose-step\nose-step.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\data\nose-developments.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\views\taste-step\taste-step.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\data\attacks.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\views\final-step\final-step.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\data\potentials.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>

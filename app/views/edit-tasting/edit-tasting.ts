@@ -2,7 +2,6 @@ import {EventData} from "data/observable";
 import dialogs = require("ui/dialogs");
 import {Page} from "ui/page";
 import {EditTastingViewModel} from "../../view-models/edit-tasting-view-model";
-import geolocation = require("nativescript-geolocation");
 import frameModule = require("ui/frame");
 import {Views} from "../../utils/views";
 import scrollViewModule = require("ui/scroll-view");
@@ -35,16 +34,6 @@ export function navigatedTo(args: EventData) {
     page.bindingContext = viewModel;
 
     console.log(new Date().toISOString(), "view-model bound");
-
-    setTimeout(() => {
-        if (geolocation.isEnabled() && !viewModel.isEditMode) {
-            geolocation.getCurrentLocation({timeout: 5000}).then(loc => {
-                viewModel.wineTasting.latitude = loc.latitude;
-                viewModel.wineTasting.longitude = loc.longitude;
-                viewModel.wineTasting.altitude = loc.altitude;
-            });
-        }
-    });
 
     attachBackButtonConfirmation();
     manageFabVisibility();

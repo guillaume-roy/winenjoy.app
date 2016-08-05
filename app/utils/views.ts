@@ -1,12 +1,16 @@
-export class Views {
-    public static main: string = "views/main/main";
-    public static gradientColorPicker: string = "views/gradient-color-picker/gradient-color-picker";
-    public static aromasPicker: string = "views/aromas-picker/aromas-picker";
-    public static login: string = "views/login/login";
-    public static yearPicker: string = "views/year-picker/year-picker";
-    public static listPicker: string = "views/list-picker/list-picker";
-    public static groupingListPicker: string = "views/grouping-list-picker/grouping-list-picker";
-    public static editTasting: string = "views/edit-tasting/edit-tasting";
-    public static importExportData: string = "views/import-export-data/import-export-data";
-    public static changePassword: string = "views/change-password/change-password";
-}
+export var Views = {
+    main: "views/main/main",
+    gradientColorPicker: "views/gradient-color-picker/gradient-color-picker",
+    aromasPicker: "views/aromas-picker/aromas-picker",
+    login: "views/login/login",
+    yearPicker: "views/year-picker/year-picker",
+    listPicker: "views/list-picker/list-picker",
+    groupingListPicker: "views/grouping-list-picker/grouping-list-picker",
+    editTasting: "views/edit-tasting/edit-tasting",
+    importExportData: "views/import-export-data/import-export-data",
+    changePassword: "views/change-password/change-password",
+    visualStep: "views/visual-step/visual-step",
+    noseStep: "views/nose-step/nose-step",
+    tasteStep: "views/taste-step/taste-step",
+    finalStep: "views/final-step/final-step"
+};

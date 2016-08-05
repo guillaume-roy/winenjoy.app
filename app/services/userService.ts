@@ -175,7 +175,7 @@ export class UserService {
                 userStats.tastingsByIsBiodynamic, wineTasting.isBiodynamic, wineTasting.id);
             userStats.tastingsByIsBlind = this.popCriteriaStat(userStats.tastingsByIsBlind, wineTasting.isBlindTasting, wineTasting.id);
             userStats.tastingsByBubble = this.popCriteriaStat(
-                userStats.tastingsByBubble, (!_.isEmpty(wineTasting.bubbles) && wineTasting.bubbles.length > 0), wineTasting.id);
+                userStats.tastingsByBubble, wineTasting.hasBubbles, wineTasting.id);
             userStats.tastingsByTastingYear = this.popCriteriaStat(
                 userStats.tastingsByTastingYear, new Date(wineTasting.startDate).getFullYear(), wineTasting.id);
 
@@ -267,7 +267,7 @@ export class UserService {
                 .pushCriteriaStat(userStats.tastingsByIsBlind, wineTasting.isBlindTasting, wineTasting.id);
             userStats.tastingsByBubble = this.pushCriteriaStat(
                 userStats.tastingsByBubble,
-                (!_.isEmpty(wineTasting.bubbles) && wineTasting.bubbles.length > 0),
+                wineTasting.hasBubbles,
                 wineTasting.id);
             userStats.tastingsByTastingYear = this.pushCriteriaStat(
                 userStats.tastingsByTastingYear,

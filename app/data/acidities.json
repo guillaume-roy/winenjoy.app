@@ -1,0 +1,32 @@
+[
+  {
+    "id": "f61e43ff-fd83-4104-b555-c7a7bbc838c9",
+    "label": "Doux",
+    "order": 0
+  },
+  {
+    "id": "d06c559e-97b6-4c58-add1-a24602ae2892",
+    "label": "Mince",
+    "order": 1
+  },
+  {
+    "id": "827a32a9-c8c4-40e6-a3ad-d0b035ed80e2",
+    "label": "Plat",
+    "order": 2
+  },
+  {
+    "id": "e2f54590-640d-477e-a5f8-e454f6b3ec5a",
+    "label": "Sec",
+    "order": 3
+  },
+  {
+    "id": "cec81a25-2f36-433c-8e1e-7e5d13be2bb0",
+    "label": "Vif",
+    "order": 4
+  },
+  {
+    "id": "ae8ea268-2815-4316-af4b-de0d6106261f",
+    "label": "Moelleux",
+    "order": 5
+  }
+]

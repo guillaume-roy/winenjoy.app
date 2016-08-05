@@ -4,7 +4,6 @@ import {MainViewModel} from "../../view-models/main-view-model";
 import frameModule = require("ui/frame");
 import {View} from "ui/core/view";
 import {Views} from "../../utils/views";
-import geolocation = require("nativescript-geolocation");
 import listViewModule = require("ui/list-view");
 import {AnalyticsService} from "../../services/analyticsService";
 import _ = require("lodash");
@@ -20,10 +19,6 @@ export function navigatedTo(args: EventData) {
 
     viewModel = new MainViewModel();
     page.bindingContext = viewModel;
-
-    if (!geolocation.isEnabled()) {
-        geolocation.enableLocationRequest();
-    }
 
     analyticsService = new AnalyticsService();
     analyticsService.logView("main");

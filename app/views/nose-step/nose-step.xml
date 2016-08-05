@@ -1,0 +1,23 @@
+﻿<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:vs="components/values-selector"
+      navigatedTo="navigatedTo">
+  <Page.actionBar>
+    <ActionBar title="Arômes" />
+  </Page.actionBar>
+  <ScrollView>
+    <StackLayout>
+      <Label text="Intensité"
+             class="form-label" />
+      <vs:ValuesSelector items="{{ intensities }}" />
+      <Label text="Arômes"
+             class="form-label" />
+      <Button text="Ajouter" />
+      <Label text="Défauts"
+             class="form-label" />
+      <Button text="Ajouter" />
+      <Label text="Développement"
+             class="form-label" />
+      <vs:ValuesSelector items="{{ developments }}" />
+    </StackLayout>
+  </ScrollView>
+</Page>

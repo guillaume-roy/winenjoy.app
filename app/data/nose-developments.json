@@ -1,0 +1,22 @@
+[
+  {
+    "id": "c4f09347-9c63-4417-86a8-36ed75a70997",
+    "label": "Jeune",
+    "order": 0
+  },
+  {
+    "id": "8b2fc578-b7de-4079-8947-62f05e1a6271",
+    "label": "En cours",
+    "order": 1
+  },
+  {
+    "id": "3552623f-3b08-4ead-87a1-3a00b340509b",
+    "label": "Développé",
+    "order": 2
+  },
+  {
+    "id": "17b2dcbd-a6e1-415e-a85b-5aecd818a70d",
+    "label": "Passé",
+    "order": 3
+  }
+]

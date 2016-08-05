@@ -6,7 +6,7 @@ import {WineTasting} from "./entities/wineTasting";
 import _ = require("lodash");
 import frameModule = require("ui/frame");
 
-application.resources.regionConverterConverter = function(value: WineTasting) {
+application.resources.regionConverterConverter = (value: WineTasting) => {
     let regionIsEmpty = _.isEmpty(value.region);
     let countryIsEmpty = _.isEmpty(value.country);
 
@@ -21,13 +21,11 @@ application.resources.regionConverterConverter = function(value: WineTasting) {
     }
 };
 
-application.resources.visibilityConverter = function(value: any) {
-    return _.isEmpty(value)
-        ? "collapse"
-        : "visible";
-};
+application.resources.visibilityConverter = (value: any) => (_.isEmpty(value)
+    ? "collapse"
+    : "visible");
 
-application.resources.finalRatingToImageConverter = function(value: any) {
+application.resources.finalRatingToImageConverter = (value: any) => {
     if (!value) {
         return null;
     }
@@ -35,21 +33,21 @@ application.resources.finalRatingToImageConverter = function(value: any) {
     let result = "";
 
     switch (parseInt(value, 10)) {
-        case 0:
-            result = "sentiment_very_dissatisfied";
-            break;
-        case 1:
-            result = "sentiment_dissatisfied";
-            break;
-        case 2:
-            result = "sentiment_neutral";
-            break;
-        case 3:
-            result = "sentiment_satisfied";
-            break;
-        case 4:
-            result = "sentiment_very_satisfied";
-            break;
+    case 0:
+        result = "sentiment_very_dissatisfied";
+        break;
+    case 1:
+        result = "sentiment_dissatisfied";
+        break;
+    case 2:
+        result = "sentiment_neutral";
+        break;
+    case 3:
+        result = "sentiment_satisfied";
+        break;
+    case 4:
+        result = "sentiment_very_satisfied";
+        break;
     }
 
     return result;
@@ -72,11 +70,11 @@ userService.initAuthentication().then(loggedIn => {
         frameModule.topmost().navigate({
             animated: false,
             backstackVisible: true,
-            moduleName: Views.main
+            moduleName: Views.finalStep
         });
     }
 });
 
 application.start({
-    moduleName: Views.login
+    moduleName: Views.main
 });

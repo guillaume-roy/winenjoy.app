@@ -1,0 +1,16 @@
+﻿@import "../../styles/_common";
+@import "../../styles/_values-selector";
+
+.form-label {
+    color: $primary-text-color;
+    font-size: 18;
+    vertical-align: center;
+    margin-left: 6;
+    margin-top: 8;
+    margin-bottom: 8;
+}
+
+ValuesSelector,
+GradientColorPicker {
+    margin-left: 6;
+}

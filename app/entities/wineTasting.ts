@@ -32,13 +32,11 @@ export interface WineTasting {
     limpidities?: CriteriaItem[];
     shines?: CriteriaItem[];
     tears?: CriteriaItem[];
-    bubbles?: CriteriaItem[];
+    hasBubbles?: boolean;
+    hasDeposit?:boolean;
     intensities?: CriteriaItem[];
     balances?: CriteriaItem[];
     length?: CriteriaItem[];
     meatsNotes?: string;
-    longitude?: number;
-    latitude?: number;
-    altitude?: number;
     containsPicture?: boolean;
 }
