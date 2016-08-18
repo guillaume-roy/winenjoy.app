@@ -1,32 +1,74 @@
-﻿<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+﻿<!--<Page xmlns="http://schemas.nativescript.org/tns.xsd"
       xmlns:vs="components/values-selector"
       navigatedTo="navigatedTo">
   <Page.actionBar>
     <ActionBar title="Saveurs" />
-  </Page.actionBar>
-  <ScrollView>
-    <StackLayout>
-      <Label text="Attaque"
-             class="form-label" />
-      <vs:ValuesSelector items="{{ attacks }}" />
-      <Label text="Acidité"
-             class="form-label" />
-      <vs:ValuesSelector items="{{ acidities }}" />
-      <Label text="Tanins"
-             class="form-label" />
-      <vs:ValuesSelector items="{{ tannins }}" />
-      <Label text="Saveurs"
-             class="form-label" />
-      <Button text="Ajouter" />
-      <Label text="Défauts"
-             class="form-label" />
-      <Button text="Ajouter" />
-      <Label text="Intensité"
-             class="form-label" />
-      <vs:ValuesSelector items="{{ intensities }}" />
-      <Label text="Finale"
-             class="form-label" />
-      <vs:ValuesSelector items="{{ length }}" />
-    </StackLayout>
-  </ScrollView>
-</Page>
+  </Page.actionBar>-->
+<StackLayout xmlns:vs="components/values-selector">
+  <GridLayout columns="auto, *"
+              rows="*,*,*,*,*,*,*,*,*,*,*,*">
+    <Label text="&#xE53B;"
+           class="material-icon form-icon" />
+    <Label text="Attaque"
+           class="form-label"
+           col="1" />
+    <vs:ValuesSelector items="{{ attacks }}"
+                       col="1"
+                       row="1"/>
+    <Label text="&#xE25A;"
+           class="material-icon form-icon"
+           row="2" />
+    <Label text="Acidité"
+           class="form-label"
+           col="1"
+           row="2" />
+    <vs:ValuesSelector items="{{ acidities }}"
+                       col="1"
+                       row="3" />
+    <Label text="&#xE258;"
+           class="material-icon form-icon"
+           row="4" />
+    <Label text="Tanins"
+           class="form-label"
+           col="1"
+           row="4" />
+    <vs:ValuesSelector items="{{ tannins }}"
+                       col="1"
+                       row="5" />
+    <Label text="&#xE80E;"
+           class="material-icon form-icon"
+           row="6" />
+    <Label text="Saveurs"
+           class="form-label"
+           col="1"
+           row="6" />
+    <Label text="&#xE002;"
+           class="material-icon form-icon"
+           row="7" />
+    <Label text="Défauts"
+           class="form-label"
+           col="1"
+           row="7" />
+    <Label text="&#xE1D8;"
+           class="material-icon form-icon"
+           row="8" />
+    <Label text="Intensité"
+           class="form-label"
+           col="1"
+           row="8" />
+    <vs:ValuesSelector items="{{ intensities }}"
+                       col="1"
+                       row="9" />
+    <Label text="&#xE256;"
+           class="material-icon form-icon"
+           row="10" />
+    <Label text="Finale"
+           class="form-label"
+           col="1"
+           row="10"/>
+    <vs:ValuesSelector items="{{ length }}"
+                       col="1"
+                       row="11" />
+  </GridLayout>
+</StackLayout>
+<!--</Page>-->

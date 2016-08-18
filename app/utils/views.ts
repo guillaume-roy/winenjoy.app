@@ -13,5 +13,6 @@ export var Views = {
     noseStep: "views/nose-step/nose-step",
     tasteStep: "views/taste-step/taste-step",
     ratingStep: "views/rating-step/rating-step",
-    informationsStep: "views/informations-step/informations-step"
+    informationsStep: "views/informations-step/informations-step",
+    allInOne: "views/all-in-one/all-in-one"
 };

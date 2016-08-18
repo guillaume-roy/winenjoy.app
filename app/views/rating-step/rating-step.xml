@@ -1,36 +1,47 @@
-﻿<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+﻿<!--<Page xmlns="http://schemas.nativescript.org/tns.xsd"
       xmlns:vs="components/values-selector"
       navigatedTo="navigatedTo">
   <Page.actionBar>
     <ActionBar title="Avis">
       <ActionBar.actionItems>
-        <ActionItem ios.position="right" icon="res://ic_photo_camera_white_24dp" />
+        <ActionItem ios.position="right"
+                    icon="res://ic_photo_camera_white_24dp" />
       </ActionBar.actionItems>
     </ActionBar>
-  </Page.actionBar>
-  <ScrollView>
-    <StackLayout>
-      <Label text="Avis"
-             class="form-label" />
-      <StackLayout orientation="horizontal"
-                   class="final-rating">
-        <Label text="sentiment_very_satisfied"
-               class="{{ wineTasting.finalRating == 4 ? 'material-icon final-rating-4 selected': 'material-icon final-rating-4' }}" />
-        <Label text="sentiment_satisfied"
-               class="{{ wineTasting.finalRating == 3 ? 'material-icon final-rating-3 selected': 'material-icon final-rating-3' }}" />
-        <Label text="sentiment_neutral"
-               class="{{ wineTasting.finalRating == 2 ? 'material-icon final-rating-2 selected': 'material-icon final-rating-2' }}" />
-        <Label text="sentiment_dissatisfied"
-               class="{{ wineTasting.finalRating == 1 ? 'material-icon final-rating-1 selected': 'material-icon final-rating-1' }}" />
-        <Label text="sentiment_very_dissatisfied"
-               class="{{ wineTasting.finalRating == 0 ? 'material-icon final-rating-0 selected': 'material-icon final-rating-0' }}" />
-      </StackLayout>
-      <Label text="Potentiel"
-             class="form-label" />
-      <vs:ValuesSelector items="{{ potentials }}" />
-      <Label text="Commentaires"
-             class="form-label" />
-      <TextView />
+  </Page.actionBar>-->
+<StackLayout xmlns:vs="components/values-selector">
+  <StackLayout>
+    <StackLayout orientation="horizontal"
+                 class="final-rating">
+      <Label text="sentiment_very_satisfied"
+             class="{{ wineTasting.finalRating == 4 ? 'material-icon final-rating-4 selected': 'material-icon final-rating-4' }}" />
+      <Label text="sentiment_satisfied"
+             class="{{ wineTasting.finalRating == 3 ? 'material-icon final-rating-3 selected': 'material-icon final-rating-3' }}" />
+      <Label text="sentiment_neutral"
+             class="{{ wineTasting.finalRating == 2 ? 'material-icon final-rating-2 selected': 'material-icon final-rating-2' }}" />
+      <Label text="sentiment_dissatisfied"
+             class="{{ wineTasting.finalRating == 1 ? 'material-icon final-rating-1 selected': 'material-icon final-rating-1' }}" />
+      <Label text="sentiment_very_dissatisfied"
+             class="{{ wineTasting.finalRating == 0 ? 'material-icon final-rating-0 selected': 'material-icon final-rating-0' }}" />
     </StackLayout>
-  </ScrollView>
-</Page>
+    <GridLayout columns="auto, *"
+                rows="*,*,*,*,*,*,*,*,*">
+      <Label text="&#xE540;"
+             class="material-icon form-icon" />
+      <Label text="Potentiel"
+             class="form-label"
+             col="1"/>
+      <vs:ValuesSelector items="{{ potentials }}"
+                         col="1"
+                         row="1" />
+      <Label text="&#xE0B9;"
+             class="material-icon form-icon"
+             row="2" />
+      <TextView row="2"
+                col="1"
+                class="form-single-line"
+                hint="Commentaires" />
+    </GridLayout>
+  </StackLayout>
+</StackLayout>
+<!--</Page>-->

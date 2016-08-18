@@ -1,0 +1,64 @@
+﻿<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:Card="nativescript-cardview"
+      xmlns:visualStep="views/visual-step"
+      xmlns:noseStep="views/nose-step"
+      xmlns:tasteStep="views/taste-step"
+      xmlns:informationsStep="views/informations-step"
+      xmlns:ratingStep="views/rating-step"
+      navigatedTo="navigatedTo"
+      actionBarHidden="true">
+  <ScrollView>
+    <StackLayout>
+      <Card:CardView class="cardStyle"
+                     margin="6"
+                     elevation="20"
+                     radius="2">
+        <StackLayout>
+          <Label text="Aspect"
+                 style="padding:16;font-size:16;color:white;background-color:#795548" />
+          <visualStep:visual-step id="visualStep" />
+        </StackLayout>
+      </Card:CardView>
+      <Card:CardView class="cardStyle"
+                     margin="6"
+                     elevation="20"
+                     radius="2">
+        <StackLayout>
+          <Label text="Arômes"
+                 style="padding:16;font-size:16;color:white;background-color:#795548" />
+          <noseStep:nose-step id="noseStep"/>
+        </StackLayout>
+      </Card:CardView>
+      <Card:CardView class="cardStyle"
+                     margin="6"
+                     elevation="20"
+                     radius="2">
+        <StackLayout>
+          <Label text="Saveurs"
+                 style="padding:16;font-size:16;color:white;background-color:#795548" />
+          <tasteStep:taste-step id="tasteStep"/>
+        </StackLayout>
+      </Card:CardView>
+      <Card:CardView class="cardStyle"
+                     margin="6"
+                     elevation="20"
+                     radius="2">
+        <StackLayout>
+          <Label text="Informations"
+                 style="padding:16;font-size:16;color:white;background-color:#795548" />
+          <informationsStep:informations-step id="informationsStep"/>
+        </StackLayout>
+      </Card:CardView>
+      <Card:CardView class="cardStyle"
+                     margin="6"
+                     elevation="20"
+                     radius="2">
+        <StackLayout>
+          <Label text="Conclusion"
+                 style="padding:16;font-size:16;color:white;background-color:#795548" />
+          <ratingStep:rating-step id="ratingStep"/>
+        </StackLayout>
+      </Card:CardView>
+    </StackLayout>
+  </ScrollView>
+</Page>

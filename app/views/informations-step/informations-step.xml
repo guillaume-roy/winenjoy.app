@@ -1,42 +1,79 @@
-﻿<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+﻿<!--<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:dd="nativescript-drop-down"
       navigatedTo="navigatedTo">
   <Page.actionBar>
     <ActionBar title="Informations">
       <ActionBar.actionItems>
-        <ActionItem ios.position="right" icon="res://ic_photo_camera_white_24dp" />
+        <ActionItem ios.position="right"
+                    icon="res://ic_visibility_white_24dp" />
+        <ActionItem ios.position="right"
+                    icon="res://ic_photo_camera_white_24dp" />
       </ActionBar.actionItems>
     </ActionBar>
-  </Page.actionBar>
-  <ScrollView>
-    <StackLayout>
-      <GridLayout columns="*, 100">
-        <Label text="Dégustation à l'aveugle"
-               class="form-label" />
-        <Switch col="1" />
-      </GridLayout>
-      <Label text="Nom"
-             class="form-label" />
-      <TextField />
-      <Label text="Domaine"
-             class="form-label" />
-      <TextField />
-      <Label text="Localisation"
-             class="form-label" />
+  </Page.actionBar>-->
+<StackLayout xmlns:dd="nativescript-drop-down">
+  <GridLayout columns="auto, *"
+              rows="*,*,*,*,*,*,*,*,*">
+    <Label text="&#xE80B;"
+           class="material-icon form-icon" />
+    <TextField col="1"
+               class="form-single-line"
+               hint="Pays, Région, AOC" />
+    <Label text="&#xE7F1;"
+           class="material-icon form-icon"
+           row="1" />
+    <TextField row="1"
+               col="1"
+               class="form-single-line"
+               hint="Domaine" />
+    <Label text="&#xE435;"
+           class="material-icon form-icon"
+           row="2"/>
+    <TextField row="2"
+               col="1"
+               class="form-single-line"
+               hint="Nom"/>
+    <Label text="&#xE838;"
+           class="material-icon form-icon"
+           row="3" />
+    <GridLayout columns="*, auto"
+                col="1"
+                row="3"
+                class="form-single-line">
       <Label text="Année"
+             class="form-label"/>
+      <dd:DropDown col="1"
+                   items="{{ years }}" />
+    </GridLayout>
+    <Label text="&#xE152;"
+           class="material-icon form-icon"
+           row="4" />
+    <Label text="Alcool"
+           class="form-label"
+           col="1"
+           row="4"/>
+    <Slider minValue="30"
+            maxValue="180"
+            row="5"
+            col="1"/>
+    <Label text="&#xE3A9;"
+           class="material-icon form-icon"
+           row="6" />
+    <GridLayout columns="*, 100"
+                col="1"
+                row="6"
+                class="form-single-line">
+      <Label text="Vin Biodynamique"
              class="form-label" />
-      <Label text="Alcool"
-             class="form-label" />
-      <Slider value="{{ alcoholValue }}"
-              minValue="30"
-              maxValue="180" />
-      <GridLayout columns="*, 100">
-        <Label text="Vin Biodynamique"
-               class="form-label" />
-        <Switch col="1" />
-      </GridLayout>
-      <Label text="Cépages"
-             class="form-label" />
-      <TextView />
-    </StackLayout>
-  </ScrollView>
-</Page>
+      <Switch col="1" />
+    </GridLayout>
+    <Label text="&#xE886;"
+           class="material-icon form-icon"
+           row="7" />
+    <TextField row="7"
+               col="1"
+               class="form-single-line"
+               hint="Ajouter un cépage" />
+  </GridLayout>
+</StackLayout>
+<!--</Page>-->

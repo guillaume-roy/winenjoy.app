@@ -7,5 +7,152 @@ Applying changes...
 Successfully synced application com.winenjoy.app on device TA4750GSW7.
 Executing before-watch hook from E:\Dev\winenjoy.app\hooks\before-watch\nativescript-dev-typescript.js
 Found peer TypeScript 1.8.10
-10:32:56 - Compilation complete. Watching for file changes.
+18:06:03 - Compilation complete. Watching for file changes.
 
+JS: loaded
+JS: Thu Aug 18 2016 18:06:07 GMT+0200 (CEST)
+JS: navigatedTo
+JS: Thu Aug 18 2016 18:06:07 GMT+0200 (CEST)
+Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
+Project successfully prepared (android)
+Transferring project files...
+Successfully transferred all-in-one.xml.
+Applying changes...
+Successfully synced application com.winenjoy.app on device TA4750GSW7.
+JS: loaded
+JS: Thu Aug 18 2016 18:06:43 GMT+0200 (CEST)
+JS: navigatedTo
+JS: Thu Aug 18 2016 18:06:43 GMT+0200 (CEST)
+18:06:47 - File change detected. Starting incremental compilation...
+
+18:06:48 - Compilation complete. Watching for file changes.
+
+Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
+Project successfully prepared (android)
+Transferring project files...
+Successfully transferred import-export-data-view-model.js.
+Successfully transferred exportDataService.js.
+Successfully transferred values-selector.js.
+Successfully transferred user.js.
+Successfully transferred wineDataService.js.
+Successfully transferred login-view-model.js.
+Successfully transferred tastingsService.js.
+Successfully transferred app.js.
+Successfully transferred views.js.
+Successfully transferred taste-step-view-model.js.
+Successfully transferred userService.js.
+Successfully transferred main-view-model.js.
+Successfully transferred analyticsService.js.
+Successfully transferred userStats.js.
+Successfully transferred diacritics.js.
+Successfully transferred converters.js.
+Successfully transferred grouping-list-picker-view-model.js.
+Successfully transferred rating-step-view-model.js.
+Successfully transferred gradient-color-picker-view-model.js.
+Successfully transferred wineTasting.js.
+Successfully transferred gradient-color-picker.js.
+Successfully transferred grouping-list-picker.js.
+Successfully transferred nose-step-view-model.js.
+Successfully transferred value-button.js.
+Successfully transferred year-picker-view-model.js.
+Successfully transferred informations-step-view-model.js.
+Successfully transferred uuid.js.
+Successfully transferred edit-tasting.js.
+Successfully transferred visual-step-view-model.js.
+Successfully transferred edit-tasting-view-model.js.
+Successfully transferred change-password.js.
+Successfully transferred all-in-one.js.
+Successfully transferred config.js.
+Successfully transferred aromas-picker-view-model.js.
+Successfully transferred gradient-color-picker.js.
+Successfully transferred aromas-picker.js.
+Successfully transferred criteriaItem.js.
+Successfully transferred color.js.
+Successfully transferred list-picker-view-model.js.
+Successfully transferred import-export-data.js.
+Successfully transferred change-password-view-model.js.
+Successfully transferred nose-step.js.
+Successfully transferred informations-step.js.
+Successfully transferred main.js.
+Successfully transferred visual-step.js.
+Successfully transferred taste-step.js.
+Successfully transferred rating-step.js.
+Successfully transferred login.js.
+Successfully transferred list-picker.js.
+Successfully transferred year-picker.js.
+Applying changes...
+Successfully synced application com.winenjoy.app on device TA4750GSW7.
+JS: navigatingTo
+JS: Thu Aug 18 2016 18:07:04 GMT+0200 (CEST)
+JS: loaded
+JS: Thu Aug 18 2016 18:07:06 GMT+0200 (CEST)
+JS: navigatedTo
+JS: Thu Aug 18 2016 18:07:06 GMT+0200 (CEST)
+18:08:02 - File change detected. Starting incremental compilation...
+
+18:08:03 - Compilation complete. Watching for file changes.
+
+Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
+Project successfully prepared (android)
+Transferring project files...
+Successfully transferred all-in-one.js.
+Applying changes...
+Successfully synced application com.winenjoy.app on device TA4750GSW7.
+JS: navigatingTo
+JS: Thu Aug 18 2016 18:08:17 GMT+0200 (CEST)
+JS: loaded
+JS: Thu Aug 18 2016 18:08:19 GMT+0200 (CEST)
+W/System.err(31960): 	at com.tns.Runtime.callJSMethodNative(Native Method)
+W/System.err(31960): 	at com.tns.Runtime.dispatchCallJSMethodNative(Runtime.java:862)
+W/System.err(31960): 	at com.tns.Runtime.callJSMethodImpl(Runtime.java:727)
+W/System.err(31960): 	at com.tns.Runtime.callJSMethod(Runtime.java:713)
+W/System.err(31960): 	at com.tns.Runtime.callJSMethod(Runtime.java:694)
+W/System.err(31960): 	at com.tns.Runtime.callJSMethod(Runtime.java:684)
+18:09:10 - File change detected. Starting incremental compilation...
+
+18:09:10 - Compilation complete. Watching for file changes.
+
+Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
+Project successfully prepared (android)
+Transferring project files...
+Successfully transferred all-in-one.js.
+Applying changes...
+Successfully synced application com.winenjoy.app on device TA4750GSW7.
+JS: navigatingTo
+JS: Thu Aug 18 2016 18:09:25 GMT+0200 (CEST)
+JS: loaded
+JS: Thu Aug 18 2016 18:09:26 GMT+0200 (CEST)
+JS: navigatedTo
+JS: Thu Aug 18 2016 18:09:26 GMT+0200 (CEST)
+JS: navigatingTo
+JS: Thu Aug 18 2016 18:09:38 GMT+0200 (CEST)
+JS: loaded
+JS: Thu Aug 18 2016 18:09:40 GMT+0200 (CEST)
+JS: navigatedTo
+JS: Thu Aug 18 2016 18:09:40 GMT+0200 (CEST)
+Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
+18:10:17 - File change detected. Starting incremental compilation...
+
+Project successfully prepared (android)
+18:10:18 - Compilation complete. Watching for file changes.
+
+Transferring project files...
+Successfully transferred all-in-one.xml.
+Applying changes...
+Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
+Successfully synced application com.winenjoy.app on device TA4750GSW7.
+JS: navigatedTo
+JS: Thu Aug 18 2016 18:10:23 GMT+0200 (CEST)
+Project successfully prepared (android)
+Transferring project files...
+Successfully transferred all-in-one.js.
+Applying changes...
+Successfully synced application com.winenjoy.app on device TA4750GSW7.
+JS: navigatedTo
+JS: Thu Aug 18 2016 18:10:35 GMT+0200 (CEST)
+18:12:02 - File change detected. Starting incremental compilation...
+
+18:12:03 - Compilation complete. Watching for file changes.
+
+Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
+Project successfully prepared (android)

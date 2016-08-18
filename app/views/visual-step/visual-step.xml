@@ -1,28 +1,50 @@
-﻿<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+﻿<!--<Page xmlns="http://schemas.nativescript.org/tns.xsd"
       xmlns:vs="components/values-selector"
       xmlns:gcp="components/gradient-color-picker"
       navigatedTo="navigatedTo">
   <Page.actionBar>
     <ActionBar title="Aspect" />
-  </Page.actionBar>
-  <ScrollView>
-    <StackLayout>
-      <SegmentedBar>
-        <SegmentedBar.items>
-          <SegmentedBarItem title="Vin Blanc" />
-          <SegmentedBarItem title="Vin Rosé" />
-          <SegmentedBarItem title="Vin Rouge" />
-        </SegmentedBar.items>
-      </SegmentedBar>
+  </Page.actionBar>-->
+<StackLayout xmlns:vs="components/values-selector"
+            xmlns:gcp="components/gradient-color-picker">
+  <StackLayout>
+    <SegmentedBar style="margin-bottom: 12;">
+      <SegmentedBar.items>
+        <SegmentedBarItem title="Vin Blanc" />
+        <SegmentedBarItem title="Vin Rosé" />
+        <SegmentedBarItem title="Vin Rouge" />
+      </SegmentedBar.items>
+    </SegmentedBar>
+    <GridLayout columns="auto, *"
+                rows="*,*,*,*,*,*,*,*,*,*">
+      <Label text="&#xE3A5;"
+             class="material-icon form-icon" />
       <Label text="Limpidité"
-             class="form-label" />
-      <vs:ValuesSelector items="{{ limpidities }}" />
+             class="form-label"
+             col="1" />
+      <vs:ValuesSelector items="{{ limpidities }}"
+                         row="1"
+                         col="1" />
+      <Label text="&#xE1AD;"
+             class="material-icon form-icon"
+             row="2" />
       <Label text="Brillance"
-             class="form-label" />
-      <vs:ValuesSelector items="{{ shines }}" />
+             class="form-label"
+             row="2"
+             col="1" />
+      <vs:ValuesSelector items="{{ shines }}"
+                         row="3"
+                         col="1" />
+      <Label text="&#xE40A;"
+             class="material-icon form-icon"
+             row="4" />
       <Label text="Couleur"
-             class="form-label" />
-      <ScrollView orientation="horizontal">
+             class="form-label"
+             row="4"
+             col="1" />
+      <ScrollView orientation="horizontal"
+                  row="5"
+                  col="1">
         <gcp:GradientColorPicker startingColor="#FDF3C2"
                                  endingColor="#F0C636"
                                  colorsCount="5"/>
@@ -37,19 +59,39 @@
                                  endingColor="#3B022D"
                                  colorsCount="5"/>
       </ScrollView>-->
+      <Label text="&#xE891;"
+             class="material-icon form-icon"
+             row="6" />
       <Label text="Larmes"
-             class="form-label" />
-      <vs:ValuesSelector items="{{ tears }}" />
-      <GridLayout columns="*, 100">
+             class="form-label"
+             row="6"
+             col="1" />
+      <vs:ValuesSelector items="{{ tears }}"
+                         row="7"
+                         col="1" />
+      <Label text="&#xE3E9;"
+             class="material-icon form-icon"
+             row="8" />
+      <GridLayout columns="*, 100"
+                  class="form-single-line"
+                  row="8"
+                  col="1">
         <Label text="Dépôt"
                class="form-label" />
         <Switch col="1" />
       </GridLayout>
-      <GridLayout columns="*, 100">
+      <Label text="&#xE6DD;"
+             class="material-icon form-icon"
+             row="9" />
+      <GridLayout columns="*, 100"
+                  class="form-single-line"
+                  row="9"
+                  col="1">
         <Label text="Bulles"
                class="form-label" />
         <Switch col="1" />
       </GridLayout>
-    </StackLayout>
-  </ScrollView>
-</Page>
+    </GridLayout>
+  </StackLayout>
+</StackLayout>
+<!--</Page>-->

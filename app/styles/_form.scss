@@ -1,0 +1,26 @@
+@import "_material-theme";
+
+.form-label {
+    color: $primary-color;
+    font-size: 16;
+    vertical-align: center;
+    margin-left: 6;
+    margin-top: 6;
+    margin-bottom: 6;
+}
+
+.form-icon {
+    font-size: 24;
+    vertical-align: center;
+    horizontal-align: center;
+    margin-top: 6;
+    margin-bottom: 6;
+    margin-left: 12;
+    margin-right: 12;
+    color: $primary-color;
+}
+
+.form-single-line {
+    margin-top: 12;
+    margin-bottom: 12;
+}

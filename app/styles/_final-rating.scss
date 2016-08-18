@@ -1,19 +1,36 @@
-.final-rating-4 {
-    color: #007C00;
-}
+.final-rating {
+    font-size: 56;
+    horizontal-align: center;
+    margin-bottom: 12;
 
-.final-rating-3 {
-    color: #7BB800;
-}
+    Label {
+        margin: 5;
+        opacity: 0.3;
+        padding-top: 10;
+    }
 
-.final-rating-2 {
-    color: #FFD300;
-}
+    .selected {
+        opacity: 1;
+        padding-top: 0;
+    }
 
-.final-rating-1 {
-    color: #FF7400;
-}
+    .final-rating-4 {
+        color: #007C00;
+    }
 
-.final-rating-0 {
-    color: #C50000;
+    .final-rating-3 {
+        color: #7BB800;
+    }
+
+    .final-rating-2 {
+        color: #FFD300;
+    }
+
+    .final-rating-1 {
+        color: #FF7400;
+    }
+
+    .final-rating-0 {
+        color: #C50000;
+    }
 }

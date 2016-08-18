@@ -45,6 +45,8 @@
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_share_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_very_happy.png" />
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_very_sad.png" />
+    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_visibility_off_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_visibility_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_wineglass_white.png" />
     <Content Include="app\App_Resources\Android\drawable-ldpi\blank.png" />
     <Content Include="app\App_Resources\Android\drawable-ldpi\icon.png" />
@@ -63,6 +65,8 @@
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_share_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_very_happy.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_very_sad.png" />
+    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_visibility_off_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_visibility_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_wineglass_white.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\blank.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\icon.png" />
@@ -79,6 +83,8 @@
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_share_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_very_happy.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_very_sad.png" />
+    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_visibility_off_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_visibility_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_wineglass_white.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\blank.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\icon.png" />
@@ -95,6 +101,8 @@
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_share_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_very_happy.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_very_sad.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_visibility_off_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_visibility_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_wineglass_white.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\blank.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\icon.png" />
@@ -111,6 +119,8 @@
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_share_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_very_happy.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_very_sad.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_visibility_off_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_visibility_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_wineglass_white.png" />
     <Content Include="app\App_Resources\Android\values-v21\colors.xml" />
     <Content Include="app\App_Resources\Android\values-v21\strings.xml" />
@@ -191,6 +201,12 @@
     <Content Include="app\App_Resources\iOS\ic_very_sad.png" />
     <Content Include="app\App_Resources\iOS\ic_very_sad_2x.png" />
     <Content Include="app\App_Resources\iOS\ic_very_sad_3x.png" />
+    <Content Include="app\App_Resources\iOS\ic_visibility_off_white_24dp.png" />
+    <Content Include="app\App_Resources\iOS\ic_visibility_off_white_24dp_2x.png" />
+    <Content Include="app\App_Resources\iOS\ic_visibility_off_white_24dp_3x.png" />
+    <Content Include="app\App_Resources\iOS\ic_visibility_white_24dp.png" />
+    <Content Include="app\App_Resources\iOS\ic_visibility_white_24dp_2x.png" />
+    <Content Include="app\App_Resources\iOS\ic_visibility_white_24dp_3x.png" />
     <Content Include="app\App_Resources\iOS\ic_wineglass_white _2x.png" />
     <Content Include="app\App_Resources\iOS\ic_wineglass_white _3x.png" />
     <Content Include="app\App_Resources\iOS\ic_wineglass_white.png" />
@@ -293,6 +309,13 @@
     <Content Include="app\view-models\year-picker-view-model.js">
       <DependentUpon>year-picker-view-model.ts</DependentUpon>
     </Content>
+    <Content Include="app\views\all-in-one\all-in-one.css">
+      <DependentUpon>all-in-one.scss</DependentUpon>
+    </Content>
+    <Content Include="app\views\all-in-one\all-in-one.js">
+      <DependentUpon>all-in-one.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\all-in-one\all-in-one.xml" />
     <Content Include="app\views\aromas-picker\aromas-picker.css">
       <DependentUpon>aromas-picker.scss</DependentUpon>
     </Content>
@@ -508,6 +531,7 @@
     <TypeScriptCompile Include="app\view-models\taste-step-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\visual-step-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\year-picker-view-model.ts" />
+    <TypeScriptCompile Include="app\views\all-in-one\all-in-one.ts" />
     <TypeScriptCompile Include="app\views\aromas-picker\aromas-picker.ts" />
     <TypeScriptCompile Include="app\views\change-password\change-password.ts" />
     <TypeScriptCompile Include="app\views\edit-tasting\edit-tasting.ts" />
@@ -549,6 +573,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\views\informations-step\informations-step.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\styles\_form.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\views\all-in-one\all-in-one.scss" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
