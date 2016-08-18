@@ -4,7 +4,7 @@
   <Page.actionBar>
     <ActionBar title="Conclusion">
       <ActionBar.actionItems>
-        <ActionItem ios.position="right" icon="res://ic_share_white_24dp" />
+        <ActionItem ios.position="right" icon="res://ic_photo_camera_white_24dp" />
       </ActionBar.actionItems>
     </ActionBar>
   </Page.actionBar>

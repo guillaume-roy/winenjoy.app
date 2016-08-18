@@ -15,7 +15,11 @@ export class TastingsService {
 
     constructor() {
         this._userService = new UserService();
-        this._userId = this._userService.getUser().uid;
+
+        let user = this._userService.getUser();
+        if (user) {
+            this._userId = user.uid;   
+        }
     }
 
     public newTasting() {

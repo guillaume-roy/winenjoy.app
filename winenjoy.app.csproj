@@ -39,6 +39,8 @@
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_delete_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_happy.png" />
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_neutral.png" />
+    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_photo_camera_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_photo_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_sad.png" />
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_share_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_very_happy.png" />
@@ -55,6 +57,8 @@
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_delete_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_happy.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_neutral.png" />
+    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_photo_camera_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_photo_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_sad.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_share_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_very_happy.png" />
@@ -69,6 +73,8 @@
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_delete_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_happy.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_neutral.png" />
+    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_photo_camera_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_photo_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_sad.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_share_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_very_happy.png" />
@@ -83,6 +89,8 @@
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_delete_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_happy.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_neutral.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_photo_camera_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_photo_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_sad.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_share_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_very_happy.png" />
@@ -97,6 +105,8 @@
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_delete_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_happy.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_neutral.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_photo_camera_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_photo_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_sad.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_share_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_very_happy.png" />
@@ -163,6 +173,12 @@
     <Content Include="app\App_Resources\iOS\ic_neutral.png" />
     <Content Include="app\App_Resources\iOS\ic_neutral_2x.png" />
     <Content Include="app\App_Resources\iOS\ic_neutral_3x.png" />
+    <Content Include="app\App_Resources\iOS\ic_photo_camera_white_24dp.png" />
+    <Content Include="app\App_Resources\iOS\ic_photo_camera_white_24dp_2x.png" />
+    <Content Include="app\App_Resources\iOS\ic_photo_camera_white_24dp_3x.png" />
+    <Content Include="app\App_Resources\iOS\ic_photo_white_24dp.png" />
+    <Content Include="app\App_Resources\iOS\ic_photo_white_24dp_2x.png" />
+    <Content Include="app\App_Resources\iOS\ic_photo_white_24dp_3x.png" />
     <Content Include="app\App_Resources\iOS\ic_sad.png" />
     <Content Include="app\App_Resources\iOS\ic_sad_2x.png" />
     <Content Include="app\App_Resources\iOS\ic_sad_3x.png" />
@@ -219,6 +235,9 @@
     </Content>
     <Content Include="app\utils\config.js">
       <DependentUpon>config.ts</DependentUpon>
+    </Content>
+    <Content Include="app\utils\converters.js">
+      <DependentUpon>converters.ts</DependentUpon>
     </Content>
     <Content Include="app\utils\diacritics.js">
       <DependentUpon>diacritics.ts</DependentUpon>
@@ -300,7 +319,9 @@
     <Content Include="app\views\final-step\final-step.js">
       <DependentUpon>final-step.ts</DependentUpon>
     </Content>
-    <Content Include="app\views\final-step\final-step.xml" />
+    <Content Include="app\views\final-step\final-step.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="app\views\gradient-color-picker\gradient-color-picker.css">
       <DependentUpon>gradient-color-picker.scss</DependentUpon>
     </Content>
@@ -458,6 +479,7 @@
     <TypeScriptCompile Include="app\services\wineDataService.ts" />
     <TypeScriptCompile Include="app\utils\color.ts" />
     <TypeScriptCompile Include="app\utils\config.ts" />
+    <TypeScriptCompile Include="app\utils\converters.ts" />
     <TypeScriptCompile Include="app\utils\diacritics.ts" />
     <TypeScriptCompile Include="app\utils\uuid.ts" />
     <TypeScriptCompile Include="app\utils\views.ts" />
