@@ -1,0 +1,42 @@
+﻿<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+      navigatedTo="navigatedTo">
+  <Page.actionBar>
+    <ActionBar title="Informations">
+      <ActionBar.actionItems>
+        <ActionItem ios.position="right" icon="res://ic_photo_camera_white_24dp" />
+      </ActionBar.actionItems>
+    </ActionBar>
+  </Page.actionBar>
+  <ScrollView>
+    <StackLayout>
+      <GridLayout columns="*, 100">
+        <Label text="Dégustation à l'aveugle"
+               class="form-label" />
+        <Switch col="1" />
+      </GridLayout>
+      <Label text="Nom"
+             class="form-label" />
+      <TextField />
+      <Label text="Domaine"
+             class="form-label" />
+      <TextField />
+      <Label text="Localisation"
+             class="form-label" />
+      <Label text="Année"
+             class="form-label" />
+      <Label text="Alcool"
+             class="form-label" />
+      <Slider value="{{ alcoholValue }}"
+              minValue="30"
+              maxValue="180" />
+      <GridLayout columns="*, 100">
+        <Label text="Vin Biodynamique"
+               class="form-label" />
+        <Switch col="1" />
+      </GridLayout>
+      <Label text="Cépages"
+             class="form-label" />
+      <TextView />
+    </StackLayout>
+  </ScrollView>
+</Page>

@@ -257,9 +257,6 @@
     <Content Include="app\view-models\edit-tasting-view-model.js">
       <DependentUpon>edit-tasting-view-model.ts</DependentUpon>
     </Content>
-    <Content Include="app\view-models\final-step-view-model.js">
-      <DependentUpon>final-step-view-model.ts</DependentUpon>
-    </Content>
     <Content Include="app\view-models\gradient-color-picker-view-model.js">
       <DependentUpon>gradient-color-picker-view-model.ts</DependentUpon>
     </Content>
@@ -268,6 +265,9 @@
     </Content>
     <Content Include="app\view-models\import-export-data-view-model.js">
       <DependentUpon>import-export-data-view-model.ts</DependentUpon>
+    </Content>
+    <Content Include="app\view-models\informations-step-view-model.js">
+      <DependentUpon>informations-step-view-model.ts</DependentUpon>
     </Content>
     <Content Include="app\view-models\list-picker-view-model.js">
       <DependentUpon>list-picker-view-model.ts</DependentUpon>
@@ -280,6 +280,9 @@
     </Content>
     <Content Include="app\view-models\nose-step-view-model.js">
       <DependentUpon>nose-step-view-model.ts</DependentUpon>
+    </Content>
+    <Content Include="app\view-models\rating-step-view-model.js">
+      <DependentUpon>rating-step-view-model.ts</DependentUpon>
     </Content>
     <Content Include="app\view-models\taste-step-view-model.js">
       <DependentUpon>taste-step-view-model.ts</DependentUpon>
@@ -313,13 +316,13 @@
     <Content Include="app\views\edit-tasting\edit-tasting.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="app\views\final-step\final-step.css">
-      <DependentUpon>final-step.scss</DependentUpon>
+    <Content Include="app\views\rating-step\rating-step.css">
+      <DependentUpon>rating-step.scss</DependentUpon>
     </Content>
-    <Content Include="app\views\final-step\final-step.js">
-      <DependentUpon>final-step.ts</DependentUpon>
+    <Content Include="app\views\rating-step\rating-step.js">
+      <DependentUpon>rating-step.ts</DependentUpon>
     </Content>
-    <Content Include="app\views\final-step\final-step.xml">
+    <Content Include="app\views\rating-step\rating-step.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="app\views\gradient-color-picker\gradient-color-picker.css">
@@ -343,6 +346,13 @@
       <DependentUpon>import-export-data.ts</DependentUpon>
     </Content>
     <Content Include="app\views\import-export-data\import-export-data.xml" />
+    <Content Include="app\views\informations-step\informations-step.css">
+      <DependentUpon>informations-step.scss</DependentUpon>
+    </Content>
+    <Content Include="app\views\informations-step\informations-step.js">
+      <DependentUpon>informations-step.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\informations-step\informations-step.xml" />
     <Content Include="app\views\list-picker\list-picker.css">
       <DependentUpon>list-picker.scss</DependentUpon>
     </Content>
@@ -486,10 +496,11 @@
     <TypeScriptCompile Include="app\view-models\aromas-picker-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\change-password-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\edit-tasting-view-model.ts" />
-    <TypeScriptCompile Include="app\view-models\final-step-view-model.ts" />
+    <TypeScriptCompile Include="app\view-models\rating-step-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\gradient-color-picker-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\grouping-list-picker-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\import-export-data-view-model.ts" />
+    <TypeScriptCompile Include="app\view-models\informations-step-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\list-picker-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\login-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\main-view-model.ts" />
@@ -500,10 +511,11 @@
     <TypeScriptCompile Include="app\views\aromas-picker\aromas-picker.ts" />
     <TypeScriptCompile Include="app\views\change-password\change-password.ts" />
     <TypeScriptCompile Include="app\views\edit-tasting\edit-tasting.ts" />
-    <TypeScriptCompile Include="app\views\final-step\final-step.ts" />
+    <TypeScriptCompile Include="app\views\rating-step\rating-step.ts" />
     <TypeScriptCompile Include="app\views\gradient-color-picker\gradient-color-picker.ts" />
     <TypeScriptCompile Include="app\views\grouping-list-picker\grouping-list-picker.ts" />
     <TypeScriptCompile Include="app\views\import-export-data\import-export-data.ts" />
+    <TypeScriptCompile Include="app\views\informations-step\informations-step.ts" />
     <TypeScriptCompile Include="app\views\list-picker\list-picker.ts" />
     <TypeScriptCompile Include="app\views\login\login.ts" />
     <TypeScriptCompile Include="app\views\main\main.ts" />
@@ -530,10 +542,13 @@
     <Content Include="app\data\attacks.json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\views\final-step\final-step.scss" />
+    <Content Include="app\views\rating-step\rating-step.scss" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\data\potentials.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\views\informations-step\informations-step.scss" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>

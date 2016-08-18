@@ -2,7 +2,7 @@
 import {WineDataService} from "../services/wineDataService";
 import {CriteriaItem} from "../entities/criteriaItem";
 
-export class FinalStepViewModel extends Observable {
+export class RatingStepViewModel extends Observable {
     private _potentials: CriteriaItem[];
     
     public get potentials() {

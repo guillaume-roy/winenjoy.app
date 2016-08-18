@@ -24,11 +24,11 @@ userService.initAuthentication().then(loggedIn => {
         frameModule.topmost().navigate({
             animated: false,
             backstackVisible: true,
-            moduleName: Views.finalStep
+            moduleName: Views.informationsStep
         });
     }
 });
 
 application.start({
-    moduleName: Views.finalStep
+    moduleName: Views.informationsStep
 });

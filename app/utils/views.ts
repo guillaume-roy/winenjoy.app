@@ -12,5 +12,6 @@ export var Views = {
     visualStep: "views/visual-step/visual-step",
     noseStep: "views/nose-step/nose-step",
     tasteStep: "views/taste-step/taste-step",
-    finalStep: "views/final-step/final-step"
+    ratingStep: "views/rating-step/rating-step",
+    informationsStep: "views/informations-step/informations-step"
 };

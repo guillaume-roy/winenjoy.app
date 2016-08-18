@@ -1,12 +1,12 @@
-﻿import {FinalStepViewModel} from "../../view-models/final-step-view-model";
+﻿import {RatingStepViewModel} from "../../view-models/rating-step-view-model";
 import {EventData} from "data/observable";
 import {Page} from "ui/page";
 
 let page: Page;
-let viewModel: FinalStepViewModel;
+let viewModel: RatingStepViewModel;
 
 export function navigatedTo(args: EventData) {
-    viewModel = new FinalStepViewModel();
+    viewModel = new RatingStepViewModel();
     page = <Page>args.object;
     page.bindingContext = viewModel;
 

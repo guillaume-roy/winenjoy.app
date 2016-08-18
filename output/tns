@@ -1,0 +1,11 @@
+Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
+Found peer TypeScript 1.8.10
+Project successfully prepared (android)
+Transferring project files...
+Successfully transferred all files.
+Applying changes...
+Successfully synced application com.winenjoy.app on device TA4750GSW7.
+Executing before-watch hook from E:\Dev\winenjoy.app\hooks\before-watch\nativescript-dev-typescript.js
+Found peer TypeScript 1.8.10
+10:32:56 - Compilation complete. Watching for file changes.
+
