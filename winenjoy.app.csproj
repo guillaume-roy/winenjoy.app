@@ -258,6 +258,9 @@
     <Content Include="app\utils\diacritics.js">
       <DependentUpon>diacritics.ts</DependentUpon>
     </Content>
+    <Content Include="app\utils\profiling.js">
+      <DependentUpon>profiling.ts</DependentUpon>
+    </Content>
     <Content Include="app\utils\uuid.js">
       <DependentUpon>uuid.ts</DependentUpon>
     </Content>
@@ -315,7 +318,9 @@
     <Content Include="app\views\all-in-one\all-in-one.js">
       <DependentUpon>all-in-one.ts</DependentUpon>
     </Content>
-    <Content Include="app\views\all-in-one\all-in-one.xml" />
+    <Content Include="app\views\all-in-one\all-in-one.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="app\views\aromas-picker\aromas-picker.css">
       <DependentUpon>aromas-picker.scss</DependentUpon>
     </Content>
@@ -514,6 +519,7 @@
     <TypeScriptCompile Include="app\utils\config.ts" />
     <TypeScriptCompile Include="app\utils\converters.ts" />
     <TypeScriptCompile Include="app\utils\diacritics.ts" />
+    <TypeScriptCompile Include="app\utils\profiling.ts" />
     <TypeScriptCompile Include="app\utils\uuid.ts" />
     <TypeScriptCompile Include="app\utils\views.ts" />
     <TypeScriptCompile Include="app\view-models\aromas-picker-view-model.ts" />

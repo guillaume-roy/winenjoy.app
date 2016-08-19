@@ -1,14 +1,10 @@
-﻿import {InformationsStepViewModel} from "../../view-models/informations-step-view-model";
-import {EventData} from "data/observable";
-import {Page} from "ui/page";
+﻿import {EventData} from "data/observable";
+import {Button} from "ui/button";
+import {InformationsStepViewModel} from "../../view-models/informations-step-view-model";
 
-let page: Page;
-let viewModel: InformationsStepViewModel;
+export function toggleIsBlindTasting(args: EventData) {
+    var src = <Button>args.object;
+    var vm = <InformationsStepViewModel>src.bindingContext;
 
-export function navigatedTo(args: EventData) {
-    viewModel = new InformationsStepViewModel();
-    page = <Page>args.object;
-    page.bindingContext = viewModel;
-
-    viewModel.init();
+    vm.isBlindTasting = !vm.isBlindTasting;
 }

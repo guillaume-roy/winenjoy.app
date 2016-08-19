@@ -60,6 +60,7 @@ export class GradientColorPicker extends WrapLayout {
 
     private _gradientButtons: Button[];
     private _noneBackground = "#D3D3D3";
+    private _buttonsSize = 64;
 
     constructor() {
         super();
@@ -108,6 +109,19 @@ export class GradientColorPicker extends WrapLayout {
 
     private displayGradient(gradient: any[]) {
         let resultLength = gradient.length;
+        
+        let noneButton = this.createButton(this._noneBackground);
+        this._gradientButtons.push(noneButton);
+        this.addChild(noneButton);
+
+        for (let i = 0; i < resultLength; i++) {
+            let gradientButton = this.createButton("#" + gradient[i]);
+            this._gradientButtons.push(gradientButton);
+            this.addChild(gradientButton);
+        }
+    }
+
+    private createButton(backgroundColor: string) {
         let onSelectColor = (args: EventData) => {
             let clickedButton = <Button>args.object;
 
@@ -122,24 +136,12 @@ export class GradientColorPicker extends WrapLayout {
                 : clickedButton.style.backgroundColor.hex;
         };
 
-        let noneButton = new Button();
-        noneButton.backgroundColor = new Color(this._noneBackground);
-        noneButton.height = 56;
-        noneButton.width = 56;
-        noneButton.on(Button.tapEvent, onSelectColor, this);
-        this._gradientButtons.push(noneButton);
-        this.addChild(noneButton);
+        let button = new Button();
+        button.backgroundColor = new Color(backgroundColor);
+        button.height = this._buttonsSize;
+        button.width = this._buttonsSize;
+        button.on(Button.tapEvent, onSelectColor, this);
 
-        for (let i = 0; i < resultLength; i++) {
-            let gradientButton = new Button();
-            gradientButton.backgroundColor = new Color("#" + gradient[i]);
-            gradientButton.color = new Color("white");
-            gradientButton.height = 56;
-            gradientButton.width = 56;
-            gradientButton.on(Button.tapEvent, onSelectColor, this);
-
-            this._gradientButtons.push(gradientButton);
-            this.addChild(gradientButton);
-        }
+        return button;
     }
 }

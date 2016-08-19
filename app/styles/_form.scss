@@ -24,3 +24,26 @@
     margin-top: 12;
     margin-bottom: 12;
 }
+
+.form-section {
+    padding: 16;
+    font-size: 16;
+    color: $primary-color-text;
+    background-color: $primary-color;
+    margin-bottom: 12;
+}
+
+.form-section-actions {
+    @extend .form-section;
+    padding: 0;
+
+    Label {
+        margin: 16;
+    }
+
+    Button {
+        background-color: $primary-color;
+        width: 72;
+        font-size: 22;
+    }
+}

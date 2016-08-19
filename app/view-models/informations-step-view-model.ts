@@ -2,6 +2,15 @@
 
 export class InformationsStepViewModel extends Observable {
     private _years: any[];
+    private _isBlindTasting: boolean;
+
+    public get isBlindTasting() {
+        return this._isBlindTasting;
+    }
+    public set isBlindTasting(value) {
+        this._isBlindTasting = value;
+        this.notifyPropertyChange("isBlindTasting", value);
+    }
 
     public get years() {
         return this._years;
@@ -13,6 +22,7 @@ export class InformationsStepViewModel extends Observable {
 
     public init() {
         this.fillYears();
+        this.isBlindTasting = false;
     }
 
     private fillYears() {

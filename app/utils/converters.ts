@@ -5,6 +5,7 @@ export class Converters {
     public static attach() {
         application.resources.regionConverterConverter = Converters.regionConverterConverter;
         application.resources.visibilityConverter = Converters.visibilityConverter;
+        application.resources.notVisiblityConverter = Converters.notVisiblityConverter;
         application.resources.finalRatingToImageConverter = Converters.finalRatingToImageConverter;
     }
 
@@ -23,8 +24,12 @@ export class Converters {
         }
     }
 
+    private static notVisiblityConverter(value: any) {
+        return !Converters.visibilityConverter(value);
+    }
+
     private static visibilityConverter(value: any) {
-        return _.isEmpty(value)
+        return _.isEmpty(value) || !value
             ? "collapse"
             : "visible";
     }
