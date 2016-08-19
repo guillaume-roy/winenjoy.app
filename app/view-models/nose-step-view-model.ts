@@ -28,5 +28,11 @@ export class NoseStepViewModel extends Observable {
             .then(data => this.intensities = data);
         wineDataService.getCriterias("nose-developments")
             .then(data => this.developments = data);
+
+        this.set('list',
+        [
+            'home', 'work', 'walker', 'witch', 'which', 'school', 'women', 'nativescript', 'none', 'brad', 'stuff',
+            'holland'
+        ]);
     }
 }

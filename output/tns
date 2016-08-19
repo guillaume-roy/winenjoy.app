@@ -7,7 +7,230 @@ Applying changes...
 Successfully synced application com.winenjoy.app on device TA4750GSW7.
 Executing before-watch hook from E:\Dev\winenjoy.app\hooks\before-watch\nativescript-dev-typescript.js
 Found peer TypeScript 1.8.10
-17:20:41 - Compilation complete. Watching for file changes.
+18:16:18 - Compilation complete. Watching for file changes.
 
-JS: ---- [main-page] STOP total: 1731ms count:1
-JS: ---- [load-steps] STOP total: 6004ms count:1
+JS: ---- [main-page] STOP total: 1606ms count:1
+W/System.err( 9533): 	at com.tns.Runtime.callJSMethodNative(Native Method)
+W/System.err( 9533): 	at com.tns.Runtime.dispatchCallJSMethodNative(Runtime.java:862)
+W/System.err( 9533): 	at com.tns.Runtime.callJSMethodImpl(Runtime.java:727)
+W/System.err( 9533): 	at com.tns.Runtime.callJSMethod(Runtime.java:713)
+W/System.err( 9533): 	at com.tns.Runtime.callJSMethod(Runtime.java:694)
+W/System.err( 9533): 	at com.tns.Runtime.callJSMethod(Runtime.java:684)
+Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
+Project successfully prepared (android)
+Transferring project files...
+Successfully transferred nose-step.xml.
+Applying changes...
+Successfully synced application com.winenjoy.app on device TA4750GSW7.
+JS: ---- [main-page] STOP total: 1590ms count:1
+JS: Binding: Binding error while setting property items of AutoComplete(56)@file:///app/views/nose-step/nose-step.xml:27:3;: Error: Expect integer value as a second argument.
+JS: ---- [load-steps] STOP total: 7108ms count:1
+Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
+Project successfully prepared (android)
+Transferring project files...
+Successfully transferred nose-step.xml.
+Applying changes...
+Successfully synced application com.winenjoy.app on device TA4750GSW7.
+JS: WARNING: No timer started: main-page
+JS: Binding: Binding error while setting property items of AutoComplete<aromas>@file:///app/views/nose-step/nose-step.xml:27:3;: Error: Expect integer value as a second argument.
+JS: ---- [load-steps] STOP total: 2332ms count:1
+18:19:44 - File change detected. Starting incremental compilation...
+
+18:19:45 - Compilation complete. Watching for file changes.
+
+Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
+Project successfully prepared (android)
+Transferring project files...
+18:19:54 - File change detected. Starting incremental compilation...
+
+18:19:55 - Compilation complete. Watching for file changes.
+
+Successfully transferred informations-step-view-model.js.
+Successfully transferred wineDataService.js.
+Successfully transferred app.js.
+Successfully transferred aromas-picker-view-model.js.
+Successfully transferred edit-tasting-view-model.js.
+Successfully transferred gradient-color-picker.js.
+Successfully transferred import-export-data.js.
+Successfully transferred value-button.js.
+Successfully transferred edit-tasting.js.
+Successfully transferred aromas-picker.js.
+Successfully transferred uuid.js.
+Successfully transferred rating-step-view-model.js.
+Successfully transferred login.js.
+Successfully transferred main-view-model.js.
+Successfully transferred rating-step.js.
+Successfully transferred list-picker-view-model.js.
+Successfully transferred login-view-model.js.
+Successfully transferred views.js.
+Successfully transferred nose-step-view-model.js.
+Successfully transferred main.js.
+Successfully transferred year-picker-view-model.js.
+Successfully transferred change-password-view-model.js.
+Successfully transferred userService.js.
+Successfully transferred grouping-list-picker-view-model.js.
+Successfully transferred gradient-color-picker-view-model.js.
+Successfully transferred wineTasting.js.
+Successfully transferred all-in-one.js.
+Successfully transferred profiling.js.
+Successfully transferred criteriaItem.js.
+Successfully transferred change-password.js.
+Successfully transferred taste-step.js.
+Successfully transferred visual-step-view-model.js.
+Successfully transferred tastingsService.js.
+Successfully transferred converters.js.
+Successfully transferred user.js.
+Successfully transferred diacritics.js.
+Successfully transferred nose-step.js.
+Successfully transferred color.js.
+Successfully transferred analyticsService.js.
+Successfully transferred values-selector.js.
+Successfully transferred exportDataService.js.
+Successfully transferred visual-step.js.
+Successfully transferred gradient-color-picker.js.
+Successfully transferred import-export-data-view-model.js.
+Successfully transferred config.js.
+Successfully transferred taste-step-view-model.js.
+Successfully transferred grouping-list-picker.js.
+Successfully transferred list-picker.js.
+Successfully transferred userStats.js.
+Successfully transferred informations-step.js.
+Successfully transferred year-picker.js.
+Applying changes...
+Successfully synced application com.winenjoy.app on device TA4750GSW7.
+JS: ---- [main-page] STOP total: 1645ms count:1
+JS: Binding: Binding error while setting property items of AutoComplete<aromas>@file:///app/views/nose-step/nose-step.xml:27:3;: Error: Expect integer value as a second argument.
+JS: ---- [load-steps] STOP total: 7162ms count:1
+18:20:19 - File change detected. Starting incremental compilation...
+
+18:20:20 - Compilation complete. Watching for file changes.
+
+Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
+Project successfully prepared (android)
+Transferring project files...
+Successfully transferred nose-step.js.
+Applying changes...
+Successfully synced application com.winenjoy.app on device TA4750GSW7.
+JS: ---- [main-page] STOP total: 1619ms count:1
+JS: Binding: Binding error while setting property items of AutoComplete<aromas>@file:///app/views/nose-step/nose-step.xml:27:3;: Error: Expect integer value as a second argument.
+W/System.err(10467): 	at com.tns.Runtime.callJSMethodNative(Native Method)
+W/System.err(10467): 	at com.tns.Runtime.dispatchCallJSMethodNative(Runtime.java:862)
+W/System.err(10467): 	at com.tns.Runtime.callJSMethodImpl(Runtime.java:727)
+W/System.err(10467): 	at com.tns.Runtime.callJSMethod(Runtime.java:713)
+W/System.err(10467): 	at com.tns.Runtime.callJSMethod(Runtime.java:694)
+W/System.err(10467): 	at com.tns.Runtime.callJSMethod(Runtime.java:684)
+18:20:59 - File change detected. Starting incremental compilation...
+
+18:21:00 - Compilation complete. Watching for file changes.
+
+Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
+Project successfully prepared (android)
+Transferring project files...
+Successfully transferred nose-step.js.
+Applying changes...
+Successfully synced application com.winenjoy.app on device TA4750GSW7.
+JS: ---- [main-page] STOP total: 1601ms count:1
+JS: Binding: Binding error while setting property items of AutoComplete<aromas>@file:///app/views/nose-step/nose-step.xml:27:3;: Error: Expect integer value as a second argument.
+JS: ---- [load-steps] STOP total: 7082ms count:1
+18:22:19 - File change detected. Starting incremental compilation...
+
+18:22:20 - Compilation complete. Watching for file changes.
+
+Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
+Project successfully prepared (android)
+Transferring project files...
+Successfully transferred nose-step.js.
+Applying changes...
+Successfully synced application com.winenjoy.app on device TA4750GSW7.
+JS: ---- [main-page] STOP total: 1612ms count:1
+JS: Binding: Binding error while setting property items of AutoComplete<aromas>@file:///app/views/nose-step/nose-step.xml:27:3;: Error: Expect integer value as a second argument.
+JS: ---- [load-steps] STOP total: 7116ms count:1
+18:23:27 - File change detected. Starting incremental compilation...
+
+18:23:27 - Compilation complete. Watching for file changes.
+
+Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
+Project successfully prepared (android)
+Transferring project files...
+Successfully transferred nose-step.js.
+Applying changes...
+Successfully synced application com.winenjoy.app on device TA4750GSW7.
+JS: ---- [main-page] STOP total: 1612ms count:1
+JS: Binding: Binding error while setting property items of AutoComplete<aromas>@file:///app/views/nose-step/nose-step.xml:27:3;: Error: Expect integer value as a second argument.
+JS: ---- [load-steps] STOP total: 7492ms count:1
+18:27:30 - File change detected. Starting incremental compilation...
+
+18:27:30 - Compilation complete. Watching for file changes.
+
+Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
+Project successfully prepared (android)
+Transferring project files...
+Successfully transferred nose-step.js.
+Applying changes...
+Successfully synced application com.winenjoy.app on device TA4750GSW7.
+JS: ---- [main-page] STOP total: 1639ms count:1
+JS: Binding: Binding error while setting property items of AutoComplete<aromas>@file:///app/views/nose-step/nose-step.xml:27:3;: Error: Expect integer value as a second argument.
+JS: undefined
+JS: ---- [load-steps] STOP total: 7171ms count:1
+18:28:10 - File change detected. Starting incremental compilation...
+
+18:28:10 - Compilation complete. Watching for file changes.
+
+Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
+Project successfully prepared (android)
+Transferring project files...
+Successfully transferred nose-step.js.
+Applying changes...
+Successfully synced application com.winenjoy.app on device TA4750GSW7.
+JS: ---- [main-page] STOP total: 1617ms count:1
+JS: Binding: Binding error while setting property items of AutoComplete<aromas>@file:///app/views/nose-step/nose-step.xml:27:3;: Error: Expect integer value as a second argument.
+JS: Ajouter un arôme
+JS: ---- [load-steps] STOP total: 7182ms count:1
+18:29:17 - File change detected. Starting incremental compilation...
+
+18:29:18 - Compilation complete. Watching for file changes.
+
+Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
+Project successfully prepared (android)
+Transferring project files...
+Successfully transferred nose-step.js.
+Applying changes...
+Successfully synced application com.winenjoy.app on device TA4750GSW7.
+JS: ---- [main-page] STOP total: 1613ms count:1
+JS: Binding: Binding error while setting property items of AutoComplete<aromas>@file:///app/views/nose-step/nose-step.xml:27:3;: Error: Expect integer value as a second argument.
+JS: ---- [load-steps] STOP total: 7316ms count:1
+18:30:37 - File change detected. Starting incremental compilation...
+
+18:30:38 - Compilation complete. Watching for file changes.
+
+Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
+Project successfully prepared (android)
+Transferring project files...
+Successfully transferred nose-step.js.
+Applying changes...
+Successfully synced application com.winenjoy.app on device TA4750GSW7.
+JS: ---- [main-page] STOP total: 1619ms count:1
+JS: Binding: Binding error while setting property items of AutoComplete<aromas>@file:///app/views/nose-step/nose-step.xml:27:3;: Error: Expect integer value as a second argument.
+JS: ---- [load-steps] STOP total: 7248ms count:1
+18:31:57 - File change detected. Starting incremental compilation...
+
+18:31:58 - Compilation complete. Watching for file changes.
+
+Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
+Project successfully prepared (android)
+Transferring project files...
+Successfully transferred nose-step.js.
+Applying changes...
+Successfully synced application com.winenjoy.app on device TA4750GSW7.
+JS: ---- [main-page] STOP total: 1601ms count:1
+JS: Binding: Binding error while setting property items of AutoComplete<aromas>@file:///app/views/nose-step/nose-step.xml:27:3;: Error: Expect integer value as a second argument.
+JS: ---- [load-steps] STOP total: 7144ms count:1
+Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
+Project successfully prepared (android)
+Transferring project files...
+Successfully transferred nose-step.xml.
+Applying changes...
+Successfully synced application com.winenjoy.app on device TA4750GSW7.
+JS: WARNING: No timer started: main-page
+JS: Binding: Binding error while setting property items of AutoComplete<aromas>@file:///app/views/nose-step/nose-step.xml:27:3;: Error: Expect integer value as a second argument.
+JS: ---- [load-steps] STOP total: 2324ms count:1
