@@ -9,15 +9,20 @@
                orientation="horizontal"
                class="final-rating">
     <Label text="sentiment_very_satisfied"
-           class="{{ wineTasting.finalRating == 4 ? 'material-icon final-rating-4 selected': 'material-icon final-rating-4' }}" />
+           class="{{ finalRating == 4 ? 'material-icon final-rating-4 selected': 'material-icon final-rating-4' }}"
+           tap="selectFinalRating"/>
     <Label text="sentiment_satisfied"
-           class="{{ wineTasting.finalRating == 3 ? 'material-icon final-rating-3 selected': 'material-icon final-rating-3' }}" />
+           class="{{ finalRating == 3 ? 'material-icon final-rating-3 selected': 'material-icon final-rating-3' }}"
+           tap="selectFinalRating"/>
     <Label text="sentiment_neutral"
-           class="{{ wineTasting.finalRating == 2 ? 'material-icon final-rating-2 selected': 'material-icon final-rating-2' }}" />
+           class="{{ finalRating == 2 ? 'material-icon final-rating-2 selected': 'material-icon final-rating-2' }}"
+           tap="selectFinalRating"/>
     <Label text="sentiment_dissatisfied"
-           class="{{ wineTasting.finalRating == 1 ? 'material-icon final-rating-1 selected': 'material-icon final-rating-1' }}" />
+           class="{{ finalRating == 1 ? 'material-icon final-rating-1 selected': 'material-icon final-rating-1' }}"
+           tap="selectFinalRating"/>
     <Label text="sentiment_very_dissatisfied"
-           class="{{ wineTasting.finalRating == 0 ? 'material-icon final-rating-0 selected': 'material-icon final-rating-0' }}" />
+           class="{{ finalRating == 0 ? 'material-icon final-rating-0 selected': 'material-icon final-rating-0' }}"
+           tap="selectFinalRating"/>
   </StackLayout>
   <Label text="&#xE540;"
          class="material-icon form-icon"

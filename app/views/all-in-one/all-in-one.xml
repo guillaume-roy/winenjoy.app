@@ -5,9 +5,16 @@
     <ActionBar>
       <ActionBar.actionItems>
         <ActionItem ios.position="right"
-                    icon="res://ic_photo_camera_white_24dp" />
+                    icon="res://ic_photo_camera_white_24dp"
+                    tap="managePicture"
+                    visibility="{{ picture ? 'collapse' : 'visible' }}"/>
         <ActionItem ios.position="right"
-                    icon="res://ic_check_white_24dp" />
+                    icon="res://ic_photo_white_24dp"
+                    tap="managePicture"
+                    visibility="{{ picture ? 'visible' : 'collapse' }}"/>
+        <ActionItem ios.position="right"
+                    icon="res://ic_check_white_24dp"
+                    tap="saveTasting"/>
       </ActionBar.actionItems>
     </ActionBar>
   </Page.actionBar>

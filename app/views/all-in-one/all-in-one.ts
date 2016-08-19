@@ -11,6 +11,10 @@ import builder = require("ui/builder");
 import profiler = require("../../utils/profiling");
 import stackLayout = require("ui/layouts/stack-layout")
 import {Progress} from "ui/progress";
+import {Observable} from "data/observable";
+import camera = require("camera");
+import imageSource = require("image-source");
+import dialogs = require("ui/dialogs");
 
 let page: Page;
 let scrollView: scrollViewModule.ScrollView;
@@ -28,6 +32,8 @@ let tasteStepViewModel: TasteStepViewModel;
 let informationsStepViewModel: InformationsStepViewModel;
 let ratingStepViewModel: RatingStepViewModel;
 
+let allInOneViewModel: Observable;
+
 export function navigatedTo(args: EventData) {
     profiler.stop("main-page");
 
@@ -35,46 +41,83 @@ export function navigatedTo(args: EventData) {
     scrollView = <scrollViewModule.ScrollView>page.getViewById("scrollView");
     progress = <Progress>page.getViewById("stepsProgress");
 
-    scrollView.on(scrollViewModule.ScrollView.scrollEvent,
-        (event: scrollViewModule.ScrollEventData) => {
-            if (event.scrollY === 0) {
-                page.actionBar.title = "Nouvelle dégustation";
-                progress.value = 0;
-                return;
-            }
-
-            if (scrollView.verticalOffset >= scrollView.scrollableHeight) {
-                page.actionBar.title = "Conclusion";
-                progress.value = 5;
-                return;
-            }
-
-            var visualStepLocation = visualStep.getLocationOnScreen().y;
-            var noseStepLocation = noseStep.getLocationOnScreen().y;
-            var tasteStepLocation = tasteStep.getLocationOnScreen().y;
-            var informationsStepLocation = informationsStep.getLocationOnScreen().y;
-            var ratingStepLocation = ratingStep.getLocationOnScreen().y;
-            var actionBarHeight = page.actionBar.getMeasuredHeight();
-
-            if (ratingStepLocation - actionBarHeight <= 0) {
-                progress.value = 5;
-                page.actionBar.title = "Conclusion";
-            } else if (informationsStepLocation - actionBarHeight <= 0) {
-                progress.value = 4;
-                page.actionBar.title = "Informations";
-            } else if (tasteStepLocation - actionBarHeight <= 0) {
-                progress.value = 3;
-                page.actionBar.title = "Saveurs";
-            } else if (noseStepLocation - actionBarHeight <= 0) {
-                progress.value = 2;
-                page.actionBar.title = "Arômes";
-            } else if (visualStepLocation - actionBarHeight <= 0) {
-                progress.value = 1;
-                page.actionBar.title = "Aspect";
-            }
-        });
+    scrollView.on(
+        scrollViewModule.ScrollView.scrollEvent,
+        (event: scrollViewModule.ScrollEventData) => handleActionBarTitle(event.scrollY));
 
     loadSteps();
+
+    allInOneViewModel = new Observable({
+        picture: imageSource.ImageSource = null
+    });
+    allInOneViewModel.set("picture", null);
+    page.bindingContext = allInOneViewModel;
+}
+
+export function managePicture() {
+    if (allInOneViewModel.get("picture")) {
+        dialogs.confirm({
+            message: "Etes-vous sûr de vouloir supprimer cette photo ?",
+            cancelButtonText: "Non",
+            okButtonText: "Oui",
+            title: "Suppression"
+        }).then(res => {
+            if (res) {
+                allInOneViewModel.set("picture", null);
+            }
+        });
+    } else {
+        camera.takePicture({
+            height: 800,
+            keepAspectRatio: true,
+            width: 800
+        }).then(picture => {
+            console.log("pictured !");
+            //allInOneViewModel.set("picture", img);
+        });
+    }
+}
+
+export function saveTasting() {
+    console.log("saveTasting");
+}
+
+function handleActionBarTitle(scrollY: number) {
+    if (scrollY === 0) {
+        page.actionBar.title = "Nouvelle dégustation";
+        progress.value = 0;
+        return;
+    }
+
+    if (scrollView.verticalOffset >= scrollView.scrollableHeight) {
+        page.actionBar.title = "Conclusion";
+        progress.value = 5;
+        return;
+    }
+
+    var visualStepLocation = visualStep.getLocationOnScreen().y;
+    var noseStepLocation = noseStep.getLocationOnScreen().y;
+    var tasteStepLocation = tasteStep.getLocationOnScreen().y;
+    var informationsStepLocation = informationsStep.getLocationOnScreen().y;
+    var ratingStepLocation = ratingStep.getLocationOnScreen().y;
+    var actionBarHeight = page.actionBar.getMeasuredHeight();
+
+    if (ratingStepLocation - actionBarHeight <= 0) {
+        progress.value = 5;
+        page.actionBar.title = "Conclusion";
+    } else if (informationsStepLocation - actionBarHeight <= 0) {
+        progress.value = 4;
+        page.actionBar.title = "Informations";
+    } else if (tasteStepLocation - actionBarHeight <= 0) {
+        progress.value = 3;
+        page.actionBar.title = "Saveurs";
+    } else if (noseStepLocation - actionBarHeight <= 0) {
+        progress.value = 2;
+        page.actionBar.title = "Arômes";
+    } else if (visualStepLocation - actionBarHeight <= 0) {
+        progress.value = 1;
+        page.actionBar.title = "Aspect";
+    }
 }
 
 function loadSteps() {

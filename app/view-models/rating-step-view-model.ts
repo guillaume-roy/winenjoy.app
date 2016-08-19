@@ -4,6 +4,7 @@ import {CriteriaItem} from "../entities/criteriaItem";
 
 export class RatingStepViewModel extends Observable {
     private _potentials: CriteriaItem[];
+    private _finalRating: number;
     
     public get potentials() {
         return this._potentials;
@@ -13,7 +14,17 @@ export class RatingStepViewModel extends Observable {
         this.notifyPropertyChange("potentials", values);
     }
 
+    public get finalRating() {
+        return this._finalRating;
+    }
+    public set finalRating(value) {
+        this._finalRating = value;
+        this.notifyPropertyChange("finalRating", value);
+    }
+
     public init() {
+        this.finalRating = 2;
+
         var wineDataService = new WineDataService();
         wineDataService.getCriterias("potentials")
             .then(data => this.potentials = data);
