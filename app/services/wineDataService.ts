@@ -7,7 +7,7 @@ export class WineDataService {
         return new Promise<CriteriaItem[]>((resolve, reject) => {
             fs.File.fromPath(fs.path.join(fs.knownFolders.currentApp().path, "data", name + ".json")).readText()
             .then(fileContent => {
-                let jsonFile = <[]>JSON.parse(fileContent);
+                let jsonFile = <any[]>JSON.parse(fileContent);
                 resolve(_.orderBy(jsonFile, ["order", "label"]));
             }).catch(error => reject(error));
         });

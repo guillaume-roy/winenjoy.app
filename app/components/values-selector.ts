@@ -5,75 +5,75 @@ import dependencyObservableModule = require("ui/core/dependency-observable");
 import _ = require("lodash");
 
 export class ValuesSelector extends WrapLayout {
-    public static DEFAULT_CSS = "values-selector-item";
-    public static SELECTED_CSS = "values-selector-selected-item";
+    static DEFAULT_CSS = "values-selector-item";
+    private static SELECTED_CSS = "values-selector-selected-item";
 
-    public static itemsProperty = new dependencyObservableModule.Property(
+    static itemsProperty = new dependencyObservableModule.Property(
         "items",
         "ValuesSelector",
         new dependencyObservableModule.PropertyMetadata(
             [],
             dependencyObservableModule.PropertyMetadataSettings.None,
-            function(data: dependencyObservableModule.PropertyChangeData) {
+            (data: dependencyObservableModule.PropertyChangeData) => {
                 if (data.newValue) {
                     let instance = <ValuesSelector>data.object;
                     instance.items = data.newValue;
                 }
             }));
 
-    public static deleteOnClickProperty = new dependencyObservableModule.Property(
+    static deleteOnClickProperty = new dependencyObservableModule.Property(
         "deleteOnClick",
         "ValuesSelector",
         new dependencyObservableModule.PropertyMetadata(
             false,
             dependencyObservableModule.PropertyMetadataSettings.None));
 
-    public static selectedItemsProperty = new dependencyObservableModule.Property(
+    static selectedItemsProperty = new dependencyObservableModule.Property(
         "selectedItems",
         "ValuesSelector",
         new dependencyObservableModule.PropertyMetadata(
             [],
             dependencyObservableModule.PropertyMetadataSettings.None,
-            function(data: dependencyObservableModule.PropertyChangeData) {
+            (data: dependencyObservableModule.PropertyChangeData) => {
                 if (data.newValue) {
                     let instance = <ValuesSelector>data.object;
                     instance.selectedItems = data.newValue;
                 }
             }));
 
-    public static isEnabledProperty = new dependencyObservableModule.Property(
+    static isEnabledProperty = new dependencyObservableModule.Property(
         "isEnabled",
         "ValuesSelector",
         new dependencyObservableModule.PropertyMetadata(
             true,
             dependencyObservableModule.PropertyMetadataSettings.None));
 
-    public get selectedItems() {
+    get selectedItems() {
         return this._getValue(ValuesSelector.selectedItemsProperty);
     }
-    public set selectedItems(value: any[]) {
+    set selectedItems(value: any[]) {
         this._setValue(ValuesSelector.selectedItemsProperty, value);
         this.bindSelectedItems();
     }
 
-    public get deleteOnClick() {
+    get deleteOnClick() {
         return this._getValue(ValuesSelector.deleteOnClickProperty);
     }
-    public set deleteOnClick(value: boolean) {
+    set deleteOnClick(value: boolean) {
         this._setValue(ValuesSelector.deleteOnClickProperty, value);
     }
 
-    public get isEnabled() {
+    get isEnabled() {
         return this._getValue(ValuesSelector.isEnabledProperty);
     }
-    public set isEnabled(value: boolean) {
+    set isEnabled(value: boolean) {
         this._setValue(ValuesSelector.isEnabledProperty, value);
     }
 
-    public get items() {
+    get items() {
         return this._getValue(ValuesSelector.itemsProperty);
     }
-    public set items(value: any) {
+    set items(value: any) {
         this._setValue(ValuesSelector.itemsProperty, value);
         this.createUI();
     }
