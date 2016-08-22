@@ -1,6 +1,9 @@
 ﻿<GridLayout xmlns:dd="nativescript-drop-down"
+            xmlns:vs="components/values-selector"
+            xmlns:ac="nativescript-autocomplete"
             columns="auto, *"
-            rows="*,*,*,*,*,*,*,*,*">
+            rows="*,*,*,*,*,*,*,*,*,*"
+            loaded="loaded">
   <GridLayout class="form-section-actions"
               colSpan="2"
               columns="*, auto">
@@ -93,9 +96,15 @@
          class="material-icon form-icon"
          row="8"
          visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}"/>
-  <TextField row="8"
-             col="1"
-             class="form-single-line"
-             hint="Ajouter un cépage"
-             visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}"/>
+  <ac:AutoComplete id="grapes"
+                   col="1"
+                   row="8"
+                   items="{{ grapesLabels }}"
+                   itemTap="selectGrape"
+                   visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}" />
+  <vs:ValuesSelector items="{{ selectedGrapes }}"
+                     deleteOnClick="true"
+                     col="1"
+                     row="9"
+                     visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}"/>
 </GridLayout>
