@@ -18,7 +18,7 @@ import dialogs = require("ui/dialogs");
 
 let page: Page;
 let scrollView: scrollViewModule.ScrollView;
-let progress: Progress;
+let actionBarHeight: number;
 
 let visualStep: View;
 let noseStep: View;
@@ -38,8 +38,8 @@ export function navigatedTo(args: EventData) {
     profiler.stop("main-page");
 
     page = <Page>args.object;
+    actionBarHeight = page.actionBar.getMeasuredHeight();
     scrollView = <scrollViewModule.ScrollView>page.getViewById("scrollView");
-    progress = <Progress>page.getViewById("stepsProgress");
 
     scrollView.on(
         scrollViewModule.ScrollView.scrollEvent,
@@ -71,9 +71,8 @@ export function managePicture() {
             height: 800,
             keepAspectRatio: true,
             width: 800
-        }).then(picture => {
-            console.log("pictured !");
-            //allInOneViewModel.set("picture", img);
+        }).then(img => {
+            allInOneViewModel.set("picture", img);
         });
     }
 }
@@ -85,13 +84,11 @@ export function saveTasting() {
 function handleActionBarTitle(scrollY: number) {
     if (scrollY === 0) {
         page.actionBar.title = "Nouvelle dégustation";
-        progress.value = 0;
         return;
     }
 
     if (scrollView.verticalOffset >= scrollView.scrollableHeight) {
         page.actionBar.title = "Conclusion";
-        progress.value = 5;
         return;
     }
 
@@ -100,22 +97,16 @@ function handleActionBarTitle(scrollY: number) {
     var tasteStepLocation = tasteStep.getLocationOnScreen().y;
     var informationsStepLocation = informationsStep.getLocationOnScreen().y;
     var ratingStepLocation = ratingStep.getLocationOnScreen().y;
-    var actionBarHeight = page.actionBar.getMeasuredHeight();
 
     if (ratingStepLocation - actionBarHeight <= 0) {
-        progress.value = 5;
         page.actionBar.title = "Conclusion";
     } else if (informationsStepLocation - actionBarHeight <= 0) {
-        progress.value = 4;
         page.actionBar.title = "Informations";
     } else if (tasteStepLocation - actionBarHeight <= 0) {
-        progress.value = 3;
         page.actionBar.title = "Saveurs";
     } else if (noseStepLocation - actionBarHeight <= 0) {
-        progress.value = 2;
         page.actionBar.title = "Arômes";
     } else if (visualStepLocation - actionBarHeight <= 0) {
-        progress.value = 1;
         page.actionBar.title = "Aspect";
     }
 }

@@ -18,30 +18,23 @@
       </ActionBar.actionItems>
     </ActionBar>
   </Page.actionBar>
-  <StackLayout>
-    <StackLayout id="progressContainer">
-      <Progress id="stepsProgress"
-                maxValue="5"
-                value="0"/>
+  <ScrollView id="scrollView">
+    <StackLayout>
+      <card:CardView elevation="10">
+        <StackLayout id="visualStepContainer"/>
+      </card:CardView>
+      <card:CardView elevation="10">
+        <StackLayout id="noseStepContainer"/>
+      </card:CardView>
+      <card:CardView elevation="10">
+        <StackLayout id="tasteStepContainer"/>
+      </card:CardView>
+      <card:CardView elevation="10">
+        <StackLayout id="informationsStepContainer"/>
+      </card:CardView>
+      <card:CardView elevation="10">
+        <StackLayout id="ratingStepContainer"/>
+      </card:CardView>
     </StackLayout>
-    <ScrollView id="scrollView">
-      <StackLayout>
-        <card:CardView elevation="10">
-          <StackLayout id="visualStepContainer"/>
-        </card:CardView>
-        <card:CardView elevation="10">
-          <StackLayout id="noseStepContainer"/>
-        </card:CardView>
-        <card:CardView elevation="10">
-          <StackLayout id="tasteStepContainer"/>
-        </card:CardView>
-        <card:CardView elevation="10">
-          <StackLayout id="informationsStepContainer"/>
-        </card:CardView>
-        <card:CardView elevation="10">
-          <StackLayout id="ratingStepContainer"/>
-        </card:CardView>
-      </StackLayout>
-    </ScrollView>
-  </StackLayout>
+  </ScrollView>
 </Page>

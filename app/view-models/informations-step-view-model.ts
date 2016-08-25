@@ -51,7 +51,7 @@ export class InformationsStepViewModel extends Observable {
         this.years = years;
     }
 
-    public addGrape(grapeLabel: string) {
+    public selectGrape(grapeLabel: string) {
         var grapes = this.get("grapes");
         var grape = _.find(grapes, (x: CriteriaItem) => x.label === grapeLabel);
 

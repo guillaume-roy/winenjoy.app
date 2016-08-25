@@ -9,6 +9,15 @@
     margin-bottom: 6;
 }
 
+.form-button {
+    background-color: white;
+    border-width: 0;
+    horizontal-align: left;
+    text-align: left;
+    width: 100%;
+    color: $primary-color;
+}
+
 .form-icon {
     font-size: 24;
     vertical-align: center;

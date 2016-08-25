@@ -194,6 +194,8 @@ export class EditTastingViewModel extends Observable {
         this._tastingsService = new TastingsService();
         this._wineDataService = new WineDataService();
 
+        wineTasting = this._tastingsService.newTasting();
+
         this.isEditMode = !_.isEmpty(wineTasting.id);
         this.wineTasting = wineTasting;
 

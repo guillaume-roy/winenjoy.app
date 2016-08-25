@@ -13,7 +13,7 @@ export function loaded(args: any) {
 
 export function selectGrape(args: { data: string, object: any }) {
     var vm = <InformationsStepViewModel>args.object.bindingContext;
-    vm.addGrape(args.data);
+    vm.selectGrape(args.data);
     grapesAutoComplete.android.setText("");
 }
 

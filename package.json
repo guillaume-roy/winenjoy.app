@@ -8,23 +8,24 @@
     }
   },
   "dependencies": {
-    "lodash": "4.15.0",
+    "lodash": "*",
     "nativescript-appversion": "1.2.0",
     "nativescript-autocomplete": "1.0.0",
+    "nativescript-cardview": "1.1.11",
     "nativescript-drop-down": "1.2.0",
     "nativescript-floatingactionbutton": "2.2.4",
     "nativescript-google-analytics": "0.2.9",
     "nativescript-plugin-firebase": "3.5.3",
-    "tns-core-modules": "2.2.1",
-    "nativescript-cardview": "1.1.11"
+    "tns-core-modules": "^2.2.1"
   },
   "devDependencies": {
     "babel-traverse": "6.13.0",
     "babel-types": "6.13.0",
     "babylon": "6.9.0",
     "filewalker": "0.1.3",
-    "gulp-sass": "2.3.2",
-    "gulp-run": "1.7.1",
+    "gulp":  "*" ,
+    "gulp-sass": "*",
+    "gulp-run": "*",
     "lazy": "1.0.11",
     "nativescript-dev-typescript": "0.3.2",
     "typescript": "2.0.0"

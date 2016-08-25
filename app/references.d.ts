@@ -6,3 +6,4 @@
 
 declare var android: any;
 declare var java: any;
+declare function getElementsByClassName(className: string): any[];

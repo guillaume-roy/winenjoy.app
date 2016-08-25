@@ -1,28 +1,50 @@
-﻿import {NoseStepViewModel} from "../../view-models/nose-step-view-model";
+﻿import {Page} from "ui/page";
+import {NoseStepViewModel} from "../../view-models/nose-step-view-model";
+import {Views} from "../../utils/views";
 
-var aromasAutoComplete;
-var aromaDefectsAutoComplete;
+let page: Page;
 
 export function loaded(args: any) {
-    aromasAutoComplete = args.object.getViewById("aromas");
-    aromasAutoComplete.android.setHint("Ajouter un arôme");
-    aromasAutoComplete.android.setHintTextColor(android.graphics.Color.parseColor("#727272"));
-    aromasAutoComplete.android.setTextSize(16);
-
-    aromaDefectsAutoComplete = args.object.getViewById("aromaDefects");
-    aromaDefectsAutoComplete.android.setHint("Ajouter un défaut d'arôme");
-    aromaDefectsAutoComplete.android.setHintTextColor(android.graphics.Color.parseColor("#727272"));
-    aromaDefectsAutoComplete.android.setTextSize(16);
+    page = args.object.page;
 }
 
-export function selectAroma(args: { data: string, object: any }) {
-    var vm = <NoseStepViewModel>args.object.bindingContext;
-    vm.addAroma(args.data);
-    aromasAutoComplete.android.setText("");
+export function selectAromas(args: any) {
+    let viewModel: NoseStepViewModel = args.object.bindingContext;
+    page.showModal(
+        Views.groupingListPicker,
+        {
+            criterias: "aromas",
+            groupingIcon: "whatshot",
+            multiple: true,
+            searchBarHintText: "Sélectionez des arômes",
+            selectedItems: viewModel.selectedAromas
+        },
+        (data: any[]) => {
+            if (data && data.length > 0) {
+                viewModel.selectedAromas = null;
+                viewModel.selectedAromas = data;
+            }
+        },
+        true);
 }
 
-export function selectAromaDefect(args: { data: string, object: any }) {
-    var vm = <NoseStepViewModel>args.object.bindingContext;
-    vm.addAromaDefect(args.data);
-    aromaDefectsAutoComplete.android.setText("");
+export function selectAromaDefects(args: any) {
+    let viewModel: NoseStepViewModel = args.object.bindingContext;
+    page.showModal(
+        Views.groupingListPicker,
+        {
+            criterias: "aromas",
+            groupingIcon: "whatshot",
+            isDefects: true,
+            multiple: true,
+            searchBarHintText: "Sélectionez des défauts d'arôme",
+            selectedItems: viewModel.selectedAromaDefects
+        },
+        (data: any[]) => {
+            if (data && data.length > 0) {
+                viewModel.selectedAromaDefects = null;
+                viewModel.selectedAromaDefects = data;
+            }
+        },
+        true);
 }
