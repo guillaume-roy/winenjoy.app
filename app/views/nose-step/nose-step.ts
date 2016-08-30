@@ -31,11 +31,10 @@ export function selectAromas(args: any) {
 export function selectAromaDefects(args: any) {
     let viewModel: NoseStepViewModel = args.object.bindingContext;
     page.showModal(
-        Views.groupingListPicker,
+        Views.listPicker,
         {
             criterias: "aromas",
             groupingIcon: "whatshot",
-            isDefects: true,
             multiple: true,
             searchBarHintText: "Sélectionez des défauts d'arôme",
             selectedItems: viewModel.selectedAromaDefects

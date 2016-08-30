@@ -95,7 +95,7 @@ export class ListPickerViewModel extends Observable {
             new WineDataService().getCriterias("aromas")
                 .then(data => {
                     this._itemsSource = _.orderBy(_.flattenDeep<Observable>(
-                        data.filter(d => d.type === "DEFECTS").map(a => {
+                        data.filter(d => d.code === "DEFECTS").map(a => {
                             return a.values.map(i => {
                                 return new Observable({
                                     isSelected: _.some(this._selectedItems, i),

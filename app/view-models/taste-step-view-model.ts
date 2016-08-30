@@ -10,8 +10,17 @@ export class TasteStepViewModel extends Observable {
     public get selectedFlavors() {
         return this._selectedFlavors;
     }
+    public set selectedFlavors(value) {
+        this._selectedFlavors = value;
+        this.notifyPropertyChange("selectedFlavors", value);
+    }
+
     public get selectedFlavorDefects() {
         return this._selectedFlavorDefects;
+    }
+    public set selectedFlavorDefects(value) {
+        this._selectedFlavorDefects = value;
+        this.notifyPropertyChange("selectedFlavorDefects", value);
     }
 
     public init() {
@@ -28,45 +37,23 @@ export class TasteStepViewModel extends Observable {
             .then(data => this.set("tannins", data));
         wineDataService.getCriterias("length")
             .then(data => this.set("length", data));
-        wineDataService.getCriterias("aromas")
-            .then(data => {
-                var nestedAromas = data.filter(d => d.code !== "DEFECTS")
-                    .map(a => {
-                        return a.values;
-                    });
-                let aromas = _.sortBy(_.flattenDeep<CriteriaItem>(nestedAromas));
-                this.set("flavors", aromas);
-                this.set("flavorsLabels", aromas.map(a => a.label));
+        //wineDataService.getCriterias("aromas")
+        //    .then(data => {
+        //        var nestedAromas = data.filter(d => d.code !== "DEFECTS")
+        //            .map(a => {
+        //                return a.values;
+        //            });
+        //        let aromas = _.sortBy(_.flattenDeep<CriteriaItem>(nestedAromas));
+        //        this.set("flavors", aromas);
+        //        this.set("flavorsLabels", aromas.map(a => a.label));
 
-                var nestedAromaDefects = data.filter(d => d.code === "DEFECTS")
-                    .map(a => {
-                        return a.values;
-                    });
-                let defects = _.sortBy(_.flattenDeep<CriteriaItem>(nestedAromaDefects));
-                this.set("flavorDefects", defects);
-                this.set("flavorDefectsLabels", defects.map(a => a.label));
-            });
-    }
-
-    public addFlavor(flavorLabel: string) {
-        var flavors = this.get("flavors");
-        var flavor = _.find(flavors, (x: CriteriaItem) => x.label === flavorLabel);
-
-        if (!_.some(this.selectedFlavors, (x: CriteriaItem) => x.id === flavor.id)) {
-            this.selectedFlavors.push(flavor);
-            this.notifyPropertyChange("selectedFlavors", []);
-            this.notifyPropertyChange("selectedFlavors", this.selectedFlavors);
-        }
-    }
-
-    public addFlavorDefect(flavorLabel: string) {
-        var defects = this.get("flavorDefects");
-        var defect = _.find(defects, (x: CriteriaItem) => x.label === flavorLabel);
-
-        if (!_.some(this.selectedFlavorDefects, (x: CriteriaItem) => x.id === defect.id)) {
-            this.selectedFlavorDefects.push(defect);
-            this.notifyPropertyChange("selectedFlavorDefects", []);
-            this.notifyPropertyChange("selectedFlavorDefects", this.selectedFlavorDefects);
-        }
+        //        var nestedAromaDefects = data.filter(d => d.code === "DEFECTS")
+        //            .map(a => {
+        //                return a.values;
+        //            });
+        //        let defects = _.sortBy(_.flattenDeep<CriteriaItem>(nestedAromaDefects));
+        //        this.set("flavorDefects", defects);
+        //        this.set("flavorDefectsLabels", defects.map(a => a.label));
+        //    });
     }
 }

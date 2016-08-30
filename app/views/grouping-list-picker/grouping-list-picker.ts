@@ -10,13 +10,13 @@ let viewModel: GroupingListPickerViewModel;
 export function onShownModally(args: pages.ShownModallyData) {
     closeCallback = args.closeCallback;
 
-    setTimeout(function() {
+    setTimeout(() => {
         viewModel = new GroupingListPickerViewModel(args.context);
         let page = <Page>args.object;
         page.bindingContext = viewModel;
 
         new AnalyticsService().logView("grouping-list-picker");
-    }, 0);
+    }, 50);
 }
 
 export function onToggleGroup(args: EventData) {
@@ -26,7 +26,7 @@ export function onToggleGroup(args: EventData) {
 export function onSelectItem(args) {
     viewModel.selectItem(args.view.bindingContext);
 
-    if (!viewModel.multiple) {
+    if (!viewModel.get("multiple")) {
         closeCallback(viewModel.selectedItem);
     }
 }
