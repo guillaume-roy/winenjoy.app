@@ -26,7 +26,7 @@ export class RatingStepViewModel extends Observable {
         this.finalRating = 2;
 
         var wineDataService = new WineDataService();
-        wineDataService.getCriterias("potentials")
+        wineDataService.getCriterias("developments")
             .then(data => this.potentials = data);
     }
 }
