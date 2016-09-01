@@ -1,6 +1,6 @@
 ﻿import {Observable} from "data/observable";
 import {CriteriaItem} from "../entities/criteriaItem";
-import {WineDataService} from "../services/wineDataService";
+import {WineCriteriasService} from "../services/wineCriteriasService";
 import _ = require("lodash");
 
 export class InformationsStepViewModel extends Observable {
@@ -33,7 +33,7 @@ export class InformationsStepViewModel extends Observable {
         this.isBlindTasting = false;
         this._selectedGrapes = [];
 
-        var wineDataService = new WineDataService();
+        var wineDataService = new WineCriteriasService();
         wineDataService.getCriterias("grapes")
             .then(data => {
                 let grapes = _.sortBy(data);

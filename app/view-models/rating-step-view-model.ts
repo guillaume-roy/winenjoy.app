@@ -1,5 +1,5 @@
 ﻿import {Observable} from "data/observable";
-import {WineDataService} from "../services/wineDataService";
+import {WineCriteriasService} from "../services/wineCriteriasService";
 import {CriteriaItem} from "../entities/criteriaItem";
 
 export class RatingStepViewModel extends Observable {
@@ -25,7 +25,7 @@ export class RatingStepViewModel extends Observable {
     public init() {
         this.finalRating = 2;
 
-        var wineDataService = new WineDataService();
+        var wineDataService = new WineCriteriasService();
         wineDataService.getCriterias("developments")
             .then(data => this.potentials = data);
     }

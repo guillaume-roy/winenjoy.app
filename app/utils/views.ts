@@ -1,9 +1,7 @@
 export var Views = {
     main: "views/main/main",
     gradientColorPicker: "views/gradient-color-picker/gradient-color-picker",
-    aromasPicker: "views/aromas-picker/aromas-picker",
     login: "views/login/login",
-    yearPicker: "views/year-picker/year-picker",
     listPicker: "views/list-picker/list-picker",
     groupingListPicker: "views/grouping-list-picker/grouping-list-picker",
     editTasting: "views/edit-tasting/edit-tasting",

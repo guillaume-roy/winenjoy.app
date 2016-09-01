@@ -1,7 +1,7 @@
 import _ = require("lodash");
 import {Observable} from "data/observable";
 import {CriteriaItem} from "../entities/criteriaItem";
-import {WineDataService} from "../services/wineDataService";
+import {WineCriteriasService} from "../services/wineCriteriasService";
 
 export class GroupingListPickerViewModel extends Observable {
     private _selectedItems: CriteriaItem[];
@@ -38,7 +38,7 @@ export class GroupingListPickerViewModel extends Observable {
         }
 
         if (args.criterias === "aromas") {
-            new WineDataService().getCriterias(args.criterias).then(data => {
+            new WineCriteriasService().getCriterias(args.criterias).then(data => {
                 this.items = this.processChild(data.filter(d => d.code !== "DEFECTS").map(g => new Observable({
                     groupingIcon: this.get("groupingIcon"),
                     isExpanded: false,
@@ -46,7 +46,7 @@ export class GroupingListPickerViewModel extends Observable {
                 })));
             });
         } else {
-            new WineDataService().getCriterias(args.criterias).then(data => {
+            new WineCriteriasService().getCriterias(args.criterias).then(data => {
                 this.items = this.processChild(data.map(g => new Observable({
                     groupingIcon: this.get("groupingIcon"),
                     isExpanded: false,

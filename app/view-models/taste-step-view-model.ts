@@ -1,5 +1,5 @@
 ﻿import {Observable} from "data/observable";
-import {WineDataService} from "../services/wineDataService";
+import {WineCriteriasService} from "../services/wineCriteriasService";
 import {CriteriaItem} from "../entities/criteriaItem";
 import _ = require("lodash");
 
@@ -26,7 +26,7 @@ export class TasteStepViewModel extends Observable {
     public init() {
         this._selectedFlavors = [];
         this._selectedFlavorDefects = [];
-        var wineDataService = new WineDataService();
+        var wineDataService = new WineCriteriasService();
         wineDataService.getCriterias("intensities")
             .then(data => this.set("intensities", data));
         wineDataService.getCriterias("attacks")

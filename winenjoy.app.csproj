@@ -243,8 +243,8 @@
     <Content Include="app\services\userService.js">
       <DependentUpon>userService.ts</DependentUpon>
     </Content>
-    <Content Include="app\services\wineDataService.js">
-      <DependentUpon>wineDataService.ts</DependentUpon>
+    <Content Include="app\services\wineCriteriasService.js">
+      <DependentUpon>wineCriteriasService.ts</DependentUpon>
     </Content>
     <Content Include="app\utils\color.js">
       <DependentUpon>color.ts</DependentUpon>
@@ -266,9 +266,6 @@
     </Content>
     <Content Include="app\utils\views.js">
       <DependentUpon>views.ts</DependentUpon>
-    </Content>
-    <Content Include="app\view-models\aromas-picker-view-model.js">
-      <DependentUpon>aromas-picker-view-model.ts</DependentUpon>
     </Content>
     <Content Include="app\view-models\change-password-view-model.js">
       <DependentUpon>change-password-view-model.ts</DependentUpon>
@@ -309,9 +306,6 @@
     <Content Include="app\view-models\visual-step-view-model.js">
       <DependentUpon>visual-step-view-model.ts</DependentUpon>
     </Content>
-    <Content Include="app\view-models\year-picker-view-model.js">
-      <DependentUpon>year-picker-view-model.ts</DependentUpon>
-    </Content>
     <Content Include="app\views\all-in-one\all-in-one.css">
       <DependentUpon>all-in-one.scss</DependentUpon>
     </Content>
@@ -321,13 +315,6 @@
     <Content Include="app\views\all-in-one\all-in-one.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="app\views\aromas-picker\aromas-picker.css">
-      <DependentUpon>aromas-picker.scss</DependentUpon>
-    </Content>
-    <Content Include="app\views\aromas-picker\aromas-picker.js">
-      <DependentUpon>aromas-picker.ts</DependentUpon>
-    </Content>
-    <Content Include="app\views\aromas-picker\aromas-picker.xml" />
     <Content Include="app\views\change-password\change-password.css">
       <DependentUpon>change-password.scss</DependentUpon>
     </Content>
@@ -427,13 +414,6 @@
     <Content Include="app\views\visual-step\visual-step.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="app\views\year-picker\year-picker.css">
-      <DependentUpon>year-picker.scss</DependentUpon>
-    </Content>
-    <Content Include="app\views\year-picker\year-picker.js">
-      <DependentUpon>year-picker.ts</DependentUpon>
-    </Content>
-    <Content Include="app\views\year-picker\year-picker.xml" />
     <Content Include="gulpfile.js" />
     <Content Include="resources\img\bottle.svg" />
     <Content Include="resources\img\earth.svg" />
@@ -470,7 +450,6 @@
     <Content Include="app\styles\_fonts.scss" />
     <Content Include="app\styles\_material-theme.scss" />
     <Content Include="app\styles\_values-selector.scss" />
-    <Content Include="app\views\aromas-picker\aromas-picker.scss" />
     <Content Include="app\views\change-password\change-password.scss" />
     <Content Include="app\views\edit-tasting\edit-tasting.scss" />
     <Content Include="app\views\gradient-color-picker\gradient-color-picker.scss" />
@@ -479,7 +458,6 @@
     <Content Include="app\views\list-picker\list-picker.scss" />
     <Content Include="app\views\login\login.scss" />
     <Content Include="app\views\main\main.scss" />
-    <Content Include="app\views\year-picker\year-picker.scss" />
     <Content Include="package.json" />
     <Content Include="resources\fonts\selection.json" />
     <Content Include="resources\fonts\winenjoy.ttf" />
@@ -500,7 +478,7 @@
     <TypeScriptCompile Include="app\services\exportDataService.ts" />
     <TypeScriptCompile Include="app\services\tastingsService.ts" />
     <TypeScriptCompile Include="app\services\userService.ts" />
-    <TypeScriptCompile Include="app\services\wineDataService.ts" />
+    <TypeScriptCompile Include="app\services\wineCriteriasService.ts" />
     <TypeScriptCompile Include="app\utils\color.ts" />
     <TypeScriptCompile Include="app\utils\config.ts" />
     <TypeScriptCompile Include="app\utils\converters.ts" />
@@ -508,7 +486,6 @@
     <TypeScriptCompile Include="app\utils\profiling.ts" />
     <TypeScriptCompile Include="app\utils\uuid.ts" />
     <TypeScriptCompile Include="app\utils\views.ts" />
-    <TypeScriptCompile Include="app\view-models\aromas-picker-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\change-password-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\edit-tasting-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\rating-step-view-model.ts" />
@@ -522,9 +499,7 @@
     <TypeScriptCompile Include="app\view-models\nose-step-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\taste-step-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\visual-step-view-model.ts" />
-    <TypeScriptCompile Include="app\view-models\year-picker-view-model.ts" />
     <TypeScriptCompile Include="app\views\all-in-one\all-in-one.ts" />
-    <TypeScriptCompile Include="app\views\aromas-picker\aromas-picker.ts" />
     <TypeScriptCompile Include="app\views\change-password\change-password.ts" />
     <TypeScriptCompile Include="app\views\edit-tasting\edit-tasting.ts" />
     <TypeScriptCompile Include="app\views\rating-step\rating-step.ts" />
@@ -538,7 +513,6 @@
     <TypeScriptCompile Include="app\views\nose-step\nose-step.ts" />
     <TypeScriptCompile Include="app\views\taste-step\taste-step.ts" />
     <TypeScriptCompile Include="app\views\visual-step\visual-step.ts" />
-    <TypeScriptCompile Include="app\views\year-picker\year-picker.ts" />
     <TypeScriptCompile Include="references.d.ts" />
     <TypeScriptCompile Include="typings\lodash.d.ts" />
   </ItemGroup>

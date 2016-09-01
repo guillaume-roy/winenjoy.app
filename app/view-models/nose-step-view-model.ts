@@ -1,5 +1,5 @@
 ﻿import {Observable} from "data/observable";
-import {WineDataService} from "../services/wineDataService";
+import {WineCriteriasService} from "../services/wineCriteriasService";
 import {CriteriaItem} from "../entities/criteriaItem";
 
 export class NoseStepViewModel extends Observable {
@@ -25,7 +25,7 @@ export class NoseStepViewModel extends Observable {
     public init() {
         this.selectedAromas = [];
         this._selectedAromaDefects = [];
-        var wineDataService = new WineDataService();
+        var wineDataService = new WineCriteriasService();
         wineDataService.getCriterias("intensities")
             .then(data => this.set("intensities", data));
         wineDataService.getCriterias("developments")

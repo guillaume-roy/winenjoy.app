@@ -11,7 +11,7 @@ export function loaded(args: any) {
 export function selectAromas(args: any) {
     let viewModel: NoseStepViewModel = args.object.bindingContext;
     page.showModal(
-        Views.groupingListPicker,
+        Views.listPicker,
         {
             criterias: "aromas",
             groupingIcon: "whatshot",
@@ -33,7 +33,7 @@ export function selectAromaDefects(args: any) {
     page.showModal(
         Views.listPicker,
         {
-            criterias: "aromas",
+            criterias: "aromaDefects",
             groupingIcon: "whatshot",
             multiple: true,
             searchBarHintText: "Sélectionez des défauts d'arôme",

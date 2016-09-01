@@ -1,5 +1,5 @@
 ﻿import {Observable} from "data/observable";
-import {WineDataService} from "../services/wineDataService";
+import {WineCriteriasService} from "../services/wineCriteriasService";
 import {CriteriaItem} from "../entities/criteriaItem";
 
 export class VisualStepViewModel extends Observable {
@@ -32,7 +32,7 @@ export class VisualStepViewModel extends Observable {
     }
 
     public init() {
-        var wineDataService = new WineDataService();
+        var wineDataService = new WineCriteriasService();
         wineDataService.getCriterias("limpidities")
             .then(data => this.limpidities = data);
         wineDataService.getCriterias("shines")

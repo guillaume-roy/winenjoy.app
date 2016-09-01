@@ -1,7 +1,7 @@
 import _ = require("lodash");
 import {Observable} from "data/observable";
 import {CriteriaItem} from "../entities/criteriaItem";
-import {WineDataService} from "../services/wineDataService";
+import {WineCriteriasService} from "../services/wineCriteriasService";
 import {Diacritics} from "../utils/diacritics";
 import {UUID} from "../utils/uuid";
 
@@ -91,23 +91,23 @@ export class ListPickerViewModel extends Observable {
             this._selectedItems = [];
         }
 
-        if (args.criterias === "aromas") {
-            new WineDataService().getCriterias("aromas")
-                .then(data => {
-                    this._itemsSource = _.orderBy(_.flattenDeep<Observable>(
-                        data.filter(d => d.code === "DEFECTS").map(a => {
-                            return a.values.map(i => {
-                                return new Observable({
-                                    isSelected: _.some(this._selectedItems, i),
-                                    item: i
-                                });
-                            });
-                        })
-                    ), ["item.label"]);
-                    this.items = this._itemsSource;
-                });
-        } else {
-            new WineDataService().getCriterias(args.criterias)
+        //if (args.criterias === "aromas") {
+        //    new WineCriteriasService().getCriterias("aromas")
+        //        .then(data => {
+        //            this._itemsSource = _.orderBy(_.flattenDeep<Observable>(
+        //                data.filter(d => d.code === "DEFECTS").map(a => {
+        //                    return a.values.map(i => {
+        //                        return new Observable({
+        //                            isSelected: _.some(this._selectedItems, i),
+        //                            item: i
+        //                        });
+        //                    });
+        //                })
+        //            ), ["item.label"]);
+        //            this.items = this._itemsSource;
+        //        });
+        //} else {
+        new WineCriteriasService().getCriterias(args.criterias)
             .then(data => {
                 if (!_.isEmpty(this.parentId)) {
                     data = data.filter(d => {
@@ -123,14 +123,14 @@ export class ListPickerViewModel extends Observable {
                 });
                 this.items = this._itemsSource;
             });
-        }
+        //}
     }
 
     public toggleItem(index: number) {
         let selectedItem = this.items[index];
 
         if (!this.multiple) {
-            this._selectedItems = [ selectedItem.item ];
+            this._selectedItems = [selectedItem.item];
         } else {
             if (selectedItem.isSelected) {
                 _.remove(this._selectedItems, selectedItem.item);

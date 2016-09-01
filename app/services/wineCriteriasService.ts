@@ -1,7 +1,7 @@
 import {CriteriaItem} from "../entities/criteriaItem";
 import _ = require("lodash");
 
-export class WineDataService {
+export class WineCriteriasService {
     private get wineCriterias() {
         return global.wineCriterias;
     }

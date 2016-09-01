@@ -2,13 +2,13 @@ import _ = require("lodash");
 import {Observable} from "data/observable";
 import {WineTasting} from "../entities/wineTasting";
 import {CriteriaItem} from "../entities/criteriaItem";
-import {WineDataService} from "../services/wineDataService";
+import {WineCriteriasService} from "../services/wineCriteriasService";
 import {TastingsService} from "../services/tastingsService";
 import imageSource = require("image-source");
 import fs = require("file-system");
 
 export class EditTastingViewModel extends Observable {
-    private _wineDataService: WineDataService;
+    private _wineCriteriasService: WineCriteriasService;
     private _tastingsService: TastingsService;
     private _wineTasting: WineTasting;
     private _isEditMode: boolean;
@@ -192,7 +192,7 @@ export class EditTastingViewModel extends Observable {
         super();
 
         this._tastingsService = new TastingsService();
-        this._wineDataService = new WineDataService();
+        this._wineCriteriasService = new WineCriteriasService();
 
         wineTasting = this._tastingsService.newTasting();
 
@@ -217,28 +217,28 @@ export class EditTastingViewModel extends Observable {
         this.acidityCriterias = [];
         this.attackCriterias = [];
 
-        this._wineDataService = new WineDataService();
-        this._wineDataService.getCriterias("limpidities")
+        this._wineCriteriasService = new WineCriteriasService();
+        this._wineCriteriasService.getCriterias("limpidities")
             .then(data => this.limpidityCriterias = data);
-        this._wineDataService.getCriterias("shines")
+        this._wineCriteriasService.getCriterias("shines")
             .then(data => this.shineCriterias = data);
-        this._wineDataService.getCriterias("tears")
+        this._wineCriteriasService.getCriterias("tears")
             .then(data => this.tearCriterias = data);
-        this._wineDataService.getCriterias("bubbles")
+        this._wineCriteriasService.getCriterias("bubbles")
             .then(data => this.bubbleCriterias = data);
-        this._wineDataService.getCriterias("intensities")
+        this._wineCriteriasService.getCriterias("intensities")
             .then(data => this.intensityCriterias = data);
-        this._wineDataService.getCriterias("wineTypes")
+        this._wineCriteriasService.getCriterias("wineTypes")
             .then(data => {
                 this._wineTypes = data;
                 this.wineTypeSelectedIndex = this.isEditMode ? data.indexOf(_.find(data, this.wineTasting.wineType)) : 0;
                 this._firstBindingTime = false;
             });
-        this._wineDataService.getCriterias("length")
+        this._wineCriteriasService.getCriterias("length")
             .then(data => this.lengthCriterias = data);
-        this._wineDataService.getCriterias("redTannics")
+        this._wineCriteriasService.getCriterias("redTannics")
             .then(data => this.tannicCriterias = data);
-        this._wineDataService.getCriterias("whiteAcidities")
+        this._wineCriteriasService.getCriterias("whiteAcidities")
             .then(data => this.acidityCriterias = data);
 
         if (this.isEditMode && this.wineTasting.containsPicture) {
@@ -353,7 +353,7 @@ export class EditTastingViewModel extends Observable {
                 break;
         }
 
-        this._wineDataService.getCriterias(criteriasName).then(data => {
+        this._wineCriteriasService.getCriterias(criteriasName).then(data => {
             this.attackCriterias = data;
         });
 
