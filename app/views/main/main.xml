@@ -9,8 +9,10 @@
       </ActionBar.actionItems>
     </ActionBar>
   </Page.actionBar>
-  <GridLayout>
-    <ListView items="{{ tastings }}" visibility="{{ tastings && tastings.length !== 0 ? 'visible' : 'collapse' }}" itemTap="onViewTasting" id="tastings-list">
+  <GridLayout rows="*,*">
+    <Button text="All In One" tap="goToAllInOne" />
+    <Button text="All In Tabs" row="1" tap="goToAllInTabs" />
+    <!--<ListView items="{{ tastings }}" visibility="{{ tastings && tastings.length !== 0 ? 'visible' : 'collapse' }}" itemTap="onViewTasting" id="tastings-list">
         <ListView.itemTemplate>
             <GridLayout columns="auto, *, auto" class="list-item">
                 <StackLayout backgroundColor="{{ color }}" class="list-item-icon" />
@@ -40,6 +42,6 @@
             <Label text="Aucune dégustation" class="no-tasting-message" />
         </StackLayout>
         <Button text="Créer une dégustation" class="first-tasting-button" tap="onCreateFirstTasting" />
-    </StackLayout>
+    </StackLayout>-->
   </GridLayout>
 </Page>

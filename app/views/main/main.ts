@@ -9,10 +9,33 @@ import {AnalyticsService} from "../../services/analyticsService";
 import _ = require("lodash");
 import dialogs = require("ui/dialogs");
 import application = require("application");
+import profiler = require("../../utils/profiling");
 
 let viewModel: MainViewModel;
 let analyticsService: AnalyticsService;
 let page: Page;
+
+export function goToAllInOne() {
+    console.log("all-in-one");
+    profiler.start("main-page");
+    frameModule.topmost().navigate({
+        animated: false,
+        backstackVisible: false,
+        context: viewModel.newTasting(),
+        moduleName: Views.allInOne4
+    });
+}
+
+export function goToAllInTabs() {
+    console.log("all-in-tabs");
+    profiler.start("main-page");
+    frameModule.topmost().navigate({
+        animated: false,
+        backstackVisible: false,
+        context: viewModel.newTasting(),
+        moduleName: Views.allInOne3
+    });
+}
 
 export function navigatedTo(args: EventData) {
     page = <Page>args.object;

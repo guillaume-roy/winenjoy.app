@@ -306,6 +306,27 @@
     <Content Include="app\view-models\visual-step-view-model.js">
       <DependentUpon>visual-step-view-model.ts</DependentUpon>
     </Content>
+    <Content Include="app\views\all-in-one2\all-in-one2.css">
+      <DependentUpon>all-in-one2.scss</DependentUpon>
+    </Content>
+    <Content Include="app\views\all-in-one2\all-in-one2.js">
+      <DependentUpon>all-in-one2.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\all-in-one2\all-in-one2.xml" />
+    <Content Include="app\views\all-in-one3\all-in-one3.css">
+      <DependentUpon>all-in-one3.scss</DependentUpon>
+    </Content>
+    <Content Include="app\views\all-in-one3\all-in-one3.js">
+      <DependentUpon>all-in-one3.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\all-in-one3\all-in-one3.xml" />
+    <Content Include="app\views\all-in-one4\all-in-one4.css">
+      <DependentUpon>all-in-one4.scss</DependentUpon>
+    </Content>
+    <Content Include="app\views\all-in-one4\all-in-one4.js">
+      <DependentUpon>all-in-one4.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\all-in-one4\all-in-one4.xml" />
     <Content Include="app\views\all-in-one\all-in-one.css">
       <DependentUpon>all-in-one.scss</DependentUpon>
     </Content>
@@ -499,6 +520,9 @@
     <TypeScriptCompile Include="app\view-models\nose-step-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\taste-step-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\visual-step-view-model.ts" />
+    <TypeScriptCompile Include="app\views\all-in-one2\all-in-one2.ts" />
+    <TypeScriptCompile Include="app\views\all-in-one3\all-in-one3.ts" />
+    <TypeScriptCompile Include="app\views\all-in-one4\all-in-one4.ts" />
     <TypeScriptCompile Include="app\views\all-in-one\all-in-one.ts" />
     <TypeScriptCompile Include="app\views\change-password\change-password.ts" />
     <TypeScriptCompile Include="app\views\edit-tasting\edit-tasting.ts" />
@@ -545,6 +569,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\data\aromas.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\views\all-in-one2\all-in-one2.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\views\all-in-one3\all-in-one3.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\views\all-in-one4\all-in-one4.scss" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>

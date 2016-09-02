@@ -30,6 +30,5 @@ application.onUncaughtError = (error: any)  => {
 //    }
 //});
 
-profiler.start("main-page");
-application.mainModule = Views.allInOne;
+application.mainModule = Views.main;
 application.start();

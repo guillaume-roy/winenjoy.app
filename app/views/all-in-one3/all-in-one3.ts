@@ -35,23 +35,26 @@ let ratingStepViewModel: RatingStepViewModel;
 let allInOneViewModel: Observable;
 
 export function navigatedTo(args: EventData) {
-    profiler.stop("main-page");
 
     page = <Page>args.object;
     actionBarHeight = page.actionBar.getMeasuredHeight();
     scrollView = <scrollViewModule.ScrollView>page.getViewById("scrollView");
 
-    scrollView.on(
-        scrollViewModule.ScrollView.scrollEvent,
-        (event: scrollViewModule.ScrollEventData) => handleActionBarTitle(event.scrollY));
+    //scrollView.on(
+    //    scrollViewModule.ScrollView.scrollEvent,
+    //    (event: scrollViewModule.ScrollEventData) => handleActionBarTitle(event.scrollY));
 
-    loadSteps();
+    //loadSteps();
 
     allInOneViewModel = new Observable({
         picture: imageSource.ImageSource = null
     });
     allInOneViewModel.set("picture", null);
     page.bindingContext = allInOneViewModel;
+}
+
+export function loaded() {
+    profiler.stop("main-page");
 }
 
 export function managePicture() {

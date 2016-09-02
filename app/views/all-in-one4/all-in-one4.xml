@@ -1,0 +1,60 @@
+﻿<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:card="nativescript-cardview"
+      xmlns:vs="components/values-selector"
+      xmlns:gcp="components/gradient-color-picker"
+      xmlns:dd="nativescript-drop-down"
+      xmlns:ac="nativescript-autocomplete"
+      xmlns:visual-step="views/visual-step"
+      xmlns:nose-step="views/nose-step"
+      xmlns:taste-step="views/taste-step"
+      xmlns:informations-step="views/informations-step"
+      xmlns:rating-step="views/rating-step"
+      navigatedTo="navigatedTo"
+      loaded="loaded">
+  <Page.actionBar>
+    <ActionBar>
+      <ActionBar.actionItems>
+        <ActionItem ios.position="right"
+                    icon="res://ic_photo_camera_white_24dp"
+                    tap="managePicture"
+                    visibility="{{ picture ? 'collapse' : 'visible' }}"/>
+        <ActionItem ios.position="right"
+                    icon="res://ic_photo_white_24dp"
+                    tap="managePicture"
+                    visibility="{{ picture ? 'visible' : 'collapse' }}"/>
+        <ActionItem ios.position="right"
+                    icon="res://ic_check_white_24dp"
+                    tap="saveTasting"/>
+      </ActionBar.actionItems>
+    </ActionBar>
+  </Page.actionBar>
+  <TabView>
+    <TabView.items>
+      <TabViewItem title="Aspect">
+        <TabViewItem.view>
+          <visual-step:visual-step />
+        </TabViewItem.view>
+      </TabViewItem>
+      <TabViewItem title="Arômes">
+        <TabViewItem.view>
+          <nose-step:nose-step />
+        </TabViewItem.view>
+      </TabViewItem>
+      <TabViewItem title="Saveurs">
+        <TabViewItem.view>
+          <taste-step:taste-step />
+        </TabViewItem.view>
+      </TabViewItem>
+      <TabViewItem title="Informations">
+        <TabViewItem.view>
+          <informations-step:informations-step />
+        </TabViewItem.view>
+      </TabViewItem>
+      <TabViewItem title="Conclusion">
+        <TabViewItem.view>
+          <rating-step:rating-step />
+        </TabViewItem.view>
+      </TabViewItem>
+    </TabView.items>
+  </TabView>
+</Page>

@@ -1,57 +1,7 @@
 Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
 Found peer TypeScript 2.0.0
-node_modules/tns-core-modules/es6.d.ts(9,13): error TS2451: Cannot redeclare block-scoped variable 'Object'.
+app/views/edit-tasting/edit-tasting.ts(183,15): error TS2339: Property 'yearPicker' does not exist on type '{ main: string; gradientColorPicker: string; login: string; listPicker: string; groupingListPicke...'.
 
-The depedency located at E:\Dev\winenjoy.app\node_modules\async with version  0.9.2 will be replaced with dependency located at E:\Dev\winenjoy.app\node_modules\winston\node_modules\async with version 1.0.0
-WARNING: The file: E:\Dev\winenjoy.app\node_modules\nativescript-google-analytics\platforms\android\AndroidManifest.xml is depricated, you can read more about what will be the expected plugin structure here: https://www.nativescript.org/blog/migrating-n-android-plugins-from-version-1.7-to-2.0
-WARNING: The file: E:\Dev\winenjoy.app\node_modules\nativescript-plugin-firebase\platforms\android\README.md is depricated, you can read more about what will be the expected plugin structure here: https://www.nativescript.org/blog/migrating-n-android-plugins-from-version-1.7-to-2.0
-
-:config phase:  createDefaultIncludeFiles
-	+found plugins: nativescript-cardview
-Renaming plugin directory to flavor name: E:\Dev\winenjoy.app\platforms\android\src\nativescript-cardview -> E:\Dev\winenjoy.app\platforms\android\src\F0
-	+found plugins: nativescript-floatingactionbutton
-Renaming plugin directory to flavor name: E:\Dev\winenjoy.app\platforms\android\src\nativescript-floatingactionbutton -> E:\Dev\winenjoy.app\platforms\android\src\F1
-	+found plugins: nativescript-google-analytics
-Renaming plugin directory to flavor name: E:\Dev\winenjoy.app\platforms\android\src\nativescript-google-analytics -> E:\Dev\winenjoy.app\platforms\android\src\F2
-	+found plugins: nativescript-plugin-firebase
-Renaming plugin directory to flavor name: E:\Dev\winenjoy.app\platforms\android\src\nativescript-plugin-firebase -> E:\Dev\winenjoy.app\platforms\android\src\F3
-	+found plugins: tns-core-modules-widgets
-Renaming plugin directory to flavor name: E:\Dev\winenjoy.app\platforms\android\src\tns-core-modules-widgets -> E:\Dev\winenjoy.app\platforms\android\src\F4
-
-:config phase:  createPluginsConfigFile
-	 Creating product flavors include.gradle file in E:\Dev\winenjoy.app\platforms\android/configurations folder...
-
-:config phase:  pluginExtend
-	+applying configuration from: E:\Dev\winenjoy.app\platforms\android\configurations\include.gradle
-	+applying configuration from: E:\Dev\winenjoy.app\platforms\android\configurations\nativescript-cardview\include.gradle
-	+applying configuration from: E:\Dev\winenjoy.app\platforms\android\configurations\nativescript-floatingactionbutton\include.gradle
-	+applying configuration from: E:\Dev\winenjoy.app\platforms\android\configurations\nativescript-google-analytics\include.gradle
-	+applying configuration from: E:\Dev\winenjoy.app\platforms\android\configurations\nativescript-plugin-firebase\include.gradle
-	+applying configuration from: E:\Dev\winenjoy.app\platforms\android\configurations\tns-core-modules-widgets\include.gradle
-
-:config phase:  copyAarDependencies
-
-:config phase:  addAarDependencies
-	+adding dependency: E:\Dev\winenjoy.app\platforms\android\libs\aar\firebase-release.aar
-	+adding dependency: E:\Dev\winenjoy.app\platforms\android\libs\aar\widgets-release.aar
-Incremental java compilation is an incubating feature.
-:deleteMetadata
-:deleteFlavors
-:clean UP-TO-DATE
-
-BUILD SUCCESSFUL
-
-Total time: 11.426 secs
-Successfully prepared plugin nativescript-appversion for android.
-Successfully prepared plugin nativescript-autocomplete for android.
-Successfully prepared plugin nativescript-cardview for android.
-Successfully prepared plugin nativescript-dom for android.
-Successfully prepared plugin nativescript-drop-down for android.
-Successfully prepared plugin nativescript-floatingactionbutton for android.
-Successfully prepared plugin nativescript-google-analytics for android.
-Successfully prepared plugin nativescript-plugin-firebase for android.
-Successfully prepared plugin tns-core-modules for android.
-Successfully prepared plugin tns-core-modules-widgets for android.
 Project successfully prepared (android)
 Transferring project files...
 Successfully transferred all files.
@@ -59,105 +9,42 @@ Applying changes...
 Successfully synced application com.winenjoy.app on device TA4750GSW7.
 Executing before-watch hook from E:\Dev\winenjoy.app\hooks\before-watch\nativescript-dev-typescript.js
 Found peer TypeScript 2.0.0
+app/views/edit-tasting/edit-tasting.ts(183,15): error TS2339: Property 'yearPicker' does not exist on type '{ main: string; gradientColorPicker: string; login: string; listPicker: string; groupingListPicke...'.
+
 node_modules/tns-core-modules/es6.d.ts(9,13): error TS2451: Cannot redeclare block-scoped variable 'Object'.
 
 node_modules/typescript/lib/lib.d.ts(94,11): error TS2451: Cannot redeclare block-scoped variable 'Object'.
 
 node_modules/typescript/lib/lib.d.ts(235,15): error TS2451: Cannot redeclare block-scoped variable 'Object'.
+15:18:40 - Compilation complete. Watching for file changes.
 
-13:53:14 - Compilation complete. Watching for file changes.
-
-JS: ---- [main-page] STOP total: 1753ms count:1
+JS: all-in-one
+JS: ---- [main-page] STOP total: 5763ms count:1
 JS: Binding: Binding error while setting property items of AutoComplete<grapes>@file:///app/views/informations-step/informations-step.xml:99:3;: Error: Expect integer value as a second argument.
-JS: ---- [load-steps] STOP total: 6628ms count:1
-13:53:59 - File change detected. Starting incremental compilation...
-
-node_modules/tns-core-modules/es6.d.ts(9,13): error TS2451: Cannot redeclare block-scoped variable 'Object'.
-
-node_modules/typescript/lib/lib.d.ts(94,11): error TS2451: Cannot redeclare block-scoped variable 'Object'.
-node_modules/typescript/lib/lib.d.ts(235,15): error TS2451: Cannot redeclare block-scoped variable 'Object'.
-13:54:00 - Compilation complete. Watching for file changes.
-
-Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
-Project successfully prepared (android)
-Transferring project files...
-Successfully transferred wineDataService.js.
-Applying changes...
-Successfully synced application com.winenjoy.app on device TA4750GSW7.
-JS: ---- [main-page] STOP total: 1601ms count:1
+JS: all-in-one
+JS: ---- [main-page] STOP total: 2011ms count:1
 JS: Binding: Binding error while setting property items of AutoComplete<grapes>@file:///app/views/informations-step/informations-step.xml:99:3;: Error: Expect integer value as a second argument.
-JS: ---------
-JS: limpidities
-JS: true
-JS: ---------
-JS: shines
-JS: false
-JS: ---------
-JS: tears
-JS: false
-JS: ---------
-JS: intensities
-JS: false
-JS: ---------
-JS: developments
-JS: false
-JS: ---------
-JS: intensities
-JS: false
-JS: ---------
-JS: attacks
-JS: false
-JS: ---------
-JS: acidities
-JS: false
-JS: ---------
-JS: tannins
-JS: false
-JS: ---------
-JS: length
-JS: false
-JS: ---------
-JS: grapes
-JS: false
-JS: ---------
-JS: developments
-JS: false
-JS: ---- [load-steps] STOP total: 6185ms count:1
-13:55:35 - File change detected. Starting incremental compilation...
-
-node_modules/tns-core-modules/es6.d.ts(9,13): error TS2451: Cannot redeclare block-scoped variable 'Object'.
-node_modules/typescript/lib/lib.d.ts(94,11): error TS2451: Cannot redeclare block-scoped variable 'Object'.
-
-node_modules/typescript/lib/lib.d.ts(235,15): error TS2451: Cannot redeclare block-scoped variable 'Object'.
-13:55:37 - Compilation complete. Watching for file changes.
-
-Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
-Project successfully prepared (android)
-Transferring project files...
-Successfully transferred wineDataService.js.
-Applying changes...
-Successfully synced application com.winenjoy.app on device TA4750GSW7.
-JS: ---- [main-page] STOP total: 1534ms count:1
+JS: all-in-one
+JS: ---- [main-page] STOP total: 1845ms count:1
 JS: Binding: Binding error while setting property items of AutoComplete<grapes>@file:///app/views/informations-step/informations-step.xml:99:3;: Error: Expect integer value as a second argument.
-JS: ---- [load-steps] STOP total: 6059ms count:1
-I/art     (10440): Rejecting re-init on previously-failed class java.lang.Class<com.android.webview.chromium.ServiceWorkerControllerAdapter>
-I/art     (10440): Rejecting re-init on previously-failed class java.lang.Class<com.android.webview.chromium.ServiceWorkerControllerAdapter>
-I/art     (10440): Rejecting re-init on previously-failed class java.lang.Class<com.android.webview.chromium.TokenBindingManagerAdapter>
-I/art     (10440): Rejecting re-init on previously-failed class java.lang.Class<com.android.webview.chromium.TokenBindingManagerAdapter>
-Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
-Project successfully prepared (android)
-Transferring project files...
-Successfully transferred repository.json.
-Applying changes...
-Successfully synced application com.winenjoy.app on device TA4750GSW7.
-JS: ---- [main-page] STOP total: 1543ms count:1
+JS: all-in-one
+JS: ---- [main-page] STOP total: 1774ms count:1
 JS: Binding: Binding error while setting property items of AutoComplete<grapes>@file:///app/views/informations-step/informations-step.xml:99:3;: Error: Expect integer value as a second argument.
-JS: ---- [load-steps] STOP total: 6105ms count:1
-13:58:19 - File change detected. Starting incremental compilation...
-
-node_modules/tns-core-modules/es6.d.ts(9,13): error TS2451: Cannot redeclare block-scoped variable 'Object'.
-
-node_modules/typescript/lib/lib.d.ts(94,11): error TS2451: Cannot redeclare block-scoped variable 'Object'.
-node_modules/typescript/lib/lib.d.ts(235,15): error TS2451: Cannot redeclare block-scoped variable 'Object'.
-13:58:20 - Compilation complete. Watching for file changes.
-
+JS: all-in-one
+JS: ---- [main-page] STOP total: 1671ms count:1
+JS: Binding: Binding error while setting property items of AutoComplete<grapes>@file:///app/views/informations-step/informations-step.xml:99:3;: Error: Expect integer value as a second argument.
+JS: all-in-one
+JS: ---- [main-page] STOP total: 1610ms count:1
+JS: Binding: Binding error while setting property items of AutoComplete<grapes>@file:///app/views/informations-step/informations-step.xml:99:3;: Error: Expect integer value as a second argument.
+JS: all-in-one
+JS: ---- [main-page] STOP total: 1503ms count:1
+JS: Binding: Binding error while setting property items of AutoComplete<grapes>@file:///app/views/informations-step/informations-step.xml:99:3;: Error: Expect integer value as a second argument.
+JS: all-in-one
+JS: ---- [main-page] STOP total: 1559ms count:1
+JS: Binding: Binding error while setting property items of AutoComplete<grapes>@file:///app/views/informations-step/informations-step.xml:99:3;: Error: Expect integer value as a second argument.
+JS: all-in-one
+JS: ---- [main-page] STOP total: 1594ms count:1
+JS: Binding: Binding error while setting property items of AutoComplete<grapes>@file:///app/views/informations-step/informations-step.xml:99:3;: Error: Expect integer value as a second argument.
+JS: all-in-one
+JS: ---- [main-page] STOP total: 1593ms count:1
+JS: Binding: Binding error while setting property items of AutoComplete<grapes>@file:///app/views/informations-step/informations-step.xml:99:3;: Error: Expect integer value as a second argument.
