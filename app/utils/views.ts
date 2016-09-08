@@ -12,8 +12,5 @@ export var Views = {
     tasteStep: "views/taste-step/taste-step",
     ratingStep: "views/rating-step/rating-step",
     informationsStep: "views/informations-step/informations-step",
-    allInOne: "views/all-in-one/all-in-one",
-    allInOne2: "views/all-in-one2/all-in-one2",
-    allInOne3: "views/all-in-one3/all-in-one3",
-    allInOne4: "views/all-in-one4/all-in-one4"
+    datePicker: "views/date-picker/date-picker"
 };

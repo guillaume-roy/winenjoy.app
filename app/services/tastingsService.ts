@@ -44,7 +44,6 @@ export class TastingsService {
             id: null,
             intensities: [],
             isBiodynamic: false,
-            isBiologic: false,
             isBlindTasting: false,
             lastModificationDate: null,
             length: [],

@@ -4,20 +4,17 @@ export interface WineTasting {
     id?: string;
     estate?: string;
     region?: CriteriaItem;
-    cuvee?: string;
+    name?: string;
     country?: CriteriaItem;
     aoc?: CriteriaItem;
     year?: number;
     wineType?: CriteriaItem;
     alcohol?: number;
-    isBiologic?: boolean;
     isBiodynamic?: boolean;
     isBlindTasting?: boolean;
     grapes?: CriteriaItem[];
     wineTabNotes?: string;
-    startDate?: number;
-    endDate?: number;
-    lastModificationDate?: number;
+    tastingDate?: number;
     synthesisTabNotes?: string;
     color?: string;
     finalRating?: number;
@@ -39,4 +36,5 @@ export interface WineTasting {
     length?: CriteriaItem[];
     meatsNotes?: string;
     containsPicture?: boolean;
+    winePairing?: string;
 }

@@ -1,0 +1,6 @@
+﻿<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+      shownModally="onShownModally">
+  <StackLayout>
+    <DatePicker id="datePicker" />
+  </StackLayout>
+</Page>

@@ -30,5 +30,5 @@ application.onUncaughtError = (error: any)  => {
 //    }
 //});
 
-application.mainModule = Views.main;
+application.mainModule = Views.editTasting;
 application.start();

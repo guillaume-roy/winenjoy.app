@@ -1,387 +1,145 @@
-import {EventData} from "data/observable";
-import dialogs = require("ui/dialogs");
+﻿import {EventData} from "data/observable";
 import {Page} from "ui/page";
-import {EditTastingViewModel} from "../../view-models/edit-tasting-view-model";
-import frameModule = require("ui/frame");
-import {Views} from "../../utils/views";
-import scrollViewModule = require("ui/scroll-view");
-import application = require("application");
-import tabViewModule = require("ui/tab-view");
-import _ = require("lodash");
-import {View} from "ui/core/view";
-import {AnalyticsService} from "../../services/analyticsService";
+import dialogs = require("ui/dialogs");
 import camera = require("camera");
-import imageSource = require("image-source");
+import profiler = require("../../utils/profiling");
+import {EditTastingViewModel} from "../../view-models/edit-tasting-view-model";
+import {Views} from "../../utils/views";
 
 let page: Page;
+
 let viewModel: EditTastingViewModel;
-let fabButton: View;
-let fabDeleteButton: View;
-let fabButtonDelay = 0;
-let tabView: tabViewModule.TabView;
-let analyticsService: AnalyticsService;
 
 export function navigatedTo(args: EventData) {
-    console.log(new Date().toISOString(), "navigated to edit-tasting");
-
-    analyticsService = new AnalyticsService();
-    analyticsService.logView("edit-tasting");
-    analyticsService.stopTimer("Navigation from main to edit-tasting");
-
+    profiler.start("loading edit-tasting");
     page = <Page>args.object;
+    viewModel = new EditTastingViewModel();
 
-    viewModel = new EditTastingViewModel(page.navigationContext);
     page.bindingContext = viewModel;
 
-    console.log(new Date().toISOString(), "view-model bound");
-
-    attachBackButtonConfirmation();
-    manageFabVisibility();
+    profiler.start("init edit-tasting-view-model");
+    viewModel.init();
+    profiler.stop("init edit-tasting-view-model");
 }
 
-export function navigatedFrom() {
-    detachBackButtonConfirmation();
-    tabView.off(tabViewModule.TabView.selectedIndexChangedEvent, attachToScroll);
-    attachToScroll({
-        eventName: tabViewModule.TabView.selectedIndexChangedEvent,
-        newIndex: -1,
-        object: null,
-        oldIndex: tabView.selectedIndex
-    });
+export function loaded() {
+    profiler.stop("loading edit-tasting");
 }
 
-export function onSelectFinalRating(args) {
-    let finalRating = args.object.className.match(/final-rating-(\d)/)[1];
-    viewModel.setFinalRating(parseInt(finalRating, 10));
-    analyticsService.logEvent("Navigation", "User Input", "onSelectFinalRating");
+export function managePicture() {
+    if (viewModel.get("picture")) {
+        dialogs.confirm({
+            message: "Etes-vous sûr de vouloir supprimer cette photo ?",
+            cancelButtonText: "Non",
+            okButtonText: "Oui",
+            title: "Suppression"
+        }).then(res => {
+            if (res) {
+                viewModel.set("picture", null);
+            }
+        });
+    } else {
+        camera.takePicture({
+            height: 800,
+            keepAspectRatio: true,
+            width: 800
+        }).then(img => {
+            viewModel.set("picture", img);
+        });
+    }
 }
 
-export function onSelectColor() {
+export function saveTasting() {
+    viewModel.saveTasting();
+}
+
+export function selectAromas() {
     page.showModal(
-        Views.gradientColorPicker,
-        viewModel.wineTasting,
-        selectedColor => {
-            viewModel.wineTasting.color = selectedColor;
-            viewModel.notifyPropertyChange("wineTasting", viewModel.wineTasting);
-            analyticsService.logEvent("Navigation", "User Input", "onSelectedColor");
+        Views.listPicker,
+        {
+            criterias: "aromas",
+            groupingIcon: "whatshot",
+            multiple: true,
+            searchBarHintText: "Sélectionez des arômes",
+            selectedItems: viewModel.get("selectedAromas")
         },
-        false);
-    analyticsService.logEvent("Navigation", "User Input", "onSelectColor");
+        (data: any[]) => {
+            if (data && data.length > 0) {
+                viewModel.set("selectedAromas", null);
+                viewModel.set("selectedAromas", data);
+            }
+        },
+        true);
 }
 
-export function onDeleteColor() {
-    viewModel.wineTasting.color = null;
-    viewModel.notifyPropertyChange("wineTasting", viewModel.wineTasting);
+export function selectAromaDefects() {
+    page.showModal(
+        Views.listPicker,
+        {
+            criterias: "aromaDefects",
+            groupingIcon: "whatshot",
+            multiple: true,
+            searchBarHintText: "Sélectionez des défauts d'arôme",
+            selectedItems: viewModel.get("selectedAromaDefects")
+        },
+        (data: any[]) => {
+            if (data && data.length > 0) {
+                viewModel.set("selectedAromaDefects", null);
+                viewModel.set("selectedAromaDefects", data);
+            }
+        },
+        true);
 }
 
-export function onAddAromas() {
+export function selectFlavors() {
     page.showModal(
         Views.groupingListPicker,
         {
             criterias: "aromas",
             groupingIcon: "whatshot",
             multiple: true,
-            searchBarHintText: "Sélectionez des arômes",
-            selectedItems: viewModel.wineTasting.aromas
+            searchBarHintText: "Sélectionez des saveurs",
+            selectedItems: viewModel.get("selectedFlavors")
         },
-        data => {
-            if (_.isArray(data)) {
-                viewModel.setAromas(data);
-                analyticsService.logEvent("Navigation", "User Input", "onAddedAromas");
+        (data: any[]) => {
+            if (data && data.length > 0) {
+                viewModel.set("selectedFlavors", null);
+                viewModel.set("selectedFlavors", data);
             }
         },
         true);
-    analyticsService.logEvent("Navigation", "User Input", "onAddAromas");
 }
 
-export function onAddDefects() {
+export function selectFlavorDefects() {
     page.showModal(
         Views.listPicker,
         {
             criterias: "aromas",
+            groupingIcon: "whatshot",
             multiple: true,
-            searchBarHintText: "Rechercher un défaut",
-            selectedItems: viewModel.wineTasting.defects
+            searchBarHintText: "Sélectionez des défauts de saveur",
+            selectedItems: viewModel.get("selectedFlavorDefects")
         },
-        items => {
-            if (_.isArray(items)) {
-                viewModel.setDefects(items);
-                analyticsService.logEvent("Navigation", "User Input", "onAddedDefects");
+        (data: any[]) => {
+            if (data && data.length > 0) {
+                viewModel.set("selectedFlavorDefects", null);
+                viewModel.set("selectedFlavorDefects", data);
             }
         },
         true);
-    analyticsService.logEvent("Navigation", "User Input", "onAddDefects");
 }
 
-export function onSelectCountry() {
+export function setTastingDate() {
     page.showModal(
-        Views.groupingListPicker,
+        Views.datePicker,
         {
-            criterias: "countries",
-            groupingIcon: "public",
-            multiple: false,
-            searchBarHintText: "Sélectionnez un pays"
+            selectedDate: viewModel.get("tastingDate")
         },
-        data => {
-            if (!_.isEmpty(data)) {
-                viewModel.setCountry(data);
-                analyticsService.logEvent("Navigation", "User Input", "onSelectedCountry");
+        (data: any) => {
+            console.log(data);
+            if (data) {
+                viewModel.set("tastingDate", null);
+                viewModel.set("tastingDate", data);
             }
-        },
-        true);
-    analyticsService.logEvent("Navigation", "User Input", "onSelectCountry");
-}
-
-export function onDeleteCountry() {
-    viewModel.setCountry(null);
-}
-
-export function onSelectRegion() {
-   page.showModal(
-        Views.listPicker,
-        {
-            criterias: "regions",
-            parentId: (viewModel.wineTasting.country || {}).id,
-            searchBarHintText: "Rechercher une région",
-            selectedItems: viewModel.wineTasting.region
-        },
-        selectedRegion => {
-            viewModel.setRegion(selectedRegion);
-            analyticsService.logEvent("Navigation", "User Input", "onSelectedRegion");
-        },
-        true);
-    analyticsService.logEvent("Navigation", "User Input", "onSelectRegion");
-}
-
-export function onDeleteRegion() {
-    viewModel.setRegion(null);
-}
-
-export function onSelectAoc() {
-   page.showModal(
-        Views.listPicker,
-        {
-            criterias: "aoc",
-            parentId: (viewModel.wineTasting.region || {}).id,
-            searchBarHintText: "Rechercher un AOC",
-            selectedItems: viewModel.wineTasting.aoc
-        },
-        selectedAoc => {
-            viewModel.setAoc(selectedAoc);
-            analyticsService.logEvent("Navigation", "User Input", "onSelectedAoc");
-        },
-        true);
-    analyticsService.logEvent("Navigation", "User Input", "onSelectAoc");
-}
-
-export function onDeleteAoc() {
-    viewModel.setAoc(null);
-}
-
-export function onSelectYear() {
-    page.showModal(
-        Views.yearPicker,
-        viewModel.wineTasting.year,
-        data => {
-            if (_.isNumber(data)) {
-                viewModel.setYear(data);
-                analyticsService.logEvent("Navigation", "User Input", "onSelectedYear");
-            }
-        },
-        false);
-    analyticsService.logEvent("Navigation", "User Input", "onSelectYear");
-}
-
-export function onDeleteYear() {
-    viewModel.setYear(null);
-}
-
-export function onSelectGrapes() {
-    page.showModal(
-        Views.listPicker,
-        {
-            criterias: "grapes",
-            multiple: true,
-            searchBarHintText: "Rechercher un cépage",
-            selectedItems: viewModel.wineTasting.grapes
-        },
-        selectedGrapes => {
-            if (_.isArray(selectedGrapes)) {
-                viewModel.setGrapes(selectedGrapes);
-                analyticsService.logEvent("Navigation", "User Input", "onSelectedGrapes");
-            }
-        },
-        true);
-    analyticsService.logEvent("Navigation", "User Input", "onSelectGrapes");
-}
-
-export function onTakePicture() {
-    camera.takePicture({
-        height: 800,
-        keepAspectRatio: true,
-        width: 800
-    }).then((img: imageSource.ImageSource) => {
-        viewModel.setPicture(img);
-    });
-}
-
-export function onDeletePicture() {
-    viewModel.setPicture(null);
-}
-
-export function saveTasting() {
-    viewModel.isBusy = true;
-    setTimeout(() => {
-        analyticsService.startTimer("Saving tasting", "Action", "saveTasting");
-        viewModel.saveTasting().then(result => {
-            analyticsService.stopTimer("Saving tasting");
-            analyticsService.logEvent("Action", "User Input", "saveTasting");
-            analyticsService.dispatch();
-            viewModel.isBusy = false;
-            frameModule.topmost().navigate({
-                animated: false,
-                moduleName: Views.main
-            });
         });
-    }, 0);
-}
-
-export function deleteTasting() {
-    dialogs.confirm({
-        cancelButtonText: "Non",
-        message: "Etes-vous sûr de vouloir supprimer cette dégustation ?",
-        okButtonText: "Oui",
-        title: "Suppression"
-    }).then(result => {
-        if (result) {
-            analyticsService.startTimer("Delete tasting", "Action", "deleteTasting");
-            analyticsService.dispatch();
-            setTimeout(() => {
-                viewModel.deleteTasting().then(r => {
-                    analyticsService.stopTimer("Delete tasting");
-                    analyticsService.logEvent("Action", "User Input", "deleteTasting");
-                    analyticsService.dispatch();
-                    frameModule.topmost().navigate({
-                        animated: false,
-                        moduleName: Views.main
-                    });
-                });
-            }, 0);
-        }
-    });
-}
-
-function attachBackButtonConfirmation() {
-    if (viewModel.isEditMode) {
-        return;
-    }
-
-    if (application.android) {
-        application.android.on(application.AndroidApplication.activityBackPressedEvent, backEvent);
-    }
-}
-
-function detachBackButtonConfirmation() {
-    if (viewModel.isEditMode) {
-        return;
-    }
-
-    // We only want to un-register the event on Android
-    if (application.android) {
-        application.android.off(application.AndroidApplication.activityBackPressedEvent, backEvent);
-    }
-};
-
-function backEvent(args: any) {
-    args.cancel = true;
-
-    dialogs.confirm({
-        cancelButtonText: "Non",
-        message: "Etes-vous sûr de vouloir annuler cette dégustation ?",
-        okButtonText: "Oui",
-        title: "Annuler"
-    }).then(result => {
-        if (result) {
-            analyticsService.dispatch();
-            frameModule.topmost().navigate({
-                animated: false,
-                moduleName: Views.main
-            });
-        }
-    });
-}
-
-function animateFabButtons(scrollEvent: scrollViewModule.ScrollEventData) {
-    if (fabDeleteButton) {
-        if (scrollEvent.scrollY > 10) {
-            fabDeleteButton.animate({
-                duration: 300,
-                translate: {
-                    x: 200,
-                    y: 0
-                }
-            });
-        } else {
-            fabDeleteButton.animate({
-                duration: 300,
-                translate: {
-                    x: 0,
-                    y: 0
-                }
-            });
-        }
-    }
-
-    if (fabButton) {
-        if (scrollEvent.scrollY > 10) {
-            fabButton.animate({
-                delay: fabButtonDelay,
-                duration: 300,
-                translate: {
-                    x: 200,
-                    y: 0
-                }
-            });
-        } else {
-            fabButton.animate({
-                delay: fabButtonDelay,
-                duration: 300,
-                translate: {
-                    x: 0,
-                    y: 0
-                }
-            });
-        }
-    }
-}
-
-function attachToScroll(args: tabViewModule.SelectedIndexChangedEventData) {
-    let scrollViewIds = [ "scroll-0", "scroll-1", "scroll-2", "scroll-3", "scroll-4" ];
-
-    if (args.newIndex >= 0) {
-        let scrollViewToAttach = page.getViewById(scrollViewIds[args.newIndex]);
-        if (scrollViewToAttach) {
-            scrollViewToAttach.on(scrollViewModule.ScrollView.scrollEvent, animateFabButtons);
-        }
-    }
-
-    if (args.oldIndex >= 0) {
-        let scrollViewToDetach = page.getViewById(scrollViewIds[args.oldIndex]);
-        if (scrollViewToDetach) {
-            scrollViewToDetach.off(scrollViewModule.ScrollView.scrollEvent, animateFabButtons);
-        }
-    }
-}
-
-function manageFabVisibility() {
-    fabButton = page.getViewById("fab");
-    fabDeleteButton = page.getViewById("fab-delete");
-    fabButtonDelay = fabDeleteButton ? 100 : 0;
-
-    tabView = <tabViewModule.TabView>page.getViewById("tab-view");
-    if (tabView) {
-        tabView.on(tabViewModule.TabView.selectedIndexChangedEvent, attachToScroll);
-    }
-
-    attachToScroll({ eventName: tabViewModule.TabView.selectedIndexChangedEvent, newIndex: 0, object: null, oldIndex: -1 });
 }

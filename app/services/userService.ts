@@ -156,8 +156,8 @@ export class UserService {
             if (!_.isEmpty(wineTasting.region)) {
                 userStats.tastingsByRegion = this.popCriteriaStat(userStats.tastingsByRegion, wineTasting.region.id, wineTasting.id);
             }
-            if (!_.isEmpty(wineTasting.cuvee)) {
-                userStats.tastingsByCuvee = this.popCriteriaStat(userStats.tastingsByCuvee, wineTasting.cuvee.toLowerCase(), wineTasting.id);
+            if (!_.isEmpty(wineTasting.name)) {
+                userStats.tastingsByName = this.popCriteriaStat(userStats.tastingsByName, wineTasting.name.toLowerCase(), wineTasting.id);
             }
             if (!_.isEmpty(wineTasting.country)) {
                 userStats.tastingsByCountry = this.popCriteriaStat(userStats.tastingsByCountry, wineTasting.country.id, wineTasting.id);
@@ -169,8 +169,6 @@ export class UserService {
                 userStats.tastingsByWineYear = this.popCriteriaStat(userStats.tastingsByWineYear, wineTasting.year, wineTasting.id);
             }
             
-            userStats.tastingsByIsBiological = this.popCriteriaStat(
-                userStats.tastingsByIsBiological, wineTasting.isBiologic, wineTasting.id);
             userStats.tastingsByIsBiodynamic = this.popCriteriaStat(
                 userStats.tastingsByIsBiodynamic, wineTasting.isBiodynamic, wineTasting.id);
             userStats.tastingsByIsBlind = this.popCriteriaStat(userStats.tastingsByIsBlind, wineTasting.isBlindTasting, wineTasting.id);
@@ -240,9 +238,9 @@ export class UserService {
                 userStats.tastingsByRegion = this
                     .pushCriteriaStat(userStats.tastingsByRegion, wineTasting.region.id, wineTasting.id);
             }
-            if (!_.isEmpty(wineTasting.cuvee)) {
-                userStats.tastingsByCuvee = this
-                    .pushCriteriaStat(userStats.tastingsByCuvee, wineTasting.cuvee.toLowerCase(), wineTasting.id);
+            if (!_.isEmpty(wineTasting.name)) {
+                userStats.tastingsByName = this
+                    .pushCriteriaStat(userStats.tastingsByName, wineTasting.name.toLowerCase(), wineTasting.id);
             }
             if (!_.isEmpty(wineTasting.country)) {
                 userStats.tastingsByCountry = this
@@ -257,8 +255,7 @@ export class UserService {
                 userStats.tastingsByWineYear = this
                     .pushCriteriaStat(userStats.tastingsByWineYear, wineTasting.year, wineTasting.id);
             }
-            userStats.tastingsByIsBiological = this
-                .pushCriteriaStat(userStats.tastingsByIsBiological, wineTasting.isBiologic, wineTasting.id);
+
             userStats.tastingsByIsBiodynamic = this.pushCriteriaStat(
                 userStats.tastingsByIsBiodynamic,
                 wineTasting.isBiodynamic,
@@ -381,13 +378,12 @@ export class UserService {
                 tastingsByAromas: {},
                 tastingsByBubbles: {},
                 tastingsByCountry: {},
-                tastingsByCuvee: {},
+                tastingsByName: {},
                 tastingsByEstate: {},
                 tastingsByFlavorDefects: {},
                 tastingsByFlavors: {},
                 tastingsByGrape: {},
                 tastingsByIsBiodynamic: {},
-                tastingsByIsBiological: {},
                 tastingsByIsBlind: {},
                 tastingsByRating: {},
                 tastingsByRegion: {},

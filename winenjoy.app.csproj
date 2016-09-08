@@ -124,7 +124,9 @@
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_wineglass_white.png" />
     <Content Include="app\App_Resources\Android\values-v21\colors.xml" />
     <Content Include="app\App_Resources\Android\values-v21\strings.xml" />
-    <Content Include="app\App_Resources\Android\values-v21\styles.xml" />
+    <Content Include="app\App_Resources\Android\values-v21\styles.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="app\App_Resources\Android\values\colors.xml" />
     <Content Include="app\App_Resources\Android\values\strings.xml" />
     <Content Include="app\App_Resources\Android\values\styles.xml" />
@@ -270,6 +272,9 @@
     <Content Include="app\view-models\change-password-view-model.js">
       <DependentUpon>change-password-view-model.ts</DependentUpon>
     </Content>
+    <Content Include="app\view-models\edit-tasting-old-view-model.js">
+      <DependentUpon>edit-tasting-old-view-model.ts</DependentUpon>
+    </Content>
     <Content Include="app\view-models\edit-tasting-view-model.js">
       <DependentUpon>edit-tasting-view-model.ts</DependentUpon>
     </Content>
@@ -306,36 +311,6 @@
     <Content Include="app\view-models\visual-step-view-model.js">
       <DependentUpon>visual-step-view-model.ts</DependentUpon>
     </Content>
-    <Content Include="app\views\all-in-one2\all-in-one2.css">
-      <DependentUpon>all-in-one2.scss</DependentUpon>
-    </Content>
-    <Content Include="app\views\all-in-one2\all-in-one2.js">
-      <DependentUpon>all-in-one2.ts</DependentUpon>
-    </Content>
-    <Content Include="app\views\all-in-one2\all-in-one2.xml" />
-    <Content Include="app\views\all-in-one3\all-in-one3.css">
-      <DependentUpon>all-in-one3.scss</DependentUpon>
-    </Content>
-    <Content Include="app\views\all-in-one3\all-in-one3.js">
-      <DependentUpon>all-in-one3.ts</DependentUpon>
-    </Content>
-    <Content Include="app\views\all-in-one3\all-in-one3.xml" />
-    <Content Include="app\views\all-in-one4\all-in-one4.css">
-      <DependentUpon>all-in-one4.scss</DependentUpon>
-    </Content>
-    <Content Include="app\views\all-in-one4\all-in-one4.js">
-      <DependentUpon>all-in-one4.ts</DependentUpon>
-    </Content>
-    <Content Include="app\views\all-in-one4\all-in-one4.xml" />
-    <Content Include="app\views\all-in-one\all-in-one.css">
-      <DependentUpon>all-in-one.scss</DependentUpon>
-    </Content>
-    <Content Include="app\views\all-in-one\all-in-one.js">
-      <DependentUpon>all-in-one.ts</DependentUpon>
-    </Content>
-    <Content Include="app\views\all-in-one\all-in-one.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="app\views\change-password\change-password.css">
       <DependentUpon>change-password.scss</DependentUpon>
     </Content>
@@ -343,6 +318,13 @@
       <DependentUpon>change-password.ts</DependentUpon>
     </Content>
     <Content Include="app\views\change-password\change-password.xml" />
+    <Content Include="app\views\date-picker\date-picker.js">
+      <DependentUpon>date-picker.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\date-picker\date-picker.xml" />
+    <Content Include="app\views\edit-tasting-old\edit-tasting-old.css" />
+    <Content Include="app\views\edit-tasting-old\edit-tasting-old.js" />
+    <Content Include="app\views\edit-tasting-old\edit-tasting-old.xml" />
     <Content Include="app\views\edit-tasting\edit-tasting.css">
       <DependentUpon>edit-tasting.scss</DependentUpon>
     </Content>
@@ -472,7 +454,6 @@
     <Content Include="app\styles\_material-theme.scss" />
     <Content Include="app\styles\_values-selector.scss" />
     <Content Include="app\views\change-password\change-password.scss" />
-    <Content Include="app\views\edit-tasting\edit-tasting.scss" />
     <Content Include="app\views\gradient-color-picker\gradient-color-picker.scss" />
     <Content Include="app\views\grouping-list-picker\grouping-list-picker.scss" />
     <Content Include="app\views\import-export-data\import-export-data.scss" />
@@ -508,6 +489,7 @@
     <TypeScriptCompile Include="app\utils\uuid.ts" />
     <TypeScriptCompile Include="app\utils\views.ts" />
     <TypeScriptCompile Include="app\view-models\change-password-view-model.ts" />
+    <TypeScriptCompile Include="app\view-models\edit-tasting-old-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\edit-tasting-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\rating-step-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\gradient-color-picker-view-model.ts" />
@@ -520,11 +502,9 @@
     <TypeScriptCompile Include="app\view-models\nose-step-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\taste-step-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\visual-step-view-model.ts" />
-    <TypeScriptCompile Include="app\views\all-in-one2\all-in-one2.ts" />
-    <TypeScriptCompile Include="app\views\all-in-one3\all-in-one3.ts" />
-    <TypeScriptCompile Include="app\views\all-in-one4\all-in-one4.ts" />
-    <TypeScriptCompile Include="app\views\all-in-one\all-in-one.ts" />
     <TypeScriptCompile Include="app\views\change-password\change-password.ts" />
+    <TypeScriptCompile Include="app\views\date-picker\date-picker.ts" />
+    <TypeScriptCompile Include="app\views\edit-tasting-old\edit-tasting-old.ts" />
     <TypeScriptCompile Include="app\views\edit-tasting\edit-tasting.ts" />
     <TypeScriptCompile Include="app\views\rating-step\rating-step.ts" />
     <TypeScriptCompile Include="app\views\gradient-color-picker\gradient-color-picker.ts" />
@@ -559,9 +539,6 @@
     <Content Include="app\styles\_form.scss" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\views\all-in-one\all-in-one.scss" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="resources\wine-criterias.json" />
   </ItemGroup>
   <ItemGroup>
@@ -571,13 +548,19 @@
     <Content Include="app\data\aromas.json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\views\all-in-one2\all-in-one2.scss" />
+    <Content Include="app\views\edit-tasting-old\edit-tasting-old.scss" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\views\all-in-one3\all-in-one3.scss" />
+    <Content Include="app\views\edit-tasting\edit-tasting.scss" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\views\all-in-one4\all-in-one4.scss" />
+    <Content Include="app\views\date-picker\date-picker.sass" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="google-services.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\App_Resources\iOS\GoogleService-Info.plist" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>

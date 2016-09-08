@@ -22,7 +22,7 @@ export function goToAllInOne() {
         animated: false,
         backstackVisible: false,
         context: viewModel.newTasting(),
-        moduleName: Views.allInOne4
+        moduleName: Views.editTasting
     });
 }
 
@@ -33,7 +33,7 @@ export function goToAllInTabs() {
         animated: false,
         backstackVisible: false,
         context: viewModel.newTasting(),
-        moduleName: Views.allInOne3
+        moduleName: Views.editTasting
     });
 }
 
