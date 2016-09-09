@@ -278,29 +278,25 @@
           <ScrollView>
             <GridLayout columns="auto, *"
                         rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto">
-              <!--<Button col="1"
-                      text="{{ isBlindTasting ? '&#xE8F5;' : '&#xE8F4;' }}"
-                      class="material-icon"
-                      tap="toggleIsBlindTasting"/>-->
               <Label text="&#xE8F5;"
-                     class="material-icon form-icon"
-                     row="1"
-                     visibility="{{ isBlindTasting ? 'visible' : 'collapse' }}"/>
-              <Label col="1"
-                     class="form-label form-single-line"
-                     row="1"
-                     text="Dégustation à l'aveugle"
-                     visibility="{{ isBlindTasting ? 'visible' : 'collapse' }}"/>
-
+                     class="material-icon form-icon" />
+              <GridLayout columns="*, 100"
+                          class="form-single-line"
+                          col="1">
+                <Label text="Dégustation à l'aveugle"
+                       class="form-label" />
+                <Switch col="1"
+                        checked="{{ isBlindTasting }}"/>
+              </GridLayout>
               <Label text="&#xE80B;"
                      class="material-icon form-icon"
                      row="1"
                      visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}"/>
-              <TextField col="1"
-                         class="form-single-line"
-                         hint="Pays, Région, AOC"
-                         row="1"
-                         visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}"/>
+              <ac:AutoComplete id="locationAutoComplete"
+                               row="1"
+                               col="1"
+                               items="{{ locationLabels }}"
+                               visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}"/>
               <Label text="&#xE7F1;"
                      class="material-icon form-icon"
                      row="2"
@@ -334,6 +330,7 @@
                        class="form-label"/>
                 <dd:DropDown col="1"
                              items="{{ years }}"
+                             selectedIndex="{{ selectedYearIndex }}"
                              hint="Sélectionner"/>
               </GridLayout>
               <Label text="&#xE152;"
@@ -374,12 +371,12 @@
                      class="material-icon form-icon"
                      row="8"
                      visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}"/>
-              <ac:AutoComplete id="grapes"
-                               col="1"
-                               row="8"
-                               items="{{ grapesLabels }}"
-                               itemTap="selectGrape"
-                               visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}" />
+              <Button text="Ajouter des cépages"
+                      col="1"
+                      row="8"
+                      tap="selectGrapes"
+                      class="form-button"
+                      visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}"/>
               <vs:ValuesSelector items="{{ selectedGrapes }}"
                                  deleteOnClick="true"
                                  col="1"

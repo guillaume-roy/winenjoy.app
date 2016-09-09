@@ -7,12 +7,13 @@ import {EditTastingViewModel} from "../../view-models/edit-tasting-view-model";
 import {Views} from "../../utils/views";
 
 let page: Page;
-
+let locationAutoComplete;
 let viewModel: EditTastingViewModel;
 
 export function navigatedTo(args: EventData) {
     profiler.start("loading edit-tasting");
     page = <Page>args.object;
+    locationAutoComplete = page.getViewById("locationAutoComplete");
     viewModel = new EditTastingViewModel();
 
     page.bindingContext = viewModel;
@@ -20,6 +21,12 @@ export function navigatedTo(args: EventData) {
     profiler.start("init edit-tasting-view-model");
     viewModel.init();
     profiler.stop("init edit-tasting-view-model");
+
+    if (locationAutoComplete.android) {
+        locationAutoComplete.android.setHint("Pays, Région, AOC");
+        locationAutoComplete.android.setHintTextColor(android.graphics.Color.parseColor("#727272"));
+        locationAutoComplete.android.setTextSize(16);
+    }
 }
 
 export function loaded() {
@@ -129,6 +136,25 @@ export function selectFlavorDefects() {
         true);
 }
 
+export function selectGrapes() {
+    page.showModal(
+        Views.listPicker,
+        {
+            criterias: "grapes",
+            groupingIcon: "group_work",
+            multiple: true,
+            searchBarHintText: "Sélectionez des cépages",
+            selectedItems: viewModel.get("selectedGrapes")
+        },
+        (data: any[]) => {
+            if (data && data.length > 0) {
+                viewModel.set("selectedGrapes", null);
+                viewModel.set("selectedGrapes", data);
+            }
+        },
+        true);
+}
+
 export function setTastingDate() {
     page.showModal(
         Views.datePicker,
@@ -142,4 +168,15 @@ export function setTastingDate() {
                 viewModel.set("tastingDate", data);
             }
         });
+}
+
+export function selectFinalRating(args) {
+    let finalRating = parseInt(args.object.className.match(/final-rating-(\d)/)[1], 10);
+    let oldFinalRating = <number>viewModel.get("finalRating");
+
+    if (finalRating === oldFinalRating) {
+        viewModel.set("finalRating", undefined);
+    } else {
+        viewModel.set("finalRating", finalRating);
+    }
 }

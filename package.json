@@ -12,10 +12,10 @@
     "nativescript-appversion": "1.2.0",
     "nativescript-autocomplete": "1.0.0",
     "nativescript-cardview": "1.1.11",
-    "nativescript-drop-down": "1.2.0",
+    "nativescript-drop-down": "1.3.2",
     "nativescript-floatingactionbutton": "2.2.4",
     "nativescript-google-analytics": "0.2.9",
-    "nativescript-plugin-firebase": "3.5.3",
+    "nativescript-plugin-firebase": "3.6.1",
     "tns-core-modules": "^2.2.1"
   },
   "devDependencies": {

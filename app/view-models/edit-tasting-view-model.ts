@@ -4,6 +4,17 @@ import {WineCriteriasService} from "../services/wineCriteriasService";
 export class EditTastingViewModel extends Observable {
     private _wineCriteriasService: WineCriteriasService;
     private _rawAlcoolValue: number;
+    private _selectedYearIndex: number;
+
+    get selectedYearIndex() {
+        return this._selectedYearIndex;
+    }
+    set selectedYearIndex(value) {
+        this._selectedYearIndex = value;
+        this.notifyPropertyChange("selectedYearIndex", value);
+
+        this.set("selectedYear", this.get("years")[value]);
+    }
 
     set rawAlcoolValue(value) {
         this._rawAlcoolValue = value;
@@ -51,15 +62,34 @@ export class EditTastingViewModel extends Observable {
         this.set("selectedIntensities", []);
         this.set("selectedTears", []);
         this.set("selectedShines", []);
+        this.set("selectedGrapes", []);
         this.set("tastingDate", new Date());
+
+        var years = [];
+        for (var i = new Date().getFullYear(); i >= 1900; i--) {
+            years.push(i);
+        }
+        this.set("years", years);
+
+        this.set("locations", []);
+        this.set("locationLabels", []);
+        this._wineCriteriasService.getLocations()
+            .then(d => {
+                this.set("locations", d);
+                this.set("locationLabels", d.map(x => x.label));
+            });
     }
 
     saveTasting() {
+        //Récupérer le location label
+        //  S'il existe pas => le créer en mode custom
         console.log("saveTasting");
     }
-
-    private loadCriteria(criteriaName, criteriaProperty?) {
-        this._wineCriteriasService.getCriterias(criteriaName)
-            .then(d => this.set(criteriaProperty || criteriaName, d));
+    
+    private loadCriteria(criteria, property?) {
+        var propertyName = property || criteria;
+        this.set(propertyName, []);
+        this._wineCriteriasService.getCriterias(criteria)
+            .then(d => this.set(propertyName, d));
     }
 }

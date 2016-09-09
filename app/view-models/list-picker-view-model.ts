@@ -91,22 +91,6 @@ export class ListPickerViewModel extends Observable {
             this._selectedItems = [];
         }
 
-        //if (args.criterias === "aromas") {
-        //    new WineCriteriasService().getCriterias("aromas")
-        //        .then(data => {
-        //            this._itemsSource = _.orderBy(_.flattenDeep<Observable>(
-        //                data.filter(d => d.code === "DEFECTS").map(a => {
-        //                    return a.values.map(i => {
-        //                        return new Observable({
-        //                            isSelected: _.some(this._selectedItems, i),
-        //                            item: i
-        //                        });
-        //                    });
-        //                })
-        //            ), ["item.label"]);
-        //            this.items = this._itemsSource;
-        //        });
-        //} else {
         new WineCriteriasService().getCriterias(args.criterias)
             .then(data => {
                 if (!_.isEmpty(this.parentId)) {
@@ -123,7 +107,6 @@ export class ListPickerViewModel extends Observable {
                 });
                 this.items = this._itemsSource;
             });
-        //}
     }
 
     public toggleItem(index: number) {
