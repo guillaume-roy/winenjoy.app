@@ -16,7 +16,8 @@
     "nativescript-floatingactionbutton": "2.2.4",
     "nativescript-google-analytics": "0.2.9",
     "nativescript-plugin-firebase": "3.6.1",
-    "tns-core-modules": "^2.2.1"
+    "tns-core-modules": "^2.2.1",
+    "moment":  "2.15.0" 
   },
   "devDependencies": {
     "babel-traverse": "6.13.0",

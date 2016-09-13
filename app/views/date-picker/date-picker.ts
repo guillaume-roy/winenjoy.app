@@ -14,23 +14,7 @@ export function onShownModally(args: pages.ShownModallyData) {
     datePicker = <datePickerModule.DatePicker>page.getViewById("datePicker");
     datePicker.date = args.context.selectedDate;
     datePicker.on(datePickerModule.DatePicker.propertyChangeEvent, (args: EventData) => {
-        console.log("-------------------");
-        console.log(args);
-        console.log(args.eventName);
-        console.log(args.object);
-        console.log(datePicker.date);
-        console.log("FINISH -------------------");
+        var result = new Date(datePicker.year, datePicker.month, datePicker.day);
+        closeCallback(result);
     });
-}
-
-function onSelectedDateChanged(args: EventData) {
-    console.log("-------------------");
-    console.log(args.eventName);
-    console.log(args.object);
-    console.log(datePicker.date);
-
-    //setTimeout(() => {
-    //    datePicker.off(datePickerModule.DatePicker.propertyChangeEvent);
-    //    closeCallback(datePicker.date);
-    //}, 50);
 }

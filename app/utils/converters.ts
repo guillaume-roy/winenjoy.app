@@ -1,5 +1,7 @@
 ﻿import application = require("application");
 import {WineTasting} from "../entities/wineTasting";
+import moment = require("moment");
+import platform = require("platform");
 
 export class Converters {
     public static attach() {
@@ -7,6 +9,7 @@ export class Converters {
         application.resources.visibilityConverter = Converters.visibilityConverter;
         application.resources.notVisiblityConverter = Converters.notVisiblityConverter;
         application.resources.finalRatingToImageConverter = Converters.finalRatingToImageConverter;
+        application.resources.displayDateConverter = Converters.displayDateConverter;
     }
 
     private static regionConverterConverter(value: WineTasting) {
@@ -60,5 +63,13 @@ export class Converters {
         }
 
         return result;
+    }
+
+    private static displayDateConverter(value: Date) {
+        if (!value)
+            return null;
+
+        moment.locale(platform.device.language);
+        return moment(value).format("L");
     }
 }

@@ -438,7 +438,7 @@
                           columns="*,auto">
                 <Label text="Dégusté le"
                        class="form-label"/>
-                <Label text="{{ tastingDate }}"
+                <Label text="{{ tastingDate | displayDateConverter }}"
                        tap="setTastingDate"
                        class="form-label"
                        col="1"

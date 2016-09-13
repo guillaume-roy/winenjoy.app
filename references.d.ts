@@ -1,5 +1,6 @@
 /// <reference path="./node_modules/tns-core-modules/tns-core-modules.d.ts" /> Needed for autocompletion and compilation.
 /// <reference path="./typings/lodash.d.ts" />
+/// <reference path="./typings/moment.d.ts" />
 /// <reference path="./node_modules/nativescript-plugin-firebase/firebase-common.d.ts" />
 /// <reference path="./node_modules/nativescript-plugin-firebase/firebase.d.ts" />
 /// <reference path="./node_modules/nativescript-google-analytics/index.d.ts" />

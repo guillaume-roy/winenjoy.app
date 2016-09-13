@@ -519,6 +519,7 @@
     <TypeScriptCompile Include="app\views\visual-step\visual-step.ts" />
     <TypeScriptCompile Include="references.d.ts" />
     <TypeScriptCompile Include="typings\lodash.d.ts" />
+    <TypeScriptCompile Include="typings\moment.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\views\visual-step\visual-step.scss" />
@@ -543,9 +544,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\data\wine-criterias.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="app\data\aromas.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\views\edit-tasting-old\edit-tasting-old.scss" />
