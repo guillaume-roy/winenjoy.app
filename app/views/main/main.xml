@@ -4,21 +4,19 @@
   <Page.actionBar>
     <ActionBar>
       <ActionBar.actionItems>
-        <ActionItem text="Import/Export" ios.position="right" android.position="popup" tap="onExportTastings" />
+        <!--<ActionItem text="Import/Export" ios.position="right" android.position="popup" tap="onExportTastings" />-->
         <!--<ActionItem text="Changer mot de passe" ios.position="right" android.position="popup" tap="onChangePassword" />-->
       </ActionBar.actionItems>
     </ActionBar>
   </Page.actionBar>
-  <GridLayout rows="*,*">
-    <Button text="All In One" tap="goToAllInOne" />
-    <Button text="All In Tabs" row="1" tap="goToAllInTabs" />
-    <!--<ListView items="{{ tastings }}" visibility="{{ tastings && tastings.length !== 0 ? 'visible' : 'collapse' }}" itemTap="onViewTasting" id="tastings-list">
+  <GridLayout>
+    <ListView items="{{ tastings }}" visibility="{{ tastings.length !== 0 ? 'visible' : 'collapse' }}" itemTap="onViewTasting">
         <ListView.itemTemplate>
             <GridLayout columns="auto, *, auto" class="list-item">
                 <StackLayout backgroundColor="{{ color }}" class="list-item-icon" />
                 <StackLayout col="1">
-                    <Label text="{{ cuvee }}" visibility="{{ cuvee | visibilityConverter }}" class="list-item-title" />
-                    <Label text="{{ estate }}" visibility="{{ estate | visibilityConverter }}" class="list-item-title" />
+                    <Label text="{{ cuvee.label }}" visibility="{{ cuvee | visibilityConverter }}" class="list-item-title" />
+                    <Label text="{{ estate.label }}" visibility="{{ estate | visibilityConverter }}" class="list-item-title" />
                     <Label text="{{ 'AOC ' + aoc.label }}" visibility="{{ aoc | visibilityConverter }}" class="list-item-secondary" />
                     <Label text="{{ $value | regionConverterConverter }}" />
                 </StackLayout>
@@ -29,19 +27,17 @@
             </GridLayout>
         </ListView.itemTemplate>
     </ListView>
-    <FAB:fab visibility="{{ tastings && tastings.length !== 0 ? 'visible' : 'collapse' }}"
-        tap="onCreateNewTasting"
+    <FAB:fab tap="onCreateNewTasting"
         icon="res://ic_add_white_24dp"
         rippleColor="#f1f1f1"
-        hideOnSwipeOfView="tastings-list"
         class="fab-button" />
 
-    <StackLayout visibility="{{ !tastings || tastings.length === 0  ? 'visible' : 'collapse'}}" class="empty-container">
+    <StackLayout visibility="{{ tastings.length === 0  ? 'visible' : 'collapse'}}" class="empty-container">
         <StackLayout class="empty-message">
             <Label class="winenjoy-icon" text="&#xe900;" />
             <Label text="Aucune dégustation" class="no-tasting-message" />
         </StackLayout>
         <Button text="Créer une dégustation" class="first-tasting-button" tap="onCreateFirstTasting" />
-    </StackLayout>-->
+    </StackLayout>
   </GridLayout>
 </Page>

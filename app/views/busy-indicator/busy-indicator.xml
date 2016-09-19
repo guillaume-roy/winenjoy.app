@@ -1,0 +1,8 @@
+﻿<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+      shownModally="onShownModally">
+  <StackLayout orientation="horizontal" style="margin: 12">
+    <ActivityIndicator style="width: 56; height: 56;margin: 6"
+                       busy="true" />
+    <Label text="Chargement en cours ..." style="vertical-align: center;margin-right: 6" />
+  </StackLayout>
+</Page>

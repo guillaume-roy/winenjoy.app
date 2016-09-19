@@ -1,20 +1,33 @@
 ﻿import pages = require("ui/page");
 import {Observable} from "data/observable";
-import datePickerModule = require("ui/date-picker");
-import {EventData} from "data/observable";
+import moment = require("moment");
+import platform = require("platform");
 
 let closeCallback: Function;
-let page: pages.Page;
-let datePicker: datePickerModule.DatePicker;
+let vm: Observable;
 
 export function onShownModally(args: pages.ShownModallyData) {
     closeCallback = args.closeCallback;
-    page = <pages.Page>args.object;
 
-    datePicker = <datePickerModule.DatePicker>page.getViewById("datePicker");
-    datePicker.date = args.context.selectedDate;
-    datePicker.on(datePickerModule.DatePicker.propertyChangeEvent, (args: EventData) => {
-        var result = new Date(datePicker.year, datePicker.month, datePicker.day);
-        closeCallback(result);
+    let page = <pages.Page>args.object;
+
+    moment.locale(platform.device.language);
+    var selectedDate = moment(args.context.selectedDate);
+    vm = new Observable({
+        day: selectedDate.date(),
+        month: selectedDate.month() + 1,
+        year: selectedDate.year()
     });
+    page.bindingContext = vm;
+}
+
+export function cancelModal() {
+    closeCallback();
+}
+
+export function okModal() {
+    closeCallback(new Date(
+        vm.get("year"),
+        vm.get("month") - 1,
+        vm.get("day")));
 }

@@ -18,7 +18,7 @@ export class TastingsService {
 
         let user = this._userService.getUser();
         if (user) {
-            this._userId = user.uid;   
+            this._userId = user.uid;
         }
     }
 
@@ -75,7 +75,17 @@ export class TastingsService {
 
     public getTastings(): Promise<WineTasting[]> {
         return new Promise<WineTasting[]>((resolve, reject) => {
-            resolve(_.orderBy(<WineTasting[]>JSON.parse(appSettings.getString(TastingsService.TASTINGS_KEY, "[]")), ["endDate"], ["desc"]));
+            try {
+                resolve(_.orderBy(<WineTasting[]>JSON.parse(appSettings.getString(TastingsService.TASTINGS_KEY, "[]")),
+                    ["endDate"],
+                    ["desc"]));
+            }
+            catch (error) {
+                reject({
+                    error: error,
+                    message: "Error in TastingsService.getTastings"
+                });
+            }
         });
     }
 
@@ -84,10 +94,12 @@ export class TastingsService {
             this.saveTastingOnFirebase(wineTasting).then(newTasting => {
                 this.saveTastingPictureOnFirebase(newTasting.id, wineTastingPicturePath).then(() => {
                     this._userService.increaseUserStats(newTasting).then(() => {
-                        this.saveTastingLocally(newTasting).then(() => resolve(true));
-                    });
-                });
-            });
+                        this.saveTastingLocally(newTasting)
+                            .then(() => resolve(true))
+                            .catch(saveTastingLocallyError => reject(saveTastingLocallyError));
+                    }).catch(increaseUserStatsError => reject(increaseUserStatsError));
+                }).catch(saveTastingPictureOnFirebase => reject(saveTastingPictureOnFirebase));
+            }).catch(saveTastingOnFirebaseError => reject(saveTastingOnFirebaseError));
         });
     }
 
@@ -177,7 +189,6 @@ export class TastingsService {
 
     private updateTastingOnFirebase(wineTasting: WineTasting) {
         return new Promise<boolean>((resolve, reject) => {
-            wineTasting.lastModificationDate = Date.now();
             firebase.setValue(`/tastings/${this._userId}/${wineTasting.id}`, wineTasting)
                 .then(() => resolve(true));
         });
@@ -194,22 +205,36 @@ export class TastingsService {
     private saveTastingLocally(wineTasting: WineTasting) {
         return new Promise<boolean>((resolve, reject) => {
             this.getTastings().then(tastings => {
-                tastings.push(wineTasting);
-                this.saveTastings(tastings);
-                resolve(true);
-            });
+                try {
+                    tastings.push(wineTasting);
+                    this.saveTastings(tastings);
+                    resolve(true);
+                } catch (error) {
+                    reject({
+                        error: error,
+                        message: "Error in TastingsService.saveTastingLocally"
+                    });
+                }
+            }).catch(e => reject(e));
         });
     }
 
     private saveTastingOnFirebase(wineTasting: WineTasting) {
-        return new Promise<WineTasting>(resolve => {
-            wineTasting.endDate = Date.now();
+        return new Promise<WineTasting>((resolve, reject) => {
             firebase.push(`/tastings/${this._userId}`, {})
                 .then(res => {
                     wineTasting.id = res.key;
                     firebase.setValue(`/tastings/${this._userId}/${wineTasting.id}`, wineTasting)
-                        .then(() => resolve(wineTasting));
-                });
+                        .then(() => resolve(wineTasting))
+                        .catch(setValueError => reject({
+                            error: setValueError,
+                            message: "Error in TastingsService.saveTastingOnFirebase.setValue"
+                        }));
+                })
+                .catch(pushError => reject({
+                    error: pushError,
+                    message: "Error in TastingsService.saveTastingOnFirebase.push"
+                }));
         });
     }
 
@@ -221,7 +246,11 @@ export class TastingsService {
             firebase.uploadFile({
                 localFile: fs.File.fromPath(wineTastingPicture),
                 remoteFullPath: `/tastings/${this._userId}/${wineTastingId}`
-            }).then(() => resolve(true));
+            }).then(() => resolve(true))
+                .catch(error => reject({
+                    error: error,
+                    message: "Error in TastingsService.saveTastingPictureOnFirebase"
+                }));
         });
     }
 }

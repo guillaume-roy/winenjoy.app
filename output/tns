@@ -1,6 +1,6 @@
 Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
 Found peer TypeScript 2.0.0
-app/services/tastingsService.ts(180,25): error TS2339: Property 'lastModificationDate' does not exist on type 'WineTasting'.
+app/view-models/edit-tasting-old-view-model.ts(362,30): error TS2339: Property 'balances' does not exist on type 'WineTasting'.
 
 Project successfully prepared (android)
 Transferring project files...
@@ -9,24 +9,19 @@ Applying changes...
 Successfully synced application com.winenjoy.app on device TA4750GSW7.
 Executing before-watch hook from E:\Dev\winenjoy.app\hooks\before-watch\nativescript-dev-typescript.js
 Found peer TypeScript 2.0.0
-app/services/tastingsService.ts(180,25): error TS2339: Property 'lastModificationDate' does not exist on type 'WineTasting'.
+app/view-models/edit-tasting-old-view-model.ts(362,30): error TS2339: Property 'balances' does not exist on type 'WineTasting'.
 
-app/services/tastingsService.ts(206,25): error TS2339: Property 'endDate' does not exist on type 'WineTasting'.
-
-app/services/userService.ts(178,71): error TS2339: Property 'startDate' does not exist on type 'WineTasting'.
-
-app/services/userService.ts(271,38): error TS2339: Property 'startDate' does not exist on type 'WineTasting'.
 app/views/edit-tasting-old/edit-tasting-old.ts(33,17): error TS2346: Supplied parameters do not match any signature of call target.
+
 app/views/edit-tasting-old/edit-tasting-old.ts(55,15): error TS2339: Property 'setFinalRating' does not exist on type 'EditTastingViewModel'.
 
 app/views/edit-tasting-old/edit-tasting-old.ts(62,19): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-
 app/views/edit-tasting-old/edit-tasting-old.ts(64,23): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
+
 app/views/edit-tasting-old/edit-tasting-old.ts(65,69): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-
 app/views/edit-tasting-old/edit-tasting-old.ts(73,15): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(74,61): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
 
+app/views/edit-tasting-old/edit-tasting-old.ts(74,61): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
 app/views/edit-tasting-old/edit-tasting-old.ts(85,38): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
 app/views/edit-tasting-old/edit-tasting-old.ts(89,27): error TS2339: Property 'setAromas' does not exist on type 'EditTastingViewModel'.
 
@@ -34,22 +29,20 @@ app/views/edit-tasting-old/edit-tasting-old.ts(104,38): error TS2339: Property '
 app/views/edit-tasting-old/edit-tasting-old.ts(108,27): error TS2339: Property 'setDefects' does not exist on type 'EditTastingViewModel'.
 
 app/views/edit-tasting-old/edit-tasting-old.ts(127,27): error TS2339: Property 'setCountry' does not exist on type 'EditTastingViewModel'.
+
 app/views/edit-tasting-old/edit-tasting-old.ts(136,15): error TS2339: Property 'setCountry' does not exist on type 'EditTastingViewModel'.
-
 app/views/edit-tasting-old/edit-tasting-old.ts(144,34): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(146,38): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
 
+app/views/edit-tasting-old/edit-tasting-old.ts(146,38): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
 app/views/edit-tasting-old/edit-tasting-old.ts(149,23): error TS2339: Property 'setRegion' does not exist on type 'EditTastingViewModel'.
 app/views/edit-tasting-old/edit-tasting-old.ts(157,15): error TS2339: Property 'setRegion' does not exist on type 'EditTastingViewModel'.
 
 app/views/edit-tasting-old/edit-tasting-old.ts(165,34): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
 app/views/edit-tasting-old/edit-tasting-old.ts(167,38): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-
 app/views/edit-tasting-old/edit-tasting-old.ts(170,23): error TS2339: Property 'setAoc' does not exist on type 'EditTastingViewModel'.
-
 app/views/edit-tasting-old/edit-tasting-old.ts(178,15): error TS2339: Property 'setAoc' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(183,15): error TS2339: Property 'yearPicker' does not exist on type '{ main: string; gradientColorPicker: string; login: string; listPicker: string; groupingListPicke...'.
 
+app/views/edit-tasting-old/edit-tasting-old.ts(183,15): error TS2339: Property 'yearPicker' does not exist on type '{ main: string; gradientColorPicker: string; login: string; listPicker: string; groupingListPicke...'.
 app/views/edit-tasting-old/edit-tasting-old.ts(184,19): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
 app/views/edit-tasting-old/edit-tasting-old.ts(187,27): error TS2339: Property 'setYear' does not exist on type 'EditTastingViewModel'.
 
@@ -62,205 +55,117 @@ app/views/edit-tasting-old/edit-tasting-old.ts(224,19): error TS2339: Property '
 app/views/edit-tasting-old/edit-tasting-old.ts(229,15): error TS2339: Property 'setPicture' does not exist on type 'EditTastingViewModel'.
 app/views/edit-tasting-old/edit-tasting-old.ts(233,15): error TS2339: Property 'isBusy' does not exist on type 'EditTastingViewModel'.
 
-app/views/edit-tasting-old/edit-tasting-old.ts(236,33): error TS2339: Property 'then' does not exist on type 'void'.
 app/views/edit-tasting-old/edit-tasting-old.ts(240,23): error TS2339: Property 'isBusy' does not exist on type 'EditTastingViewModel'.
-
 app/views/edit-tasting-old/edit-tasting-old.ts(260,27): error TS2339: Property 'deleteTasting' does not exist on type 'EditTastingViewModel'.
+
 app/views/edit-tasting-old/edit-tasting-old.ts(275,19): error TS2339: Property 'isEditMode' does not exist on type 'EditTastingViewModel'.
-
 app/views/edit-tasting-old/edit-tasting-old.ts(285,19): error TS2339: Property 'isEditMode' does not exist on type 'EditTastingViewModel'.
+
 node_modules/tns-core-modules/es6.d.ts(9,13): error TS2451: Cannot redeclare block-scoped variable 'Object'.
-
 node_modules/typescript/lib/lib.d.ts(94,11): error TS2451: Cannot redeclare block-scoped variable 'Object'.
+
 node_modules/typescript/lib/lib.d.ts(235,15): error TS2451: Cannot redeclare block-scoped variable 'Object'.
+16:52:22 - Compilation complete. Watching for file changes.
 
-11:05:59 - Compilation complete. Watching for file changes.
-
+JS: Binding: Property: 'cuvee' is invalid or does not exist. SourceProperty: 'cuvee.label'
+JS: Binding: Run-time error occured in file: undefined at line: undefined and column: undefined
+JS: Binding: Binding error while setting property visibility of Label(28)@file:///app/views/main/main.xml:18:21;: Error: Invalid value [object Object] for property visibility
+JS: Binding: Property: 'estate' is invalid or does not exist. SourceProperty: 'estate.label'
+JS: Binding: Run-time error occured in file: undefined at line: undefined and column: undefined
+JS: Binding: Binding error while setting property visibility of Label(29)@file:///app/views/main/main.xml:19:21;: Error: Invalid value [object Object] for property visibility
+JS: Binding: Run-time error occured in file: undefined at line: undefined and column: undefined
+JS: Binding: Binding error while setting property visibility of Label(30)@file:///app/views/main/main.xml:20:21;: Error: Invalid value [object Object] for property visibility
+JS: Binding: Run-time error occured in file: undefined at line: undefined and column: undefined
+JS: Binding: Property: 'year' is invalid or does not exist. SourceProperty: 'year'
+JS: Binding: Property: 'cuvee' is invalid or does not exist. SourceProperty: 'cuvee.label'
+JS: Binding: Run-time error occured in file: undefined at line: undefined and column: undefined
+JS: Binding: Binding error while setting property visibility of Label(38)@file:///app/views/main/main.xml:18:21;: Error: Invalid value [object Object] for property visibility
+JS: Binding: Property: 'estate' is invalid or does not exist. SourceProperty: 'estate.label'
+JS: Binding: Run-time error occured in file: undefined at line: undefined and column: undefined
+JS: Binding: Binding error while setting property visibility of Label(39)@file:///app/views/main/main.xml:19:21;: Error: Invalid value [object Object] for property visibility
+JS: Binding: Run-time error occured in file: undefined at line: undefined and column: undefined
+JS: Binding: Binding error while setting property visibility of Label(40)@file:///app/views/main/main.xml:20:21;: Error: Invalid value [object Object] for property visibility
+JS: Binding: Run-time error occured in file: undefined at line: undefined and column: undefined
+JS: Binding: Property: 'year' is invalid or does not exist. SourceProperty: 'year'
 JS: WARNING: No timer started: loading edit-tasting
 JS: Binding: Binding error while setting property items of AutoComplete<locationAutoComplete>@file:///app/views/edit-tasting/edit-tasting.xml:295:15;: Error: Expect integer value as a second argument.
-JS: ---- [init edit-tasting-view-model] STOP total: 1844ms count:1
-JS: Sun Oct 23 2016 00:00:00 GMT+0200 (CEST)
-JS: Sun Nov 27 2016 00:00:00 GMT+0100 (CET)
-I/ActivityManager(  823): Start proc 9811:com.android.chrome/u0a51 for service com.android.chrome/org.chromium.chrome.browser.omaha.OmahaClient
-V/AlarmManager(  823): sending alarm {f5a72a4 type 1 *alarm*:org.chromium.chrome.browser.omaha.ACTION_REGISTER_REQUEST}
-V/AlarmManager(  823): done {f5a72a4, *alarm*:org.chromium.chrome.browser.omaha.ACTION_REGISTER_REQUEST} [54ms]
-11:09:20 - File change detected. Starting incremental compilation...
-
-app/services/tastingsService.ts(180,25): error TS2339: Property 'lastModificationDate' does not exist on type 'WineTasting'.
-
-app/services/tastingsService.ts(206,25): error TS2339: Property 'endDate' does not exist on type 'WineTasting'.
-app/services/userService.ts(178,71): error TS2339: Property 'startDate' does not exist on type 'WineTasting'.
-app/services/userService.ts(271,38): error TS2339: Property 'startDate' does not exist on type 'WineTasting'.
-app/views/edit-tasting-old/edit-tasting-old.ts(33,17): error TS2346: Supplied parameters do not match any signature of call target.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(55,15): error TS2339: Property 'setFinalRating' does not exist on type 'EditTastingViewModel'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(62,19): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(64,23): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(65,69): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(73,15): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(74,61): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(85,38): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(89,27): error TS2339: Property 'setAromas' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(104,38): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(108,27): error TS2339: Property 'setDefects' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(127,27): error TS2339: Property 'setCountry' does not exist on type 'EditTastingViewModel'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(136,15): error TS2339: Property 'setCountry' does not exist on type 'EditTastingViewModel'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(144,34): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(146,38): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(149,23): error TS2339: Property 'setRegion' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(157,15): error TS2339: Property 'setRegion' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(165,34): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(167,38): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(170,23): error TS2339: Property 'setAoc' does not exist on type 'EditTastingViewModel'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(178,15): error TS2339: Property 'setAoc' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(183,15): error TS2339: Property 'yearPicker' does not exist on type '{ main: string; gradientColorPicker: string; login: string; listPicker: string; groupingListPicke...'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(184,19): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(187,27): error TS2339: Property 'setYear' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(196,15): error TS2339: Property 'setYear' does not exist on type 'EditTastingViewModel'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(206,38): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(210,27): error TS2339: Property 'setGrapes' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(224,19): error TS2339: Property 'setPicture' does not exist on type 'EditTastingViewModel'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(229,15): error TS2339: Property 'setPicture' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(233,15): error TS2339: Property 'isBusy' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(236,33): error TS2339: Property 'then' does not exist on type 'void'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(240,23): error TS2339: Property 'isBusy' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(260,27): error TS2339: Property 'deleteTasting' does not exist on type 'EditTastingViewModel'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(275,19): error TS2339: Property 'isEditMode' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(285,19): error TS2339: Property 'isEditMode' does not exist on type 'EditTastingViewModel'.
-node_modules/tns-core-modules/es6.d.ts(9,13): error TS2451: Cannot redeclare block-scoped variable 'Object'.
-
-node_modules/typescript/lib/lib.d.ts(94,11): error TS2451: Cannot redeclare block-scoped variable 'Object'.
-node_modules/typescript/lib/lib.d.ts(235,15): error TS2451: Cannot redeclare block-scoped variable 'Object'.
-11:09:21 - Compilation complete. Watching for file changes.
-
+JS: ---- [init edit-tasting-view-model] STOP total: 1942ms count:1
 Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
 Project successfully prepared (android)
-Transferring project files...
-Successfully transferred converters.js.
-Applying changes...
-Successfully synced application com.winenjoy.app on device TA4750GSW7.
-JS: WARNING: No timer started: loading edit-tasting
-JS: Binding: Binding error while setting property items of AutoComplete<locationAutoComplete>@file:///app/views/edit-tasting/edit-tasting.xml:295:15;: Error: Expect integer value as a second argument.
-JS: fr
-JS: FR
-JS: fr
-JS: FR
-JS: fr
-JS: FR
-JS: fr
-JS: FR
-JS: ---- [init edit-tasting-view-model] STOP total: 1890ms count:1
-JS: fr
-JS: FR
-JS: fr
-JS: FR
-JS: fr
-JS: FR
-JS: fr
-JS: FR
-JS: fr
-JS: FR
-JS: fr
-JS: FR
-JS: fr
-JS: FR
-JS: fr
-JS: FR
-JS: fr
-JS: FR
-JS: fr
-JS: FR
-JS: fr
-JS: FR
-JS: fr
-JS: FR
-JS: fr
-JS: FR
-11:11:27 - File change detected. Starting incremental compilation...
+The application with id "com.winenjoy.app" is not installed on device with identifier TA4750GSW7.
+WARNING: The file: E:\Dev\winenjoy.app\node_modules\nativescript-google-analytics\platforms\android\AndroidManifest.xml is depricated, you can read more about what will be the expected plugin structure here: https://www.nativescript.org/blog/migrating-n-android-plugins-from-version-1.7-to-2.0
+WARNING: The file: E:\Dev\winenjoy.app\node_modules\nativescript-plugin-firebase\platforms\android\README.md is depricated, you can read more about what will be the expected plugin structure here: https://www.nativescript.org/blog/migrating-n-android-plugins-from-version-1.7-to-2.0
 
-app/services/tastingsService.ts(180,25): error TS2339: Property 'lastModificationDate' does not exist on type 'WineTasting'.
+:config phase:  createDefaultIncludeFiles
+	+found plugins: nativescript-cardview
+	+found plugins: nativescript-floatingactionbutton
+	+found plugins: nativescript-google-analytics
+	+found plugins: nativescript-plugin-firebase
+	+found plugins: tns-core-modules-widgets
 
-app/services/tastingsService.ts(206,25): error TS2339: Property 'endDate' does not exist on type 'WineTasting'.
-app/services/userService.ts(178,71): error TS2339: Property 'startDate' does not exist on type 'WineTasting'.
-app/services/userService.ts(271,38): error TS2339: Property 'startDate' does not exist on type 'WineTasting'.
-app/views/edit-tasting-old/edit-tasting-old.ts(33,17): error TS2346: Supplied parameters do not match any signature of call target.
-app/views/edit-tasting-old/edit-tasting-old.ts(55,15): error TS2339: Property 'setFinalRating' does not exist on type 'EditTastingViewModel'.
+:config phase:  createPluginsConfigFile
+	 Creating product flavors include.gradle file in E:\Dev\winenjoy.app\platforms\android/configurations folder...
 
-app/views/edit-tasting-old/edit-tasting-old.ts(62,19): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(64,23): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(65,69): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
+:config phase:  pluginExtend
+	+applying configuration from: E:\Dev\winenjoy.app\platforms\android\configurations\include.gradle
+	+applying configuration from: E:\Dev\winenjoy.app\platforms\android\configurations\nativescript-cardview\include.gradle
+	+applying configuration from: E:\Dev\winenjoy.app\platforms\android\configurations\nativescript-floatingactionbutton\include.gradle
+	+applying configuration from: E:\Dev\winenjoy.app\platforms\android\configurations\nativescript-google-analytics\include.gradle
+	+applying configuration from: E:\Dev\winenjoy.app\platforms\android\configurations\nativescript-plugin-firebase\include.gradle
+	+applying configuration from: E:\Dev\winenjoy.app\platforms\android\configurations\tns-core-modules-widgets\include.gradle
 
-app/views/edit-tasting-old/edit-tasting-old.ts(73,15): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(74,61): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(85,38): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
+:config phase:  copyAarDependencies
 
-app/views/edit-tasting-old/edit-tasting-old.ts(89,27): error TS2339: Property 'setAromas' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(104,38): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(108,27): error TS2339: Property 'setDefects' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(127,27): error TS2339: Property 'setCountry' does not exist on type 'EditTastingViewModel'.
+:config phase:  addAarDependencies
+	+adding dependency: E:\Dev\winenjoy.app\platforms\android\libs\aar\firebase-release.aar
+	+adding dependency: E:\Dev\winenjoy.app\platforms\android\libs\aar\widgets-release.aar
+Incremental java compilation is an incubating feature.
+:preBuild UP-TO-DATE
+:preF0F1F2F3F4DebugBuild UP-TO-DATE
+:checkF0F1F2F3F4DebugManifest
+:preF0F1F2F3F4ReleaseBuild UP-TO-DATE
+:prepareAppRuntimeUnspecifiedLibrary UP-TO-DATE
+:prepareComAndroidSupportAnimatedVectorDrawable2340Library UP-TO-DATE
+:prepareComAndroidSupportAppcompatV72340Library UP-TO-DATE
+:prepareComAndroidSupportCardviewV72340Library UP-TO-DATE
+:prepareComAndroidSupportDesign2340Library UP-TO-DATE
+:prepareComAndroidSupportRecyclerviewV72340Library UP-TO-DATE
+:prepareComAndroidSupportSupportV42340Library UP-TO-DATE
+:prepareComAndroidSupportSupportVectorDrawable2340Library UP-TO-DATE
+:prepareComGoogleAndroidGmsPlayServicesAnalytics940Library UP-TO-DATE
+:prepareComGoogleAndroidGmsPlayServicesAnalyticsImpl940Library UP-TO-DATE
+:prepareComGoogleAndroidGmsPlayServicesBase940Library UP-TO-DATE
+:prepareComGoogleAndroidGmsPlayServicesBasement940Library UP-TO-DATE
+:prepareComGoogleAndroidGmsPlayServicesTasks940Library UP-TO-DATE
+:prepareComGoogleFirebaseFirebaseAnalytics940Library UP-TO-DATE
+:prepareComGoogleFirebaseFirebaseAnalyticsImpl940Library UP-TO-DATE
+:prepareComGoogleFirebaseFirebaseAuth940Library UP-TO-DATE
+:prepareComGoogleFirebaseFirebaseAuthCommon940Library UP-TO-DATE
+:prepareComGoogleFirebaseFirebaseAuthModule940Library UP-TO-DATE
+:prepareComGoogleFirebaseFirebaseCommon940Library UP-TO-DATE
+:prepareComGoogleFirebaseFirebaseConfig940Library UP-TO-DATE
+:prepareComGoogleFirebaseFirebaseCore940Library UP-TO-DATE
+:prepareComGoogleFirebaseFirebaseCrash940Library UP-TO-DATE
+:prepareComGoogleFirebaseFirebaseDatabase940Library UP-TO-DATE
+:prepareComGoogleFirebaseFirebaseDatabaseConnection940Library UP-TO-DATE
+:prepareComGoogleFirebaseFirebaseIid940Library UP-TO-DATE
+:prepareComGoogleFirebaseFirebaseStorage940Library UP-TO-DATE
+:prepareComGoogleFirebaseFirebaseStorageCommon940Library UP-TO-DATE
+:prepareFirebaseReleaseLibrary UP-TO-DATE
+:prepareWidgetsReleaseLibrary UP-TO-DATE
+:prepareF0F1F2F3F4DebugDependencies
+:compileF0F1F2F3F4DebugAidl UP-TO-DATE
+:compileF0F1F2F3F4DebugRenderscript UP-TO-DATE
+:generateF0F1F2F3F4DebugBuildConfig UP-TO-DATE
+:cleanLocalAarFiles
+:ensureMetadataOutDir
+:collectAllJars
+:setProperties
+:asbg:generateInterfaceNamesList
+:asbg:runAstParser
+inputDir: E:\Dev\winenjoy.app\platforms\android\src\main\assets\app
+:asbg:runAstParser FAILED
 
-app/views/edit-tasting-old/edit-tasting-old.ts(136,15): error TS2339: Property 'setCountry' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(144,34): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
+BUILD FAILED
 
-app/views/edit-tasting-old/edit-tasting-old.ts(146,38): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(149,23): error TS2339: Property 'setRegion' does not exist on type 'EditTastingViewModel'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(157,15): error TS2339: Property 'setRegion' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(165,34): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(167,38): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(170,23): error TS2339: Property 'setAoc' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(178,15): error TS2339: Property 'setAoc' does not exist on type 'EditTastingViewModel'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(183,15): error TS2339: Property 'yearPicker' does not exist on type '{ main: string; gradientColorPicker: string; login: string; listPicker: string; groupingListPicke...'.
-app/views/edit-tasting-old/edit-tasting-old.ts(184,19): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(187,27): error TS2339: Property 'setYear' does not exist on type 'EditTastingViewModel'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(196,15): error TS2339: Property 'setYear' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(206,38): error TS2339: Property 'wineTasting' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(210,27): error TS2339: Property 'setGrapes' does not exist on type 'EditTastingViewModel'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(224,19): error TS2339: Property 'setPicture' does not exist on type 'EditTastingViewModel'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(229,15): error TS2339: Property 'setPicture' does not exist on type 'EditTastingViewModel'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(233,15): error TS2339: Property 'isBusy' does not exist on type 'EditTastingViewModel'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(236,33): error TS2339: Property 'then' does not exist on type 'void'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(240,23): error TS2339: Property 'isBusy' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(260,27): error TS2339: Property 'deleteTasting' does not exist on type 'EditTastingViewModel'.
-app/views/edit-tasting-old/edit-tasting-old.ts(275,19): error TS2339: Property 'isEditMode' does not exist on type 'EditTastingViewModel'.
-
-app/views/edit-tasting-old/edit-tasting-old.ts(285,19): error TS2339: Property 'isEditMode' does not exist on type 'EditTastingViewModel'.
-node_modules/tns-core-modules/es6.d.ts(9,13): error TS2451: Cannot redeclare block-scoped variable 'Object'.
-node_modules/typescript/lib/lib.d.ts(94,11): error TS2451: Cannot redeclare block-scoped variable 'Object'.
-
-node_modules/typescript/lib/lib.d.ts(235,15): error TS2451: Cannot redeclare block-scoped variable 'Object'.
-11:11:28 - Compilation complete. Watching for file changes.
-
-Executing before-prepare hook from E:\Dev\winenjoy.app\hooks\before-prepare\nativescript-dev-typescript.js
-Project successfully prepared (android)
-Transferring project files...
-Successfully transferred converters.js.
-Applying changes...
-Successfully synced application com.winenjoy.app on device TA4750GSW7.
-JS: WARNING: No timer started: loading edit-tasting
-JS: Binding: Binding error while setting property items of AutoComplete<locationAutoComplete>@file:///app/views/edit-tasting/edit-tasting.xml:295:15;: Error: Expect integer value as a second argument.
-JS: ---- [init edit-tasting-view-model] STOP total: 1898ms count:1
+Total time: 11.947 secs

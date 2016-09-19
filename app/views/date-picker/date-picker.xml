@@ -1,6 +1,17 @@
 ﻿<Page xmlns="http://schemas.nativescript.org/tns.xsd"
       shownModally="onShownModally">
   <StackLayout>
-    <DatePicker id="datePicker" />
+    <DatePicker day="{{ day }}"
+                month="{{ month }}"
+                year="{{ year }}" />
+    <StackLayout orientation="horizontal"
+                 style="horizontal-align: right;margin-right: 12;margin-bottom: 12">
+      <Label text="ANNULER"
+             style="color: #FFC107; margin: 6;padding: 6"
+             tap="cancelModal" />
+      <Label text="OK"
+             style="color: #FFC107; margin: 6;padding: 6"
+             tap="okModal" />
+    </StackLayout>
   </StackLayout>
 </Page>

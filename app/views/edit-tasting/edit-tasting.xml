@@ -142,8 +142,8 @@
                      class="form-label"
                      col="1"
                      row="1"/>
-              <vs:ValuesSelector items="{{ intensities }}"
-                                 selectedItems="{{ selectedIntensities }}"
+              <vs:ValuesSelector items="{{ noseIntensities }}"
+                                 selectedItems="{{ selectedNoseIntensities }}"
                                  row="2"
                                  col="1" />
               <Label text="&#xE80E;"
@@ -390,9 +390,8 @@
         <TabViewItem.view>
           <ScrollView>
             <GridLayout columns="auto, *"
-                        rows="auto,auto,auto,auto,auto,auto,auto,auto">
+                        rows="auto,auto,auto,auto,auto,auto">
               <StackLayout colSpan="2"
-                           row="1"
                            orientation="horizontal"
                            class="final-rating">
                 <Label text="sentiment_very_satisfied"
@@ -411,6 +410,20 @@
                        class="{{ finalRating == 0 ? 'material-icon final-rating-0 selected': 'material-icon final-rating-0' }}"
                        tap="selectFinalRating"/>
               </StackLayout>
+              <Label text="&#xE878;"
+                     class="material-icon form-icon"
+                     row="1"/>
+              <GridLayout col="1"
+                          row="1"
+                          columns="*,auto">
+                <Label text="Dégusté le"
+                       class="form-label"/>
+                <Label text="{{ tastingDate | displayDateConverter }}"
+                       tap="setTastingDate"
+                       class="form-label"
+                       col="1"
+                       style="horizontal-align: right;margin-right: 6"/>
+              </GridLayout>
               <Label text="&#xE540;"
                      class="material-icon form-icon"
                      row="2"/>
@@ -418,8 +431,8 @@
                      class="form-label"
                      col="1"
                      row="2"/>
-              <vs:ValuesSelector items="{{ potentials }}"
-                                 selectedItems="{{ selectedPotentials }}"
+              <vs:ValuesSelector items="{{ winePotentials }}"
+                                 selectedItems="{{ selectedWinePotentials }}"
                                  col="1"
                                  row="3" />
               <Label text="&#xE56C;"
@@ -430,24 +443,10 @@
                         class="form-single-line"
                         hint="Accords Mets &amp; Vins"
                         text="{{ winePairing }}"/>
-              <Label text="&#xE878;"
-                     class="material-icon form-icon"
-                     row="5"/>
-              <GridLayout col="1"
-                          row="5"
-                          columns="*,auto">
-                <Label text="Dégusté le"
-                       class="form-label"/>
-                <Label text="{{ tastingDate | displayDateConverter }}"
-                       tap="setTastingDate"
-                       class="form-label"
-                       col="1"
-                       style="horizontal-align: right;margin-right: 6"/>
-              </GridLayout>
               <Label text="&#xE0B9;"
                      class="material-icon form-icon"
-                     row="7" />
-              <TextView row="7"
+                     row="5" />
+              <TextView row="5"
                         col="1"
                         class="form-single-line"
                         hint="Commentaires"

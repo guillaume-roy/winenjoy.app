@@ -311,6 +311,7 @@
     <Content Include="app\view-models\visual-step-view-model.js">
       <DependentUpon>visual-step-view-model.ts</DependentUpon>
     </Content>
+    <Content Include="app\views\busy-indicator\busy-indicator.xml" />
     <Content Include="app\views\change-password\change-password.css">
       <DependentUpon>change-password.scss</DependentUpon>
     </Content>
@@ -318,9 +319,6 @@
       <DependentUpon>change-password.ts</DependentUpon>
     </Content>
     <Content Include="app\views\change-password\change-password.xml" />
-    <Content Include="app\views\date-picker\date-picker.js">
-      <DependentUpon>date-picker.ts</DependentUpon>
-    </Content>
     <Content Include="app\views\date-picker\date-picker.xml" />
     <Content Include="app\views\edit-tasting-old\edit-tasting-old.css" />
     <Content Include="app\views\edit-tasting-old\edit-tasting-old.js" />
@@ -391,7 +389,9 @@
     <Content Include="app\views\main\main.js">
       <DependentUpon>main.ts</DependentUpon>
     </Content>
-    <Content Include="app\views\main\main.xml" />
+    <Content Include="app\views\main\main.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="app\views\nose-step\nose-step.css">
       <DependentUpon>nose-step.scss</DependentUpon>
     </Content>
@@ -502,6 +502,7 @@
     <TypeScriptCompile Include="app\view-models\nose-step-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\taste-step-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\visual-step-view-model.ts" />
+    <TypeScriptCompile Include="app\views\busy-indicator\busy-indicator.ts" />
     <TypeScriptCompile Include="app\views\change-password\change-password.ts" />
     <TypeScriptCompile Include="app\views\date-picker\date-picker.ts" />
     <TypeScriptCompile Include="app\views\edit-tasting-old\edit-tasting-old.ts" />
@@ -550,9 +551,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\views\edit-tasting\edit-tasting.scss" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="app\views\date-picker\date-picker.sass" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="google-services.json" />

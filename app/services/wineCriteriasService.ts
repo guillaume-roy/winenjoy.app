@@ -9,7 +9,7 @@ export class WineCriteriasService {
         global.wineCriterias = value;
     }
 
-    private loadData() {
+    public loadData() {
         if (_.isEmpty(this.wineCriterias)) {
             var data = require("../data/wine-criterias.json");
             this.wineCriterias = data;

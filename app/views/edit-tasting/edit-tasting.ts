@@ -5,10 +5,12 @@ import camera = require("camera");
 import profiler = require("../../utils/profiling");
 import {EditTastingViewModel} from "../../view-models/edit-tasting-view-model";
 import {Views} from "../../utils/views";
+import frameModule = require("ui/frame");
 
 let page: Page;
 let locationAutoComplete;
 let viewModel: EditTastingViewModel;
+let busyModal: Page;
 
 export function navigatedTo(args: EventData) {
     profiler.start("loading edit-tasting");
@@ -18,15 +20,21 @@ export function navigatedTo(args: EventData) {
 
     page.bindingContext = viewModel;
 
-    profiler.start("init edit-tasting-view-model");
-    viewModel.init();
-    profiler.stop("init edit-tasting-view-model");
-
     if (locationAutoComplete.android) {
         locationAutoComplete.android.setHint("Pays, Région, AOC");
         locationAutoComplete.android.setHintTextColor(android.graphics.Color.parseColor("#727272"));
         locationAutoComplete.android.setTextSize(16);
     }
+
+    setTimeout(() => {
+        profiler.start("init edit-tasting-view-model");
+        viewModel.init();
+        profiler.stop("init edit-tasting-view-model");
+
+        if (page.navigationContext) {
+            viewModel.load(page.navigationContext);
+        }
+    });
 }
 
 export function loaded() {
@@ -57,7 +65,24 @@ export function managePicture() {
 }
 
 export function saveTasting() {
-    viewModel.saveTasting();
+    isBusy();
+    setTimeout(() => {
+        viewModel.saveTasting()
+            .then(() => {
+                isBusy(true);
+                frameModule.topmost()
+                    .navigate({
+                        animated: false,
+                        backstackVisible: false,
+                        moduleName: Views.main
+                    });
+            }).catch(error => {
+                isBusy(true);
+                console.log("saveTasting ERROR");
+                console.log(error.message);
+                console.log(error.error);
+            });
+    }, 0);
 }
 
 export function selectAromas() {
@@ -100,7 +125,7 @@ export function selectAromaDefects() {
 
 export function selectFlavors() {
     page.showModal(
-        Views.groupingListPicker,
+        Views.listPicker,
         {
             criterias: "aromas",
             groupingIcon: "whatshot",
@@ -121,7 +146,7 @@ export function selectFlavorDefects() {
     page.showModal(
         Views.listPicker,
         {
-            criterias: "aromas",
+            criterias: "aromaDefects",
             groupingIcon: "whatshot",
             multiple: true,
             searchBarHintText: "Sélectionez des défauts de saveur",
@@ -162,7 +187,6 @@ export function setTastingDate() {
             selectedDate: viewModel.get("tastingDate")
         },
         (data: any) => {
-            console.log(data);
             if (data) {
                 viewModel.set("tastingDate", null);
                 viewModel.set("tastingDate", data);
@@ -172,11 +196,16 @@ export function setTastingDate() {
 
 export function selectFinalRating(args) {
     let finalRating = parseInt(args.object.className.match(/final-rating-(\d)/)[1], 10);
-    let oldFinalRating = <number>viewModel.get("finalRating");
+    viewModel.set("finalRating", finalRating);
+}
 
-    if (finalRating === oldFinalRating) {
-        viewModel.set("finalRating", undefined);
+function isBusy(closeModal?: boolean) {
+    if (closeModal) {
+        if (busyModal) {
+            busyModal.closeModal();
+            busyModal = null;
+        }
     } else {
-        viewModel.set("finalRating", finalRating);
+        busyModal = page.showModal("views/busy-indicator/busy-indicator", null, () => { busyModal = null; }, false);
     }
 }

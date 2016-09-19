@@ -18,17 +18,17 @@ application.onUncaughtError = (error: any)  => {
     analyticsService.logException(null, true);
 };
 
-//let userService = new UserService();
-//userService.initAuthentication().then(loggedIn => {
-//    if (loggedIn) {
-//        userService.updateLastConnectionDate();
-//        frameModule.topmost().navigate({
-//            animated: false,
-//            backstackVisible: true,
-//            moduleName: Views.allInOne
-//        });
-//    }
-//});
+let userService = new UserService();
+userService.initAuthentication().then(loggedIn => {
+    if (loggedIn) {
+        userService.updateLastConnectionDate();
+        frameModule.topmost().navigate({
+            animated: false,
+            backstackVisible: true,
+            moduleName: Views.main
+        });
+    }
+});
 
-application.mainModule = Views.editTasting;
+application.mainModule = Views.login;
 application.start();

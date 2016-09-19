@@ -13,16 +13,12 @@ export interface WineTasting {
     isBiodynamic?: boolean;
     isBlindTasting?: boolean;
     grapes?: CriteriaItem[];
-    wineTabNotes?: string;
     tastingDate?: number;
-    synthesisTabNotes?: string;
     color?: string;
     finalRating?: number;
-    sightTabNotes?: string;
-    smellTabNotes?: string;
-    tasteTabNotes?: string;
     aromas?: CriteriaItem[];
     defects?: CriteriaItem[];
+    winePotentials?: CriteriaItem[];
     flavors?: CriteriaItem[];
     flavorDefects?: CriteriaItem[];
     attacks?: CriteriaItem[];
@@ -31,10 +27,13 @@ export interface WineTasting {
     tears?: CriteriaItem[];
     hasBubbles?: boolean;
     hasDeposit?:boolean;
-    intensities?: CriteriaItem[];
-    balances?: CriteriaItem[];
+    noseIntensities?: CriteriaItem[];
+    tasteIntensities?: CriteriaItem[];
+    noseDevelopments?: CriteriaItem[];
+    tannins?: CriteriaItem[];
+    acidities?: CriteriaItem[];
     length?: CriteriaItem[];
-    meatsNotes?: string;
     containsPicture?: boolean;
     winePairing?: string;
+    comments?: string;
 }
