@@ -10,34 +10,53 @@
     </ActionBar>
   </Page.actionBar>
   <GridLayout>
-    <ListView items="{{ tastings }}" visibility="{{ tastings.length !== 0 ? 'visible' : 'collapse' }}" itemTap="onViewTasting">
-        <ListView.itemTemplate>
-            <GridLayout columns="auto, *, auto" class="list-item">
-                <StackLayout backgroundColor="{{ color }}" class="list-item-icon" />
-                <StackLayout col="1">
-                    <Label text="{{ cuvee.label }}" visibility="{{ cuvee | visibilityConverter }}" class="list-item-title" />
-                    <Label text="{{ estate.label }}" visibility="{{ estate | visibilityConverter }}" class="list-item-title" />
-                    <Label text="{{ 'AOC ' + aoc.label }}" visibility="{{ aoc | visibilityConverter }}" class="list-item-secondary" />
-                    <Label text="{{ $value | regionConverterConverter }}" />
-                </StackLayout>
-                <StackLayout col="2">
-                    <Label text="{{ year }}" class="list-item-secondary" />
-                    <Label text="{{ finalRating | finalRatingToImageConverter }}" class="{{ finalRating ? 'material-icon final-rating final-rating-' + finalRating : 'material-icon final-rating' }}" />
-                </StackLayout>
-            </GridLayout>
-        </ListView.itemTemplate>
+    <ListView items="{{ tastings }}"
+              visibility="{{ tastings.length !== 0 ? 'visible' : 'collapse' }}"
+              itemTap="onViewTasting">
+      <ListView.itemTemplate>
+        <GridLayout columns="auto, *, auto"
+                    class="list-item">
+          <StackLayout backgroundColor="{{ color }}"
+                       class="list-item-icon" />
+          <StackLayout col="1">
+            <Label text="{{ cuvee.label }}"
+                   visibility="{{ cuvee | visibilityConverter }}"
+                   class="list-item-title" />
+            <Label text="{{ estate.label }}"
+                   visibility="{{ estate | visibilityConverter }}"
+                   class="list-item-title" />
+            <Label text="{{ 'AOC ' + aoc.label }}"
+                   visibility="{{ aoc | visibilityConverter }}"
+                   class="list-item-secondary" />
+            <Label text="{{ $value | regionConverterConverter }}" />
+          </StackLayout>
+          <StackLayout col="2">
+            <Label text="{{ year }}"
+                   class="list-item-secondary" />
+            <Label text="{{ finalRating | finalRatingToImageConverter }}"
+                   class="{{ finalRating ? 'material-icon final-rating final-rating-' + finalRating : 'material-icon final-rating' }}" />
+          </StackLayout>
+        </GridLayout>
+      </ListView.itemTemplate>
     </ListView>
+    
     <FAB:fab tap="onCreateNewTasting"
-        icon="res://ic_add_white_24dp"
-        rippleColor="#f1f1f1"
-        class="fab-button" />
+             visibility="{{ tastings.length !== 0 ? 'visible' : 'collapse' }}"
+             icon="res://ic_add_white_24dp"
+             rippleColor="#f1f1f1"
+             class="fab-button" />
 
-    <StackLayout visibility="{{ tastings.length === 0  ? 'visible' : 'collapse'}}" class="empty-container">
-        <StackLayout class="empty-message">
-            <Label class="winenjoy-icon" text="&#xe900;" />
-            <Label text="Aucune dégustation" class="no-tasting-message" />
-        </StackLayout>
-        <Button text="Créer une dégustation" class="first-tasting-button" tap="onCreateFirstTasting" />
+    <StackLayout visibility="{{ tastings.length === 0  ? 'visible' : 'collapse'}}"
+                 class="empty-container">
+      <StackLayout class="empty-message">
+        <Label class="winenjoy-icon"
+               text="&#xe900;" />
+        <Label text="Aucune dégustation"
+               class="no-tasting-message" />
+      </StackLayout>
+      <Button text="Créer une dégustation"
+              class="first-tasting-button"
+              tap="onCreateFirstTasting" />
     </StackLayout>
   </GridLayout>
 </Page>

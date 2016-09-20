@@ -108,13 +108,16 @@ export class TastingsService {
             var endOfDelete = () => {
                 this.deleteTastingOnFirebase(wineTasting).then(() => {
                     this._userService.decreaseUserStats(wineTasting).then(() => {
-                        this.deleteTastingLocally(wineTasting.id).then(() => resolve(true));
-                    });
-                });
+                        this.deleteTastingLocally(wineTasting.id).then(() => resolve(true))
+                            .catch(deleteTastingLocallyError => reject(deleteTastingLocallyError));
+                    }).catch(decreaseUserStatsError => reject(decreaseUserStatsError));
+                }).catch(deleteTastingOnFirebaseError => reject(deleteTastingOnFirebaseError));
             };
 
             if (wineTasting.containsPicture) {
-                this.deleteTastingPictureOnFirebase(wineTasting.id).then(() => endOfDelete());
+                this.deleteTastingPictureOnFirebase(wineTasting.id)
+                    .then(() => endOfDelete())
+                    .catch(deleteTastingPictureOnFirebaseError => reject(deleteTastingPictureOnFirebaseError));
             } else {
                 endOfDelete();
             }
@@ -163,7 +166,13 @@ export class TastingsService {
     private deleteTastingOnFirebase(wineTasting: WineTasting) {
         return new Promise<boolean>((resolve, reject) => {
             firebase.remove(`/tastings/${this._userId}/${wineTasting.id}`)
-                .then(() => resolve(true));
+                .then(() => resolve(true))
+                .catch(removeError => {
+                    reject({
+                        error: removeError,
+                        message: "Error in TastingsService.deleteTastingOnFirebase"
+                    });
+                });
         });
     }
 
@@ -173,6 +182,11 @@ export class TastingsService {
                 remoteFullPath: `/tastings/${this._userId}/${wineTastingId}`
             }).then(() => {
                 resolve(true);
+            }).catch(deleteFileError => {
+                reject({
+                    error: deleteFileError,
+                    message: "Error in TastingsService.deleteTastingPictureOnFirebase"
+                });
             });
         });
     }
@@ -180,10 +194,17 @@ export class TastingsService {
     private deleteTastingLocally(wineTastingId) {
         return new Promise<boolean>((resolve, reject) => {
             this.getTastings().then(tastings => {
-                _.remove(tastings, w => w.id === wineTastingId);
-                this.saveTastings(tastings);
-                resolve(true);
-            });
+                try {
+                    _.remove(tastings, w => w.id === wineTastingId);
+                    this.saveTastings(tastings);
+                    resolve(true);
+                } catch (error) {
+                    reject({
+                        error: error,
+                        message: "Error in TastingsService.deleteTastingLocally"
+                    });
+                }
+            }).catch(e => reject(e));
         });
     }
 

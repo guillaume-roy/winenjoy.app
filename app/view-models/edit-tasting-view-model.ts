@@ -4,6 +4,7 @@ import {WineTasting} from "../entities/wineTasting";
 import {TastingsService} from "../services/tastingsService";
 import fs = require("file-system");
 import _ = require("lodash");
+import {CriteriaItem} from "../entities/criteriaItem";
 
 export class EditTastingViewModel extends Observable {
     private _wineCriteriasService: WineCriteriasService;
@@ -123,11 +124,40 @@ export class EditTastingViewModel extends Observable {
         this.set("selectedTannins", wineTasting.tannins);
         this.set("selectedAcidities", wineTasting.acidities);
         this.set("selectedNoseDevelopments", wineTasting.noseDevelopments);
+
+        this.set("editWineTasting", wineTasting);
+        this.set("isEdit", true);
     }
 
-    saveTasting() {
+    saveTasting(locationLabel: string) {
         return new Promise<boolean>((resolve, reject) => {
-            //TODO : Récupérer le location label - S'il existe pas => le créer en mode custom
+            if (!_.isEmpty(locationLabel)) {
+                var locations = <CriteriaItem[]>this.get("locations");
+                var location = _.find(locations, { label: locationLabel });
+
+                if (!_.isEmpty(location)) {
+                    switch (location.type) {
+                    case "aoc":
+                        var aoc = this._wineCriteriasService.getAoc(location.id);
+                        this.set("aoc", aoc);
+                        var region = this._wineCriteriasService.getRegion(aoc.parentId);
+                        this.set("region", region);
+                        var country = this._wineCriteriasService.getCountry(region.parentId);
+                        this.set("country", country);
+                        break;
+                    case "region":
+                        var region1 = this._wineCriteriasService.getRegion(location.id);
+                        this.set("region", region1);
+                        var country1 = this._wineCriteriasService.getCountry(region1.parentId);
+                        this.set("country", country1);
+                        break;
+                    case "country":
+                        var country2 = this._wineCriteriasService.getCountry(location.id);
+                        this.set("country", country2);
+                        break;
+                    }
+                }
+            }
 
             var wineTasting = <WineTasting>{
                 estate: this.get("estate"),
@@ -182,6 +212,11 @@ export class EditTastingViewModel extends Observable {
                 reject(error);
             });
         });
+    }
+
+    deleteTasting() {
+        var service = new TastingsService();
+        return service.deleteTasting(this.get("editWineTasting"));
     }
 
     private loadCriteria(criteria, property?) {

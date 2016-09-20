@@ -66,8 +66,15 @@ export function managePicture() {
 
 export function saveTasting() {
     isBusy();
+
+    var locationText = locationAutoComplete.android.getText();
+
+    if (locationText) {
+        locationText = locationText.toString();
+    }
+
     setTimeout(() => {
-        viewModel.saveTasting()
+        viewModel.saveTasting(locationText)
             .then(() => {
                 isBusy(true);
                 frameModule.topmost()
@@ -197,6 +204,36 @@ export function setTastingDate() {
 export function selectFinalRating(args) {
     let finalRating = parseInt(args.object.className.match(/final-rating-(\d)/)[1], 10);
     viewModel.set("finalRating", finalRating);
+}
+
+export function deleteTasting() {
+    dialogs.confirm({
+        cancelButtonText: "Annuler",
+        message: "Etes-vous spur de vouloir supprimer cette dégustation ?",
+        okButtonText: "OK",
+        title: "Suppression"
+    }).then(confirm => {
+        if (confirm) {
+            isBusy();
+            setTimeout(() => {
+                viewModel.deleteTasting()
+                    .then(() => {
+                        isBusy(true);
+                        frameModule.topmost()
+                            .navigate({
+                                animated: false,
+                                backstackVisible: false,
+                                moduleName: Views.main
+                            });
+                    });
+            }, 0);
+        }
+    }).catch(error => {
+        isBusy(true);
+        console.log("deleteTasting ERROR");
+        console.log(error.message);
+        console.log(error.error);
+    });;
 }
 
 function isBusy(closeModal?: boolean) {

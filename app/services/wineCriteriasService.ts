@@ -15,7 +15,7 @@ export class WineCriteriasService {
             this.wineCriterias = data;
         }
     }
-    
+
     public getCriterias(type: string): Promise<CriteriaItem[]> {
         return new Promise<CriteriaItem[]>((resolve, reject) => {
             this.loadData();
@@ -27,22 +27,37 @@ export class WineCriteriasService {
         return new Promise<CriteriaItem[]>((resolve, reject) => {
             this.loadData();
             var regions = (<CriteriaItem[]>this.wineCriterias["regions"]).map(r => {
-                r.label = "Région : " + r.label;
-                r.type = "region";
-                return r;
+                var region = <CriteriaItem>_.assignIn({}, r);
+                region.label = "Région : " + r.label;
+                region.type = "region";
+                return region;
             });
             var countries = (<CriteriaItem[]>this.wineCriterias["countries"]).map(r => {
-                r.label = "Pays : " + r.label;
-                r.type = "country";
-                return r;
+                var country = <CriteriaItem>_.assignIn({}, r);
+                country.label = "Pays : " + r.label;
+                country.type = "country";
+                return country;
             });
             var aoc = (<CriteriaItem[]>this.wineCriterias["aoc"]).map(r => {
-                r.label = "AOC : " + r.label;
-                r.type = "aoc";
-                return r;
+                var aoc = <CriteriaItem>_.assignIn({}, r);
+                aoc.label = "AOC : " + r.label;
+                aoc.type = "aoc";
+                return aoc;
             });
 
             resolve((<CriteriaItem[]>[]).concat(regions, countries, aoc));
         });
+    }
+
+    getAoc(id): CriteriaItem {
+        return _.find(this.wineCriterias["aoc"], { id: id });
+    }
+
+    getRegion(id): CriteriaItem {
+        return _.find(this.wineCriterias["regions"], { id: id });
+    }
+
+    getCountry(id): CriteriaItem {
+        return _.find(this.wineCriterias["countries"], { id: id });
     }
 }
