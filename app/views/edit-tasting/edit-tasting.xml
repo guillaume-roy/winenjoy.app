@@ -10,13 +10,13 @@
     <ActionBar>
       <ActionBar.actionItems>
         <ActionItem ios.position="right"
-                    icon="res://ic_photo_camera_white_24dp"
+                    icon="res://ic_add_a_photo_white_24dp"
                     tap="managePicture"
-                    visibility="{{ picture ? 'collapse' : 'visible' }}"/>
+                    visibility="{{ containsPicture ? 'collapse' : 'visible' }}"/>
         <ActionItem ios.position="right"
                     icon="res://ic_photo_white_24dp"
                     tap="managePicture"
-                    visibility="{{ picture ? 'visible' : 'collapse' }}"/>
+                    visibility="{{ containsPicture ? 'visible' : 'collapse' }}"/>
         <ActionItem ios.position="right"
                     icon="res://ic_delete_white_24dp"
                     tap="deleteTasting"

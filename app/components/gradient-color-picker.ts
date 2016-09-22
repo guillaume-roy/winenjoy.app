@@ -6,6 +6,8 @@ import {ColorUtils} from "../utils/color";
 import dependencyObservableModule = require("ui/core/dependency-observable");
 
 export class GradientColorPicker extends WrapLayout {
+    public static noneBackground = "#D3D3D3";
+
     public static startingColorProperty = new dependencyObservableModule.Property(
         "startingColor",
         "GradientColorPicker",
@@ -24,7 +26,11 @@ export class GradientColorPicker extends WrapLayout {
     public static selectedColorProperty = new dependencyObservableModule.Property(
         "selectedColor",
         "GradientColorPicker",
-        new dependencyObservableModule.PropertyMetadata(undefined, dependencyObservableModule.PropertyMetadataSettings.None));
+        new dependencyObservableModule.PropertyMetadata(undefined, dependencyObservableModule.PropertyMetadataSettings.AffectsLayout,
+            (data: dependencyObservableModule.PropertyChangeData) => {
+                var instance = <GradientColorPicker>data.object;
+                instance.setSelectedColor(data.newValue);
+            }));
 
     public get startingColor() {
         return this._getValue(GradientColorPicker.startingColorProperty);
@@ -55,11 +61,9 @@ export class GradientColorPicker extends WrapLayout {
     }
     public set selectedColor(value: string) {
         this._setValue(GradientColorPicker.selectedColorProperty, value);
-        //this.setSelectedColor();
     }
 
     private _gradientButtons: Button[];
-    private _noneBackground = "#D3D3D3";
     private _buttonsSize = 64;
 
     constructor() {
@@ -68,17 +72,23 @@ export class GradientColorPicker extends WrapLayout {
         this._gradientButtons = [];
     }
 
-    private setSelectedColor() {
-        if (this._gradientButtons.length <= 0)
+    public setSelectedColor(newColor) {
+        if (this._gradientButtons.length <= 0 || !newColor)
             return;
 
         for (var i = 0; i < this._gradientButtons.length; i++) {
             var currentButton = this._gradientButtons[i];
             currentButton.text = "";
 
-            if (currentButton.backgroundColor.hex.toUpperCase() === this.selectedColor.toUpperCase()) {
+            if (currentButton.backgroundColor.hex.toUpperCase() === newColor.toUpperCase()) {
                 currentButton.color = new Color(ColorUtils.getForegroundColor(currentButton.style.backgroundColor.hex));
                 currentButton.text = "✓";
+
+                if (newColor.toUpperCase() === GradientColorPicker.noneBackground) {
+                    this.selectedColor = null;
+                } else {
+                    this.selectedColor = newColor;
+                }
             }
         }
     }
@@ -104,13 +114,14 @@ export class GradientColorPicker extends WrapLayout {
             }
 
             this.displayGradient(result.reverse());
+            this.setSelectedColor(GradientColorPicker.noneBackground);
         }
     }
 
     private displayGradient(gradient: any[]) {
         let resultLength = gradient.length;
-        
-        let noneButton = this.createButton(this._noneBackground);
+
+        let noneButton = this.createButton(GradientColorPicker.noneBackground);
         this._gradientButtons.push(noneButton);
         this.addChild(noneButton);
 
@@ -131,7 +142,7 @@ export class GradientColorPicker extends WrapLayout {
 
             clickedButton.color = new Color(ColorUtils.getForegroundColor(clickedButton.style.backgroundColor.hex));
             clickedButton.text = "✓";
-            this.selectedColor = clickedButton.style.backgroundColor.hex.toUpperCase() === this._noneBackground
+            this.selectedColor = clickedButton.style.backgroundColor.hex.toUpperCase() === GradientColorPicker.noneBackground
                 ? null
                 : clickedButton.style.backgroundColor.hex;
         };

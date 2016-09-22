@@ -6,6 +6,7 @@ import profiler = require("../../utils/profiling");
 import {EditTastingViewModel} from "../../view-models/edit-tasting-view-model";
 import {Views} from "../../utils/views";
 import frameModule = require("ui/frame");
+import _ = require("lodash");
 
 let page: Page;
 let locationAutoComplete;
@@ -33,6 +34,18 @@ export function navigatedTo(args: EventData) {
 
         if (page.navigationContext) {
             viewModel.load(page.navigationContext);
+            
+            var aoc = viewModel.get("aoc");
+            var region = viewModel.get("region");
+            var country = viewModel.get("country");
+            
+            if (aoc) {
+                locationAutoComplete.android.setText("AOC : " + aoc.label);
+            } else if (region) {
+                locationAutoComplete.android.setText("Région : " + region.label);
+            } else if (country) {
+                locationAutoComplete.android.setText("Pays : " + country.label);
+            }
         }
     });
 }
@@ -42,17 +55,28 @@ export function loaded() {
 }
 
 export function managePicture() {
-    if (viewModel.get("picture")) {
-        dialogs.confirm({
-            message: "Etes-vous sûr de vouloir supprimer cette photo ?",
-            cancelButtonText: "Non",
-            okButtonText: "Oui",
-            title: "Suppression"
-        }).then(res => {
-            if (res) {
-                viewModel.set("picture", null);
-            }
-        });
+    if (viewModel.get("containsPicture")) {
+        var args = {
+            tastingId: null,
+            img: null
+        };
+
+        if (viewModel.get("isEdit")) {
+            args.tastingId = viewModel.get("editWineTasting").id;
+        } else {
+            args.img = viewModel.get("picture");
+        }
+
+        page.showModal(
+            Views.tastingPictureViewer,
+            args,
+            (deletePicture) => {
+                if (deletePicture) {
+                    viewModel.set("picture", null);
+                    viewModel.set("containsPicture", false);
+                }
+            },
+            true);
     } else {
         camera.takePicture({
             height: 800,
@@ -60,6 +84,7 @@ export function managePicture() {
             width: 800
         }).then(img => {
             viewModel.set("picture", img);
+            viewModel.set("containsPicture", true);
         });
     }
 }
@@ -243,6 +268,6 @@ function isBusy(closeModal?: boolean) {
             busyModal = null;
         }
     } else {
-        busyModal = page.showModal("views/busy-indicator/busy-indicator", null, () => { busyModal = null; }, false);
+        busyModal = page.showModal(Views.busyIndicator, null, () => { busyModal = null; }, false);
     }
 }

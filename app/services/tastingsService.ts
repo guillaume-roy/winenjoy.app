@@ -155,7 +155,12 @@ export class TastingsService {
         return new Promise<string>((resolve, reject) => {
             firebase.getDownloadUrl({
                 remoteFullPath: `/tastings/${this._userId}/${wineTastingId}`
-            }).then(url => resolve(url));
+            })
+                .then(url => resolve(url))
+                .catch(error => reject({
+                    error: error,
+                    message: "Error in TastingsService.getTastingPictureUrl"
+                }));
         });
     }
 

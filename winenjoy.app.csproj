@@ -30,98 +30,42 @@
       <DependentUpon>app.ts</DependentUpon>
     </Content>
     <Content Include="app\App_Resources\Android\AndroidManifest.xml" />
-    <Content Include="app\App_Resources\Android\drawable-hdpi\blank.png" />
     <Content Include="app\App_Resources\Android\drawable-hdpi\icon.png" />
+    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_add_a_photo_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_add_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_arrow_back_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_check_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_close_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_delete_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_happy.png" />
-    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_neutral.png" />
-    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_photo_camera_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_photo_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_sad.png" />
-    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_share_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_very_happy.png" />
-    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_very_sad.png" />
-    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_visibility_off_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_visibility_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_wineglass_white.png" />
-    <Content Include="app\App_Resources\Android\drawable-ldpi\blank.png" />
     <Content Include="app\App_Resources\Android\drawable-ldpi\icon.png" />
-    <Content Include="app\App_Resources\Android\drawable-mdpi\blank.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\icon.png" />
+    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_add_a_photo_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_add_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_arrow_back_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_check_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_close_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_delete_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_happy.png" />
-    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_neutral.png" />
-    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_photo_camera_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_photo_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_sad.png" />
-    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_share_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_very_happy.png" />
-    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_very_sad.png" />
-    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_visibility_off_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_visibility_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_wineglass_white.png" />
-    <Content Include="app\App_Resources\Android\drawable-xhdpi\blank.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\icon.png" />
+    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_add_a_photo_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_add_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_arrow_back_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_check_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_close_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_delete_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_happy.png" />
-    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_neutral.png" />
-    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_photo_camera_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_photo_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_sad.png" />
-    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_share_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_very_happy.png" />
-    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_very_sad.png" />
-    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_visibility_off_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_visibility_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_wineglass_white.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxhdpi\blank.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\icon.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_add_a_photo_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_add_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_arrow_back_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_check_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_close_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_delete_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_happy.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_neutral.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_photo_camera_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_photo_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_sad.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_share_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_very_happy.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_very_sad.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_visibility_off_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_visibility_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_wineglass_white.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\blank.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\icon.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_add_a_photo_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_add_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_arrow_back_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_check_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_close_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_delete_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_happy.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_neutral.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_photo_camera_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_photo_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_sad.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_share_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_very_happy.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_very_sad.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_visibility_off_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_visibility_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_wineglass_white.png" />
     <Content Include="app\App_Resources\Android\values-v21\colors.xml" />
     <Content Include="app\App_Resources\Android\values-v21\strings.xml" />
     <Content Include="app\App_Resources\Android\values-v21\styles.xml">
@@ -164,6 +108,9 @@
     <Content Include="app\App_Resources\iOS\blank.png" />
     <Content Include="app\App_Resources\iOS\icon%402x.png" />
     <Content Include="app\App_Resources\iOS\icon.png" />
+    <Content Include="app\App_Resources\iOS\ic_add_a_photo_white.png" />
+    <Content Include="app\App_Resources\iOS\ic_add_a_photo_white_2x.png" />
+    <Content Include="app\App_Resources\iOS\ic_add_a_photo_white_3x.png" />
     <Content Include="app\App_Resources\iOS\ic_add_white.png" />
     <Content Include="app\App_Resources\iOS\ic_add_white_2x.png" />
     <Content Include="app\App_Resources\iOS\ic_add_white_3x.png" />
@@ -269,26 +216,17 @@
     <Content Include="app\utils\views.js">
       <DependentUpon>views.ts</DependentUpon>
     </Content>
-    <Content Include="app\view-models\change-password-view-model.js">
-      <DependentUpon>change-password-view-model.ts</DependentUpon>
-    </Content>
     <Content Include="app\view-models\edit-tasting-old-view-model.js">
       <DependentUpon>edit-tasting-old-view-model.ts</DependentUpon>
     </Content>
     <Content Include="app\view-models\edit-tasting-view-model.js">
       <DependentUpon>edit-tasting-view-model.ts</DependentUpon>
     </Content>
-    <Content Include="app\view-models\gradient-color-picker-view-model.js">
-      <DependentUpon>gradient-color-picker-view-model.ts</DependentUpon>
-    </Content>
     <Content Include="app\view-models\grouping-list-picker-view-model.js">
       <DependentUpon>grouping-list-picker-view-model.ts</DependentUpon>
     </Content>
     <Content Include="app\view-models\import-export-data-view-model.js">
       <DependentUpon>import-export-data-view-model.ts</DependentUpon>
-    </Content>
-    <Content Include="app\view-models\informations-step-view-model.js">
-      <DependentUpon>informations-step-view-model.ts</DependentUpon>
     </Content>
     <Content Include="app\view-models\list-picker-view-model.js">
       <DependentUpon>list-picker-view-model.ts</DependentUpon>
@@ -299,30 +237,8 @@
     <Content Include="app\view-models\main-view-model.js">
       <DependentUpon>main-view-model.ts</DependentUpon>
     </Content>
-    <Content Include="app\view-models\nose-step-view-model.js">
-      <DependentUpon>nose-step-view-model.ts</DependentUpon>
-    </Content>
-    <Content Include="app\view-models\rating-step-view-model.js">
-      <DependentUpon>rating-step-view-model.ts</DependentUpon>
-    </Content>
-    <Content Include="app\view-models\taste-step-view-model.js">
-      <DependentUpon>taste-step-view-model.ts</DependentUpon>
-    </Content>
-    <Content Include="app\view-models\visual-step-view-model.js">
-      <DependentUpon>visual-step-view-model.ts</DependentUpon>
-    </Content>
     <Content Include="app\views\busy-indicator\busy-indicator.xml" />
-    <Content Include="app\views\change-password\change-password.css">
-      <DependentUpon>change-password.scss</DependentUpon>
-    </Content>
-    <Content Include="app\views\change-password\change-password.js">
-      <DependentUpon>change-password.ts</DependentUpon>
-    </Content>
-    <Content Include="app\views\change-password\change-password.xml" />
     <Content Include="app\views\date-picker\date-picker.xml" />
-    <Content Include="app\views\edit-tasting-old\edit-tasting-old.css" />
-    <Content Include="app\views\edit-tasting-old\edit-tasting-old.js" />
-    <Content Include="app\views\edit-tasting-old\edit-tasting-old.xml" />
     <Content Include="app\views\edit-tasting\edit-tasting.css">
       <DependentUpon>edit-tasting.scss</DependentUpon>
     </Content>
@@ -332,22 +248,6 @@
     <Content Include="app\views\edit-tasting\edit-tasting.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="app\views\rating-step\rating-step.css">
-      <DependentUpon>rating-step.scss</DependentUpon>
-    </Content>
-    <Content Include="app\views\rating-step\rating-step.js">
-      <DependentUpon>rating-step.ts</DependentUpon>
-    </Content>
-    <Content Include="app\views\rating-step\rating-step.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="app\views\gradient-color-picker\gradient-color-picker.css">
-      <DependentUpon>gradient-color-picker.scss</DependentUpon>
-    </Content>
-    <Content Include="app\views\gradient-color-picker\gradient-color-picker.js">
-      <DependentUpon>gradient-color-picker.ts</DependentUpon>
-    </Content>
-    <Content Include="app\views\gradient-color-picker\gradient-color-picker.xml" />
     <Content Include="app\views\grouping-list-picker\grouping-list-picker.css">
       <DependentUpon>grouping-list-picker.scss</DependentUpon>
     </Content>
@@ -362,13 +262,6 @@
       <DependentUpon>import-export-data.ts</DependentUpon>
     </Content>
     <Content Include="app\views\import-export-data\import-export-data.xml" />
-    <Content Include="app\views\informations-step\informations-step.css">
-      <DependentUpon>informations-step.scss</DependentUpon>
-    </Content>
-    <Content Include="app\views\informations-step\informations-step.js">
-      <DependentUpon>informations-step.ts</DependentUpon>
-    </Content>
-    <Content Include="app\views\informations-step\informations-step.xml" />
     <Content Include="app\views\list-picker\list-picker.css">
       <DependentUpon>list-picker.scss</DependentUpon>
     </Content>
@@ -392,29 +285,7 @@
     <Content Include="app\views\main\main.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="app\views\nose-step\nose-step.css">
-      <DependentUpon>nose-step.scss</DependentUpon>
-    </Content>
-    <Content Include="app\views\nose-step\nose-step.js">
-      <DependentUpon>nose-step.ts</DependentUpon>
-    </Content>
-    <Content Include="app\views\nose-step\nose-step.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="app\views\taste-step\taste-step.css">
-      <DependentUpon>taste-step.scss</DependentUpon>
-    </Content>
-    <Content Include="app\views\taste-step\taste-step.js">
-      <DependentUpon>taste-step.ts</DependentUpon>
-    </Content>
-    <Content Include="app\views\taste-step\taste-step.xml" />
-    <Content Include="app\views\visual-step\visual-step.css">
-      <DependentUpon>visual-step.scss</DependentUpon>
-    </Content>
-    <Content Include="app\views\visual-step\visual-step.js">
-      <DependentUpon>visual-step.ts</DependentUpon>
-    </Content>
-    <Content Include="app\views\visual-step\visual-step.xml">
+    <Content Include="app\views\tasting-picture-viewer\tasting-picture-viewer.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="gulpfile.js" />
@@ -446,15 +317,12 @@
     <Content Include="app\fonts\MaterialIcons-Regular.ttf" />
     <Content Include="app\fonts\winenjoy.ttf" />
     <Content Include="app\package.json" />
-    <Content Include="app\styles\_bottom-navigation.scss" />
     <Content Include="app\styles\_common.scss" />
     <Content Include="app\styles\_fab.scss" />
     <Content Include="app\styles\_final-rating.scss" />
     <Content Include="app\styles\_fonts.scss" />
     <Content Include="app\styles\_material-theme.scss" />
     <Content Include="app\styles\_values-selector.scss" />
-    <Content Include="app\views\change-password\change-password.scss" />
-    <Content Include="app\views\gradient-color-picker\gradient-color-picker.scss" />
     <Content Include="app\views\grouping-list-picker\grouping-list-picker.scss" />
     <Content Include="app\views\import-export-data\import-export-data.scss" />
     <Content Include="app\views\list-picker\list-picker.scss" />
@@ -488,54 +356,25 @@
     <TypeScriptCompile Include="app\utils\profiling.ts" />
     <TypeScriptCompile Include="app\utils\uuid.ts" />
     <TypeScriptCompile Include="app\utils\views.ts" />
-    <TypeScriptCompile Include="app\view-models\change-password-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\edit-tasting-old-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\edit-tasting-view-model.ts" />
-    <TypeScriptCompile Include="app\view-models\rating-step-view-model.ts" />
-    <TypeScriptCompile Include="app\view-models\gradient-color-picker-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\grouping-list-picker-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\import-export-data-view-model.ts" />
-    <TypeScriptCompile Include="app\view-models\informations-step-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\list-picker-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\login-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\main-view-model.ts" />
-    <TypeScriptCompile Include="app\view-models\nose-step-view-model.ts" />
-    <TypeScriptCompile Include="app\view-models\taste-step-view-model.ts" />
-    <TypeScriptCompile Include="app\view-models\visual-step-view-model.ts" />
     <TypeScriptCompile Include="app\views\busy-indicator\busy-indicator.ts" />
-    <TypeScriptCompile Include="app\views\change-password\change-password.ts" />
     <TypeScriptCompile Include="app\views\date-picker\date-picker.ts" />
-    <TypeScriptCompile Include="app\views\edit-tasting-old\edit-tasting-old.ts" />
     <TypeScriptCompile Include="app\views\edit-tasting\edit-tasting.ts" />
-    <TypeScriptCompile Include="app\views\rating-step\rating-step.ts" />
-    <TypeScriptCompile Include="app\views\gradient-color-picker\gradient-color-picker.ts" />
     <TypeScriptCompile Include="app\views\grouping-list-picker\grouping-list-picker.ts" />
     <TypeScriptCompile Include="app\views\import-export-data\import-export-data.ts" />
-    <TypeScriptCompile Include="app\views\informations-step\informations-step.ts" />
     <TypeScriptCompile Include="app\views\list-picker\list-picker.ts" />
     <TypeScriptCompile Include="app\views\login\login.ts" />
     <TypeScriptCompile Include="app\views\main\main.ts" />
-    <TypeScriptCompile Include="app\views\nose-step\nose-step.ts" />
-    <TypeScriptCompile Include="app\views\taste-step\taste-step.ts" />
-    <TypeScriptCompile Include="app\views\visual-step\visual-step.ts" />
+    <TypeScriptCompile Include="app\views\tasting-picture-viewer\tasting-picture-viewer.ts" />
     <TypeScriptCompile Include="references.d.ts" />
     <TypeScriptCompile Include="typings\lodash.d.ts" />
     <TypeScriptCompile Include="typings\moment.d.ts" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="app\views\visual-step\visual-step.scss" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="app\views\nose-step\nose-step.scss" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="app\views\taste-step\taste-step.scss" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="app\views\rating-step\rating-step.scss" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="app\views\informations-step\informations-step.scss" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\styles\_form.scss" />
@@ -545,9 +384,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\data\wine-criterias.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="app\views\edit-tasting-old\edit-tasting-old.scss" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\views\edit-tasting\edit-tasting.scss" />

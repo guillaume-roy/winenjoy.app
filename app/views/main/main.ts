@@ -73,7 +73,6 @@ export function onCreateFirstTasting() {
         frameModule.topmost().navigate({
             animated: false,
             backstackVisible: false,
-            context: viewModel.newTasting(),
             moduleName: Views.editTasting
         });
     }, 0);

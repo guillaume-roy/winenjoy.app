@@ -71,6 +71,7 @@ export class EditTastingViewModel extends Observable {
         this.set("selectedGrapes", []);
         this.set("tastingDate", new Date());
         this.set("finalRating", 2);
+        this.set("containsPicture", false);
 
         var years = [];
         for (var i = new Date().getFullYear(); i >= 1900; i--) {
@@ -88,7 +89,17 @@ export class EditTastingViewModel extends Observable {
     }
 
     load(wineTasting: WineTasting) {
-        //TODO : Get picture
+        switch (wineTasting.wineType.code) {
+            case "WHITE":
+                this.set("selectedWineType", 0);
+                break;
+            case "ROSE":
+                this.set("selectedWineType", 1);
+                break;
+            case "RED":
+                this.set("selectedWineType", 2);
+                break;
+        }
 
         this.set("estate", wineTasting.estate);
         this.set("region", wineTasting.region);
@@ -96,7 +107,6 @@ export class EditTastingViewModel extends Observable {
         this.set("country", wineTasting.country);
         this.set("aoc", wineTasting.aoc);
         this.set("selectedYearIndex", this.get("years").indexOf(wineTasting.year));
-        this.set("selectedWineType", this.get("wineTypes").indexOf(wineTasting.wineType));
         this.set("rawAlcoolValue", wineTasting.alcohol * 10);
         this.set("isBiodynamic", wineTasting.isBiodynamic);
         this.set("isBlindTasting", wineTasting.isBlindTasting);
@@ -137,24 +147,24 @@ export class EditTastingViewModel extends Observable {
 
                 if (!_.isEmpty(location)) {
                     switch (location.type) {
-                    case "aoc":
-                        var aoc = this._wineCriteriasService.getAoc(location.id);
-                        this.set("aoc", aoc);
-                        var region = this._wineCriteriasService.getRegion(aoc.parentId);
-                        this.set("region", region);
-                        var country = this._wineCriteriasService.getCountry(region.parentId);
-                        this.set("country", country);
-                        break;
-                    case "region":
-                        var region1 = this._wineCriteriasService.getRegion(location.id);
-                        this.set("region", region1);
-                        var country1 = this._wineCriteriasService.getCountry(region1.parentId);
-                        this.set("country", country1);
-                        break;
-                    case "country":
-                        var country2 = this._wineCriteriasService.getCountry(location.id);
-                        this.set("country", country2);
-                        break;
+                        case "aoc":
+                            var aoc = this._wineCriteriasService.getAoc(location.id);
+                            this.set("aoc", aoc);
+                            var region = this._wineCriteriasService.getRegion(aoc.parentId);
+                            this.set("region", region);
+                            var country = this._wineCriteriasService.getCountry(region.parentId);
+                            this.set("country", country);
+                            break;
+                        case "region":
+                            var region1 = this._wineCriteriasService.getRegion(location.id);
+                            this.set("region", region1);
+                            var country1 = this._wineCriteriasService.getCountry(region1.parentId);
+                            this.set("country", country1);
+                            break;
+                        case "country":
+                            var country2 = this._wineCriteriasService.getCountry(location.id);
+                            this.set("country", country2);
+                            break;
                     }
                 }
             }
