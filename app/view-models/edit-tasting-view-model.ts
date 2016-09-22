@@ -101,12 +101,15 @@ export class EditTastingViewModel extends Observable {
                 break;
         }
 
+        if (wineTasting.year && wineTasting.year > 0) {
+            this.set("selectedYearIndex", this.get("years").indexOf(wineTasting.year));    
+        }
+        
         this.set("estate", wineTasting.estate);
         this.set("region", wineTasting.region);
         this.set("name", wineTasting.name);
         this.set("country", wineTasting.country);
         this.set("aoc", wineTasting.aoc);
-        this.set("selectedYearIndex", this.get("years").indexOf(wineTasting.year));
         this.set("rawAlcoolValue", wineTasting.alcohol * 10);
         this.set("isBiodynamic", wineTasting.isBiodynamic);
         this.set("isBlindTasting", wineTasting.isBlindTasting);
