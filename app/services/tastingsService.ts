@@ -13,12 +13,16 @@ export class TastingsService {
     private _userService: UserService;
     private _userId: string;
 
-    constructor() {
-        this._userService = new UserService();
+    constructor(userId?: string) {
+        if (!_.isEmpty(userId)) {
+            this._userId = userId;
+        } else {
+            this._userService = new UserService();
 
-        let user = this._userService.getUser();
-        if (user) {
-            this._userId = user.uid;
+            let user = this._userService.getUser();
+            if (user) {
+                this._userId = user.uid;
+            }
         }
     }
 
@@ -69,6 +73,11 @@ export class TastingsService {
             this.getTastings()
                 .then(tastings => {
                     resolve(_.find(tastings, t => t.id === wineTastingId));
+                }).catch(error => {
+                    reject({
+                        error: error,
+                        message: "Error in TastingsService.getTasting"
+                    });
                 });
         });
     }
@@ -131,17 +140,22 @@ export class TastingsService {
                     this.getTasting(wineTasting.id).then(oldWineTasting => {
                         this._userService.decreaseUserStats(oldWineTasting).then(() => {
                             this._userService.increaseUserStats(wineTasting).then(() => {
-                                this.updateTastingLocally(wineTasting).then(() => resolve(true));
-                            });
-                        });
-                    });
+                                this.updateTastingLocally(wineTasting).then(() => resolve(true))
+                                    .catch(updateTastingLocallyError => reject(updateTastingLocallyError));
+                            }).catch(increaseUserStatsError => reject(increaseUserStatsError));
+                        }).catch(decreaseUserStatsError => reject(decreaseUserStatsError));
+                    }).catch(getTastingError => reject(getTastingError));
                 };
                 switch (pictureEditMode) {
                     case "EDIT":
-                        this.saveTastingPictureOnFirebase(wineTasting.id, wineTastingPicturePath).then(endOfUpdate);
+                        this.saveTastingPictureOnFirebase(wineTasting.id, wineTastingPicturePath)
+                            .then(endOfUpdate)
+                            .catch(saveTastingPictureOnFirebaseError => reject(saveTastingPictureOnFirebaseError));
                         break;
                     case "DELETE":
-                        this.deleteTastingPictureOnFirebase(wineTasting.id).then(endOfUpdate);
+                        this.deleteTastingPictureOnFirebase(wineTasting.id)
+                            .then(endOfUpdate)
+                            .catch(deleteTastingPictureOnFirebaseError => reject(deleteTastingPictureOnFirebaseError));
                         break;
                     default:
                         endOfUpdate();
@@ -164,7 +178,7 @@ export class TastingsService {
         });
     }
 
-    public saveTastings(wineTastings: WineTasting[]) {
+    public saveTastingsLocally(wineTastings: WineTasting[]) {
         appSettings.setString(TastingsService.TASTINGS_KEY, JSON.stringify(wineTastings));
     }
 
@@ -201,7 +215,7 @@ export class TastingsService {
             this.getTastings().then(tastings => {
                 try {
                     _.remove(tastings, w => w.id === wineTastingId);
-                    this.saveTastings(tastings);
+                    this.saveTastingsLocally(tastings);
                     resolve(true);
                 } catch (error) {
                     reject({
@@ -216,15 +230,23 @@ export class TastingsService {
     private updateTastingOnFirebase(wineTasting: WineTasting) {
         return new Promise<boolean>((resolve, reject) => {
             firebase.setValue(`/tastings/${this._userId}/${wineTasting.id}`, wineTasting)
-                .then(() => resolve(true));
+                .then(() => resolve(true))
+                .catch(e => reject({
+                    error: e,
+                    message: "Error in TastingsService.updateTastingOnFirebase"
+                }));
         });
     }
 
     private updateTastingLocally(wineTasting: WineTasting) {
         return new Promise<boolean>((resolve, reject) => {
-            this.deleteTastingLocally(wineTasting.id).then(() => {
-                this.saveTastingLocally(wineTasting).then(() => resolve(true));
-            });
+            this.deleteTastingLocally(wineTasting.id)
+                .then(() => {
+                    this.saveTastingLocally(wineTasting)
+                        .then(() => resolve(true))
+                        .catch(e => reject(e));
+                })
+                .catch(e1 => reject(e1));
         });
     }
 
@@ -232,8 +254,8 @@ export class TastingsService {
         return new Promise<boolean>((resolve, reject) => {
             this.getTastings().then(tastings => {
                 try {
-                    tastings.push(wineTasting);
-                    this.saveTastings(tastings);
+                    tastings.unshift(wineTasting);
+                    this.saveTastingsLocally(tastings);
                     resolve(true);
                 } catch (error) {
                     reject({
@@ -277,6 +299,30 @@ export class TastingsService {
                     error: error,
                     message: "Error in TastingsService.saveTastingPictureOnFirebase"
                 }));
+        });
+    }
+
+    loadTastings() {
+        return new Promise<boolean>((resolve, reject) => {
+            firebase.query(
+                data => {
+                    var tastings = _.toArray(data.value || []);
+                    this.saveTastingsLocally(_.orderBy(tastings, ['tastingDate'], ['desc']));
+                    resolve(true);
+                },
+                `/tastings/${this._userId}`,
+                {
+                    orderBy: {
+                        type: firebase.QueryOrderByType.CHILD,
+                        value: "tastingDate"
+                    },
+                    singleEvent: true
+                }).catch(error => {
+                    reject({
+                        error: error,
+                        message: "Error in TastingsService.loadTastings"
+                    });
+                });
         });
     }
 }

@@ -4,7 +4,6 @@ import {AnalyticsService} from "./services/analyticsService";
 import {UserService} from "./services/userService";
 import frameModule = require("ui/frame");
 import {Converters} from "./utils/converters";
-import profiler = require("./utils/profiling");
 
 Converters.attach();
 
@@ -14,7 +13,8 @@ application.onLaunch = (context: any) => {
     analyticsService.initialize();
 };
 
-application.onUncaughtError = (error: any)  => {
+application.onUncaughtError = (error: any) => {
+    console.dump(error);
     analyticsService.logException(null, true);
 };
 

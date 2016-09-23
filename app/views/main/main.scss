@@ -21,7 +21,7 @@
 
 .list-item-secondary {
     font-size: 14;
-    color: $primary-text-color;
+    color: $secondary-text-color;
 }
 
 .empty-container {
@@ -63,5 +63,47 @@
 .final-rating {
     font-size: 32;
     horizontal-align: center;
-    vertical-align:center;
+    vertical-align: center;
+}
+
+.final-rating-4 {
+    color: #007C00;
+}
+
+.final-rating-3 {
+    color: #7BB800;
+}
+
+.final-rating-2 {
+    color: #FFD300;
+}
+
+.final-rating-1 {
+    color: #FF7400;
+}
+
+.final-rating-0 {
+    color: #C50000;
+}
+
+.busy-indicator {
+    horizontal-align: center;
+    vertical-align: center;
+
+    ActivityIndicator {
+        width: 56;
+        height: 56;
+        margin: 6;
+    }
+}
+
+.location-separator {
+    margin-left: 6;
+    margin-right: 6;
+}
+
+.picture-icon {
+    font-size: 22;
+    horizontal-align: center;
+    text-align: center;
 }

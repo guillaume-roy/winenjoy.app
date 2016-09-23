@@ -2,16 +2,22 @@
       xmlns:FAB="nativescript-floatingactionbutton"
       navigatedTo="navigatedTo">
   <Page.actionBar>
-    <ActionBar>
+    <ActionBar title="Mes dégustations">
       <ActionBar.actionItems>
-        <!--<ActionItem text="Import/Export" ios.position="right" android.position="popup" tap="onExportTastings" />-->
-        <!--<ActionItem text="Changer mot de passe" ios.position="right" android.position="popup" tap="onChangePassword" />-->
       </ActionBar.actionItems>
     </ActionBar>
   </Page.actionBar>
   <GridLayout>
+
+    <StackLayout orientation="vertical"
+                 class="busy-indicator"
+                 visibility="{{ isBusy ? 'visible' : 'collapse' }}">
+      <ActivityIndicator busy="true" />
+      <Label text="Chargement des dégustations ..." />
+    </StackLayout>
+
     <ListView items="{{ tastings }}"
-              visibility="{{ tastings.length !== 0 ? 'visible' : 'collapse' }}"
+              visibility="{{ tastings.length !== 0 &amp;&amp; !isBusy ? 'visible' : 'collapse' }}"
               itemTap="onViewTasting">
       <ListView.itemTemplate>
         <GridLayout columns="auto, *, auto"
@@ -19,34 +25,50 @@
           <StackLayout backgroundColor="{{ color }}"
                        class="list-item-icon" />
           <StackLayout col="1">
-            <Label text="{{ cuvee.label }}"
-                   visibility="{{ cuvee | visibilityConverter }}"
+            <Label text="{{ name }}"
+                   visibility="{{ name ? 'visible' : 'collapse' }}"
                    class="list-item-title" />
-            <Label text="{{ estate.label }}"
-                   visibility="{{ estate | visibilityConverter }}"
+            <Label text="{{ estate }}"
+                   visibility="{{ estate ? 'visible' : 'collapse' }}"
                    class="list-item-title" />
+            <StackLayout orientation="horizontal">
+              <Label text="{{ region.label }}"
+                     visibility="{{ region ? 'visible' : 'collapse' }}"
+                     class="list-item-title" />
+              <Label text="-"
+                     visibility="{{ region ? 'visible' : 'collapse' }}" />
+              <Label text="{{ country.label }}"
+                     visibility="{{ country ? 'visible' : 'collapse' }}"
+                     class="list-item-title" />
+            </StackLayout>
             <Label text="{{ 'AOC ' + aoc.label }}"
-                   visibility="{{ aoc | visibilityConverter }}"
+                   visibility="{{ aoc ? 'visible' : 'collapse' }}"
                    class="list-item-secondary" />
-            <Label text="{{ $value | regionConverterConverter }}" />
           </StackLayout>
-          <StackLayout col="2">
+          <GridLayout col="2"
+                      rows="*,*,*">
             <Label text="{{ year }}"
-                   class="list-item-secondary" />
+                   class="list-item-secondary"
+                   visibility="{{ year ? 'visible' : 'collapse' }}"/>
             <Label text="{{ finalRating | finalRatingToImageConverter }}"
-                   class="{{ finalRating ? 'material-icon final-rating final-rating-' + finalRating : 'material-icon final-rating' }}" />
-          </StackLayout>
+                   class="{{ finalRating ? 'material-icon final-rating final-rating-' + finalRating : 'material-icon final-rating' }}"
+                   row="1" />
+            <Label text="photo"
+                   class="material-icon picture-icon"
+                   visibility="{{ containsPicture ? 'visible' : 'collapse' }}"
+                   row="2" />
+          </GridLayout>
         </GridLayout>
       </ListView.itemTemplate>
     </ListView>
-    
+
     <FAB:fab tap="onCreateNewTasting"
-             visibility="{{ tastings.length !== 0 ? 'visible' : 'collapse' }}"
+             visibility="{{ tastings.length !== 0 &amp;&amp; !isBusy ? 'visible' : 'collapse' }}"
              icon="res://ic_add_white_24dp"
              rippleColor="#f1f1f1"
              class="fab-button" />
 
-    <StackLayout visibility="{{ tastings.length === 0  ? 'visible' : 'collapse'}}"
+    <StackLayout visibility="{{ tastings.length === 0 &amp;&amp; !isBusy ? 'visible' : 'collapse'}}"
                  class="empty-container">
       <StackLayout class="empty-message">
         <Label class="winenjoy-icon"

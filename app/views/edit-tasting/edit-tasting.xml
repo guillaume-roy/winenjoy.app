@@ -4,8 +4,7 @@
       xmlns:gcp="components/gradient-color-picker"
       xmlns:dd="nativescript-drop-down"
       xmlns:ac="nativescript-autocomplete"
-      navigatedTo="navigatedTo"
-      loaded="loaded">
+      navigatedTo="navigatedTo">
   <Page.actionBar>
     <ActionBar>
       <ActionBar.actionItems>

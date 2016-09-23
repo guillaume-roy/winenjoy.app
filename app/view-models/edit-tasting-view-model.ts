@@ -37,55 +37,39 @@ export class EditTastingViewModel extends Observable {
     }
 
     init() {
-        this._wineCriteriasService.loadData();
-        this.loadCriteria("limpidities");
-        this.loadCriteria("shines");
-        this.loadCriteria("tears");
-        this.loadCriteria("intensities", "noseIntensities");
-        this.loadCriteria("developments", "noseDevelopments");
-        this.loadCriteria("attacks");
-        this.loadCriteria("acidities");
-        this.loadCriteria("tannins");
-        this.loadCriteria("intensities", "tasteIntensities");
-        this.loadCriteria("length");
-        this.loadCriteria("developments", "winePotentials");
-        this.loadCriteria("wineTypes");
+        return new Promise<boolean>((resolve, reject) => {
+            try {
+                this.set("selectedWineType", 0);
+                this.set("selectedAromas", []);
+                this.set("selectedAromaDefects", []);
+                this.set("selectedFlavors", []);
+                this.set("selectedFlavorDefects", []);
+                this.set("picture", null);
+                this.set("selectedLimpidities", []);
+                this.set("selectedWinePotentials", []);
+                this.set("selectedLength", []);
+                this.set("selectedTasteIntensities", []);
+                this.set("selectedTannins", []);
+                this.set("selectedAcidities", []);
+                this.set("selectedAttacks", []);
+                this.set("selectedNoseDevelopments", []);
+                this.set("selectedNoseIntensities", []);
+                this.set("selectedTears", []);
+                this.set("selectedShines", []);
+                this.set("selectedGrapes", []);
+                this.set("tastingDate", Date.now());
+                this.set("finalRating", 2);
+                this.set("containsPicture", false);
+                this.set("locations", []);
+                this.set("locationLabels", []);
 
-        this.set("selectedWineType", 0);
-        this.set("selectedAromas", []);
-        this.set("selectedAromaDefects", []);
-        this.set("selectedFlavors", []);
-        this.set("selectedFlavorDefects", []);
-        this.set("picture", null);
-        this.set("selectedLimpidities", []);
-        this.set("selectedWinePotentials", []);
-        this.set("selectedLength", []);
-        this.set("selectedTasteIntensities", []);
-        this.set("selectedTannins", []);
-        this.set("selectedAcidities", []);
-        this.set("selectedAttacks", []);
-        this.set("selectedNoseDevelopments", []);
-        this.set("selectedNoseIntensities", []);
-        this.set("selectedTears", []);
-        this.set("selectedShines", []);
-        this.set("selectedGrapes", []);
-        this.set("tastingDate", new Date());
-        this.set("finalRating", 2);
-        this.set("containsPicture", false);
-
-        var years = [];
-        for (var i = new Date().getFullYear(); i >= 1900; i--) {
-            years.push(i);
-        }
-        this.set("years", years);
-
-        this.set("locations", []);
-        this.set("locationLabels", []);
-        this._wineCriteriasService.getLocations()
-            .then(d => {
-                this.set("locations", d);
-                this.set("locationLabels", d.map(x => x.label));
-            });
+                this.loadCriterias()
+                    .then(() => resolve(true))
+                    .catch(e => reject(e));
+            } catch (error) {
+                reject(error);
+            }
+        });
     }
 
     load(wineTasting: WineTasting) {
@@ -102,9 +86,9 @@ export class EditTastingViewModel extends Observable {
         }
 
         if (wineTasting.year && wineTasting.year > 0) {
-            this.set("selectedYearIndex", this.get("years").indexOf(wineTasting.year));    
+            this.set("selectedYearIndex", this.get("years").indexOf(wineTasting.year));
         }
-        
+
         this.set("estate", wineTasting.estate);
         this.set("region", wineTasting.region);
         this.set("name", wineTasting.name);
@@ -232,10 +216,34 @@ export class EditTastingViewModel extends Observable {
         return service.deleteTasting(this.get("editWineTasting"));
     }
 
+    loadCriterias() {
+        return Promise.all([
+            this._wineCriteriasService.getLocations()
+                .then(d => {
+                    this.set("locations", d);
+                    this.set("locationLabels", d.map(x => x.label));
+                }),
+            this.loadCriteria("years"),
+            this.loadCriteria("limpidities"),
+            this.loadCriteria("shines"),
+            this.loadCriteria("tears"),
+            this.loadCriteria("intensities", "noseIntensities"),
+            this.loadCriteria("developments", "noseDevelopments"),
+            this.loadCriteria("attacks"),
+            this.loadCriteria("acidities"),
+            this.loadCriteria("tannins"),
+            this.loadCriteria("intensities", "tasteIntensities"),
+            this.loadCriteria("length"),
+            this.loadCriteria("developments", "winePotentials"),
+            this.loadCriteria("wineTypes")
+        ]);
+    }
+
     private loadCriteria(criteria, property?) {
         var propertyName = property || criteria;
         this.set(propertyName, []);
-        this._wineCriteriasService.getCriterias(criteria)
-            .then(d => this.set(propertyName, d));
+        return this._wineCriteriasService.getCriteriasFromFirebase(criteria)
+            .then(d => this.set(propertyName, d))
+            .catch(e => console.dump(e));
     }
 }

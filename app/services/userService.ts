@@ -5,6 +5,7 @@ import appSettings = require("application-settings");
 import firebase = require("nativescript-plugin-firebase");
 import {Config} from "../utils/config";
 import appversion = require("nativescript-appversion");
+import {TastingsService} from "./tastingsService";
 import _ = require("lodash");
 
 export class UserService {
@@ -41,8 +42,10 @@ export class UserService {
                 },
                 storageBucket: config.FirebaseStorageBucket
             }).catch(error => {
-                console.log("ERROR firebase init : " + error);
-                reject(error);
+                reject({
+                    error: error,
+                    message: "Error in UserService.initAuthentication"
+                });
             });
         });
     }
@@ -54,13 +57,24 @@ export class UserService {
                 password: password,
                 type: firebase.LoginType.PASSWORD
             }).then(res => {
-                Promise.all([this.loadUserProfile(res.uid).then(() => this.updateLastConnectionDate()), this.loadUserStats(res.uid)])
+                this.loadUserProfile(res.uid)
                     .then(() => {
-                        resolve(true);
-                    });
+                        this.updateLastConnectionDate();
+                        this.loadUserStats(res.uid)
+                            .then(() => {
+                                var tastingsService = new TastingsService(res.uid);
+                                tastingsService.loadTastings()
+                                    .then(() => resolve(true))
+                                    .catch(loadTastingsError => reject(loadTastingsError));
+                            })
+                            .catch(loadUserStatsError => reject(loadUserStatsError));
+                    })
+                    .catch(loadUserProfileError => reject(loadUserProfileError));
             }).catch(error => {
-                console.log("ERROR firebase login : " + error);
-                reject(error);
+                reject({
+                    error: error,
+                    message: "Error in UserService.login"
+                });
             });
         });
     }
@@ -76,8 +90,10 @@ export class UserService {
                         resolve(true);
                     });
             }).catch(createUserError => {
-                console.log("ERROR firebase createUser : " + createUserError);
-                reject(createUserError);
+                reject({
+                    error: createUserError,
+                    message: "Error in UserService.signup"
+                });
             });
         });
     }
@@ -89,8 +105,10 @@ export class UserService {
             }).then(res => {
                 resolve(true);
             }).catch(error => {
-                console.log("ERROR firebase resetPassword : " + error);
-                reject(error);
+                reject({
+                    error: error,
+                    message: "Error in UserService.forgotPassword"
+                });
             });
         });
     }
@@ -104,8 +122,10 @@ export class UserService {
             }).then(res => {
                 resolve(true);
             }).catch(err => {
-                console.log("ERROR firebase changePassword : " + err);
-                reject(err);
+                reject({
+                    error: err,
+                    message: "Error in UserService.changePassword"
+                });
             });
         });
     }
@@ -129,8 +149,10 @@ export class UserService {
                     resolve(true);
                 })
                 .catch(error => {
-                    console.log("ERROR firebase updateLastConnectionDate : " + error);
-                    reject(error);
+                    reject({
+                        error: error,
+                        message: "Error in UserService.updateLastConnectionDate"
+                    });
                 });
         });
     }
@@ -372,7 +394,16 @@ export class UserService {
                 appversion.getVersionName()
                     .then(localVersion => {
                         resolve(localVersion !== res.properties["app_version"]);
-                    });
+                    })
+                    .catch(e => reject({
+                        error: e,
+                        message: "Error in UserService.needToUpdateApp.getVersionName"
+                    }));
+            }).catch(err => {
+                reject({
+                    error: err,
+                    message: "Error in UserService.needToUpdateApp.getRemoteConfig"
+                });
             });
         });
     }
@@ -409,8 +440,10 @@ export class UserService {
                     resolve(true);
                 })
                 .catch(error => {
-                    console.log("ERROR firebase updateUserProfile : " + error);
-                    reject(error);
+                    reject({
+                        error: error,
+                        message: "Error in UserService.createUserProfile"
+                    });
                 });
         });
     }
@@ -447,8 +480,10 @@ export class UserService {
                     resolve(true);
                 })
                 .catch(setValueError => {
-                    console.log("ERROR firebase updateUserStats : " + setValueError);
-                    reject(setValueError);
+                    reject({
+                        error: setValueError,
+                        message: "Error in UserService.createUserStats"
+                    });
                 });
         });
     }
@@ -465,7 +500,10 @@ export class UserService {
                         type: firebase.QueryOrderByType.VALUE
                     },
                     singleEvent: true
-                });
+                }).catch(err => reject({
+                    error: err,
+                    message: "Error in UserService.loadUserProfile"
+                }));
         });
     }
 
@@ -481,32 +519,49 @@ export class UserService {
                         type: firebase.QueryOrderByType.VALUE
                     },
                     singleEvent: true
-                });
+                }).catch(err => reject({
+                    error: err,
+                    message: "Error in UserService.loadUserStats"
+                }));
         });
     }
 
     private pushCriteriaStat(criteriaStat: { [id: string]: string[] }, code: any, wineTastingId: string) {
-        if (_.isEmpty(criteriaStat)) {
-            criteriaStat = {};
-        }
-        if (_.isEmpty(criteriaStat[code])) {
-            criteriaStat[code] = [];
-        }
-        criteriaStat[code].push(wineTastingId);
+        try {
+            if (_.isEmpty(criteriaStat)) {
+                criteriaStat = {};
+            }
+            if (_.isEmpty(criteriaStat[code])) {
+                criteriaStat[code] = [];
+            }
+            criteriaStat[code].push(wineTastingId);
 
-        return criteriaStat;
+            return criteriaStat;
+        } catch (error) {
+            throw {
+                error: error,
+                message: `Error in UserService.pushCriteriaStat for [${code}]`
+            }
+        }
     }
 
     private popCriteriaStat(criteriaStat: { [id: string]: string[] }, code: any, wineTastingId: string) {
-        if (_.isEmpty(criteriaStat)) {
-            criteriaStat = {};
-        }
-        if (_.isEmpty(criteriaStat[code])) {
-            criteriaStat[code] = [];
-        }
+        try {
+            if (_.isEmpty(criteriaStat)) {
+                criteriaStat = {};
+            }
+            if (_.isEmpty(criteriaStat[code])) {
+                criteriaStat[code] = [];
+            }
 
-        _.remove(criteriaStat[code], v => v === wineTastingId);
+            _.remove(criteriaStat[code], v => v === wineTastingId);
 
-        return criteriaStat;
+            return criteriaStat;
+        } catch (error) {
+            throw {
+                error: error,
+                message: `Error in UserService.popCriteriaStat for [${code}]`
+            }
+        }
     }
 }

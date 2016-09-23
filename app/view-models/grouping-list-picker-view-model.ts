@@ -38,7 +38,7 @@ export class GroupingListPickerViewModel extends Observable {
         }
 
         if (args.criterias === "aromas") {
-            new WineCriteriasService().getCriterias(args.criterias).then(data => {
+            new WineCriteriasService().getCriteriasFromFirebase(args.criterias).then(data => {
                 this.items = this.processChild(data.filter(d => d.code !== "DEFECTS").map(g => new Observable({
                     groupingIcon: this.get("groupingIcon"),
                     isExpanded: false,
@@ -46,7 +46,7 @@ export class GroupingListPickerViewModel extends Observable {
                 })));
             });
         } else {
-            new WineCriteriasService().getCriterias(args.criterias).then(data => {
+            new WineCriteriasService().getCriteriasFromFirebase(args.criterias).then(data => {
                 this.items = this.processChild(data.map(g => new Observable({
                     groupingIcon: this.get("groupingIcon"),
                     isExpanded: false,

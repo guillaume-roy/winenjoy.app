@@ -86,7 +86,7 @@ export class ExportDataService {
 
                     let result = JSON.parse(sb.toString());
                     let tastingsService = new TastingsService();
-                    tastingsService.saveTastings(result);
+                    tastingsService.saveTastingsLocally(result);
                     resolve(true);
                 }
             }

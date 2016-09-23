@@ -29,5 +29,5 @@ export function okModal() {
     closeCallback(new Date(
         vm.get("year"),
         vm.get("month") - 1,
-        vm.get("day")));
+        vm.get("day")).getTime());
 }

@@ -1,5 +1,6 @@
 import {CriteriaItem} from "../entities/criteriaItem";
 import _ = require("lodash");
+import firebase = require("nativescript-plugin-firebase");
 
 export class WineCriteriasService {
     private get wineCriterias() {
@@ -9,43 +10,85 @@ export class WineCriteriasService {
         global.wineCriterias = value;
     }
 
-    public loadData() {
+    constructor() {
         if (_.isEmpty(this.wineCriterias)) {
-            var data = require("../data/wine-criterias.json");
-            this.wineCriterias = data;
+            this.wineCriterias = {};
         }
     }
 
-    public getCriterias(type: string): Promise<CriteriaItem[]> {
+    getCriteriasFromFirebase(type: string): Promise<CriteriaItem[]> {
         return new Promise<CriteriaItem[]>((resolve, reject) => {
-            this.loadData();
-            resolve(this.wineCriterias[type]);
+            try {
+                if (!_.isEmpty(this.wineCriterias[type])) {
+                    resolve(this.wineCriterias[type]);
+                } else {
+                    firebase.query(
+                        data => {
+                            var res = data.value || [];
+                            this.wineCriterias[type] = res;
+                            resolve(res);
+                        },
+                        `/criterias/fr/${type}`,
+                        {
+                            orderBy: {
+                                type: firebase.QueryOrderByType.CHILD,
+                                value: "order"
+                            },
+                            singleEvent: true
+                        })
+                        .catch(error => {
+                            reject({
+                                error: error,
+                                message: "Error in WineCriteriasService.getCriteriasFromFirebase"
+                            });
+                        });
+                }
+            } catch (error) {
+                reject(error);
+            }
         });
     }
 
-    public getLocations(): Promise<CriteriaItem[]> {
+    getLocations(): Promise<CriteriaItem[]> {
         return new Promise<CriteriaItem[]>((resolve, reject) => {
-            this.loadData();
-            var regions = (<CriteriaItem[]>this.wineCriterias["regions"]).map(r => {
-                var region = <CriteriaItem>_.assignIn({}, r);
-                region.label = "Région : " + r.label;
-                region.type = "region";
-                return region;
-            });
-            var countries = (<CriteriaItem[]>this.wineCriterias["countries"]).map(r => {
-                var country = <CriteriaItem>_.assignIn({}, r);
-                country.label = "Pays : " + r.label;
-                country.type = "country";
-                return country;
-            });
-            var aoc = (<CriteriaItem[]>this.wineCriterias["aoc"]).map(r => {
-                var aoc = <CriteriaItem>_.assignIn({}, r);
-                aoc.label = "AOC : " + r.label;
-                aoc.type = "aoc";
-                return aoc;
-            });
-
-            resolve((<CriteriaItem[]>[]).concat(regions, countries, aoc));
+            try {
+                var res = [];
+                this.getCriteriasFromFirebase("regions")
+                    .then(regions => {
+                        this.getCriteriasFromFirebase("countries")
+                            .then(countries => {
+                                this.getCriteriasFromFirebase("aoc")
+                                    .then(aoc => {
+                                        res = res
+                                            .concat(regions.map(r => {
+                                                var region = <CriteriaItem>_.assignIn({}, r);
+                                                region.label = "Région : " + r.label;
+                                                region.type = "region";
+                                                return region;
+                                            }))
+                                            .concat(countries.map(r => {
+                                                var country = <CriteriaItem>_.assignIn({}, r);
+                                                country.label = "Pays : " + r.label;
+                                                country.type = "country";
+                                                return country;
+                                            }))
+                                            .concat(aoc.map(r => {
+                                                var aoc = <CriteriaItem>_.assignIn({}, r);
+                                                aoc.label = "AOC : " + r.label;
+                                                aoc.type = "aoc";
+                                                return aoc;
+                                            }));
+                                        resolve(res);
+                                    }).catch(aocError => reject(aocError));
+                            }).catch(countriesError => reject(countriesError));
+                    })
+                    .catch(regionsError => reject(regionsError));
+            } catch (error) {
+                reject({
+                    error: error,
+                    messgae: "Error in WineCriteriasService.getLocations"
+                });
+            }
         });
     }
 

@@ -26,66 +26,78 @@ export function navigatedTo(args: EventData) {
 
 export function onLogin() {
     if (!viewModel.isBusy && viewModel.canSubmit) {
-        viewModel.login().then(res => {
-            analyticsService.logEvent("Action", "User Input", "onLogin");
-            analyticsService.dispatch();
-            frameModule.topmost().navigate({
-                animated: false,
-                backstackVisible: true,
-                moduleName: Views.main
+        setTimeout(() => {
+            viewModel.login().then(res => {
+                analyticsService.logEvent("Action", "User Input", "onLogin");
+                analyticsService.dispatch();
+                frameModule.topmost().navigate({
+                    animated: false,
+                    backstackVisible: true,
+                    moduleName: Views.main
+                });
+            }).catch(error => {
+                analyticsService.logException(error, false);
+                analyticsService.dispatch();
+                console.dump(error);
+                dialogs.alert({
+                    message: "Erreur lors de la connexion.",
+                    okButtonText: "OK",
+                    title: "Erreur"
+                });
             });
-        }).catch(error => {
-            analyticsService.logException(error, false);
-            analyticsService.dispatch();
-            dialogs.alert({
-                message: "Erreur lors de la connexion.",
-                okButtonText: "OK",
-                title: "Erreur"
-            });
-        });
+        }, 0);
     }
 }
 
 export function onSignup() {
     if (!viewModel.isBusy && viewModel.canSubmit) {
-        viewModel.signup().then(res => {
-            analyticsService.logEvent("Action", "User Input", "onSignup");
-            analyticsService.dispatch();
-            frameModule.topmost().navigate({
-                animated: false,
-                backstackVisible: true,
-                moduleName: Views.main
+        setTimeout(() => {
+            viewModel.signup().then(res => {
+                analyticsService.logEvent("Action", "User Input", "onSignup");
+                analyticsService.dispatch();
+                frameModule.topmost().navigate({
+                    animated: false,
+                    backstackVisible: true,
+                    moduleName: Views.main
+                });
+            }).catch(error => {
+                analyticsService.logException(error, false);
+                analyticsService.dispatch();
+                console.dump(error);
+                dialogs.alert({
+                    message: "Erreur lors de la création du compte.",
+                    okButtonText: "OK",
+                    title: "Erreur"
+                });
             });
-        }).catch(error => {
-            analyticsService.logException(error, false);
-            analyticsService.dispatch();
-            dialogs.alert({
-                message: "Erreur lors de la création du compte.",
-                okButtonText: "OK",
-                title: "Erreur"
-            });
-        });
+        }, 0);
     }
 }
 
 export function onForgotPassword() {
     if (!viewModel.isBusy && viewModel.canForgotPassword) {
-        viewModel.forgotPassword().then(res => {
-            analyticsService.logEvent("Action", "User Input", "onForgotPassword");
-            analyticsService.dispatch();
-            dialogs.alert({
-                message: "Une procédure de réinitialisation de votre mot de passe vient d'être envoyé par email.",
-                okButtonText: "OK",
-                title: "Mot de passe oublié"
-            });
-        }).catch(error => {
-            analyticsService.logException(error, false);
-            analyticsService.dispatch();
-            dialogs.alert({
-                message: "Erreur lors de la réinitialisation du mot de passe.",
-                okButtonText: "OK",
-                title: "Erreur"
-            });
-        });
+        setTimeout(() => {
+            viewModel.forgotPassword()
+                .then(res => {
+                    analyticsService.logEvent("Action", "User Input", "onForgotPassword");
+                    analyticsService.dispatch();
+                    dialogs.alert({
+                        message:
+                        "Une procédure de réinitialisation de votre mot de passe vient d'être envoyé par email.",
+                        okButtonText: "OK",
+                        title: "Mot de passe oublié"
+                    });
+                })
+                .catch(error => {
+                    analyticsService.logException(error, false);
+                    analyticsService.dispatch();
+                    console.dump(error);
+                    dialogs.alert({
+                        message: "Erreur lors de la réinitialisation du mot de passe.",
+                        okButtonText: "OK",
+                        title: "Erreur"
+                    });
+                });
+        }, 0);
     }
 }

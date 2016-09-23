@@ -2,11 +2,9 @@
 import {Page} from "ui/page";
 import dialogs = require("ui/dialogs");
 import camera = require("camera");
-import profiler = require("../../utils/profiling");
 import {EditTastingViewModel} from "../../view-models/edit-tasting-view-model";
 import {Views} from "../../utils/views";
 import frameModule = require("ui/frame");
-import _ = require("lodash");
 
 let page: Page;
 let locationAutoComplete;
@@ -14,7 +12,6 @@ let viewModel: EditTastingViewModel;
 let busyModal: Page;
 
 export function navigatedTo(args: EventData) {
-    profiler.start("loading edit-tasting");
     page = <Page>args.object;
     locationAutoComplete = page.getViewById("locationAutoComplete");
     viewModel = new EditTastingViewModel();
@@ -28,17 +25,23 @@ export function navigatedTo(args: EventData) {
     }
 
     setTimeout(() => {
-        profiler.start("init edit-tasting-view-model");
-        viewModel.init();
-        profiler.stop("init edit-tasting-view-model");
+        isBusy();
+    }, 0);
+
+    setTimeout(() => {
+        viewModel.init()
+            .then(() => isBusy(true))
+            .catch(error => {
+                console.dump(error);
+            });
 
         if (page.navigationContext) {
             viewModel.load(page.navigationContext);
-            
+
             var aoc = viewModel.get("aoc");
             var region = viewModel.get("region");
             var country = viewModel.get("country");
-            
+
             if (aoc) {
                 locationAutoComplete.android.setText("AOC : " + aoc.label);
             } else if (region) {
@@ -47,11 +50,7 @@ export function navigatedTo(args: EventData) {
                 locationAutoComplete.android.setText("Pays : " + country.label);
             }
         }
-    });
-}
-
-export function loaded() {
-    profiler.stop("loading edit-tasting");
+    }, 0);
 }
 
 export function managePicture() {
