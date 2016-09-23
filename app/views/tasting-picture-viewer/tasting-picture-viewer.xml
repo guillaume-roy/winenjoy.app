@@ -5,14 +5,14 @@
     <Image src="{{ src }}"
            style="margin: 6"
            colspan="2" />
-    <Label text="SUPPRIMER"
-           style="color: red;font-weight: bold;margin: 6;padding: 6;horizontal-align:center"
-           row="1"
-           tap="deletePicture" />
-    <Label text="FERMER"
-           style="font-weight: bold;horizontal-align:center;margin: 6;padding: 6"
-           col="1"
-           row="1"
-           tap="closeModal" />
+    <Button text="SUPPRIMER"
+            style="color: white;font-weight: bold;margin-right: 6;margin-left: 6;background-color:red;"
+            row="1"
+            tap="deletePicture" />
+    <Button text="FERMER"
+            style="font-weight: bold;margin-right: 6;margin-left: 6;"
+            col="1"
+            row="1"
+            tap="closeModal" />
   </GridLayout>
 </Page>
