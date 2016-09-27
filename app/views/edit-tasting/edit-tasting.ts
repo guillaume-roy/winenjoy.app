@@ -291,6 +291,13 @@ export function deleteTasting() {
     });;
 }
 
+export function goBack() {
+    if (isBusyIndicator)
+        return;
+
+    frameModule.goBack();
+}
+
 function isBusy(closeModal?: boolean) {
     if (closeModal) {
         if (busyModal) {
