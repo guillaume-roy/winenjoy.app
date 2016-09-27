@@ -216,9 +216,6 @@
     <Content Include="app\utils\views.js">
       <DependentUpon>views.ts</DependentUpon>
     </Content>
-    <Content Include="app\view-models\edit-tasting-old-view-model.js">
-      <DependentUpon>edit-tasting-old-view-model.ts</DependentUpon>
-    </Content>
     <Content Include="app\view-models\edit-tasting-view-model.js">
       <DependentUpon>edit-tasting-view-model.ts</DependentUpon>
     </Content>
@@ -356,7 +353,6 @@
     <TypeScriptCompile Include="app\utils\profiling.ts" />
     <TypeScriptCompile Include="app\utils\uuid.ts" />
     <TypeScriptCompile Include="app\utils\views.ts" />
-    <TypeScriptCompile Include="app\view-models\edit-tasting-old-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\edit-tasting-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\grouping-list-picker-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\import-export-data-view-model.ts" />

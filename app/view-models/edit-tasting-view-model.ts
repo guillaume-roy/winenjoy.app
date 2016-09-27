@@ -22,7 +22,7 @@ export class EditTastingViewModel extends Observable {
     }
 
     set rawAlcoolValue(value) {
-        this._rawAlcoolValue = value;
+        this._rawAlcoolValue = parseFloat(value.toFixed(1));
         this.notifyPropertyChange("rawAlcoolValue", value);
 
         this.set("alcoolValue", (value / 10).toFixed(1));
@@ -124,6 +124,7 @@ export class EditTastingViewModel extends Observable {
 
         this.set("editWineTasting", wineTasting);
         this.set("isEdit", true);
+        this.set("pictureEditMode", "");
     }
 
     saveTasting(locationLabel: string) {
@@ -200,14 +201,26 @@ export class EditTastingViewModel extends Observable {
             }
 
             var service = new TastingsService();
-            service.saveTasting(wineTasting, wineTastingPicturePath).then(() => {
-                if (!_.isEmpty(wineTastingPicturePath) && fs.File.exists(wineTastingPicturePath)) {
-                    fs.File.fromPath(wineTastingPicturePath).remove();
-                }
-                resolve(true);
-            }).catch(error => {
-                reject(error);
-            });
+            if (this.get("isEdit")) {
+                var updatedWineTasting = _.assignIn({}, this.get("editWineTasting"), wineTasting);
+                service.updateTasting(updatedWineTasting, wineTastingPicturePath, this.get("pictureEditMode")).then(() => {
+                    if (!_.isEmpty(wineTastingPicturePath) && fs.File.exists(wineTastingPicturePath)) {
+                        fs.File.fromPath(wineTastingPicturePath).remove();
+                    }
+                    resolve(true);
+                }).catch(error => {
+                    reject(error);
+                });
+            } else {
+                service.saveTasting(wineTasting, wineTastingPicturePath).then(() => {
+                    if (!_.isEmpty(wineTastingPicturePath) && fs.File.exists(wineTastingPicturePath)) {
+                        fs.File.fromPath(wineTastingPicturePath).remove();
+                    }
+                    resolve(true);
+                }).catch(error => {
+                    reject(error);
+                });
+            }
         });
     }
 

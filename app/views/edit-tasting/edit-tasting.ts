@@ -30,26 +30,33 @@ export function navigatedTo(args: EventData) {
 
     setTimeout(() => {
         viewModel.init()
-            .then(() => isBusy(true))
+            .then(() => {
+                if (page.navigationContext) {
+                    viewModel.load(page.navigationContext);
+
+                    var aoc = viewModel.get("aoc");
+                    var region = viewModel.get("region");
+                    var country = viewModel.get("country");
+
+                    if (aoc) {
+                        locationAutoComplete.android.setText("AOC : " + aoc.label);
+                    } else if (region) {
+                        locationAutoComplete.android.setText("Région : " + region.label);
+                    } else if (country) {
+                        locationAutoComplete.android.setText("Pays : " + country.label);
+                    }
+                }
+
+                isBusy(true);
+            })
             .catch(error => {
                 console.dump(error);
+                dialogs.alert({
+                    message: "Erreur lors du chargement de la dégustation.",
+                    okButtonText: "OK",
+                    title: "Erreur"
+                });
             });
-
-        if (page.navigationContext) {
-            viewModel.load(page.navigationContext);
-
-            var aoc = viewModel.get("aoc");
-            var region = viewModel.get("region");
-            var country = viewModel.get("country");
-
-            if (aoc) {
-                locationAutoComplete.android.setText("AOC : " + aoc.label);
-            } else if (region) {
-                locationAutoComplete.android.setText("Région : " + region.label);
-            } else if (country) {
-                locationAutoComplete.android.setText("Pays : " + country.label);
-            }
-        }
     }, 0);
 }
 
@@ -73,6 +80,7 @@ export function managePicture() {
                 if (deletePicture) {
                     viewModel.set("picture", null);
                     viewModel.set("containsPicture", false);
+                    viewModel.set("pictureEditMode", "DELETE");
                 }
             },
             true);
@@ -84,12 +92,15 @@ export function managePicture() {
         }).then(img => {
             viewModel.set("picture", img);
             viewModel.set("containsPicture", true);
+            viewModel.set("pictureEditMode", "EDIT");
         });
     }
 }
 
 export function saveTasting() {
-    isBusy();
+    setTimeout(() => {
+        isBusy();
+    }, 0);
 
     var locationText = locationAutoComplete.android.getText();
 
@@ -112,6 +123,11 @@ export function saveTasting() {
                 console.log("saveTasting ERROR");
                 console.log(error.message);
                 console.log(error.error);
+                dialogs.alert({
+                    message: "Erreur lors de l'enregistrement de la dégustation.",
+                    okButtonText: "OK",
+                    title: "Erreur"
+                });
             });
     }, 0);
 }
@@ -233,7 +249,7 @@ export function selectFinalRating(args) {
 export function deleteTasting() {
     dialogs.confirm({
         cancelButtonText: "Annuler",
-        message: "Etes-vous spur de vouloir supprimer cette dégustation ?",
+        message: "Etes-vous sur de vouloir supprimer cette dégustation ?",
         okButtonText: "OK",
         title: "Suppression"
     }).then(confirm => {
@@ -257,6 +273,11 @@ export function deleteTasting() {
         console.log("deleteTasting ERROR");
         console.log(error.message);
         console.log(error.error);
+        dialogs.alert({
+            message: "Erreur lors de la suppression de la dégustation.",
+            okButtonText: "OK",
+            title: "Erreur"
+        });
     });;
 }
 

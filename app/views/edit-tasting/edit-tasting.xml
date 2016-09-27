@@ -347,7 +347,7 @@
                            class="form-label">
                 <Label text="Alcool"/>
                 <Label text="{{ alcoolValue, alcoolValue + ' %' }}"
-                       style="margin-left: 6"
+                       style="margin-left: 6;width: 240"
                        visibility="{{ alcoolValue ? 'visible' : 'collapse' }}"/>
               </StackLayout>
               <Slider minValue="30"

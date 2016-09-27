@@ -161,7 +161,7 @@ export class UserService {
         return new Promise<boolean>((resolve, reject) => {
             try {
                 let userStats = this.getUserStats();
-
+                
                 userStats.totalTastings -= 1;
                 userStats.totalRatings -= wineTasting.finalRating;
                 userStats.averageRating = userStats.totalTastings > 0

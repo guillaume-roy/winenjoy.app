@@ -35,7 +35,7 @@
               <Label text="{{ region.label }}"
                      visibility="{{ region ? 'visible' : 'collapse' }}"
                      class="list-item-title" />
-              <Label text="-"
+              <Label text=" - "
                      visibility="{{ region ? 'visible' : 'collapse' }}" />
               <Label text="{{ country.label }}"
                      visibility="{{ country ? 'visible' : 'collapse' }}"

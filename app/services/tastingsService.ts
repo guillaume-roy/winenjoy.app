@@ -72,7 +72,7 @@ export class TastingsService {
         return new Promise<WineTasting>((resolve, reject) => {
             this.getTastings()
                 .then(tastings => {
-                    resolve(_.find(tastings, t => t.id === wineTastingId));
+                    resolve(_.find(tastings, { id: wineTastingId }));
                 }).catch(error => {
                     reject({
                         error: error,
@@ -133,7 +133,7 @@ export class TastingsService {
         });
     }
 
-    public updateTasting(wineTasting: WineTasting, wineTastingPicturePath: string, pictureEditMode: string) {
+    public updateTasting(wineTasting: WineTasting, wineTastingPicturePath?: string, pictureEditMode?: string) {
         return new Promise<boolean>((resolve, reject) => {
             this.updateTastingOnFirebase(wineTasting).then(() => {
                 var endOfUpdate = () => {

@@ -24,7 +24,7 @@ export function navigatedTo(args: EventData) {
     analyticsService.logView("main");
 
     setTimeout(() => {
-        viewModel.getTastings()
+        viewModel.init()
             .catch(error => {
                 analyticsService.logException(error, false);
                 analyticsService.dispatch();
