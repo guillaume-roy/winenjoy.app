@@ -10,6 +10,7 @@ let page: Page;
 let locationAutoComplete;
 let viewModel: EditTastingViewModel;
 let busyModal: Page;
+let isBusyIndicator = false;
 
 export function navigatedTo(args: EventData) {
     page = <Page>args.object;
@@ -61,6 +62,9 @@ export function navigatedTo(args: EventData) {
 }
 
 export function managePicture() {
+    if (isBusyIndicator)
+        return;
+
     if (viewModel.get("containsPicture")) {
         var args = {
             tastingId: null,
@@ -98,6 +102,9 @@ export function managePicture() {
 }
 
 export function saveTasting() {
+    if (isBusyIndicator)
+        return;
+
     setTimeout(() => {
         isBusy();
     }, 0);
@@ -247,6 +254,9 @@ export function selectFinalRating(args) {
 }
 
 export function deleteTasting() {
+    if (isBusyIndicator)
+        return;
+
     dialogs.confirm({
         cancelButtonText: "Annuler",
         message: "Etes-vous sur de vouloir supprimer cette dégustation ?",
@@ -284,10 +294,12 @@ export function deleteTasting() {
 function isBusy(closeModal?: boolean) {
     if (closeModal) {
         if (busyModal) {
+            isBusyIndicator = false;
             busyModal.closeModal();
             busyModal = null;
         }
     } else {
-        busyModal = page.showModal(Views.busyIndicator, null, () => { busyModal = null; }, false);
+        isBusyIndicator = true;
+        busyModal = page.showModal(Views.busyIndicator, null, () => { busyModal = null; viewModel.set("isBusy", true); }, false);
     }
 }
