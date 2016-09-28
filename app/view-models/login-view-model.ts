@@ -93,15 +93,13 @@ export class LoginViewModel extends Observable {
 
     public login() {
         this.isBusy = true;
-        return new Promise<boolean>((resolve, reject) => {
-            let email = this.email.toLowerCase().trim();
-            this._service.login(email, this.password).then(loginRes => {
-                this.isBusy = false;
-                resolve(true);
-            }).catch(error => {
-                this.isBusy = false;
-                reject(error);
-            });
+        let email = this.email.toLowerCase().trim();
+        return this._service.login(email, this.password).then(loginRes => {
+            this.isBusy = false;
+            return;
+        }).catch(error => {
+            this.isBusy = false;
+            throw error;
         });
     }
 

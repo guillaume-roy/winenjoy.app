@@ -4,11 +4,12 @@
   "nativescript": {
     "id": "com.winenjoy.app",
     "tns-android": {
-      "version": "2.2.0"
+      "version": "2.3.0"
     }
   },
   "dependencies": {
     "lodash": "*",
+    "moment": "2.15.0",
     "nativescript-appversion": "1.2.0",
     "nativescript-autocomplete": "1.0.0",
     "nativescript-cardview": "1.1.11",
@@ -16,8 +17,7 @@
     "nativescript-floatingactionbutton": "2.2.4",
     "nativescript-google-analytics": "0.2.9",
     "nativescript-plugin-firebase": "3.6.1",
-    "tns-core-modules": "^2.2.1",
-    "moment":  "2.15.0" 
+    "tns-core-modules": "^2.3.0"
   },
   "devDependencies": {
     "babel-traverse": "6.13.0",

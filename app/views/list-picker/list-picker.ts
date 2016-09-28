@@ -3,7 +3,6 @@ import {Page} from "ui/page";
 import {ListPickerViewModel} from "../../view-models/list-picker-view-model";
 import {SearchBar} from "ui/search-bar";
 import listViewModule = require("ui/list-view");
-import {AnalyticsService} from "../../services/analyticsService";
 
 let closeCallback: Function;
 let viewModel: ListPickerViewModel;
@@ -20,8 +19,6 @@ export function onShownModally(args: pages.ShownModallyData) {
         searchBar.on(SearchBar.propertyChangeEvent, searchBarArgs => {
             viewModel.searchingText = searchBar.text;
         });
-
-        new AnalyticsService().logView("list-picker");
     }, 0);
 }
 

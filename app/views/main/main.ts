@@ -5,13 +5,11 @@ import frameModule = require("ui/frame");
 import {View} from "ui/core/view";
 import {Views} from "../../utils/views";
 import listViewModule = require("ui/list-view");
-import {AnalyticsService} from "../../services/analyticsService";
 import dialogs = require("ui/dialogs");
 import application = require("application");
 import {Config} from "../../utils/config";
 
 let viewModel: MainViewModel;
-let analyticsService: AnalyticsService;
 let page: Page;
 
 export function navigatedTo(args: EventData) {
@@ -19,15 +17,10 @@ export function navigatedTo(args: EventData) {
 
     viewModel = new MainViewModel();
     page.bindingContext = viewModel;
-
-    analyticsService = new AnalyticsService();
-    analyticsService.logView("main");
-
+    
     setTimeout(() => {
         viewModel.init()
             .catch(error => {
-                analyticsService.logException(error, false);
-                analyticsService.dispatch();
                 console.dump(error);
                 dialogs.alert({
                     message: "Erreur lors du chargement des dégustations.",
@@ -60,9 +53,6 @@ export function navigatedTo(args: EventData) {
 }
 
 export function onCreateNewTasting(args: EventData) {
-    analyticsService.logEvent("Navigation", "User Input", "onCreateNewTasting");
-    analyticsService.startTimer("Navigation from main to edit-tasting", "Navigation", "onCreateNewTasting");
-
     setTimeout(() => {
         frameModule.topmost()
             .navigate({
@@ -74,8 +64,6 @@ export function onCreateNewTasting(args: EventData) {
 }
 
 export function onCreateFirstTasting() {
-    analyticsService.logEvent("Navigation", "User Input", "onCreateFirstTasting");
-    analyticsService.startTimer("Navigation from main to edit-tasting", "Navigation", "onCreateFirstTasting");
     setTimeout(() => {
         frameModule.topmost().navigate({
             animated: false,
@@ -86,9 +74,6 @@ export function onCreateFirstTasting() {
 }
 
 export function onViewTasting(args: listViewModule.ItemEventData) {
-    analyticsService.logEvent("Navigation", "User Input", "onViewTasting");
-    analyticsService.startTimer("Navigation from main to edit-tasting", "Navigation", "onViewTasting");
-
     setTimeout(() => {
         frameModule.topmost().navigate({
             animated: false,
@@ -103,8 +88,6 @@ export function refreshTastings() {
     setTimeout(() => {
         viewModel.refreshTastings()
             .catch(error => {
-                analyticsService.logException(error, false);
-                analyticsService.dispatch();
                 console.dump(error);
                 dialogs.alert({
                     message: "Erreur lors du chargement des dégustations.",
