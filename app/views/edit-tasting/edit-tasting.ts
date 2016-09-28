@@ -5,6 +5,7 @@ import camera = require("camera");
 import {EditTastingViewModel} from "../../view-models/edit-tasting-view-model";
 import {Views} from "../../utils/views";
 import frameModule = require("ui/frame");
+import application = require("application");
 
 let page: Page;
 let locationAutoComplete;
@@ -24,7 +25,7 @@ export function navigatedTo(args: EventData) {
         locationAutoComplete.android.setHintTextColor(android.graphics.Color.parseColor("#727272"));
         locationAutoComplete.android.setTextSize(16);
     }
-
+    
     setTimeout(() => {
         isBusy();
     }, 0);
@@ -48,6 +49,8 @@ export function navigatedTo(args: EventData) {
                     }
                 }
 
+                attachBackButtonConfirmation();
+
                 isBusy(true);
             })
             .catch(error => {
@@ -59,6 +62,10 @@ export function navigatedTo(args: EventData) {
                 });
             });
     }, 0);
+}
+
+export function unloaded() {
+    detachBackButtonConfirmation();
 }
 
 export function managePicture() {
@@ -291,11 +298,23 @@ export function deleteTasting() {
     });;
 }
 
-export function goBack() {
+export function goBack(args: any) {
+    args = args || {};
+    args.cancel = true;
+
     if (isBusyIndicator)
         return;
 
-    frameModule.goBack();
+    dialogs.confirm({
+        cancelButtonText: "Non",
+        message: "Etes-vous sûr de vouloir quitter cette dégustation ?",
+        okButtonText: "Oui",
+        title: "Annuler"
+    }).then(result => {
+        if (result) {
+            frameModule.goBack();
+        }
+    });
 }
 
 function isBusy(closeModal?: boolean) {
@@ -310,3 +329,22 @@ function isBusy(closeModal?: boolean) {
         busyModal = page.showModal(Views.busyIndicator, null, () => { busyModal = null; viewModel.set("isBusy", true); }, false);
     }
 }
+
+function attachBackButtonConfirmation() {
+    if (viewModel.get("isEdit"))
+        return;
+
+    if (application.android) {
+        application.android.on(application.AndroidApplication.activityBackPressedEvent, goBack);
+    }
+}
+
+function detachBackButtonConfirmation() {
+    if (viewModel.get("isEdit"))
+        return;
+
+    // We only want to unregister the event on Android
+    if (application.android) {
+        application.android.off(application.AndroidApplication.activityBackPressedEvent, goBack);
+    }
+};

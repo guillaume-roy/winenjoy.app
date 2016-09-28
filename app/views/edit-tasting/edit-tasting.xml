@@ -4,7 +4,8 @@
       xmlns:gcp="components/gradient-color-picker"
       xmlns:dd="nativescript-drop-down"
       xmlns:ac="nativescript-autocomplete"
-      navigatedTo="navigatedTo">
+      navigatedTo="navigatedTo"
+      unloaded="unloaded">
   <Page.actionBar>
     <ActionBar title="{{ isEdit ? 'Consultation' : 'Nouvelle dégustation' }}">
       <NavigationButton icon="res://ic_arrow_back_white_24dp"

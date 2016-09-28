@@ -17,6 +17,7 @@ export class MainViewModel extends Observable {
         this._wineCriteriasService = new WineCriteriasService();
 
         this.set("tastings", []);
+        this.set("isBusy", true);
     }
 
     init() {

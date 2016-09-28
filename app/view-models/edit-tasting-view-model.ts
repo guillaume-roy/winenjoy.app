@@ -129,70 +129,7 @@ export class EditTastingViewModel extends Observable {
 
     saveTasting(locationLabel: string) {
         return new Promise<boolean>((resolve, reject) => {
-            if (!_.isEmpty(locationLabel)) {
-                var locations = <CriteriaItem[]>this.get("locations");
-                var location = _.find(locations, { label: locationLabel });
-
-                if (!_.isEmpty(location)) {
-                    switch (location.type) {
-                        case "aoc":
-                            var aoc = this._wineCriteriasService.getAoc(location.id);
-                            this.set("aoc", aoc);
-                            var region = this._wineCriteriasService.getRegion(aoc.parentId);
-                            this.set("region", region);
-                            var country = this._wineCriteriasService.getCountry(region.parentId);
-                            this.set("country", country);
-                            break;
-                        case "region":
-                            var region1 = this._wineCriteriasService.getRegion(location.id);
-                            this.set("region", region1);
-                            var country1 = this._wineCriteriasService.getCountry(region1.parentId);
-                            this.set("country", country1);
-                            break;
-                        case "country":
-                            var country2 = this._wineCriteriasService.getCountry(location.id);
-                            this.set("country", country2);
-                            break;
-                    }
-                }
-            }
-
-            var wineTasting = <WineTasting>{
-                estate: this.get("estate"),
-                region: this.get("region"),
-                name: this.get("name"),
-                country: this.get("country"),
-                aoc: this.get("aoc"),
-                year: this.get("selectedYear"),
-                wineType: this.get("wineTypes")[this.get("selectedWineType")],
-                alcohol: this.get("alcoolValue"),
-                isBiodynamic: this.get("isBiodynamic"),
-                isBlindTasting: this.get("isBlindTasting"),
-                grapes: this.get("selectedGrapes"),
-                comments: this.get("comments"),
-                tastingDate: this.get("tastingDate"),
-                color: this.get("wineColor"),
-                finalRating: this.get("finalRating"),
-                aromas: this.get("selectedAromas"),
-                defects: this.get("selectedAromaDefects"),
-                flavorDefects: this.get("selectedFlavorDefects"),
-                flavors: this.get("selectedFlavors"),
-                attacks: this.get("selectedAttacks"),
-                limpidities: this.get("selectedLimpidities"),
-                shines: this.get("selectedShines"),
-                tears: this.get("selectedTears"),
-                hasBubbles: this.get("hasBubbles"),
-                hasDeposit: this.get("hasDeposit"),
-                noseIntensities: this.get("selectedNoseIntensities"),
-                length: this.get("selectedLength"),
-                containsPicture: this.get("picture") ? true : false,
-                winePairing: this.get("winePairing"),
-                winePotentials: this.get("selectedWinePotentials"),
-                tasteIntensities: this.get("selectedTasteIntensities"),
-                tannins: this.get("selectedTannins"),
-                acidities: this.get("selectedAcidities"),
-                noseDevelopments: this.get("selectedNoseDevelopments")
-            };
+            var wineTasting = this.getModel(locationLabel);
 
             let wineTastingPicturePath = null;
             if (this.get("picture")) {
@@ -252,6 +189,10 @@ export class EditTastingViewModel extends Observable {
         ]);
     }
 
+    getModelHashCode(locationLabel: string) {
+        return this.hashCode(JSON.stringify(this.getModel(locationLabel)));
+    }
+
     private loadCriteria(criteria, property?) {
         var propertyName = property || criteria;
         this.set(propertyName, []);
@@ -259,4 +200,88 @@ export class EditTastingViewModel extends Observable {
             .then(d => this.set(propertyName, d))
             .catch(e => console.dump(e));
     }
+
+    private getModel(locationLabel: string) {
+        if (!_.isEmpty(locationLabel)) {
+            var locations = <CriteriaItem[]>this.get("locations");
+            var location = _.find(locations, { label: locationLabel });
+
+            if (!_.isEmpty(location)) {
+                switch (location.type) {
+                    case "aoc":
+                        var aoc = this._wineCriteriasService.getAoc(location.id);
+                        this.set("aoc", aoc);
+                        var region = this._wineCriteriasService.getRegion(aoc.parentId);
+                        this.set("region", region);
+                        var country = this._wineCriteriasService.getCountry(region.parentId);
+                        this.set("country", country);
+                        break;
+                    case "region":
+                        var region1 = this._wineCriteriasService.getRegion(location.id);
+                        this.set("region", region1);
+                        var country1 = this._wineCriteriasService.getCountry(region1.parentId);
+                        this.set("country", country1);
+                        break;
+                    case "country":
+                        var country2 = this._wineCriteriasService.getCountry(location.id);
+                        this.set("country", country2);
+                        break;
+                }
+            }
+        }
+
+        var wineTasting = <WineTasting>{
+            estate: this.get("estate"),
+            region: this.get("region"),
+            name: this.get("name"),
+            country: this.get("country"),
+            aoc: this.get("aoc"),
+            year: this.get("selectedYear"),
+            wineType: this.get("wineTypes")[this.get("selectedWineType")],
+            alcohol: this.get("alcoolValue"),
+            isBiodynamic: this.get("isBiodynamic"),
+            isBlindTasting: this.get("isBlindTasting"),
+            grapes: this.get("selectedGrapes"),
+            comments: this.get("comments"),
+            tastingDate: this.get("tastingDate"),
+            color: this.get("wineColor"),
+            finalRating: this.get("finalRating"),
+            aromas: this.get("selectedAromas"),
+            defects: this.get("selectedAromaDefects"),
+            flavorDefects: this.get("selectedFlavorDefects"),
+            flavors: this.get("selectedFlavors"),
+            attacks: this.get("selectedAttacks"),
+            limpidities: this.get("selectedLimpidities"),
+            shines: this.get("selectedShines"),
+            tears: this.get("selectedTears"),
+            hasBubbles: this.get("hasBubbles"),
+            hasDeposit: this.get("hasDeposit"),
+            noseIntensities: this.get("selectedNoseIntensities"),
+            length: this.get("selectedLength"),
+            containsPicture: this.get("picture") ? true : false,
+            winePairing: this.get("winePairing"),
+            winePotentials: this.get("selectedWinePotentials"),
+            tasteIntensities: this.get("selectedTasteIntensities"),
+            tannins: this.get("selectedTannins"),
+            acidities: this.get("selectedAcidities"),
+            noseDevelopments: this.get("selectedNoseDevelopments")
+        };
+
+        if (this.get("isEdit")) {
+            return _.assignIn({}, this.get("editWineTasting"), wineTasting);
+        } else {
+            return wineTasting;
+        }
+    }
+
+    private hashCode(str) {
+        var hash = 0, i, chr, len;
+        if (str.length === 0) return hash;
+        for (i = 0, len = str.length; i < len; i++) {
+            chr = str.charCodeAt(i);
+            hash = ((hash << 5) - hash) + chr;
+            hash |= 0; // Convert to 32bit integer
+        }
+        return hash;
+    };
 }
