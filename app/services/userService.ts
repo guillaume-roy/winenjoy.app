@@ -78,7 +78,7 @@ export class UserService {
             email: email,
             password: password
         }).then((res: any) => {
-            return Promise.all([this.createUserProfile(email, res.uid), this.createUserStats(res.uid)]);
+            return Promise.all([this.createUserProfile(email, res.key), this.createUserStats(res.key)]);
         }).catch(createUserError => {
             throw {
                 error: createUserError,
