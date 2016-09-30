@@ -6,10 +6,16 @@ import fs = require("file-system");
 import _ = require("lodash");
 import {CriteriaItem} from "../entities/criteriaItem";
 
+export enum EditTastingMode {
+    Normal,
+    Full
+}
+
 export class EditTastingViewModel extends Observable {
     private _wineCriteriasService: WineCriteriasService;
     private _rawAlcoolValue: number;
     private _selectedYearIndex: number;
+    private _editTastingMode: EditTastingMode;
 
     get selectedYearIndex() {
         return this._selectedYearIndex;
@@ -31,8 +37,9 @@ export class EditTastingViewModel extends Observable {
         return this._rawAlcoolValue;
     }
 
-    constructor() {
+    constructor(editTastingMode: EditTastingMode) {
         super();
+        this._editTastingMode = editTastingMode;
         this._wineCriteriasService = new WineCriteriasService();
     }
 
@@ -62,11 +69,11 @@ export class EditTastingViewModel extends Observable {
                 this.set("containsPicture", false);
                 this.set("locations", []);
                 this.set("locationLabels", []);
-                this.set("isBiodynamic", false); 
-                this.set("isBlindTasting", false); 
-                this.set("hasBubbles", false); 
-                this.set("hasDeposit", false); 
-                
+                this.set("isBiodynamic", false);
+                this.set("isBlindTasting", false);
+                this.set("hasBubbles", false);
+                this.set("hasDeposit", false);
+
                 this.loadCriterias()
                     .then(() => resolve(true))
                     .catch(e => reject(e));
@@ -171,26 +178,31 @@ export class EditTastingViewModel extends Observable {
     }
 
     loadCriterias() {
-        return Promise.all([
+        var promises = [
             this._wineCriteriasService.getLocations()
                 .then(d => {
                     this.set("locations", d);
                     this.set("locationLabels", d.map(x => x.label));
                 }),
             this.loadCriteria("years"),
-            this.loadCriteria("limpidities"),
-            this.loadCriteria("shines"),
-            this.loadCriteria("tears"),
             this.loadCriteria("intensities", "noseIntensities"),
-            this.loadCriteria("developments", "noseDevelopments"),
-            this.loadCriteria("attacks"),
-            this.loadCriteria("acidities"),
-            this.loadCriteria("tannins"),
             this.loadCriteria("intensities", "tasteIntensities"),
-            this.loadCriteria("length"),
             this.loadCriteria("developments", "winePotentials"),
             this.loadCriteria("wineTypes")
-        ]);
+        ];
+
+        if (this._editTastingMode === EditTastingMode.Full) {
+            promises.push(this.loadCriteria("limpidities"));
+            promises.push(this.loadCriteria("shines"));
+            promises.push(this.loadCriteria("tears"));
+            promises.push(this.loadCriteria("developments", "noseDevelopments"));
+            promises.push(this.loadCriteria("attacks"));
+            promises.push(this.loadCriteria("acidities"));
+            promises.push(this.loadCriteria("tannins"));
+            promises.push(this.loadCriteria("length"));
+        }
+
+        return Promise.all(promises);
     }
 
     getModelHashCode(locationLabel: string) {

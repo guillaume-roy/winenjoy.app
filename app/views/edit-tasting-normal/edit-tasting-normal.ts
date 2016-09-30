@@ -2,21 +2,21 @@
 import {Page} from "ui/page";
 import dialogs = require("ui/dialogs");
 import camera = require("camera");
-import {EditTastingViewModel} from "../../view-models/edit-tasting-view-model";
+import editTastingViewModelModule = require("../../view-models/edit-tasting-view-model");
 import {Views} from "../../utils/views";
 import frameModule = require("ui/frame");
 import application = require("application");
 
 let page: Page;
 let locationAutoComplete;
-let viewModel: EditTastingViewModel;
+let viewModel: editTastingViewModelModule.EditTastingViewModel;
 let busyModal: Page;
 let isBusyIndicator = false;
 
 export function navigatedTo(args: EventData) {
     page = <Page>args.object;
     locationAutoComplete = page.getViewById("locationAutoComplete");
-    viewModel = new EditTastingViewModel();
+    viewModel = new editTastingViewModelModule.EditTastingViewModel(editTastingViewModelModule.EditTastingMode.Normal);
 
     page.bindingContext = viewModel;
 
@@ -258,44 +258,6 @@ export function setTastingDate() {
 export function selectFinalRating(args) {
     let finalRating = parseInt(args.object.className.match(/final-rating-(\d)/)[1], 10);
     viewModel.set("finalRating", finalRating);
-}
-
-export function deleteTasting() {
-    if (isBusyIndicator)
-        return;
-
-    dialogs.confirm({
-        cancelButtonText: "Annuler",
-        message: "Etes-vous sur de vouloir supprimer cette dégustation ?",
-        okButtonText: "OK",
-        title: "Suppression"
-    }).then(confirm => {
-        if (confirm) {
-            isBusy();
-            setTimeout(() => {
-                viewModel.deleteTasting()
-                    .then(() => {
-                        isBusy(true);
-                        frameModule.topmost()
-                            .navigate({
-                                animated: false,
-                                backstackVisible: false,
-                                moduleName: Views.main
-                            });
-                    });
-            }, 0);
-        }
-    }).catch(error => {
-        isBusy(true);
-        console.log("deleteTasting ERROR");
-        console.log(error.message);
-        console.log(error.error);
-        dialogs.alert({
-            message: "Erreur lors de la suppression de la dégustation.",
-            okButtonText: "OK",
-            title: "Erreur"
-        });
-    });;
 }
 
 export function goBack(args: any) {

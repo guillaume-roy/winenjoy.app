@@ -58,7 +58,7 @@ export function onCreateNewTasting(args: EventData) {
             .navigate({
                 animated: false,
                 backstackVisible: false,
-                moduleName: Views.editTasting
+                moduleName: Views.editTastingNormal
             });
     }, 0);
 }
@@ -68,7 +68,7 @@ export function onCreateFirstTasting() {
         frameModule.topmost().navigate({
             animated: false,
             backstackVisible: false,
-            moduleName: Views.editTasting
+            moduleName: Views.editTastingNormal
         });
     }, 0);
 }
@@ -79,7 +79,7 @@ export function onViewTasting(args: listViewModule.ItemEventData) {
             animated: false,
             backstackVisible: true,
             context: viewModel.get("tastings")[args.index],
-            moduleName: Views.editTasting
+            moduleName: Views.editTastingFull
         });
     }, 0);
 }

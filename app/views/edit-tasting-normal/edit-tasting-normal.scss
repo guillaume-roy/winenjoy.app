@@ -1,0 +1,24 @@
+﻿@import "../../styles/_common";
+@import "../../styles/_values-selector";
+@import "../../styles/_form";
+@import "../../styles/_final-rating";
+
+.gradient-color-scroll-view {
+    background-color: white;
+    margin: 6;
+    padding: 6;
+}
+
+TabView {
+    color: white;
+}
+
+TabView ScrollView {
+    color: $primary-color;
+}
+
+DropDown {
+    text-align: center;
+    padding: 6;
+    font-size: 18;
+}

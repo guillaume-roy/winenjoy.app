@@ -1,0 +1,356 @@
+﻿<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:vs="components/values-selector"
+      xmlns:gcp="components/gradient-color-picker"
+      xmlns:dd="nativescript-drop-down"
+      xmlns:ac="nativescript-autocomplete"
+      navigatedTo="navigatedTo"
+      unloaded="unloaded">
+  <Page.actionBar>
+    <ActionBar title="Nouvelle dégustation">
+      <NavigationButton icon="res://ic_arrow_back_white_24dp"
+                        tap="goBack"/>
+      <ActionBar.actionItems>
+        <ActionItem ios.position="right"
+                    icon="res://ic_add_a_photo_white_24dp"
+                    tap="managePicture"
+                    visibility="{{ containsPicture ? 'collapse' : 'visible' }}"/>
+        <ActionItem ios.position="right"
+                    icon="res://ic_photo_white_24dp"
+                    tap="managePicture"
+                    visibility="{{ containsPicture ? 'visible' : 'collapse' }}"/>
+        <ActionItem ios.position="right"
+                    icon="res://ic_check_white_24dp"
+                    tap="saveTasting"/>
+      </ActionBar.actionItems>
+    </ActionBar>
+  </Page.actionBar>
+  <TabView>
+    <TabView.items>
+      <TabViewItem title="Aspect">
+        <TabViewItem.view>
+          <ScrollView>
+            <GridLayout columns="auto, *"
+                        rows="auto,auto,auto,auto">
+              <SegmentedBar colSpan="2"
+                            selectedIndex="{{ selectedWineType }}">
+                <SegmentedBar.items>
+                  <SegmentedBarItem title="Vin Blanc" />
+                  <SegmentedBarItem title="Vin Rosé" />
+                  <SegmentedBarItem title="Vin Rouge" />
+                </SegmentedBar.items>
+              </SegmentedBar>
+              <Label text="&#xE40A;"
+                     class="material-icon form-icon"
+                     row="1" />
+              <Label text="Couleur"
+                     class="form-label"
+                     row="1"
+                     col="1" />
+              <ScrollView class="gradient-color-scroll-view"
+                          orientation="horizontal"
+                          row="2"
+                          col="1">
+                <StackLayout>
+                  <gcp:GradientColorPicker startingColor="#FDF3C2"
+                                           endingColor="#F0C636"
+                                           colorsCount="5"
+                                           visibility="{{ selectedWineType === 0 ? 'visible' : 'collapse' }}"
+                                           selectedColor="{{ wineColor }}"/>
+                  <gcp:GradientColorPicker startingColor="#F7C7B1"
+                                           endingColor="#BF3E2B"
+                                           colorsCount="5"
+                                           visibility="{{ selectedWineType === 1 ? 'visible' : 'collapse' }}"
+                                           selectedColor="{{ wineColor }}"/>
+                  <gcp:GradientColorPicker startingColor="#C23311"
+                                           endingColor="#3B022D"
+                                           colorsCount="5"
+                                           visibility="{{ selectedWineType === 2 ? 'visible' : 'collapse' }}"
+                                           selectedColor="{{ wineColor }}"/>
+                </StackLayout>
+              </ScrollView>
+              <Label text="&#xE6DD;"
+                     class="material-icon form-icon"
+                     row="3" />
+              <GridLayout columns="*, 100"
+                          class="form-single-line"
+                          row="3"
+                          col="1">
+                <Label text="Présence de bulles"
+                       class="form-label" />
+                <Switch col="1"
+                        checked="{{ hasBubbles }}"/>
+              </GridLayout>
+            </GridLayout>
+          </ScrollView>
+        </TabViewItem.view>
+      </TabViewItem>
+      <TabViewItem title="Arômes">
+        <TabViewItem.view>
+          <ScrollView>
+            <GridLayout id="noseStepContainer"
+                        columns="auto, *"
+                        rows="auto,auto,auto,auto,auto,auto">
+              <Label text="&#xE1D8;"
+                     class="material-icon form-icon"/>
+              <Label text="Intensité"
+                     class="form-label"
+                     col="1"/>
+              <vs:ValuesSelector items="{{ noseIntensities }}"
+                                 selectedItems="{{ selectedNoseIntensities }}"
+                                 row="1"
+                                 col="1" />
+              <Label text="&#xE80E;"
+                     class="material-icon form-icon"
+                     row="2" />
+              <Button text="Ajouter des arômes"
+                      col="1"
+                      row="2"
+                      tap="selectAromas"
+                      class="form-button"/>
+              <vs:ValuesSelector items="{{ selectedAromas }}"
+                                 deleteOnClick="true"
+                                 col="1"
+                                 row="3" />
+              <Label text="&#xE002;"
+                     class="material-icon form-icon"
+                     row="4" />
+              <Button text="Ajouter des défauts d'arôme"
+                      col="1"
+                      row="4"
+                      tap="selectAromaDefects"
+                      class="form-button" />
+              <vs:ValuesSelector items="{{ selectedAromaDefects }}"
+                                 deleteOnClick="true"
+                                 col="1"
+                                 row="5" />
+            </GridLayout>
+          </ScrollView>
+        </TabViewItem.view>
+      </TabViewItem>
+      <TabViewItem title="Saveurs">
+        <TabViewItem.view>
+          <ScrollView>
+            <GridLayout columns="auto, *"
+                        rows="auto,auto,auto,auto,auto,auto">
+              <Label text="&#xE1D8;"
+                     class="material-icon form-icon" />
+              <Label text="Intensité"
+                     class="form-label"
+                     col="1" />
+              <vs:ValuesSelector items="{{ tasteIntensities }}"
+                                 selectedItems="{{ selectedTasteIntensities }}"
+                                 col="1"
+                                 row="1" />
+              <Label text="&#xE80E;"
+                     class="material-icon form-icon"
+                     row="2"/>
+              <Button text="Ajouter des saveurs"
+                      col="1"
+                      row="2"
+                      tap="selectFlavors"
+                      class="form-button"/>
+              <vs:ValuesSelector items="{{ selectedFlavors }}"
+                                 deleteOnClick="true"
+                                 col="1"
+                                 row="3" />
+              <Label text="&#xE002;"
+                     class="material-icon form-icon"
+                     row="4" />
+              <Button text="Ajouter des défauts de saveur"
+                      col="1"
+                      row="4"
+                      tap="selectFlavorDefects"
+                      class="form-button" />
+              <vs:ValuesSelector items="{{ selectedFlavorDefects }}"
+                                 deleteOnClick="true"
+                                 col="1"
+                                 row="5" />
+            </GridLayout>
+          </ScrollView>
+        </TabViewItem.view>
+      </TabViewItem>
+      <TabViewItem title="Informations">
+        <TabViewItem.view>
+          <ScrollView>
+            <GridLayout columns="auto, *"
+                        rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto">
+              <Label text="&#xE8F5;"
+                     class="material-icon form-icon" />
+              <GridLayout columns="*, 100"
+                          class="form-single-line"
+                          col="1">
+                <Label text="Dégustation à l'aveugle"
+                       class="form-label" />
+                <Switch col="1"
+                        checked="{{ isBlindTasting }}"/>
+              </GridLayout>
+              <Label text="&#xE80B;"
+                     class="material-icon form-icon"
+                     row="1"
+                     visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}"/>
+              <ac:AutoComplete id="locationAutoComplete"
+                               row="1"
+                               col="1"
+                               items="{{ locationLabels }}"
+                               visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}"/>
+              <Label text="&#xE7F1;"
+                     class="material-icon form-icon"
+                     row="2"
+                     visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}"/>
+              <TextField row="2"
+                         col="1"
+                         class="form-single-line"
+                         hint="Domaine"
+                         text="{{ estate }}"
+                         visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}"/>
+              <Label text="&#xE435;"
+                     class="material-icon form-icon"
+                     row="3"
+                     visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}"/>
+              <TextField row="3"
+                         col="1"
+                         class="form-single-line"
+                         hint="Nom"
+                         text="{{ name }}"
+                         visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}"/>
+              <Label text="&#xE838;"
+                     class="material-icon form-icon"
+                     row="4"
+                     visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}"/>
+              <GridLayout columns="*, auto"
+                          col="1"
+                          row="4"
+                          class="form-single-line"
+                          visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}">
+                <Label text="Année"
+                       class="form-label"/>
+                <dd:DropDown col="1"
+                             items="{{ years }}"
+                             selectedIndex="{{ selectedYearIndex }}"
+                             hint="Sélectionner"/>
+              </GridLayout>
+              <Label text="&#xE152;"
+                     class="material-icon form-icon"
+                     row="5"
+                     visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}"/>
+              <StackLayout col="1"
+                           row="5"
+                           orientation="horizontal"
+                           visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}"
+                           class="form-label">
+                <Label text="Alcool"/>
+                <Label text="{{ alcoolValue, alcoolValue + ' %' }}"
+                       style="margin-left: 6;width: 240"
+                       visibility="{{ alcoolValue ? 'visible' : 'collapse' }}"/>
+              </StackLayout>
+              <Slider minValue="30"
+                      maxValue="180"
+                      value="{{ rawAlcoolValue }}"
+                      row="6"
+                      col="1"
+                      visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}"/>
+              <Label text="&#xE3A9;"
+                     class="material-icon form-icon"
+                     row="7"
+                     visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}"/>
+              <GridLayout columns="*, 100"
+                          col="1"
+                          row="7"
+                          class="form-single-line"
+                          visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}">
+                <Label text="Vin Biodynamique"
+                       class="form-label" />
+                <Switch col="1"
+                        checked="{{ isBiodynamic }}"/>
+              </GridLayout>
+              <Label text="&#xE886;"
+                     class="material-icon form-icon"
+                     row="8"
+                     visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}"/>
+              <Button text="Ajouter des cépages"
+                      col="1"
+                      row="8"
+                      tap="selectGrapes"
+                      class="form-button"
+                      visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}"/>
+              <vs:ValuesSelector items="{{ selectedGrapes }}"
+                                 deleteOnClick="true"
+                                 col="1"
+                                 row="9"
+                                 visibility="{{ !isBlindTasting ? 'visible' : 'collapse' }}"/>
+            </GridLayout>
+          </ScrollView>
+        </TabViewItem.view>
+      </TabViewItem>
+      <TabViewItem title="Conclusion">
+        <TabViewItem.view>
+          <ScrollView>
+            <GridLayout columns="auto, *"
+                        rows="auto,auto,auto,auto,auto,auto">
+              <StackLayout colSpan="2"
+                           orientation="horizontal"
+                           class="final-rating">
+                <Label text="sentiment_very_satisfied"
+                       class="{{ finalRating == 4 ? 'material-icon final-rating-4 selected': 'material-icon final-rating-4' }}"
+                       tap="selectFinalRating"/>
+                <Label text="sentiment_satisfied"
+                       class="{{ finalRating == 3 ? 'material-icon final-rating-3 selected': 'material-icon final-rating-3' }}"
+                       tap="selectFinalRating"/>
+                <Label text="sentiment_neutral"
+                       class="{{ finalRating == 2 ? 'material-icon final-rating-2 selected': 'material-icon final-rating-2' }}"
+                       tap="selectFinalRating"/>
+                <Label text="sentiment_dissatisfied"
+                       class="{{ finalRating == 1 ? 'material-icon final-rating-1 selected': 'material-icon final-rating-1' }}"
+                       tap="selectFinalRating"/>
+                <Label text="sentiment_very_dissatisfied"
+                       class="{{ finalRating == 0 ? 'material-icon final-rating-0 selected': 'material-icon final-rating-0' }}"
+                       tap="selectFinalRating"/>
+              </StackLayout>
+              <Label text="&#xE878;"
+                     class="material-icon form-icon"
+                     row="1"/>
+              <GridLayout col="1"
+                          row="1"
+                          columns="*,auto">
+                <Label text="Dégusté le"
+                       class="form-label"/>
+                <Label text="{{ tastingDate | displayDateConverter }}"
+                       tap="setTastingDate"
+                       class="form-label"
+                       col="1"
+                       style="horizontal-align: right;margin-right: 6"/>
+              </GridLayout>
+              <Label text="&#xE540;"
+                     class="material-icon form-icon"
+                     row="2"/>
+              <Label text="Potentiel"
+                     class="form-label"
+                     col="1"
+                     row="2"/>
+              <vs:ValuesSelector items="{{ winePotentials }}"
+                                 selectedItems="{{ selectedWinePotentials }}"
+                                 col="1"
+                                 row="3" />
+              <Label text="&#xE56C;"
+                     class="material-icon form-icon"
+                     row="4" />
+              <TextView row="4"
+                        col="1"
+                        class="form-single-line"
+                        hint="Accords Mets &amp; Vins"
+                        text="{{ winePairing }}"/>
+              <Label text="&#xE0B9;"
+                     class="material-icon form-icon"
+                     row="5" />
+              <TextView row="5"
+                        col="1"
+                        class="form-single-line"
+                        hint="Commentaires"
+                        text="{{ comments }}"/>
+            </GridLayout>
+          </ScrollView>
+        </TabViewItem.view>
+      </TabViewItem>
+    </TabView.items>
+  </TabView>
+</Page>
