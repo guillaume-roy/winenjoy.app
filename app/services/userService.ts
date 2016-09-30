@@ -186,6 +186,10 @@ export class UserService {
                 userStats.tastingsByBubble,
                 wineTasting.hasBubbles,
                 wineTasting.id);
+            userStats.tastingsByDeposit = this.popCriteriaStat(
+                userStats.tastingsByDeposit,
+                wineTasting.hasDeposit,
+                wineTasting.id);
             userStats.tastingsByTastingYear = this.popCriteriaStat(
                 userStats.tastingsByTastingYear,
                 new Date(wineTasting.tastingDate).getFullYear(),
@@ -295,10 +299,15 @@ export class UserService {
                 userStats.tastingsByBubble,
                 wineTasting.hasBubbles,
                 wineTasting.id);
+            userStats.tastingsByDeposit = this.pushCriteriaStat(
+                userStats.tastingsByDeposit,
+                wineTasting.hasDeposit,
+                wineTasting.id);
             userStats.tastingsByTastingYear = this.pushCriteriaStat(
                 userStats.tastingsByTastingYear,
                 new Date(wineTasting.tastingDate).getFullYear(),
                 wineTasting.id);
+
             if (!_.isEmpty(wineTasting.grapes)) {
                 for (let i = 0; i < wineTasting.grapes.length; i++) {
                     userStats.tastingsByGrape = this.pushCriteriaStat(
@@ -420,6 +429,7 @@ export class UserService {
             tastingsByAromaDefects: {},
             tastingsByAromas: {},
             tastingsByBubbles: {},
+            tastingsByDeposit: {},
             tastingsByCountry: {},
             tastingsByName: {},
             tastingsByEstate: {},

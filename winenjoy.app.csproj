@@ -30,6 +30,7 @@
       <DependentUpon>app.ts</DependentUpon>
     </Content>
     <Content Include="app\App_Resources\Android\AndroidManifest.xml" />
+    <Content Include="app\App_Resources\Android\drawable-hdpi\background.png" />
     <Content Include="app\App_Resources\Android\drawable-hdpi\icon.png" />
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_add_a_photo_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_add_white_24dp.png" />
@@ -37,7 +38,8 @@
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_check_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_delete_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_photo_white_24dp.png" />
-    <Content Include="app\App_Resources\Android\drawable-ldpi\icon.png" />
+    <Content Include="app\App_Resources\Android\drawable-hdpi\logo.png" />
+    <Content Include="app\App_Resources\Android\drawable-mdpi\background.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\icon.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_add_a_photo_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_add_white_24dp.png" />
@@ -45,6 +47,9 @@
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_check_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_delete_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_photo_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-mdpi\logo.png" />
+    <Content Include="app\App_Resources\Android\drawable-nodpi\splash_screen.xml" />
+    <Content Include="app\App_Resources\Android\drawable-xhdpi\background.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\icon.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_add_a_photo_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_add_white_24dp.png" />
@@ -52,6 +57,8 @@
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_check_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_delete_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_photo_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xhdpi\logo.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxhdpi\background.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\icon.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_add_a_photo_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_add_white_24dp.png" />
@@ -59,6 +66,8 @@
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_check_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_delete_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_photo_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxhdpi\logo.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\background.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\icon.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_add_a_photo_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_add_white_24dp.png" />
@@ -66,6 +75,7 @@
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_check_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_delete_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_photo_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\logo.png" />
     <Content Include="app\App_Resources\Android\values-v21\colors.xml" />
     <Content Include="app\App_Resources\Android\values-v21\strings.xml" />
     <Content Include="app\App_Resources\Android\values-v21\styles.xml">
@@ -389,6 +399,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\App_Resources\iOS\GoogleService-Info.plist" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\fonts\BalooBhai-Regular.ttf" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>

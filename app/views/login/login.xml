@@ -4,7 +4,7 @@
   <StackLayout class="page-container">
     <StackLayout class="logo-container">
         <Image src="res://icon" />
-        <Label text="Winenjoy" class="logo-title" />
+        <Label text="Winenjoy" class="logo-title baloo-bhai-font" />
     </StackLayout>
     <StackLayout class="form-container">
         <TextField id="email" hint="Email" keyboardType="email" text="{{ email }}" isEnabled="{{ !isBusy }}" />

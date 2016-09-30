@@ -62,6 +62,10 @@ export class EditTastingViewModel extends Observable {
                 this.set("containsPicture", false);
                 this.set("locations", []);
                 this.set("locationLabels", []);
+                this.set("isBiodynamic", false); 
+                this.set("isBlindTasting", false); 
+                this.set("hasBubbles", false); 
+                this.set("hasDeposit", false); 
                 
                 this.loadCriterias()
                     .then(() => resolve(true))

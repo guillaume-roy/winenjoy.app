@@ -24,7 +24,8 @@
                     class="list-item">
           <StackLayout backgroundColor="{{ color }}"
                        class="list-item-icon" />
-          <StackLayout col="1">
+          <StackLayout col="1"
+                       visibility="{{ isBlindTasting ? 'collapse' : 'visible' }}">
             <Label text="{{ name }}"
                    visibility="{{ name ? 'visible' : 'collapse' }}"
                    class="list-item-title" />
@@ -44,6 +45,13 @@
             <Label text="{{ 'AOC ' + aoc.label }}"
                    visibility="{{ aoc ? 'visible' : 'collapse' }}"
                    class="list-item-secondary" />
+          </StackLayout>
+          <StackLayout visibility="{{ isBlindTasting ? 'visible' : 'collapse' }}" orientation="horizontal" style="vertical-align: center">
+            <Label text="&#xE8F5;"
+                   class="material-icon list-item-title"
+                   style="margin: 4"/>
+            <Label text="Dégustation à l'aveugle"
+                   class="list-item-title" />
           </StackLayout>
           <GridLayout col="2"
                       rows="*,*,*">
