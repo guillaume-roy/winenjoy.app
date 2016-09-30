@@ -3,6 +3,7 @@ export var Views = {
     login: "views/login/login",
     listPicker: "views/list-picker/list-picker",
     groupingListPicker: "views/grouping-list-picker/grouping-list-picker",
+    editTastingLight: "views/edit-tasting-light/edit-tasting-light",
     editTastingNormal: "views/edit-tasting-normal/edit-tasting-normal",
     editTastingFull: "views/edit-tasting-full/edit-tasting-full",
     importExportData: "views/import-export-data/import-export-data",

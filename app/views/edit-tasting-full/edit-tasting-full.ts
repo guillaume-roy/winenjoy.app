@@ -6,6 +6,7 @@ import editTastingViewModelModule = require("../../view-models/edit-tasting-view
 import {Views} from "../../utils/views";
 import frameModule = require("ui/frame");
 import application = require("application");
+import {WineTastingMode} from "../../entities/wineTastingMode";
 
 let page: Page;
 let locationAutoComplete;
@@ -16,7 +17,7 @@ let isBusyIndicator = false;
 export function navigatedTo(args: EventData) {
     page = <Page>args.object;
     locationAutoComplete = page.getViewById("locationAutoComplete");
-    viewModel = new editTastingViewModelModule.EditTastingViewModel(editTastingViewModelModule.EditTastingMode.Full);
+    viewModel = new editTastingViewModelModule.EditTastingViewModel(WineTastingMode.Full);
 
     page.bindingContext = viewModel;
 

@@ -5,17 +5,13 @@ import {TastingsService} from "../services/tastingsService";
 import fs = require("file-system");
 import _ = require("lodash");
 import {CriteriaItem} from "../entities/criteriaItem";
-
-export enum EditTastingMode {
-    Normal,
-    Full
-}
+import {WineTastingMode} from "../entities/wineTastingMode";
 
 export class EditTastingViewModel extends Observable {
     private _wineCriteriasService: WineCriteriasService;
     private _rawAlcoolValue: number;
     private _selectedYearIndex: number;
-    private _editTastingMode: EditTastingMode;
+    private _wineTastingMode: WineTastingMode;
 
     get selectedYearIndex() {
         return this._selectedYearIndex;
@@ -37,9 +33,9 @@ export class EditTastingViewModel extends Observable {
         return this._rawAlcoolValue;
     }
 
-    constructor(editTastingMode: EditTastingMode) {
+    constructor(wineTastingMode: WineTastingMode) {
         super();
-        this._editTastingMode = editTastingMode;
+        this._wineTastingMode = wineTastingMode;
         this._wineCriteriasService = new WineCriteriasService();
     }
 
@@ -185,21 +181,26 @@ export class EditTastingViewModel extends Observable {
                     this.set("locationLabels", d.map(x => x.label));
                 }),
             this.loadCriteria("years"),
-            this.loadCriteria("intensities", "noseIntensities"),
-            this.loadCriteria("intensities", "tasteIntensities"),
-            this.loadCriteria("developments", "winePotentials"),
             this.loadCriteria("wineTypes")
         ];
 
-        if (this._editTastingMode === EditTastingMode.Full) {
-            promises.push(this.loadCriteria("limpidities"));
-            promises.push(this.loadCriteria("shines"));
-            promises.push(this.loadCriteria("tears"));
-            promises.push(this.loadCriteria("developments", "noseDevelopments"));
-            promises.push(this.loadCriteria("attacks"));
-            promises.push(this.loadCriteria("acidities"));
-            promises.push(this.loadCriteria("tannins"));
-            promises.push(this.loadCriteria("length"));
+        if (this._wineTastingMode === WineTastingMode.Normal
+            || this._wineTastingMode === WineTastingMode.Full) {
+
+            promises.push(this.loadCriteria("intensities", "noseIntensities"));
+            promises.push(this.loadCriteria("intensities", "tasteIntensities"));
+            promises.push(this.loadCriteria("developments", "winePotentials"));
+
+            if (this._wineTastingMode === WineTastingMode.Full) {
+                promises.push(this.loadCriteria("limpidities"));
+                promises.push(this.loadCriteria("shines"));
+                promises.push(this.loadCriteria("tears"));
+                promises.push(this.loadCriteria("developments", "noseDevelopments"));
+                promises.push(this.loadCriteria("attacks"));
+                promises.push(this.loadCriteria("acidities"));
+                promises.push(this.loadCriteria("tannins"));
+                promises.push(this.loadCriteria("length"));
+            }
         }
 
         return Promise.all(promises);

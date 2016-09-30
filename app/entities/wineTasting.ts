@@ -1,4 +1,5 @@
 import {CriteriaItem} from "./criteriaItem";
+import {WineTastingMode} from "./wineTastingMode";
 
 export interface WineTasting {
     id?: string;
@@ -36,4 +37,5 @@ export interface WineTasting {
     containsPicture?: boolean;
     winePairing?: string;
     comments?: string;
+    wineTastingMode?: WineTastingMode;
 }

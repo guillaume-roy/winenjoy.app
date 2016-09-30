@@ -190,6 +190,9 @@
     <Content Include="app\entities\wineTasting.js">
       <DependentUpon>wineTasting.ts</DependentUpon>
     </Content>
+    <Content Include="app\entities\wineTastingMode.js">
+      <DependentUpon>wineTastingMode.ts</DependentUpon>
+    </Content>
     <Content Include="app\services\analyticsService.js">
       <DependentUpon>analyticsService.ts</DependentUpon>
     </Content>
@@ -246,6 +249,25 @@
     </Content>
     <Content Include="app\views\busy-indicator\busy-indicator.xml" />
     <Content Include="app\views\date-picker\date-picker.xml" />
+    <Content Include="app\views\edit-tasting-full\edit-tasting-full.css">
+      <DependentUpon>edit-tasting-full.scss</DependentUpon>
+    </Content>
+    <Content Include="app\views\edit-tasting-full\edit-tasting-full.js">
+      <DependentUpon>edit-tasting-full.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\edit-tasting-light\edit-tasting-light.css">
+      <DependentUpon>edit-tasting-light.scss</DependentUpon>
+    </Content>
+    <Content Include="app\views\edit-tasting-light\edit-tasting-light.js">
+      <DependentUpon>edit-tasting-light.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\edit-tasting-light\edit-tasting-light.xml" />
+    <Content Include="app\views\edit-tasting-normal\edit-tasting-normal.css">
+      <DependentUpon>edit-tasting-normal.scss</DependentUpon>
+    </Content>
+    <Content Include="app\views\edit-tasting-normal\edit-tasting-normal.js">
+      <DependentUpon>edit-tasting-normal.ts</DependentUpon>
+    </Content>
     <Content Include="app\views\edit-tasting-normal\edit-tasting-normal.xml" />
     <Content Include="app\views\edit-tasting-full\edit-tasting-full.xml">
       <SubType>Designer</SubType>
@@ -345,6 +367,7 @@
     <TypeScriptCompile Include="app\entities\user.ts" />
     <TypeScriptCompile Include="app\entities\userStats.ts" />
     <TypeScriptCompile Include="app\entities\wineTasting.ts" />
+    <TypeScriptCompile Include="app\entities\wineTastingMode.ts" />
     <TypeScriptCompile Include="app\references.d.ts" />
     <TypeScriptCompile Include="app\services\analyticsService.ts" />
     <TypeScriptCompile Include="app\services\exportDataService.ts" />
@@ -366,6 +389,7 @@
     <TypeScriptCompile Include="app\view-models\main-view-model.ts" />
     <TypeScriptCompile Include="app\views\busy-indicator\busy-indicator.ts" />
     <TypeScriptCompile Include="app\views\date-picker\date-picker.ts" />
+    <TypeScriptCompile Include="app\views\edit-tasting-light\edit-tasting-light.ts" />
     <TypeScriptCompile Include="app\views\edit-tasting-normal\edit-tasting-normal.ts" />
     <TypeScriptCompile Include="app\views\edit-tasting-full\edit-tasting-full.ts" />
     <TypeScriptCompile Include="app\views\grouping-list-picker\grouping-list-picker.ts" />
@@ -401,6 +425,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\views\edit-tasting-normal\edit-tasting-normal.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\views\edit-tasting-light\edit-tasting-light.scss" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>

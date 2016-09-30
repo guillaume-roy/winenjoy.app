@@ -17,7 +17,7 @@ let isBusyIndicator = false;
 export function navigatedTo(args: EventData) {
     page = <Page>args.object;
     locationAutoComplete = page.getViewById("locationAutoComplete");
-    viewModel = new editTastingViewModelModule.EditTastingViewModel(WineTastingMode.Normal);
+    viewModel = new editTastingViewModelModule.EditTastingViewModel(WineTastingMode.Light);
 
     page.bindingContext = viewModel;
 
@@ -166,25 +166,6 @@ export function selectAromas() {
         true);
 }
 
-export function selectAromaDefects() {
-    page.showModal(
-        Views.listPicker,
-        {
-            criterias: "aromaDefects",
-            groupingIcon: "whatshot",
-            multiple: true,
-            searchBarHintText: "Sélectionez des défauts d'arôme",
-            selectedItems: viewModel.get("selectedAromaDefects")
-        },
-        (data: any[]) => {
-            if (data && data.length > 0) {
-                viewModel.set("selectedAromaDefects", null);
-                viewModel.set("selectedAromaDefects", data);
-            }
-        },
-        true);
-}
-
 export function selectFlavors() {
     page.showModal(
         Views.listPicker,
@@ -199,44 +180,6 @@ export function selectFlavors() {
             if (data && data.length > 0) {
                 viewModel.set("selectedFlavors", null);
                 viewModel.set("selectedFlavors", data);
-            }
-        },
-        true);
-}
-
-export function selectFlavorDefects() {
-    page.showModal(
-        Views.listPicker,
-        {
-            criterias: "aromaDefects",
-            groupingIcon: "whatshot",
-            multiple: true,
-            searchBarHintText: "Sélectionez des défauts de saveur",
-            selectedItems: viewModel.get("selectedFlavorDefects")
-        },
-        (data: any[]) => {
-            if (data && data.length > 0) {
-                viewModel.set("selectedFlavorDefects", null);
-                viewModel.set("selectedFlavorDefects", data);
-            }
-        },
-        true);
-}
-
-export function selectGrapes() {
-    page.showModal(
-        Views.listPicker,
-        {
-            criterias: "grapes",
-            groupingIcon: "group_work",
-            multiple: true,
-            searchBarHintText: "Sélectionez des cépages",
-            selectedItems: viewModel.get("selectedGrapes")
-        },
-        (data: any[]) => {
-            if (data && data.length > 0) {
-                viewModel.set("selectedGrapes", null);
-                viewModel.set("selectedGrapes", data);
             }
         },
         true);

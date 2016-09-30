@@ -58,7 +58,7 @@ export function onCreateNewTasting(args: EventData) {
             .navigate({
                 animated: false,
                 backstackVisible: false,
-                moduleName: Views.editTastingNormal
+                moduleName: Views.editTastingLight
             });
     }, 0);
 }
