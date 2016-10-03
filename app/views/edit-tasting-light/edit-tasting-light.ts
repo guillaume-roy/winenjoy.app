@@ -80,7 +80,11 @@ export function managePicture() {
         };
 
         if (viewModel.get("isEdit")) {
-            args.tastingId = viewModel.get("editWineTasting").id;
+            if (viewModel.get("pictureEditMode") === "EDIT") {
+                args.img = viewModel.get("picture");
+            } else {
+                args.tastingId = viewModel.get("editWineTasting").id;
+            }
         } else {
             args.img = viewModel.get("picture");
         }

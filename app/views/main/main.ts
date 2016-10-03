@@ -52,13 +52,35 @@ export function navigatedTo(args: EventData) {
     }, 0);
 }
 
-export function onCreateNewTasting(args: EventData) {
+export function onCreateNewTastingNormal(args: EventData) {
+    setTimeout(() => {
+        frameModule.topmost()
+            .navigate({
+                animated: false,
+                backstackVisible: false,
+                moduleName: Views.editTastingNormal
+            });
+    }, 0);
+}
+
+export function onCreateNewTastingLight(args: EventData) {
     setTimeout(() => {
         frameModule.topmost()
             .navigate({
                 animated: false,
                 backstackVisible: false,
                 moduleName: Views.editTastingLight
+            });
+    }, 0);
+}
+
+export function onCreateNewTastingFull(args: EventData) {
+    setTimeout(() => {
+        frameModule.topmost()
+            .navigate({
+                animated: false,
+                backstackVisible: false,
+                moduleName: Views.editTastingFull
             });
     }, 0);
 }

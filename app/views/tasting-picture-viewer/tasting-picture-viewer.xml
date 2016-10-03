@@ -4,11 +4,18 @@
               columns="*,*">
     <Image src="{{ src }}"
            style="margin: 6"
-           colspan="2" />
+           colspan="2"
+           visibility="{{ isBusy ? 'collapse' : 'visible' }}"/>
+    <GridLayout colspan="2"
+                visibility="{{ isBusy ? 'visible' : 'collapse' }}">
+      <ActivityIndicator style="height: 81; width: 81"
+                         busy="true" />
+    </GridLayout>
     <Button text="SUPPRIMER"
             style="color: white;font-weight: bold;margin-right: 6;margin-left: 6;background-color:red;"
             row="1"
-            tap="deletePicture" />
+            tap="deletePicture"
+            visibility="{{ isBusy ? 'collapse' : 'visible' }}"/>
     <Button text="FERMER"
             style="font-weight: bold;margin-right: 6;margin-left: 6;"
             col="1"

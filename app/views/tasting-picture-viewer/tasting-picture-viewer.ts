@@ -10,7 +10,10 @@ export function onShownModally(args: pages.ShownModallyData) {
     closeCallback = args.closeCallback;
     let page = <pages.Page>args.object;
 
-    vm = new Observable();
+    vm = new Observable({
+        src: null,
+        isBusy: true
+    });
     page.bindingContext = vm;
 
     var tastingId = args.context.tastingId;
@@ -19,9 +22,11 @@ export function onShownModally(args: pages.ShownModallyData) {
         tastingService.getTastingPictureUrl(tastingId)
             .then(url => {
                 vm.set("src", url);
+                vm.set("isBusy", false);
             });
     } else {
         vm.set("src", args.context.img);
+        vm.set("isBusy", false);
     }
 }
 
@@ -37,6 +42,7 @@ export function deletePicture() {
         title: "Suppression"
     }).then(res => {
         if (res) {
+            vm.set("isBusy", true);
             closeCallback(true);
         }
     });

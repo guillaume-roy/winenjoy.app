@@ -23,7 +23,9 @@
         <GridLayout columns="auto, *, auto"
                     class="list-item">
           <StackLayout backgroundColor="{{ color }}"
-                       class="list-item-icon" />
+                       class="list-item-icon"
+                       visibility="{{ isBlindTasting ? 'collapse' : 'visible' }}"/>
+
           <StackLayout col="1"
                        visibility="{{ isBlindTasting ? 'collapse' : 'visible' }}">
             <Label text="{{ name }}"
@@ -46,18 +48,23 @@
                    visibility="{{ aoc ? 'visible' : 'collapse' }}"
                    class="list-item-secondary" />
           </StackLayout>
-          <StackLayout visibility="{{ isBlindTasting ? 'visible' : 'collapse' }}" orientation="horizontal" style="vertical-align: center">
+
+          <StackLayout visibility="{{ isBlindTasting ? 'visible' : 'collapse' }}"
+                       orientation="horizontal"
+                       style="vertical-align: center"
+                       colspan="2">
             <Label text="&#xE8F5;"
                    class="material-icon list-item-title"
                    style="margin: 4"/>
             <Label text="Dégustation à l'aveugle"
                    class="list-item-title" />
           </StackLayout>
+
           <GridLayout col="2"
                       rows="*,*,*">
             <Label text="{{ year }}"
                    class="list-item-secondary"
-                   visibility="{{ year ? 'visible' : 'collapse' }}"/>
+                   visibility="{{ year &amp;&amp; !isBlindTasting ? 'visible' : 'collapse' }}"/>
             <Label text="{{ finalRating | finalRatingToImageConverter }}"
                    class="{{ finalRating ? 'material-icon final-rating final-rating-' + finalRating : 'material-icon final-rating' }}"
                    row="1" />
@@ -70,11 +77,34 @@
       </ListView.itemTemplate>
     </ListView>
 
-    <FAB:fab tap="onCreateNewTasting"
+    <FAB:fab tap="onCreateNewTastingNormal"
              visibility="{{ tastings.length !== 0 &amp;&amp; !isBusy ? 'visible' : 'collapse' }}"
              icon="res://ic_add_white_24dp"
              rippleColor="#f1f1f1"
              class="fab-button" />
+
+    <Label text="Dégustation normale"
+           style="vertical-align:bottom;horizontal-align:right;margin-bottom:35;margin-right:80" />
+
+    <FAB:fab tap="onCreateNewTastingLight"
+             visibility="{{ tastings.length !== 0 &amp;&amp; !isBusy ? 'visible' : 'collapse' }}"
+             icon="res://ic_add_white_24dp"
+             rippleColor="#f1f1f1"
+             class="fab-button"
+             style="margin-bottom: 90;height:40;margin-right:24"/>
+
+    <Label text="Dégustation rapide"
+           style="vertical-align:bottom;horizontal-align:right;margin-bottom:105;margin-right:80" />
+
+    <FAB:fab tap="onCreateNewTastingFull"
+             visibility="{{ tastings.length !== 0 &amp;&amp; !isBusy ? 'visible' : 'collapse' }}"
+             icon="res://ic_add_white_24dp"
+             rippleColor="#f1f1f1"
+             class="fab-button"
+             style="margin-bottom: 160;height:40;margin-right:30"/>
+
+    <Label text="Dégustation complète"
+           style="vertical-align:bottom;horizontal-align:right;margin-bottom:175;margin-right:80" />
 
     <StackLayout visibility="{{ tastings.length === 0 &amp;&amp; !isBusy ? 'visible' : 'collapse'}}"
                  class="empty-container">
