@@ -8,16 +8,41 @@ import listViewModule = require("ui/list-view");
 import dialogs = require("ui/dialogs");
 import application = require("application");
 import {Config} from "../../utils/config";
+import {AnimationCurve} from "ui/enums";
+import {Animation} from "ui/animation";
 
 let viewModel: MainViewModel;
 let page: Page;
+
+let overlayPanel: View;
+let fabButtonFull: View;
+let fabLabelFull: View;
+let fabButtonLight: View;
+let fabLabelLight: View;
+let fabLabelNormal: View;
 
 export function navigatedTo(args: EventData) {
     page = <Page>args.object;
 
     viewModel = new MainViewModel();
     page.bindingContext = viewModel;
-    
+
+    overlayPanel = page.getViewById("overlay-panel");
+    fabButtonFull = page.getViewById("fab-button-full");
+    fabLabelFull = page.getViewById("fab-label-full");
+    fabButtonLight = page.getViewById("fab-button-light");
+    fabLabelLight = page.getViewById("fab-label-light");
+    fabLabelNormal = page.getViewById("fab-label-normal");
+
+    if (application.android) {
+        application.android.on(application.AndroidApplication.activityBackPressedEvent, (args: any) => {
+            args.cancel = true;
+
+            if (viewModel.get("menuIsOpen"))
+                closeMenu();
+        });
+    }
+
     setTimeout(() => {
         viewModel.init()
             .catch(error => {
@@ -52,15 +77,24 @@ export function navigatedTo(args: EventData) {
     }, 0);
 }
 
+export function loaded() {
+    closeMenu(true);
+}
+
 export function onCreateNewTastingNormal(args: EventData) {
-    setTimeout(() => {
-        frameModule.topmost()
-            .navigate({
-                animated: false,
-                backstackVisible: false,
-                moduleName: Views.editTastingNormal
-            });
-    }, 0);
+    if (!viewModel.get("menuIsOpen")) {
+        openMenu();
+    } else {
+        setTimeout(() => {
+            frameModule.topmost()
+                .navigate({
+                    animated: false,
+                    backstackVisible: false,
+                    moduleName: Views.editTastingNormal
+                });
+
+        }, 0);
+    }
 }
 
 export function onCreateNewTastingLight(args: EventData) {
@@ -117,5 +151,120 @@ export function refreshTastings() {
                     okButtonText: "OK"
                 });
             });
+    }, 0);
+}
+
+export function onCloseMenu() {
+    if (viewModel.get("menuIsOpen"))
+        closeMenu();
+}
+
+function openMenu() {
+    setTimeout(() => {
+        viewModel.set("menuIsOpen", true);
+        new Animation([
+            {
+                target: fabButtonFull,
+                translate: { x: 0, y: -145 },
+                opacity: 1,
+                duration: 80,
+                curve: AnimationCurve.easeOut,
+                delay: 0
+            },
+            {
+                target: fabLabelFull,
+                translate: { x: 0, y: -135 },
+                opacity: 1,
+                duration: 80,
+                curve: AnimationCurve.easeOut,
+                delay: 0
+            },
+            {
+                target: fabButtonLight,
+                translate: { x: 0, y: -80 },
+                opacity: 1,
+                duration: 80,
+                curve: AnimationCurve.easeOut,
+                delay: 0
+            },
+            {
+                target: fabLabelLight,
+                translate: { x: 0, y: -70 },
+                opacity: 1,
+                duration: 80,
+                curve: AnimationCurve.easeOut,
+                delay: 0
+            },
+            {
+                target: fabLabelNormal,
+                opacity: 1,
+                duration: 80,
+                curve: AnimationCurve.easeOut,
+                delay: 0
+            },
+            {
+                target: overlayPanel,
+                opacity: 0.8,
+                duration: 50,
+                curve: AnimationCurve.easeOut,
+                delay: 0
+            }
+        ]).play();
+    }, 0);
+}
+
+function closeMenu(force?: boolean) {
+    setTimeout(() => {
+        var duration = force ? 0 : 80;
+        var overlayDuration = force ? 0 : 50;
+        viewModel.set("menuIsOpen", false);
+        new Animation([
+            {
+                target: fabButtonFull,
+                translate: { x: 0, y: 0 },
+                opacity: 0,
+                duration: duration,
+                curve: AnimationCurve.easeOut,
+                delay: 0
+            },
+            {
+                target: fabLabelFull,
+                translate: { x: 0, y: 0 },
+                opacity: 0,
+                duration: duration,
+                curve: AnimationCurve.easeOut,
+                delay: 0
+            },
+            {
+                target: fabButtonLight,
+                translate: { x: 0, y: 0 },
+                opacity: 0,
+                duration: duration,
+                curve: AnimationCurve.easeOut,
+                delay: 0
+            },
+            {
+                target: fabLabelLight,
+                translate: { x: 0, y: 0 },
+                opacity: 0,
+                duration: duration,
+                curve: AnimationCurve.easeOut,
+                delay: 0
+            },
+            {
+                target: fabLabelNormal,
+                opacity: 0,
+                duration: duration,
+                curve: AnimationCurve.easeOut,
+                delay: 0
+            },
+            {
+                target: overlayPanel,
+                opacity: 0,
+                duration: overlayDuration,
+                curve: AnimationCurve.easeOut,
+                delay: 0
+            }
+        ]).play();
     }, 0);
 }

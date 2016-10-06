@@ -1,0 +1,35 @@
+﻿.empty-container {
+    vertical-align: center;
+    horizontal-align: center;
+    text-align: center;
+
+    .empty-message {
+        vertical-align: center;
+        horizontal-align: center;
+        text-align: center;
+        border-width: 1;
+        border-color: $accent-color;
+        border-radius: 250;
+        height: 250;
+        width: 250;
+        background-color: $accent-color;
+        color: $primary-color-text;
+
+        .winenjoy-icon {
+            font-size: 120;
+        }
+
+        .no-tasting-message {
+            margin-top: 20;
+            font-size: 18;
+        }
+    }
+
+    .first-tasting-button {
+        margin-top: 30;
+        background-color: $primary-color-dark;
+        color: $primary-color-text;
+        width: 100%;
+        height: 70;
+    }
+}

@@ -342,7 +342,6 @@
     <Content Include="app\fonts\winenjoy.ttf" />
     <Content Include="app\package.json" />
     <Content Include="app\styles\_common.scss" />
-    <Content Include="app\styles\_fab.scss" />
     <Content Include="app\styles\_final-rating.scss" />
     <Content Include="app\styles\_fonts.scss" />
     <Content Include="app\styles\_material-theme.scss" />
@@ -428,6 +427,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\views\edit-tasting-light\edit-tasting-light.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\views\main\_fab.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\views\main\_list.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\views\main\_empty.scss" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>

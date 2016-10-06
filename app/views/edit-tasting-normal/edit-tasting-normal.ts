@@ -26,7 +26,9 @@ export function navigatedTo(args: EventData) {
         locationAutoComplete.android.setHintTextColor(android.graphics.Color.parseColor("#727272"));
         locationAutoComplete.android.setTextSize(16);
     }
-    
+
+    attachBackButtonConfirmation();
+
     setTimeout(() => {
         isBusy();
     }, 0);
@@ -49,8 +51,6 @@ export function navigatedTo(args: EventData) {
                         locationAutoComplete.android.setText("Pays : " + country.label);
                     }
                 }
-
-                attachBackButtonConfirmation();
 
                 isBusy(true);
             })
@@ -266,22 +266,26 @@ export function selectFinalRating(args) {
 }
 
 export function goBack(args: any) {
-    args = args || {};
-    args.cancel = true;
+    if (viewModel.get("isEdit")) {
+        frameModule.goBack();
+    } else {
+        args = args || {};
+        args.cancel = true;
 
-    if (isBusyIndicator)
-        return;
+        if (isBusyIndicator)
+            return;
 
-    dialogs.confirm({
-        cancelButtonText: "Non",
-        message: "Etes-vous sûr de vouloir quitter cette dégustation ?",
-        okButtonText: "Oui",
-        title: "Annuler"
-    }).then(result => {
-        if (result) {
-            frameModule.goBack();
-        }
-    });
+        dialogs.confirm({
+            cancelButtonText: "Non",
+            message: "Etes-vous sûr de vouloir quitter cette dégustation ?",
+            okButtonText: "Oui",
+            title: "Annuler"
+        }).then(result => {
+            if (result) {
+                frameModule.goBack();
+            }
+        });
+    }
 }
 
 function isBusy(closeModal?: boolean) {
@@ -298,9 +302,6 @@ function isBusy(closeModal?: boolean) {
 }
 
 function attachBackButtonConfirmation() {
-    if (viewModel.get("isEdit"))
-        return;
-
     if (application.android) {
         application.android.on(application.AndroidApplication.activityBackPressedEvent, goBack);
     }

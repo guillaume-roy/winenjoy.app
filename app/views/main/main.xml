@@ -1,6 +1,7 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd"
       xmlns:FAB="nativescript-floatingactionbutton"
-      navigatedTo="navigatedTo">
+      navigatedTo="navigatedTo"
+      loaded="loaded">
   <Page.actionBar>
     <ActionBar title="Mes dégustations">
       <ActionBar.actionItems>
@@ -14,6 +15,19 @@
                  visibility="{{ isBusy ? 'visible' : 'collapse' }}">
       <ActivityIndicator busy="true" />
       <Label text="Chargement des dégustations ..." />
+    </StackLayout>
+
+    <StackLayout visibility="{{ tastings.length === 0 &amp;&amp; !isBusy ? 'visible' : 'collapse'}}"
+                 class="empty-container">
+      <StackLayout class="empty-message">
+        <Label class="winenjoy-icon"
+               text="&#xe900;" />
+        <Label text="Aucune dégustation"
+               class="no-tasting-message" />
+      </StackLayout>
+      <Button text="Créer une dégustation"
+              class="first-tasting-button"
+              tap="onCreateFirstTasting" />
     </StackLayout>
 
     <ListView items="{{ tastings }}"
@@ -76,47 +90,39 @@
         </GridLayout>
       </ListView.itemTemplate>
     </ListView>
-
-    <FAB:fab tap="onCreateNewTastingNormal"
-             visibility="{{ tastings.length !== 0 &amp;&amp; !isBusy ? 'visible' : 'collapse' }}"
-             icon="res://ic_add_white_24dp"
-             rippleColor="#f1f1f1"
-             class="fab-button" />
-
-    <Label text="Dégustation normale"
-           style="vertical-align:bottom;horizontal-align:right;margin-bottom:35;margin-right:80" />
-
-    <FAB:fab tap="onCreateNewTastingLight"
-             visibility="{{ tastings.length !== 0 &amp;&amp; !isBusy ? 'visible' : 'collapse' }}"
-             icon="res://ic_add_white_24dp"
-             rippleColor="#f1f1f1"
-             class="fab-button"
-             style="margin-bottom: 90;height:40;margin-right:24"/>
-
-    <Label text="Dégustation rapide"
-           style="vertical-align:bottom;horizontal-align:right;margin-bottom:105;margin-right:80" />
+    
+    <GridLayout id="overlay-panel" class="overlay-panel opacity-0" tap="onCloseMenu" visibility="{{ menuIsOpen ? 'visible' : 'collapse' }}" />
 
     <FAB:fab tap="onCreateNewTastingFull"
              visibility="{{ tastings.length !== 0 &amp;&amp; !isBusy ? 'visible' : 'collapse' }}"
              icon="res://ic_add_white_24dp"
              rippleColor="#f1f1f1"
-             class="fab-button"
-             style="margin-bottom: 160;height:40;margin-right:30"/>
+             class="fab-button fab-button-full"
+             id="fab-button-full"/>
 
     <Label text="Dégustation complète"
-           style="vertical-align:bottom;horizontal-align:right;margin-bottom:175;margin-right:80" />
+           class="fab-label fab-label-full opacity-0"
+           id="fab-label-full"/>
 
-    <StackLayout visibility="{{ tastings.length === 0 &amp;&amp; !isBusy ? 'visible' : 'collapse'}}"
-                 class="empty-container">
-      <StackLayout class="empty-message">
-        <Label class="winenjoy-icon"
-               text="&#xe900;" />
-        <Label text="Aucune dégustation"
-               class="no-tasting-message" />
-      </StackLayout>
-      <Button text="Créer une dégustation"
-              class="first-tasting-button"
-              tap="onCreateFirstTasting" />
-    </StackLayout>
+    <FAB:fab tap="onCreateNewTastingLight"
+             visibility="{{ tastings.length !== 0 &amp;&amp; !isBusy ? 'visible' : 'collapse' }}"
+             icon="res://ic_add_white_24dp"
+             rippleColor="#f1f1f1"
+             class="fab-button fab-button-light opacity-0"
+             id="fab-button-light"/>
+
+    <Label text="Dégustation rapide"
+           class="fab-label fab-label-light opacity-0"
+           id="fab-label-light"/>
+
+    <FAB:fab tap="onCreateNewTastingNormal"
+             visibility="{{ tastings.length !== 0 &amp;&amp; !isBusy ? 'visible' : 'collapse' }}"
+             icon="res://ic_add_white_24dp"
+             rippleColor="#f1f1f1"
+             class="fab-button fab-button-normal" />
+
+    <Label text="Dégustation normale"
+           class="fab-label fab-label-normal opacity-0"
+           id="fab-label-normal"/>
   </GridLayout>
 </Page>

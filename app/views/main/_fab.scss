@@ -1,0 +1,75 @@
+﻿/*
+    Buttons
+*/
+
+.fab-button {
+    background-color: $accent-color;
+    horizontal-align: right;
+    vertical-align: bottom;
+}
+
+.fab-button-normal {
+    height: 70;
+    margin-right: 15;
+    margin-bottom: 15;
+}
+
+.fab-button-light {
+    /*margin-bottom: 95;*/
+    margin-bottom: 15;
+    height: 40;
+    margin-right: 22;
+}
+
+.fab-button-full {
+    /*margin-bottom: 160;*/
+    margin-bottom: 15;
+    height: 40;
+    margin-right: 22;
+}
+
+/*
+    Labels
+*/
+
+.fab-label {
+    vertical-align: bottom;
+    horizontal-align: right;
+    font-weight: bold;
+    border-width: 1;
+    border-color: $secondary-text-color;
+    border-radius: 4;
+    padding: 6;
+    opacity: 1;
+    background-color: white;
+}
+
+.fab-label-normal {
+    margin-bottom: 30;
+    margin-right: 80;
+}
+
+.fab-label-light {
+    /*margin-bottom: 100;*/
+    margin-bottom: 30;
+    margin-right: 80;
+}
+
+.fab-label-full {
+    /*margin-bottom: 165;*/
+    margin-bottom: 30;
+    margin-right: 80;
+}
+
+/*
+    Misc
+*/
+
+.opacity-0 {
+    opacity: 0;
+}
+
+.overlay-panel {
+    background-color: white;
+    /*opacity: 0.8;*/
+}

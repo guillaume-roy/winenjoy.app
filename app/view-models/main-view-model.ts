@@ -18,6 +18,7 @@ export class MainViewModel extends Observable {
 
         this.set("tastings", []);
         this.set("isBusy", true);
+        this.set("menuIsOpen", false);
     }
 
     init() {
