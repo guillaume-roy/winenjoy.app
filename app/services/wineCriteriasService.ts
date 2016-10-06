@@ -16,7 +16,7 @@ export class WineCriteriasService {
         }
     }
 
-    getCriteriasFromFirebase(type: string): Promise<CriteriaItem[]> {
+    getCriteriasFromFirebase(type: string, order?: string): Promise<CriteriaItem[]> {
         return new Promise<CriteriaItem[]>((resolve, reject) => {
             try {
                 if (!_.isEmpty(this.wineCriterias[type])) {
@@ -32,7 +32,7 @@ export class WineCriteriasService {
                         {
                             orderBy: {
                                 type: firebase.QueryOrderByType.CHILD,
-                                value: "order"
+                                value: order ? order : "order"
                             },
                             singleEvent: true
                         })

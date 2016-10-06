@@ -40,6 +40,8 @@ export function navigatedTo(args: EventData) {
 
             if (viewModel.get("menuIsOpen"))
                 closeMenu();
+
+            return false;
         });
     }
 

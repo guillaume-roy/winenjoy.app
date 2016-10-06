@@ -91,14 +91,8 @@ export class ListPickerViewModel extends Observable {
             this._selectedItems = [];
         }
 
-        new WineCriteriasService().getCriteriasFromFirebase(args.criterias)
+        new WineCriteriasService().getCriteriasFromFirebase(args.criterias, "label")
             .then(data => {
-                if (!_.isEmpty(this.parentId)) {
-                    data = data.filter(d => {
-                        return d.parentId === this.parentId;
-                    });
-                }
-
                 this._itemsSource = data.map(a => {
                     return new Observable({
                         isSelected: _.some(this._selectedItems, a),
