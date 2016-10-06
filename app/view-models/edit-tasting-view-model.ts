@@ -138,37 +138,31 @@ export class EditTastingViewModel extends Observable {
     }
 
     saveTasting(locationLabel: string) {
-        return new Promise<boolean>((resolve, reject) => {
-            var wineTasting = this.getModel(locationLabel);
+        var wineTasting = this.getModel(locationLabel);
 
-            let wineTastingPicturePath = null;
-            if (this.get("picture")) {
-                wineTastingPicturePath = fs.path.join(fs.knownFolders.temp().path, Date.now() + ".png");
-                this.get("picture").saveToFile(wineTastingPicturePath, "png");
-            }
+        let wineTastingPicturePath = null;
+        if (this.get("picture")) {
+            wineTastingPicturePath = fs.path.join(fs.knownFolders.temp().path, Date.now() + ".png");
+            this.get("picture").saveToFile(wineTastingPicturePath, "png");
+        }
 
-            var service = new TastingsService();
-            if (this.get("isEdit")) {
-                var updatedWineTasting = _.assignIn({}, this.get("editWineTasting"), wineTasting);
-                service.updateTasting(updatedWineTasting, wineTastingPicturePath, this.get("pictureEditMode")).then(() => {
-                    if (!_.isEmpty(wineTastingPicturePath) && fs.File.exists(wineTastingPicturePath)) {
-                        fs.File.fromPath(wineTastingPicturePath).remove();
-                    }
-                    resolve(true);
-                }).catch(error => {
-                    reject(error);
-                });
-            } else {
-                service.saveTasting(wineTasting, wineTastingPicturePath).then(() => {
-                    if (!_.isEmpty(wineTastingPicturePath) && fs.File.exists(wineTastingPicturePath)) {
-                        fs.File.fromPath(wineTastingPicturePath).remove();
-                    }
-                    resolve(true);
-                }).catch(error => {
-                    reject(error);
-                });
-            }
-        });
+        var service = new TastingsService();
+        if (this.get("isEdit")) {
+            var updatedWineTasting = _.assignIn({}, this.get("editWineTasting"), wineTasting);
+            return service.updateTasting(updatedWineTasting, wineTastingPicturePath, this.get("pictureEditMode")).then(() => {
+                if (!_.isEmpty(wineTastingPicturePath) && fs.File.exists(wineTastingPicturePath)) {
+                    fs.File.fromPath(wineTastingPicturePath).remove();
+                }
+                return;
+            });
+        } else {
+            return service.saveTasting(wineTasting, wineTastingPicturePath).then(() => {
+                if (!_.isEmpty(wineTastingPicturePath) && fs.File.exists(wineTastingPicturePath)) {
+                    fs.File.fromPath(wineTastingPicturePath).remove();
+                }
+                return;
+            });
+        }
     }
 
     deleteTasting() {

@@ -26,48 +26,6 @@ export class TastingsService {
         }
     }
 
-    public newTasting() {
-        return <WineTasting>{
-            alcohol: null,
-            aoc: null,
-            aromas: [],
-            attacks: [],
-            balances: [],
-            hasBubbles: false,
-            hasDeposit: false,
-            color: null,
-            country: null,
-            cuvee: null,
-            defects: [],
-            endDate: null,
-            estate: null,
-            finalRating: 2,
-            flavorDefects: [],
-            flavors: [],
-            grapes: [],
-            id: null,
-            intensities: [],
-            isBiodynamic: false,
-            isBlindTasting: false,
-            lastModificationDate: null,
-            length: [],
-            limpidities: [],
-            meatsNotes: null,
-            picture: null,
-            region: null,
-            shines: [],
-            sightTabNotes: null,
-            smellTabNotes: null,
-            startDate: Date.now(),
-            synthesisTabNotes: null,
-            tasteTabNotes: null,
-            tears: [],
-            wineTabNotes: null,
-            wineType: null,
-            year: null
-        };
-    }
-
     public getTasting(wineTastingId: string) {
         return new Promise<WineTasting>((resolve, reject) => {
             this.getTastings()
@@ -99,75 +57,56 @@ export class TastingsService {
     }
 
     public saveTasting(wineTasting: WineTasting, wineTastingPicturePath: string) {
-        return new Promise<boolean>((resolve, reject) => {
-            this.saveTastingOnFirebase(wineTasting).then(newTasting => {
-                this.saveTastingPictureOnFirebase(newTasting.id, wineTastingPicturePath).then(() => {
-                    this._userService.increaseUserStats(newTasting).then(() => {
-                        this.saveTastingLocally(newTasting)
-                            .then(() => resolve(true))
-                            .catch(saveTastingLocallyError => reject(saveTastingLocallyError));
-                    }).catch(increaseUserStatsError => reject(increaseUserStatsError));
-                }).catch(saveTastingPictureOnFirebase => reject(saveTastingPictureOnFirebase));
-            }).catch(saveTastingOnFirebaseError => reject(saveTastingOnFirebaseError));
+        return this.saveTastingOnFirebase(wineTasting).then(newTasting => {
+            return this.saveTastingPictureOnFirebase(newTasting.id, wineTastingPicturePath).then(() => {
+                return this._userService.increaseUserStats(newTasting).then(() => {
+                    return this.saveTastingLocally(newTasting);
+                });
+            });
         });
     }
 
     public deleteTasting(wineTasting: WineTasting) {
-        return new Promise<boolean>((resolve, reject) => {
-            var endOfDelete = () => {
-                this.deleteTastingOnFirebase(wineTasting).then(() => {
-                    this._userService.decreaseUserStats(wineTasting).then(() => {
-                        this.deleteTastingLocally(wineTasting.id).then(() => resolve(true))
-                            .catch(deleteTastingLocallyError => reject(deleteTastingLocallyError));
-                    }).catch(decreaseUserStatsError => reject(decreaseUserStatsError));
-                }).catch(deleteTastingOnFirebaseError => reject(deleteTastingOnFirebaseError));
-            };
+        var endOfDelete = () => {
+            return this.deleteTastingOnFirebase(wineTasting).then(() => {
+                return this._userService.decreaseUserStats(wineTasting).then(() => {
+                    return this.deleteTastingLocally(wineTasting.id);
+                });
+            });
+        };
 
-            if (wineTasting.containsPicture) {
-                this.deleteTastingPictureOnFirebase(wineTasting.id)
-                    .then(() => endOfDelete())
-                    .catch(deleteTastingPictureOnFirebaseError => reject(deleteTastingPictureOnFirebaseError));
-            } else {
-                endOfDelete();
-            }
-        });
+        if (wineTasting.containsPicture) {
+            return this.deleteTastingPictureOnFirebase(wineTasting.id).then(() => { return endOfDelete(); });
+        } else {
+            return endOfDelete();
+        }
     }
 
     public updateTasting(wineTasting: WineTasting, wineTastingPicturePath?: string, pictureEditMode?: string) {
-        return new Promise<boolean>((resolve, reject) => {
-            this.updateTastingOnFirebase(wineTasting).then(() => {
-                this.getTasting(wineTasting.id).then(oldWineTasting => {
+        return this.updateTastingOnFirebase(wineTasting).then(() => {
+            return this.getTasting(wineTasting.id).then(oldWineTasting => {
+                var endOfUpdate = () => {
+                    return this._userService.decreaseUserStats(oldWineTasting).then(() => {
+                        return this._userService.increaseUserStats(wineTasting).then(() => {
+                            return this.updateTastingLocally(wineTasting);
+                        });
+                    });
+                };
 
-                    var endOfUpdate = () => {
-                        this._userService.decreaseUserStats(oldWineTasting).then(() => {
-                            this._userService.increaseUserStats(wineTasting).then(() => {
-                                this.updateTastingLocally(wineTasting).then(() => resolve(true))
-                                    .catch(updateTastingLocallyError => reject(updateTastingLocallyError));
-                            }).catch(increaseUserStatsError => reject(increaseUserStatsError));
-                        }).catch(decreaseUserStatsError => reject(decreaseUserStatsError));
-                    };
-
-                    switch (pictureEditMode) {
-                        case "EDIT":
-                            this.saveTastingPictureOnFirebase(wineTasting.id, wineTastingPicturePath)
-                                .then(endOfUpdate)
-                                .catch(saveTastingPictureOnFirebaseError => reject(saveTastingPictureOnFirebaseError));
-                            break;
-                        case "DELETE":
-                            if (oldWineTasting.containsPicture) {
-                                this.deleteTastingPictureOnFirebase(wineTasting.id)
-                                    .then(endOfUpdate)
-                                    .catch(deleteTastingPictureOnFirebaseError =>
-                                        reject(deleteTastingPictureOnFirebaseError));
-                            } else {
-                                endOfUpdate();
-                            }
-                            break;
-                        default:
-                            endOfUpdate();
-                            break;
-                    }
-                }).catch(getTastingError => reject(getTastingError));
+                switch (pictureEditMode) {
+                    case "EDIT":
+                        return this.saveTastingPictureOnFirebase(wineTasting.id, wineTastingPicturePath)
+                            .then(() => { return endOfUpdate() });
+                    case "DELETE":
+                        if (oldWineTasting.containsPicture) {
+                            return this.deleteTastingPictureOnFirebase(wineTasting.id)
+                                .then(() => { return endOfUpdate() });
+                        } else {
+                            return endOfUpdate();
+                        }
+                    default:
+                        return endOfUpdate();
+                }
             });
         });
     }
