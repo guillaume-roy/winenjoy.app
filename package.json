@@ -15,7 +15,6 @@
     "nativescript-drop-down": "^1.3.3",
     "nativescript-floatingactionbutton": "^2.2.5",
     "nativescript-appversion": "^1.3.2",
-    "nativescript-google-analytics": "^0.3.0",
     "tns-core-modules": "2.3.0"
   },
   "devDependencies": {

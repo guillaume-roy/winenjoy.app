@@ -37,6 +37,7 @@
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_arrow_back_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_check_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_delete_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-hdpi\ic_insert_chart_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-hdpi\ic_photo_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-hdpi\logo.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\background.png" />
@@ -46,6 +47,7 @@
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_arrow_back_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_check_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_delete_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-mdpi\ic_insert_chart_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\ic_photo_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-mdpi\logo.png" />
     <Content Include="app\App_Resources\Android\drawable-nodpi\splash_screen.xml" />
@@ -56,6 +58,7 @@
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_arrow_back_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_check_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_delete_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_insert_chart_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\ic_photo_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xhdpi\logo.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\background.png" />
@@ -65,6 +68,7 @@
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_arrow_back_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_check_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_delete_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_insert_chart_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\ic_photo_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxhdpi\logo.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\background.png" />
@@ -74,6 +78,7 @@
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_arrow_back_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_check_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_delete_white_24dp.png" />
+    <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_insert_chart_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\ic_photo_white_24dp.png" />
     <Content Include="app\App_Resources\Android\drawable-xxxhdpi\logo.png" />
     <Content Include="app\App_Resources\Android\values-v21\colors.xml" />
@@ -139,6 +144,9 @@
     <Content Include="app\App_Resources\iOS\ic_happy.png" />
     <Content Include="app\App_Resources\iOS\ic_happy_2x.png" />
     <Content Include="app\App_Resources\iOS\ic_happy_3x.png" />
+    <Content Include="app\App_Resources\iOS\ic_insert_chart_white.png" />
+    <Content Include="app\App_Resources\iOS\ic_insert_chart_white_2x.png" />
+    <Content Include="app\App_Resources\iOS\ic_insert_chart_white_3x.png" />
     <Content Include="app\App_Resources\iOS\ic_neutral.png" />
     <Content Include="app\App_Resources\iOS\ic_neutral_2x.png" />
     <Content Include="app\App_Resources\iOS\ic_neutral_3x.png" />
@@ -192,9 +200,6 @@
     </Content>
     <Content Include="app\entities\wineTastingMode.js">
       <DependentUpon>wineTastingMode.ts</DependentUpon>
-    </Content>
-    <Content Include="app\services\analyticsService.js">
-      <DependentUpon>analyticsService.ts</DependentUpon>
     </Content>
     <Content Include="app\services\exportDataService.js">
       <DependentUpon>exportDataService.ts</DependentUpon>
@@ -368,7 +373,6 @@
     <TypeScriptCompile Include="app\entities\wineTasting.ts" />
     <TypeScriptCompile Include="app\entities\wineTastingMode.ts" />
     <TypeScriptCompile Include="app\references.d.ts" />
-    <TypeScriptCompile Include="app\services\analyticsService.ts" />
     <TypeScriptCompile Include="app\services\exportDataService.ts" />
     <TypeScriptCompile Include="app\services\tastingsService.ts" />
     <TypeScriptCompile Include="app\services\userService.ts" />
@@ -412,9 +416,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\views\edit-tasting-full\edit-tasting-full.scss" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="google-services.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\App_Resources\iOS\GoogleService-Info.plist" />

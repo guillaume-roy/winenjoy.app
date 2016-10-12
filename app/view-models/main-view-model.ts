@@ -24,10 +24,8 @@ export class MainViewModel extends Observable {
     init() {
         this.set("isBusy", true);
         return new Promise((resolve, reject) => {
-            Promise.all([
-                this.getTastings(),
-                this.loadCriterias()
-            ]).then(() => {
+            this.loadCriterias();
+            this.getTastings().then(() => {
                 this.set("isBusy", false);
                 resolve();
             }).catch(e => {
