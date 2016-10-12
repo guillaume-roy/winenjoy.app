@@ -2,6 +2,7 @@ import pages = require("ui/page");
 import {Page} from "ui/page";
 import {GroupingListPickerViewModel} from "../../view-models/grouping-list-picker-view-model";
 import {EventData} from "data/observable";
+import {SearchBar} from "ui/search-bar";
 
 let closeCallback: Function;
 let viewModel: GroupingListPickerViewModel;
@@ -9,11 +10,15 @@ let viewModel: GroupingListPickerViewModel;
 export function onShownModally(args: pages.ShownModallyData) {
     closeCallback = args.closeCallback;
 
+    viewModel = new GroupingListPickerViewModel(args.context);
+    let page = <Page>args.object;
+    page.bindingContext = viewModel;
+}
+
+export function loaded() {
     setTimeout(() => {
-        viewModel = new GroupingListPickerViewModel(args.context);
-        let page = <Page>args.object;
-        page.bindingContext = viewModel;
-    }, 50);
+        viewModel.loadItems();
+    }, 0);
 }
 
 export function onToggleGroup(args: EventData) {
@@ -31,3 +36,11 @@ export function onSelectItem(args) {
 export function onValidate() {
     closeCallback(viewModel.selectedItems);
 }
+
+export function useNewElement() {
+    if (!viewModel.get("multiple")) {
+        //viewModel.useNewElement();
+        closeCallback(viewModel.selectedItem);
+    }
+}
+

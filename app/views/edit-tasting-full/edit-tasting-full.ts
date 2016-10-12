@@ -7,6 +7,7 @@ import {Views} from "../../utils/views";
 import frameModule = require("ui/frame");
 import application = require("application");
 import {WineTastingMode} from "../../entities/wineTastingMode";
+import _ = require("lodash");
 
 let page: Page;
 let locationAutoComplete;
@@ -153,7 +154,7 @@ export function saveTasting() {
 
 export function selectAromas() {
     page.showModal(
-        Views.listPicker,
+        Views.groupingListPicker,
         {
             criterias: "aromas",
             groupingIcon: "whatshot",
@@ -162,7 +163,7 @@ export function selectAromas() {
             selectedItems: viewModel.get("selectedAromas")
         },
         (data: any[]) => {
-            if (data && data.length > 0) {
+            if (_.isArray(data)) {
                 viewModel.set("selectedAromas", null);
                 viewModel.set("selectedAromas", data);
             }
@@ -181,7 +182,7 @@ export function selectAromaDefects() {
             selectedItems: viewModel.get("selectedAromaDefects")
         },
         (data: any[]) => {
-            if (data && data.length > 0) {
+            if (_.isArray(data)) {
                 viewModel.set("selectedAromaDefects", null);
                 viewModel.set("selectedAromaDefects", data);
             }
@@ -191,7 +192,7 @@ export function selectAromaDefects() {
 
 export function selectFlavors() {
     page.showModal(
-        Views.listPicker,
+        Views.groupingListPicker,
         {
             criterias: "aromas",
             groupingIcon: "whatshot",
@@ -200,7 +201,7 @@ export function selectFlavors() {
             selectedItems: viewModel.get("selectedFlavors")
         },
         (data: any[]) => {
-            if (data && data.length > 0) {
+            if (_.isArray(data)) {
                 viewModel.set("selectedFlavors", null);
                 viewModel.set("selectedFlavors", data);
             }
@@ -219,7 +220,7 @@ export function selectFlavorDefects() {
             selectedItems: viewModel.get("selectedFlavorDefects")
         },
         (data: any[]) => {
-            if (data && data.length > 0) {
+            if (_.isArray(data)) {
                 viewModel.set("selectedFlavorDefects", null);
                 viewModel.set("selectedFlavorDefects", data);
             }

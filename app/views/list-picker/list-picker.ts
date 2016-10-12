@@ -10,22 +10,26 @@ let viewModel: ListPickerViewModel;
 export function onShownModally(args: pages.ShownModallyData) {
     closeCallback = args.closeCallback;
 
-    setTimeout(() => {
-        viewModel = new ListPickerViewModel(args.context);
-        let page = <Page>args.object;
-        page.bindingContext = viewModel;
+    viewModel = new ListPickerViewModel(args.context);
+    let page = <Page>args.object;
+    page.bindingContext = viewModel;
 
-        let searchBar = <SearchBar>page.getViewById("searchBar");
-        searchBar.on(SearchBar.propertyChangeEvent, searchBarArgs => {
-            viewModel.searchingText = searchBar.text;
-        });
+    let searchBar = <SearchBar>page.getViewById("searchBar");
+    searchBar.on(SearchBar.propertyChangeEvent, searchBarArgs => {
+        viewModel.searchingText = searchBar.text;
+    });
+}
+
+export function loaded() {
+    setTimeout(() => {
+        viewModel.loadItems();
     }, 0);
 }
 
 export function onSelectItem(args: listViewModule.ItemEventData) {
     viewModel.toggleItem(args.index);
 
-    if (!viewModel.multiple) {
+    if (!viewModel.get("multiple")) {
         closeCallback(viewModel.selectedItem);
     }
 }
@@ -35,7 +39,7 @@ export function onValidate() {
 }
 
 export function useNewElement() {
-    if (!viewModel.multiple) {
+    if (!viewModel.get("multiple")) {
         viewModel.useNewElement();
         closeCallback(viewModel.selectedItem);
     }

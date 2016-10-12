@@ -1,19 +1,51 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd"
-        shownModally="onShownModally">
-    <GridLayout rows="auto, *, auto">
-        <SearchBar hint="{{ searchBarHintText }}" id="searchBar" textFieldHintColor="#FFFFFF" />
-        <ListView items="{{ items }}" itemTap="onSelectItem" row="1" visibility="{{ items.length !== 0 ? 'visible' : 'collapse' }}">
-            <ListView.itemTemplate>
-                <GridLayout class="{{ isSelected ? 'list-item list-item-selected' : 'list-item' }}">
-                    <Label text="{{ item.label }}" />
-                    <Label text="check" visibility="{{ isSelected ? 'visible' : 'collapse' }}" class="material-icon" />
-                </GridLayout>
-            </ListView.itemTemplate>
-        </ListView>
-        <StackLayout row="1" visibility="{{ items.length === 0 ? 'visible' : 'collapse' }}">
-            <Label text="Aucun résultat" class="no-result-label" />
-            <Button text="Utiliser cet élément" class="accent-button modal-button" visibility="{{ searchingText.length !== 0 && !multiple ? 'visible' : 'collapse' }}" tap="useNewElement" />
-        </StackLayout>
-        <Button text="Valider" row="2" tap="onValidate" class="validate-button" visibility="{{ items.length !== 0 ? 'visible' : 'collapse' }}" />
-    </GridLayout>
+      shownModally="onShownModally"
+      loaded="loaded">
+  <GridLayout rows="auto, *, auto">
+
+    <StackLayout orientation="horizontal"
+                 rowspan="3"
+                 style="horizontal-align:center;vertical-align:center;"
+                 visibility="{{ isBusy ? 'visible' : 'collapse' }}">
+      <ActivityIndicator style="width: 56; height: 56;margin: 6"
+                         busy="true" />
+      <Label text="Chargement en cours ..."
+             style="vertical-align: center;margin-right: 6" />
+    </StackLayout>
+
+    <SearchBar hint="{{ searchBarHintText }}"
+               id="searchBar"
+               textFieldHintColor="#FFFFFF"
+               visibility="{{ isBusy ? 'collapse' : 'visible' }}"/>
+    
+    <ListView items="{{ items }}"
+              itemTap="onSelectItem"
+              row="1"
+              visibility="{{ items.length !== 0 || !isBusy ? 'visible' : 'collapse' }}">
+      <ListView.itemTemplate>
+        <GridLayout class="{{ isSelected ? 'list-item list-item-selected' : 'list-item' }}">
+          <Label text="{{ item.label }}" />
+          <Label text="check"
+                 visibility="{{ isSelected ? 'visible' : 'collapse' }}"
+                 class="material-icon" />
+        </GridLayout>
+      </ListView.itemTemplate>
+    </ListView>
+    
+    <StackLayout row="1"
+                 visibility="{{ items.length === 0 &amp;&amp; !isBusy ? 'visible' : 'collapse' }}">
+      <Label text="Aucun résultat"
+             class="no-result-label" />
+      <Button text="Utiliser cet élément"
+              class="accent-button modal-button"
+              visibility="{{ searchingText.length !== 0 &amp;&amp; !multiple ? 'visible' : 'collapse' }}"
+              tap="useNewElement" />
+    </StackLayout>
+    
+    <Button text="Valider"
+            row="2"
+            tap="onValidate"
+            class="validate-button"
+            visibility="{{ items.length !== 0 &amp;&amp; !isBusy ? 'visible' : 'collapse' }}" />
+  </GridLayout>
 </Page>

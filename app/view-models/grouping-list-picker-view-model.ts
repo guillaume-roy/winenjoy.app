@@ -5,15 +5,6 @@ import {WineCriteriasService} from "../services/wineCriteriasService";
 
 export class GroupingListPickerViewModel extends Observable {
     private _selectedItems: CriteriaItem[];
-    private _items: Observable[];
-    
-    public get items() {
-        return this._items;
-    }
-    public set items(value) {
-        this._items = value;
-        this.notifyPropertyChange("items", value);
-    }
 
     public get selectedItem() {
         return this._selectedItems[0];
@@ -28,46 +19,49 @@ export class GroupingListPickerViewModel extends Observable {
 
         this.set("multiple", args.multiple);
         this.set("searchBarHintText", args.searchBarHintText);
-        this.set("groupingIcon", args.groupingIcon);
+        this.set("isBusy", true);
 
-        this.items = [];
+        this.set("items", []);
         if (_.isArray(args.selectedItems)) {
             this._selectedItems = args.selectedItems;
         } else {
             this._selectedItems = [];
         }
-
-        if (args.criterias === "aromas") {
-            new WineCriteriasService().getCriteriasFromFirebase(args.criterias).then(data => {
-                this.items = this.processChild(data.filter(d => d.code !== "DEFECTS").map(g => new Observable({
-                    groupingIcon: this.get("groupingIcon"),
-                    isExpanded: false,
-                    item: g
-                })));
-            });
-        } else {
-            new WineCriteriasService().getCriteriasFromFirebase(args.criterias).then(data => {
-                this.items = this.processChild(data.map(g => new Observable({
-                    groupingIcon: this.get("groupingIcon"),
-                    isExpanded: false,
-                    item: g
-                })));
-            });
-        }
     }
 
-    public toggleGroup(item: Observable) {
-        _.each(_.reject(this.items, item), area => {
+    loadItems() {
+        this.set("isBusy", true);
+        var wineCriteriasService = new WineCriteriasService();
+        wineCriteriasService.getCriteriasFromFirebase("aromastree")
+            .then(tree => {
+                this.set("items", tree.map((t: CriteriaItem) => {
+                    var obs = {
+                        isSelected: false,
+                        isExpanded: false,
+                        item: _.cloneDeep(t)
+                    };
+                    obs.item.values = t.values.map(x => new Observable({
+                        isSelected: _.some(this._selectedItems, { id: x.id }),
+                        item: _.cloneDeep(x)
+                    }));
+                    return new Observable(obs);
+                }));
+                this.set("isBusy", false);
+            });
+    }
+
+    toggleGroup(item: Observable) {
+        _.each(_.reject(this.get("items"), item), (area: Observable) => {
             area.set("isExpanded", false);
         });
         item.set("isExpanded", !item.get("isExpanded"));
     }
 
-    public selectItem(item: any) {
-        let selectedItem = _.find(_.flattenDeep(this.items.map(g => g.get("item").values)), v => v.item.id === item.item.id) || {};
+    selectItem(item: any) {
+        let selectedItem = _.find(_.flattenDeep(this.get("items").map(g => g.get("item").values)), (v: any) => v.item.id === item.item.id) || {};
 
         if (!this.get("multiple")) {
-            this._selectedItems = [ selectedItem.item ];
+            this._selectedItems = [selectedItem.item];
         } else {
             if (selectedItem.isSelected) {
                 _.remove(this._selectedItems, selectedItem.item);
@@ -77,16 +71,5 @@ export class GroupingListPickerViewModel extends Observable {
 
             selectedItem.isSelected = !selectedItem.isSelected;
         }
-    }
-
-    private processChild(items) {
-        _.each(items, i => {
-           i.item.values = _.sortBy(i.item.values, ["order", "label"]).map(v => new Observable({
-               isSelected: _.some(this._selectedItems, v),
-               item: v
-           }));
-        });
-
-        return items;
     }
 }

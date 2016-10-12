@@ -1,27 +1,67 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd"
-        shownModally="onShownModally">
-    <GridLayout rows="auto, *, auto">
-        <Label class="title" text="{{ searchBarHintText }}" />
-        <ListView items="{{ items }}" row="1">
+      shownModally="onShownModally"
+      loaded="loaded">
+  <GridLayout rows="auto, *, auto">
+    <StackLayout orientation="horizontal"
+                 rowspan="3"
+                 style="horizontal-align:center;vertical-align:center;"
+                 visibility="{{ isBusy ? 'visible' : 'collapse' }}">
+      <ActivityIndicator style="width: 56; height: 56;margin: 6"
+                         busy="true" />
+      <Label text="Chargement en cours ..."
+             style="vertical-align: center;margin-right: 6" />
+    </StackLayout>
+
+    <Label text="{{ searchBarHintText }}"
+           id="searchBar"
+           textFieldHintColor="#FFFFFF"
+           visibility="{{ isBusy ? 'collapse' : 'visible' }}"/>
+
+    <ListView items="{{ items }}"
+              row="1"
+              visibility="{{ isBusy ? 'collapse' : 'visible' }}">
+      <ListView.itemTemplate>
+        <GridLayout rows="auto, auto">
+          <GridLayout columns="auto,*,24"
+                      class="{{ isExpanded ? 'list-item expanded-item' : 'list-item' }}"
+                      tap="onToggleGroup">
+            <Label text="expand_more"
+                   class="material-icon left-icon"
+                   visibility="{{ isExpanded ? 'collapse' : 'visible' }}" />
+            <Label text="expand_less"
+                   class="material-icon left-icon"
+                   visibility="{{ isExpanded ? 'visible' : 'collapse' }}" />
+            <Label text="{{ item.label }}"
+                   col="1" />
+            <Label text="check"
+                   visibility="{{ isSelected ? 'visible' : 'collapse' }}"
+                   col="2"
+                   class="material-icon check-icon" />
+          </GridLayout>
+          <ListView class="items-list"
+                    itemTap="onSelectItem"
+                    items="{{ item.values }}"
+                    separatorColor="transparent"
+                    row="1"
+                    height="{{ item.values.length * 55 }}"
+                    visibility="{{ isExpanded ? 'visible' : 'collapse' }}">
             <ListView.itemTemplate>
-                <GridLayout rows="auto, auto">
-                    <GridLayout columns="auto,*,24" class="{{ isExpanded ? 'list-item expanded-item' : 'list-item' }}" tap="onToggleGroup">
-                        <Label text="{{ groupingIcon }}" class="material-icon left-icon" />
-                        <Label text="{{ item.label }}" col="1" />
-                        <Label text="expand_more" class="material-icon" col="2" visibility="{{ isExpanded ? 'collapse' : 'visible' }}" />
-                        <Label text="expand_less" class="material-icon" col="2" visibility="{{ isExpanded ? 'visible' : 'collapse' }}" />
-                    </GridLayout>
-                    <ListView class="items-list" itemTap="onSelectItem" items="{{ item.values }}" separatorColor="transparent" row="1" height="{{ item.values.length * 55 }}" visibility="{{ isExpanded ? 'visible' : 'collapse' }}">
-                        <ListView.itemTemplate>
-                            <GridLayout class="{{ isSelected ? 'list-item expanded-item' : 'list-item' }}">
-                                <Label text="{{ item.label }}" />
-                                <Label text="check" visibility="{{ isSelected ? 'visible' : 'collapse' }}" class="material-icon check-icon" />
-                            </GridLayout>
-                        </ListView.itemTemplate>
-                </ListView>
-                </GridLayout>
+              <GridLayout class="{{ isSelected ? 'list-item expanded-item' : 'list-item' }}">
+                <Label text="{{ item.label }}" />
+                <Label text="check"
+                       visibility="{{ isSelected ? 'visible' : 'collapse' }}"
+                       class="material-icon check-icon" />
+              </GridLayout>
             </ListView.itemTemplate>
-        </ListView>
-        <Button text="Valider" row="2" tap="onValidate" class="validate-button" visibility="{{ multiple ? 'visible' : 'collapse' }}" />
-    </GridLayout>
+          </ListView>
+        </GridLayout>
+      </ListView.itemTemplate>
+    </ListView>
+
+    <Button text="Valider"
+            row="2"
+            tap="onValidate"
+            class="validate-button"
+            visibility="{{ multiple &amp;&amp; !isBusy ? 'visible' : 'collapse' }}" />
+  </GridLayout>
 </Page>

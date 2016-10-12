@@ -3,7 +3,8 @@
 #searchBar {
     color: $primary-color-text;
     background-color: $primary-color;
-    height:60;
+    padding: 16;
+    font-size: 18;
 }
 
 .list-item {
@@ -27,14 +28,14 @@
 
 .title {
     font-size: 20;
-    margin:20;
+    margin: 20;
 }
 
 .validate-button {
     background-color: $accent-color;
     color: $primary-color-text;
-    height:60;
-    font-size:16;
+    height: 60;
+    font-size: 16;
 }
 
 .check-icon {
