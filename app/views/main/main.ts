@@ -37,25 +37,11 @@ export function navigatedTo(args: EventData) {
     if (application.android) {
         application.android.on(application.AndroidApplication.activityBackPressedEvent, (args: any) => {
             args.cancel = true;
-
             if (viewModel.get("menuIsOpen"))
                 closeMenu();
-
             return false;
         });
     }
-
-    setTimeout(() => {
-        viewModel.init()
-            .catch(error => {
-                console.dump(error);
-                dialogs.alert({
-                    message: "Erreur lors du chargement des dégustations.",
-                    title: "Erreur",
-                    okButtonText: "OK"
-                });
-            });
-    }, 0);
 
     setTimeout(() => {
         viewModel.needToUpdateApp().then(needToUpdate => {
@@ -81,6 +67,17 @@ export function navigatedTo(args: EventData) {
 
 export function loaded() {
     closeMenu(true);
+    setTimeout(() => {
+        viewModel.init()
+            .catch(error => {
+                console.dump(error);
+                dialogs.alert({
+                    message: "Erreur lors du chargement des dégustations.",
+                    title: "Erreur",
+                    okButtonText: "OK"
+                });
+            });
+    }, 0);
 }
 
 export function onCreateNewTastingNormal(args: EventData) {
@@ -212,7 +209,7 @@ function openMenu() {
                 delay: 0
             }
         ]).play();
-    }, 0);
+    }, 80);
 }
 
 function closeMenu(force?: boolean) {
@@ -268,5 +265,5 @@ function closeMenu(force?: boolean) {
                 delay: 0
             }
         ]).play();
-    }, 0);
+    }, 80);
 }

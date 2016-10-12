@@ -4,6 +4,7 @@
       xmlns:dd="nativescript-drop-down"
       xmlns:ac="nativescript-autocomplete"
       navigatedTo="navigatedTo"
+      loaded="loaded"
       unloaded="unloaded">
   <Page.actionBar>
     <ActionBar title="Nouvelle dégustation">

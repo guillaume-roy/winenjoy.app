@@ -29,12 +29,11 @@ export function navigatedTo(args: EventData) {
     }
 
     attachBackButtonConfirmation();
+}
 
+export function loaded() {
     setTimeout(() => {
         isBusy();
-    }, 0);
-
-    setTimeout(() => {
         viewModel.init()
             .then(() => {
                 if (page.navigationContext) {

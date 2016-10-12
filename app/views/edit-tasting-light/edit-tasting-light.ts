@@ -29,12 +29,11 @@ export function navigatedTo(args: EventData) {
     }
 
     attachBackButtonConfirmation();
-    
+}
+
+export function loaded() {
     setTimeout(() => {
         isBusy();
-    }, 0);
-
-    setTimeout(() => {
         viewModel.init()
             .then(() => {
                 if (page.navigationContext) {
@@ -52,7 +51,7 @@ export function navigatedTo(args: EventData) {
                         locationAutoComplete.android.setText("Pays : " + country.label);
                     }
                 }
-                
+
                 isBusy(true);
             })
             .catch(error => {
