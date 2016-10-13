@@ -3,10 +3,10 @@ import _ = require("lodash");
 import firebase = require("nativescript-plugin-firebase");
 
 export class WineCriteriasService {
-    private get wineCriterias() {
+    public get wineCriterias() {
         return global.wineCriterias;
     }
-    private set wineCriterias(value) {
+    public set wineCriterias(value) {
         global.wineCriterias = value;
     }
 

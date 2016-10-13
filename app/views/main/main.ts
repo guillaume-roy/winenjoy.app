@@ -21,7 +21,7 @@ let fabButtonLight: View;
 let fabLabelLight: View;
 let fabLabelNormal: View;
 
-export function navigatedTo(args: EventData) {
+export function loaded(args: EventData) {
     page = <Page>args.object;
 
     viewModel = new MainViewModel();
@@ -33,6 +33,8 @@ export function navigatedTo(args: EventData) {
     fabButtonLight = page.getViewById("fab-button-light");
     fabLabelLight = page.getViewById("fab-label-light");
     fabLabelNormal = page.getViewById("fab-label-normal");
+
+    closeMenu(true);
 
     if (application.android) {
         application.android.on(application.AndroidApplication.activityBackPressedEvent, (args: any) => {
@@ -63,10 +65,7 @@ export function navigatedTo(args: EventData) {
             }
         });
     }, 0);
-}
-
-export function loaded() {
-    closeMenu(true);
+    
     setTimeout(() => {
         viewModel.init()
             .catch(error => {
@@ -156,6 +155,16 @@ export function refreshTastings() {
 export function onCloseMenu() {
     if (viewModel.get("menuIsOpen"))
         closeMenu();
+}
+
+export function navigateToDashboard() {
+    setTimeout(() => {
+        frameModule.topmost().navigate({
+            animated: false,
+            backstackVisible: false,
+            moduleName: Views.dashboard
+        });
+    }, 0);
 }
 
 function openMenu() {

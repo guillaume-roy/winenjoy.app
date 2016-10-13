@@ -31,7 +31,6 @@ gulp.task('wineCriterias',
 gulp.task('watch',
     function () {
         gulp.watch(sassPath, ['sass']).on('change', reportChange);
-        gulp.watch(wineCriteriasPath, ['wineCriterias']).on('change', reportChange);
     });
 
 gulp.task('livesync',

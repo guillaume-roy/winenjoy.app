@@ -1,10 +1,13 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd"
       xmlns:FAB="nativescript-floatingactionbutton"
-      navigatedTo="navigatedTo"
       loaded="loaded">
   <Page.actionBar>
     <ActionBar title="Mes dégustations">
       <ActionBar.actionItems>
+        <ActionItem ios.position="right"
+                    icon="res://ic_insert_chart_white_24dp"
+                    tap="navigateToDashboard"
+                    visibility="{{ isBusy || tastings.length === 0 ? 'collapse' : 'visible' }}"/>
       </ActionBar.actionItems>
     </ActionBar>
   </Page.actionBar>

@@ -1,0 +1,64 @@
+﻿@import "../../styles/_common";
+@import "../../styles/_final-rating";
+
+.final-rating {
+    horizontal-align: center;
+    vertical-align: center;
+    font-size: 38;
+    text-align: center;
+    margin: 6;
+}
+
+.final-rating-4 {
+    color: #007C00;
+}
+
+.final-rating-3 {
+    color: #7BB800;
+}
+
+.final-rating-2 {
+    color: #FFD300;
+}
+
+.final-rating-1 {
+    color: #FF7400;
+}
+
+.final-rating-0 {
+    color: #C50000;
+}
+
+.top-label {
+    font-size: 16;
+    text-align: center;
+    margin: 6;
+    font-weight: bold;
+}
+
+.top-stat {
+    font-size: 32;
+    text-align: center;
+    margin: 6;
+}
+
+.stat-label {
+    font-size: 16;
+    margin: 6;
+    text-transform: capitalize;
+}
+
+.stat-value {
+    font-size: 16;
+    margin: 6;
+    text-align: right;
+}
+
+.stat-section {
+    margin: 6;
+}
+
+.label-section {
+    font-weight: bold;
+    font-size: 16;
+}

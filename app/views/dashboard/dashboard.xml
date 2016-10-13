@@ -1,0 +1,197 @@
+﻿<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+      loaded="loaded">
+  <Page.actionBar>
+    <ActionBar title="Tableau de bord">
+      <NavigationButton icon="res://ic_arrow_back_white_24dp"
+                        tap="goBack"/>
+    </ActionBar>
+  </Page.actionBar>
+  <ScrollView>
+    <GridLayout rows="auto, auto">
+      <StackLayout orientation="horizontal"
+                   style="horizontal-align:center;vertical-align:center;"
+                   visibility="{{ isBusy ? 'visible' : 'collapse' }}"
+                   rowspan="2">
+        <ActivityIndicator style="width: 56; height: 56;margin: 6"
+                           busy="true" />
+        <Label text="Chargement en cours ..."
+               style="vertical-align: center;margin-right: 6" />
+      </StackLayout>
+
+      <GridLayout columns="*,*"
+                  visibility="{{ isBusy ? 'collapse' : 'visible' }}"
+                  style="margin:12">
+        <StackLayout>
+          <Label text="Total dégustations"
+                 class="top-label" />
+          <Label text="{{ userStats.totalTastings }}"
+                 class="top-stat" />
+        </StackLayout>
+        <StackLayout col="1">
+          <Label text="Note moyenne"
+                 class="top-label" />
+          <Label text="{{ averageRating | finalRatingToImageConverter }}"
+                 class="{{ averageRating ? 'material-icon final-rating final-rating-' + averageRating : 'material-icon final-rating' }}" />
+        </StackLayout>
+      </GridLayout>
+
+      <StackLayout row="1"
+                   visibility="{{ isBusy ? 'collapse' : 'visible' }}"
+                   style="margin:12">
+        
+        <Label text="Dégustations par année de dégustation :"
+               class="label-section"
+               visibility="{{ tastingsByTastingYear.length !== 0 ? 'visible' : 'collapse' }}" />
+        <Repeater items="{{ tastingsByTastingYear }}"
+                  class="stat-section"
+                  visibility="{{ tastingsByTastingYear.length !== 0 ? 'visible' : 'collapse' }}">
+          <Repeater.itemTemplate>
+            <DockLayout>
+              <Label text="{{ label }}"
+                     class="stat-label"/>
+              <Label text="{{ total }}"
+                     class="stat-value"
+                     style="horizontal-align:right"/>
+            </DockLayout>
+          </Repeater.itemTemplate>
+        </Repeater>
+
+        <Label text="Dégustations par type de vin :"
+               class="label-section"
+               visibility="{{ tastingsByWineType.length !== 0 ? 'visible' : 'collapse' }}"/>
+        <Repeater items="{{ tastingsByWineType }}"
+                  class="stat-section"
+                  visibility="{{ tastingsByWineType.length !== 0 ? 'visible' : 'collapse' }}">
+          <Repeater.itemTemplate>
+            <DockLayout>
+              <Label text="{{ label }}"
+                     class="stat-label"/>
+              <Label text="{{ total }}"
+                     class="stat-value"
+                     style="horizontal-align:right"/>
+            </DockLayout>
+          </Repeater.itemTemplate>
+        </Repeater>
+
+        <Label text="Dégustations par pays :"
+               class="label-section"
+               visibility="{{ tastingsByCountry.length !== 0 ? 'visible' : 'collapse' }}"/>
+        <Repeater items="{{ tastingsByCountry }}"
+                  class="stat-section"
+                  visibility="{{ tastingsByCountry.length !== 0 ? 'visible' : 'collapse' }}">
+          <Repeater.itemTemplate>
+            <DockLayout>
+              <Label text="{{ label }}"
+                     class="stat-label"/>
+              <Label text="{{ total }}"
+                     class="stat-value"
+                     style="horizontal-align:right"/>
+            </DockLayout>
+          </Repeater.itemTemplate>
+        </Repeater>
+        
+        <Label text="Dégustations par région :"
+               class="label-section"
+               visibility="{{ tastingsByRegion.length !== 0 ? 'visible' : 'collapse' }}"/>
+        <Repeater items="{{ tastingsByRegion }}"
+                  class="stat-section"
+                  visibility="{{ tastingsByRegion.length !== 0 ? 'visible' : 'collapse' }}">
+          <Repeater.itemTemplate>
+            <DockLayout>
+              <Label text="{{ label }}"
+                     class="stat-label"/>
+              <Label text="{{ total }}"
+                     class="stat-value"
+                     style="horizontal-align:right"/>
+            </DockLayout>
+          </Repeater.itemTemplate>
+        </Repeater>
+        
+        <Label text="Dégustations par AOC :"
+               class="label-section"
+               visibility="{{ tastingsByAoc.length !== 0 ? 'visible' : 'collapse' }}" />
+        <Repeater items="{{ tastingsByAoc }}"
+                  class="stat-section"
+                  visibility="{{ tastingsByAoc.length !== 0 ? 'visible' : 'collapse' }}">
+          <Repeater.itemTemplate>
+            <DockLayout>
+              <Label text="{{ label }}"
+                     class="stat-label"/>
+              <Label text="{{ total }}"
+                     class="stat-value"
+                     style="horizontal-align:right"/>
+            </DockLayout>
+          </Repeater.itemTemplate>
+        </Repeater>
+        
+        <Label text="Dégustations par millésime :"
+               class="label-section"
+               visibility="{{ tastingsByWineYear.length !== 0 ? 'visible' : 'collapse' }}" />
+        <Repeater items="{{ tastingsByWineYear }}"
+                  class="stat-section"
+                  visibility="{{ tastingsByWineYear.length !== 0 ? 'visible' : 'collapse' }}">
+          <Repeater.itemTemplate>
+            <DockLayout>
+              <Label text="{{ label }}"
+                     class="stat-label"/>
+              <Label text="{{ total }}"
+                     class="stat-value"
+                     style="horizontal-align:right"/>
+            </DockLayout>
+          </Repeater.itemTemplate>
+        </Repeater>
+        
+        <Label text="Dégustations par cépage :"
+               class="label-section"
+               visibility="{{ tastingsByGrape.length !== 0 ? 'visible' : 'collapse' }}" />
+        <Repeater items="{{ tastingsByGrape }}"
+                  class="stat-section"
+                  visibility="{{ tastingsByGrape.length !== 0 ? 'visible' : 'collapse' }}">
+          <Repeater.itemTemplate>
+            <DockLayout>
+              <Label text="{{ label }}"
+                     class="stat-label"/>
+              <Label text="{{ total }}"
+                     class="stat-value"
+                     style="horizontal-align:right"/>
+            </DockLayout>
+          </Repeater.itemTemplate>
+        </Repeater>
+        
+        <Label text="Dégustations par arôme :"
+               class="label-section"
+               visibility="{{ tastingsByAroma.length !== 0 ? 'visible' : 'collapse' }}" />
+        <Repeater items="{{ tastingsByAroma }}"
+                  class="stat-section"
+                  visibility="{{ tastingsByAroma.length !== 0 ? 'visible' : 'collapse' }}">
+          <Repeater.itemTemplate>
+            <DockLayout>
+              <Label text="{{ label }}"
+                     class="stat-label"/>
+              <Label text="{{ total }}"
+                     class="stat-value"
+                     style="horizontal-align:right"/>
+            </DockLayout>
+          </Repeater.itemTemplate>
+        </Repeater>
+        
+        <Label text="Dégustations par saveur :"
+               class="label-section"
+               visibility="{{ tastingsByFlavor.length !== 0 ? 'visible' : 'collapse' }}" />
+        <Repeater items="{{ tastingsByFlavor }}"
+                  class="stat-section"
+                  visibility="{{ tastingsByFlavor.length !== 0 ? 'visible' : 'collapse' }}">
+          <Repeater.itemTemplate>
+            <DockLayout>
+              <Label text="{{ label }}"
+                     class="stat-label"/>
+              <Label text="{{ total }}"
+                     class="stat-value"
+                     style="horizontal-align:right"/>
+            </DockLayout>
+          </Repeater.itemTemplate>
+        </Repeater>
+      </StackLayout>
+    </GridLayout>
+  </ScrollView>
+</Page>

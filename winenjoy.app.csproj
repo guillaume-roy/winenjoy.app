@@ -234,6 +234,9 @@
     <Content Include="app\utils\views.js">
       <DependentUpon>views.ts</DependentUpon>
     </Content>
+    <Content Include="app\view-models\dashboard-view-model.js">
+      <DependentUpon>dashboard-view-model.ts</DependentUpon>
+    </Content>
     <Content Include="app\view-models\edit-tasting-view-model.js">
       <DependentUpon>edit-tasting-view-model.ts</DependentUpon>
     </Content>
@@ -253,6 +256,15 @@
       <DependentUpon>main-view-model.ts</DependentUpon>
     </Content>
     <Content Include="app\views\busy-indicator\busy-indicator.xml" />
+    <Content Include="app\views\dashboard\dashboard.css">
+      <DependentUpon>dashboard.scss</DependentUpon>
+    </Content>
+    <Content Include="app\views\dashboard\dashboard.js">
+      <DependentUpon>dashboard.ts</DependentUpon>
+    </Content>
+    <Content Include="app\views\dashboard\dashboard.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="app\views\date-picker\date-picker.xml" />
     <Content Include="app\views\edit-tasting-full\edit-tasting-full.css">
       <DependentUpon>edit-tasting-full.scss</DependentUpon>
@@ -384,6 +396,7 @@
     <TypeScriptCompile Include="app\utils\profiling.ts" />
     <TypeScriptCompile Include="app\utils\uuid.ts" />
     <TypeScriptCompile Include="app\utils\views.ts" />
+    <TypeScriptCompile Include="app\view-models\dashboard-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\edit-tasting-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\grouping-list-picker-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\import-export-data-view-model.ts" />
@@ -391,6 +404,7 @@
     <TypeScriptCompile Include="app\view-models\login-view-model.ts" />
     <TypeScriptCompile Include="app\view-models\main-view-model.ts" />
     <TypeScriptCompile Include="app\views\busy-indicator\busy-indicator.ts" />
+    <TypeScriptCompile Include="app\views\dashboard\dashboard.ts" />
     <TypeScriptCompile Include="app\views\date-picker\date-picker.ts" />
     <TypeScriptCompile Include="app\views\edit-tasting-light\edit-tasting-light.ts" />
     <TypeScriptCompile Include="app\views\edit-tasting-normal\edit-tasting-normal.ts" />
@@ -410,9 +424,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="resources\wine-criterias.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="app\data\wine-criterias.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\views\edit-tasting-full\edit-tasting-full.scss" />
@@ -437,6 +448,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\views\main\_empty.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\views\dashboard\dashboard.scss" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>

@@ -59,7 +59,7 @@ export class UserService {
             return this.loadUserProfile(res.uid)
                 .then(() => {
                     this.updateLastConnectionDate();
-                    this.loadUserStats(res.uid)
+                    return this.loadUserStats(res.uid)
                         .then(() => {
                             var tastingsService = new TastingsService(res.uid);
                             return tastingsService.loadTastings();

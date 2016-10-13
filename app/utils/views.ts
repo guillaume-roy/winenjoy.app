@@ -9,5 +9,6 @@ export var Views = {
     importExportData: "views/import-export-data/import-export-data",
     datePicker: "views/date-picker/date-picker",
     busyIndicator: "views/busy-indicator/busy-indicator",
-    tastingPictureViewer: "views/tasting-picture-viewer/tasting-picture-viewer"
+    tastingPictureViewer: "views/tasting-picture-viewer/tasting-picture-viewer",
+    dashboard: "views/dashboard/dashboard"
 };

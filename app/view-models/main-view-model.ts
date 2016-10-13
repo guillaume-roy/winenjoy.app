@@ -66,9 +66,12 @@ export class MainViewModel extends Observable {
     loadCriterias() {
         return Promise.all([
             this._wineCriteriasService.getLocations(),
+            this.loadCriteria("aromaDefects"),
+            this.loadCriteria("aromas"),
             this.loadCriteria("acidities"),
             this.loadCriteria("attacks"),
             this.loadCriteria("developments"),
+            this.loadCriteria("grapes"),
             this.loadCriteria("intensities"),
             this.loadCriteria("length"),
             this.loadCriteria("limpidities"),
