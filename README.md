@@ -33,6 +33,15 @@ SYNTHÈSE :
 
 Pour chaque étape, il est possible de rajouter des commentaires propres à vous.
 
+![screenshots/01](screenshots/01.png)
+![screenshots/02](screenshots/02.png)
+![screenshots/03](screenshots/03.png)
+![screenshots/04](screenshots/04.png)
+![screenshots/05](screenshots/05.png)
+![screenshots/06](screenshots/06.png)
+![screenshots/07](screenshots/07.png)
+![screenshots/08](screenshots/08.png)
+
 ---
 
 Pour tout problème, suggestion ou critique, contactez-nous :
